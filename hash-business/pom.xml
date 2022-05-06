@@ -21,7 +21,6 @@
         <dependency>
             <groupId>com.ruoyi</groupId>
             <artifactId>hash-common</artifactId>
-            <version>3.8.2</version>
         </dependency>
 
     </dependencies>
