@@ -216,6 +216,7 @@
         <module>hash-framework</module>
         <module>hash-quartz</module>
         <module>hash-generator</module>
+        <module>hash-business</module>
     </modules>
     <packaging>pom</packaging>
 
