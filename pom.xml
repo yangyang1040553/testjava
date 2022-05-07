@@ -210,13 +210,12 @@
     </dependencyManagement>
 
     <modules>
+        <module>hash-common</module>
+        <module>hash-system</module>
         <module>hash-admin</module>
         <module>hash-framework</module>
-        <module>hash-system</module>
         <module>hash-quartz</module>
         <module>hash-generator</module>
-        <module>hash-common</module>
-        <module>hash-business</module>
     </modules>
     <packaging>pom</packaging>
 

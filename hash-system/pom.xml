@@ -19,7 +19,7 @@
 
         <!-- 通用工具-->
         <dependency>
-            <groupId>com.ruoyi</groupId>
+            <groupId>com.hash</groupId>
             <artifactId>hash-common</artifactId>
             <version>3.8.2</version>
         </dependency>

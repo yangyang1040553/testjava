@@ -45,30 +45,33 @@
 
         <!-- 核心模块-->
         <dependency>
-            <groupId>com.ruoyi</groupId>
+            <groupId>com.hash</groupId>
             <artifactId>hash-framework</artifactId>
             <version>3.8.2</version>
         </dependency>
 
         <!-- 定时任务-->
         <dependency>
-            <groupId>com.ruoyi</groupId>
+            <groupId>com.hash</groupId>
             <artifactId>hash-quartz</artifactId>
             <version>3.8.2</version>
         </dependency>
 
         <!-- 代码生成-->
         <dependency>
-            <groupId>com.ruoyi</groupId>
+            <groupId>com.hash</groupId>
             <artifactId>hash-generator</artifactId>
             <version>3.8.2</version>
         </dependency>
 
         <!-- 业务代码-->
         <dependency>
-            <groupId>com.ruoyi</groupId>
-            <artifactId>hash-business</artifactId>
-            <version>3.8.2</version>
+            <groupId>com.hash</groupId>
+            <artifactId>hash-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.hash</groupId>
+            <artifactId>hash-framework</artifactId>
         </dependency>
 
     </dependencies>
