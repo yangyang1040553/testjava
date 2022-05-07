@@ -3,8 +3,8 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>ruoyi</artifactId>
-        <groupId>com.ruoyi</groupId>
+        <artifactId>hash</artifactId>
+        <groupId>com.hash</groupId>
         <version>3.8.2</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -46,25 +46,29 @@
         <!-- 核心模块-->
         <dependency>
             <groupId>com.ruoyi</groupId>
-            <artifactId>ruoyi-framework</artifactId>
+            <artifactId>hash-framework</artifactId>
+            <version>3.8.2</version>
         </dependency>
 
         <!-- 定时任务-->
         <dependency>
             <groupId>com.ruoyi</groupId>
-            <artifactId>ruoyi-quartz</artifactId>
+            <artifactId>hash-quartz</artifactId>
+            <version>3.8.2</version>
         </dependency>
 
         <!-- 代码生成-->
         <dependency>
             <groupId>com.ruoyi</groupId>
-            <artifactId>ruoyi-generator</artifactId>
+            <artifactId>hash-generator</artifactId>
+            <version>3.8.2</version>
         </dependency>
 
         <!-- 业务代码-->
         <dependency>
             <groupId>com.ruoyi</groupId>
-            <artifactId>ruoyi-business</artifactId>
+            <artifactId>hash-business</artifactId>
+            <version>3.8.2</version>
         </dependency>
 
     </dependencies>
