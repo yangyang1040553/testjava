@@ -70,6 +70,12 @@
             <artifactId>hash-common</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.hash</groupId>
+            <artifactId>hash-game</artifactId>
+            <version>3.8.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>

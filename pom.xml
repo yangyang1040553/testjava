@@ -193,7 +193,11 @@
             </dependency>
 
             <!-- 系统模块-->
-
+            <dependency>
+                <groupId>com.hash</groupId>
+                <artifactId>hash-game</artifactId>
+                <version>${hash.version}</version>
+            </dependency>
 
             <!-- 通用工具-->
             <dependency>
@@ -212,6 +216,7 @@
         <module>hash-framework</module>
         <module>hash-quartz</module>
         <module>hash-generator</module>
+        <module>hash-game</module>
     </modules>
     <packaging>pom</packaging>
 
