@@ -199,6 +199,23 @@
                 <version>${hash.version}</version>
             </dependency>
 
+
+            <!-- 系统模块-->
+            <dependency>
+                <groupId>com.hash</groupId>
+                <artifactId>hash-wallet</artifactId>
+                <version>${hash.version}</version>
+            </dependency>
+
+            <!-- 系统模块-->
+            <dependency>
+                <groupId>com.hash</groupId>
+                <artifactId>hash-user</artifactId>
+                <version>${hash.version}</version>
+            </dependency>
+
+
+
             <!-- 通用工具-->
             <dependency>
                 <groupId>com.hash</groupId>
@@ -217,6 +234,8 @@
         <module>hash-quartz</module>
         <module>hash-generator</module>
         <module>hash-game</module>
+        <module>hash-wallet</module>
+        <module>hash-user</module>
     </modules>
     <packaging>pom</packaging>
 
