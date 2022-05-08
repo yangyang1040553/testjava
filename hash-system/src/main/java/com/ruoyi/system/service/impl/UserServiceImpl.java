@@ -1,8 +1,5 @@
 package com.ruoyi.system.service.impl;
 
-import com.ruoyi.system.domain.User;
-import com.ruoyi.system.mapper.UserMapper;
-import com.ruoyi.system.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
