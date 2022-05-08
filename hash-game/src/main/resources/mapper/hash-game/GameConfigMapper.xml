@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.game.mapper.GameConfigMapper">
+
+    <resultMap type="GameConfig" id="GameConfigResult">
+        <result property="id" column="id"/>
+        <result property="gameId" column="game_id"/>
+        <result property="gameName" column="game_name"/>
+        <result property="gameSession" column="game_session"/>
+        <result property="betRule" column="bet_rule"/>
+        <result property="odds" column="odds"/>
+        <result property="tax" column="tax"/>
+        <result property="open" column="open"/>
+        <result property="isActivty" column="is_activty"/>
+        <result property="finishTime" column="finish_time"/>
+        <result property="createTime" column="create_time"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="updateBy" column="update_by"/>
+    </resultMap>
+
+    <sql id="selectGameConfigVo">
+        select id,
+               game_id,
+               game_name,
+               game_session,
+               bet_rule,
+               odds,
+               tax, open, is_activty, finish_time, create_time, create_by, update_time, update_by
+        from t_game_config
+    </sql>
+
+    <select id="selectGameConfigList" parameterType="GameConfig" resultMap="GameConfigResult">
+        <include refid="selectGameConfigVo"/>
+        <where>
+            <if test="gameName != null  and gameName != ''">and game_name like concat('%', #{gameName}, '%')</if>
+            <if test="gameSession != null ">and game_session = #{gameSession}</if>
+            <if test="odds != null ">and odds = #{odds}</if>
+            <if test="open != null ">and open = #{open}</if>
+            <if test="isActivty != null ">and is_activty = #{isActivty}</if>
+            <if test="finishTime != null ">and finish_time = #{finishTime}</if>
+        </where>
+        <if test="sort != null "> order by finish_time ${sort}</if>
+    </select>
+
+    <select id="selectGameConfigById" parameterType="String" resultMap="GameConfigResult">
+        <include refid="selectGameConfigVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertGameConfig" parameterType="GameConfig">
+        insert into t_game_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="gameId != null">game_id,</if>
+            <if test="gameName != null">game_name,</if>
+            <if test="gameSession != null">game_session,</if>
+            <if test="betRule != null">bet_rule,</if>
+            <if test="odds != null">odds,</if>
+            <if test="tax != null">tax,</if>
+            <if test="open != null">open,</if>
+            <if test="isActivty != null">is_activty,</if>
+            <if test="finishTime != null">finish_time,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="updateBy != null">update_by,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="gameId != null">#{gameId},</if>
+            <if test="gameName != null">#{gameName},</if>
+            <if test="gameSession != null">#{gameSession},</if>
+            <if test="betRule != null">#{betRule},</if>
+            <if test="odds != null">#{odds},</if>
+            <if test="tax != null">#{tax},</if>
+            <if test="open != null">#{open},</if>
+            <if test="isActivty != null">#{isActivty},</if>
+            <if test="finishTime != null">#{finishTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+        </trim>
+    </insert>
+
+    <update id="updateGameConfig" parameterType="GameConfig">
+        update t_game_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="gameId != null">game_id = #{gameId},</if>
+            <if test="gameName != null">game_name = #{gameName},</if>
+            <if test="gameSession != null">game_session = #{gameSession},</if>
+            <if test="betRule != null">bet_rule = #{betRule},</if>
+            <if test="odds != null">odds = #{odds},</if>
+            <if test="tax != null">tax = #{tax},</if>
+            <if test="open != null">open = #{open},</if>
+            <if test="isActivty != null">is_activty = #{isActivty},</if>
+            <if test="finishTime != null">finish_time = #{finishTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteGameConfigById" parameterType="String">
+        delete
+        from t_game_config
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteGameConfigByIds" parameterType="String">
+        delete from t_game_config where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
