@@ -69,14 +69,6 @@
             <groupId>com.hash</groupId>
             <artifactId>hash-common</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.hash</groupId>
-            <artifactId>hash-framework</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.hash</groupId>
-            <artifactId>hash-business</artifactId>
-        </dependency>
 
     </dependencies>
 

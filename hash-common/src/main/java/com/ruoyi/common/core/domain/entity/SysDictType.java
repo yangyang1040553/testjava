@@ -78,6 +78,16 @@ public class SysDictType extends BaseEntity
     {
         this.status = status;
     }
+
+    private String  sort;
+
+    public String getSort() {
+        return sort;
+    }
+
+    public void setSort(String sort) {
+        this.sort = sort;
+    }
     
     @Override
     public String toString() {
