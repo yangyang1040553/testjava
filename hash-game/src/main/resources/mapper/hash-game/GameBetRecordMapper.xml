@@ -37,7 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="hashValue != null  and hashValue != ''"> and hash_value = #{hashValue}</if>
             <if test="betResult != null "> and bet_result = #{betResult}</if>
             <if test="rewardStatus != null "> and reward_status = #{rewardStatus}</if>
-            <if test="createTime != null "> and create_time = #{createTime}</if>
+            <if test="createTime != null "> and create_time  >= #{createTime}</if>
         </where>
     </select>
     
