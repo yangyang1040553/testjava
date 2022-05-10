@@ -52,7 +52,7 @@ public class HashUserNoticeServiceImpl implements IHashUserNoticeService {
     @Override
     public int insertHashUserNotice(HashUserNotice hashUserNotice) {
         hashUserNotice.setCreateTime(DateUtils.getNowDate());
-        hashUserNotice.setId(IdUtils.fastSimpleUUID().substring(0, 6));
+        hashUserNotice.setId(IdUtils.getID12Str());
         return hashUserNoticeMapper.insertHashUserNotice(hashUserNotice);
     }
 
