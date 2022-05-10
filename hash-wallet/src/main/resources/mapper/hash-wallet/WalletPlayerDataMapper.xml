@@ -21,12 +21,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectWalletPlayerDataList" parameterType="WalletPlayerData" resultMap="WalletPlayerDataResult">
         <include refid="selectWalletPlayerDataVo"/>
         <where>  
-            <if test="usdtAmount != null "> and usdt_amount = #{usdtAmount}</if>
-            <if test="trxAmount != null "> and trx_amount = #{trxAmount}</if>
+            <if test="id != null  and id != ''"> and id = #{id}</if>
+            <if test="usdtAmount != null and usdtAmount != ''"> and usdt_amount = #{usdtAmount}</if>
+            <if test="trxAmount != null and trxAmount != ''"> and trx_amount = #{trxAmount}</if>
             <if test="hashAddressUsdt != null  and hashAddressUsdt != ''"> and hash_address_usdt = #{hashAddressUsdt}</if>
             <if test="hashAddressTrx != null  and hashAddressTrx != ''"> and hash_address_trx = #{hashAddressTrx}</if>
-            <if test="rechargeTotal != null "> and recharge_total = #{rechargeTotal}</if>
-            <if test="withdrawTotal != null "> and withdraw_total = #{withdrawTotal}</if>
+            <if test="rechargeTotal != null  and rechargeTotal != ''"> and recharge_total = #{rechargeTotal}</if>
+            <if test="withdrawTotal != null and withdrawTotal != '' "> and withdraw_total = #{withdrawTotal}</if>
         </where>
     </select>
     

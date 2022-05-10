@@ -42,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select id="selectGameBetRecordById" parameterType="String" resultMap="GameBetRecordResult">
-        <include refid="selectGameBetRecordVo"/>
+        <include refid="selectGameBetRecordVo"/>s
         where id = #{id}
     </select>
         
