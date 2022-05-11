@@ -6,6 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <resultMap type="UserFeedback" id="UserFeedbackResult">
         <result property="id"    column="id"    />
+        <result property="code"    column="code"    />
         <result property="userId"    column="user_id"    />
         <result property="nickName"    column="nick_name"    />
         <result property="content"    column="content"    />
@@ -13,12 +14,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectUserFeedbackVo">
-        select id, user_id, nick_name, content, create_time from t_user_feedback
+        select id, code, user_id, nick_name, content, create_time from t_user_feedback
     </sql>
 
     <select id="selectUserFeedbackList" parameterType="UserFeedback" resultMap="UserFeedbackResult">
         <include refid="selectUserFeedbackVo"/>
         <where>  
+            <if test="code != null "> and code = #{code}</if>
             <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
             <if test="nickName != null  and nickName != ''"> and nick_name like concat('%', #{nickName}, '%')</if>
             <if test="createTime != null "> and create_time >= #{createTime}</if>
@@ -34,6 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         insert into t_user_feedback
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">id,</if>
+            <if test="code != null">code,</if>
             <if test="userId != null">user_id,</if>
             <if test="nickName != null">nick_name,</if>
             <if test="content != null">content,</if>
@@ -41,6 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
+            <if test="code != null">#{code},</if>
             <if test="userId != null">#{userId},</if>
             <if test="nickName != null">#{nickName},</if>
             <if test="content != null">#{content},</if>
@@ -51,6 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateUserFeedback" parameterType="UserFeedback">
         update t_user_feedback
         <trim prefix="SET" suffixOverrides=",">
+            <if test="code != null">code = #{code},</if>
             <if test="userId != null">user_id = #{userId},</if>
             <if test="nickName != null">nick_name = #{nickName},</if>
             <if test="content != null">content = #{content},</if>

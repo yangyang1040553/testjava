@@ -2,6 +2,7 @@ package com.ruoyi.hashuser.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.uuid.IdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.hashuser.mapper.UserFeedbackMapper;
@@ -54,6 +55,7 @@ public class UserFeedbackServiceImpl implements IUserFeedbackService
     public int insertUserFeedback(UserFeedback userFeedback)
     {
         userFeedback.setCreateTime(DateUtils.getNowDate());
+        userFeedback.setId(IdUtils.getID12Str());
         return userFeedbackMapper.insertUserFeedback(userFeedback);
     }
 

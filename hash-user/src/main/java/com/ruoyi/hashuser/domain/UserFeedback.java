@@ -9,7 +9,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * 用户意见反馈对象 t_user_feedback
  * 
  * @author xxk
- * @date 2022-05-08
+ * @date 2022-05-11
  */
 public class UserFeedback extends BaseEntity
 {
@@ -17,6 +17,10 @@ public class UserFeedback extends BaseEntity
 
     /** 唯一id */
     private String id;
+
+    /** 反馈类型 1问题反馈 2游戏反馈 */
+    @Excel(name = "反馈类型 1问题反馈 2游戏反馈")
+    private Long code;
 
     /** 玩家ID */
     @Excel(name = "玩家ID")
@@ -38,6 +42,15 @@ public class UserFeedback extends BaseEntity
     public String getId() 
     {
         return id;
+    }
+    public void setCode(Long code) 
+    {
+        this.code = code;
+    }
+
+    public Long getCode() 
+    {
+        return code;
     }
     public void setUserId(String userId) 
     {
@@ -71,6 +84,7 @@ public class UserFeedback extends BaseEntity
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())
+            .append("code", getCode())
             .append("userId", getUserId())
             .append("nickName", getNickName())
             .append("content", getContent())
