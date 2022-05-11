@@ -1,6 +1,8 @@
 package com.ruoyi.game.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -79,11 +81,22 @@ public class GameConfig extends BaseEntity {
     @Excel(name = "结束时间", width = 30, dateFormat = "yyyy-MM-dd HH:MM:ss")
     private Date finishTime;
 
+
+    private List<BetRule> betRuleList;
+
     private String sort;
     private int usdtMin;
     private int usdtMax;
     private int trxMax;
     private int trxMin;
+
+    public List<BetRule> getBetRuleList() {
+        return betRuleList;
+    }
+
+    public void setBetRuleList(List<BetRule> betRuleList) {
+        this.betRuleList = betRuleList;
+    }
 
     public int getUsdtMin() {
         return usdtMin;
@@ -169,11 +182,23 @@ public class GameConfig extends BaseEntity {
             JSONObject usdt = (JSONObject) jsonObject.getJSONObject("USDT");
             JSONObject trx = (JSONObject) jsonObject.getJSONObject("TRX");
 
-            setUsdtMax(usdt.getIntValue("betMaxLimit"));
-            setUsdtMin(usdt.getIntValue("betMinLimit"));
+//            setUsdtMax(usdt.getIntValue("betMaxLimit"));
+//            setUsdtMin(usdt.getIntValue("betMinLimit"));
 
-            setTrxMax(trx.getIntValue("betMaxLimit"));
-            setTrxMin(trx.getIntValue("betMinLimit"));
+//            setTrxMax(trx.getIntValue("betMaxLimit"));
+//            setTrxMin(trx.getIntValue("betMinLimit"));
+
+            BetRule usdtRule = JSONObject.toJavaObject(usdt, BetRule.class);
+            usdtRule.setName("USDT");
+            usdtRule.setTitle("USDT规则");
+
+            BetRule trxtRule = JSONObject.toJavaObject(trx, BetRule.class);
+            trxtRule.setName("TRX");
+            trxtRule.setTitle("TRX规则");
+
+            betRuleList = new ArrayList<>();
+            betRuleList.add(usdtRule);
+            betRuleList.add(trxtRule);
         }
 
         return betRule;
@@ -240,4 +265,42 @@ public class GameConfig extends BaseEntity {
     }
 
 
+    private static class BetRule {
+        private String name;
+        private String title;
+        private int betMinLimit;
+        private int betMaxLimit;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getBetMinLimit() {
+            return betMinLimit;
+        }
+
+        public void setBetMinLimit(int betMinLimit) {
+            this.betMinLimit = betMinLimit;
+        }
+
+        public int getBetMaxLimit() {
+            return betMaxLimit;
+        }
+
+        public void setBetMaxLimit(int betMaxLimit) {
+            this.betMaxLimit = betMaxLimit;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+    }
 }
