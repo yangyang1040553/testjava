@@ -2,6 +2,7 @@ package com.ruoyi.game.domain;
 
 import java.util.Date;
 
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -78,8 +79,44 @@ public class GameConfig extends BaseEntity {
     @Excel(name = "结束时间", width = 30, dateFormat = "yyyy-MM-dd HH:MM:ss")
     private Date finishTime;
 
+    private String sort;
+    private int usdtMin;
+    private int usdtMax;
+    private int trxMax;
+    private int trxMin;
 
-    private String  sort;
+    public int getUsdtMin() {
+        return usdtMin;
+    }
+
+    public void setUsdtMin(int usdtMin) {
+        this.usdtMin = usdtMin;
+    }
+
+    public int getUsdtMax() {
+        return usdtMax;
+    }
+
+    public void setUsdtMax(int usdtMax) {
+        this.usdtMax = usdtMax;
+    }
+
+    public int getTrxMax() {
+        return trxMax;
+    }
+
+    public void setTrxMax(int trxMax) {
+        this.trxMax = trxMax;
+    }
+
+    public int getTrxMin() {
+        return trxMin;
+    }
+
+    public void setTrxMin(int trxMin) {
+        this.trxMin = trxMin;
+    }
+
 
     public String getSort() {
         return sort;
@@ -126,6 +163,19 @@ public class GameConfig extends BaseEntity {
     }
 
     public String getBetRule() {
+
+        if (betRule != null) {
+            JSONObject jsonObject = JSONObject.parseObject(betRule);
+            JSONObject usdt = (JSONObject) jsonObject.getJSONObject("USDT");
+            JSONObject trx = (JSONObject) jsonObject.getJSONObject("TRX");
+
+            setUsdtMax(usdt.getIntValue("betMaxLimit"));
+            setUsdtMin(usdt.getIntValue("betMinLimit"));
+
+            setTrxMax(trx.getIntValue("betMaxLimit"));
+            setTrxMin(trx.getIntValue("betMinLimit"));
+        }
+
         return betRule;
     }
 
@@ -188,4 +238,6 @@ public class GameConfig extends BaseEntity {
                 .append("updateBy", getUpdateBy())
                 .toString();
     }
+
+
 }
