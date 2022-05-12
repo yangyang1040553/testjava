@@ -3,6 +3,7 @@ package com.ruoyi.game.service.impl;
 import java.util.List;
 
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.game.redis.GameRedis;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.game.mapper.GameConfigMapper;
@@ -20,6 +21,10 @@ import com.ruoyi.game.service.IGameConfigService;
 public class GameConfigServiceImpl implements IGameConfigService {
     @Autowired
     private GameConfigMapper gameConfigMapper;
+
+
+    @Autowired
+    private GameRedis gameRedis;
 
     /**
      * 查询游戏配置
@@ -66,7 +71,11 @@ public class GameConfigServiceImpl implements IGameConfigService {
     @Override
     public int updateGameConfig(GameConfig gameConfig) {
         gameConfig.setUpdateTime(DateUtils.getNowDate());
-        return gameConfigMapper.updateGameConfig(gameConfig);
+        int i = gameConfigMapper.updateGameConfig(gameConfig);
+        if (i > 0) {
+            gameRedis.deleteGameConfig(gameConfig.getId());
+        }
+        return i;
     }
 
     /**
@@ -78,7 +87,8 @@ public class GameConfigServiceImpl implements IGameConfigService {
      */
     @Override
     public int deleteGameConfigByIds(String[] ids) {
-        return gameConfigMapper.deleteGameConfigByIds(ids);
+        int i = gameConfigMapper.deleteGameConfigByIds(ids);
+        return i;
     }
 
     /**
@@ -91,6 +101,10 @@ public class GameConfigServiceImpl implements IGameConfigService {
      */
     @Override
     public int deleteGameConfigById(String id) {
-        return gameConfigMapper.deleteGameConfigById(id);
+        int i = gameConfigMapper.deleteGameConfigById(id);
+        if (i > 0) {
+            gameRedis.deleteGameConfig(id);
+        }
+        return i;
     }
 }
