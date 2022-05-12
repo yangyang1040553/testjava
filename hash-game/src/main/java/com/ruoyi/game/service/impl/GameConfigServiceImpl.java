@@ -3,6 +3,7 @@ package com.ruoyi.game.service.impl;
 import java.util.List;
 
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.uuid.IdUtils;
 import com.ruoyi.game.redis.GameRedis;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,7 +60,12 @@ public class GameConfigServiceImpl implements IGameConfigService {
     @Override
     public int insertGameConfig(GameConfig gameConfig) {
         gameConfig.setCreateTime(DateUtils.getNowDate());
-        return gameConfigMapper.insertGameConfig(gameConfig);
+        gameConfig.setId(IdUtils.getID12Str());
+        int i = gameConfigMapper.insertGameConfig(gameConfig);
+        if (i > 0) {
+            gameRedis.deleteGameConfigList();
+        }
+        return i;
     }
 
     /**
@@ -88,7 +94,7 @@ public class GameConfigServiceImpl implements IGameConfigService {
     @Override
     public int deleteGameConfigByIds(String[] ids) {
         int i = gameConfigMapper.deleteGameConfigByIds(ids);
-        if (i>0){
+        if (i > 0) {
             gameRedis.deleteGameConfigList();
         }
         return i;
