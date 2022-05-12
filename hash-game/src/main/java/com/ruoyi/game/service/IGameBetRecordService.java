@@ -7,7 +7,7 @@ import com.ruoyi.game.domain.GameBetRecord;
  * 游戏投注记录Service接口
  * 
  * @author xxk
- * @date 2022-05-08
+ * @date 2022-05-12
  */
 public interface IGameBetRecordService 
 {

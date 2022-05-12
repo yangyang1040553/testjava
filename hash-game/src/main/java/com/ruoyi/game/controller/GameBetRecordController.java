@@ -25,7 +25,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * 游戏投注记录Controller
  * 
  * @author xxk
- * @date 2022-05-08
+ * @date 2022-05-12
  */
 @RestController
 @RequestMapping("/hash-game/record")

@@ -12,7 +12,7 @@ import com.ruoyi.game.service.IGameBetRecordService;
  * 游戏投注记录Service业务层处理
  * 
  * @author xxk
- * @date 2022-05-08
+ * @date 2022-05-12
  */
 @Service
 public class GameBetRecordServiceImpl implements IGameBetRecordService 
