@@ -23,6 +23,7 @@
         <result property="winner" column="winner"/>
         <result property="gameCollect" column="game_collect"/>
         <result property="createTime" column="create_time"/>
+        <result property="finishTime" column="finish_time"/>
     </resultMap>
 
     <sql id="selectGameBetRecordVo">
@@ -43,7 +44,8 @@
                reward_status,
                winner,
                game_collect,
-               create_time
+               create_time,
+               finish_time
         from t_game_bet_record
     </sql>
 
@@ -62,6 +64,7 @@
             <if test="rewardStatus != null ">and reward_status = #{rewardStatus}</if>
             <if test="winner != null ">and winner = #{winner}</if>
             <if test="createTime != null ">and create_time >= #{createTime}</if>
+            <if test="finishTime != null ">and finish_time >= #{finish_time}</if>
         </where>
         <if test="sort != null ">order by #{prop} ${sort}</if>
     </select>
@@ -92,6 +95,7 @@
             <if test="winner != null">winner,</if>
             <if test="gameCollect != null">game_collect,</if>
             <if test="createTime != null">create_time,</if>
+            <if test="finishTime != null">finish_time,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -112,6 +116,7 @@
             <if test="winner != null">#{winner},</if>
             <if test="gameCollect != null">#{gameCollect},</if>
             <if test="createTime != null">#{createTime},</if>
+            <if test="finishTime != null">#{finish_time},</if>
         </trim>
     </insert>
 
@@ -135,6 +140,7 @@
             <if test="winner != null">winner = #{winner},</if>
             <if test="gameCollect != null">game_collect = #{gameCollect},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="finishTime != null">finish_time = #{finishTime},</if>
         </trim>
         where id = #{id}
     </update>

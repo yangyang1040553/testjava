@@ -32,6 +32,10 @@ public class BaseEntity implements Serializable
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
+    /** 结束时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date finishTime;
+
     /** 备注 */
     private String remark;
 
@@ -56,6 +60,14 @@ public class BaseEntity implements Serializable
     public void setCreateBy(String createBy)
     {
         this.createBy = createBy;
+    }
+
+    public Date getFinishTime() {
+        return finishTime;
+    }
+
+    public void setFinishTime(Date finishTime) {
+        this.finishTime = finishTime;
     }
 
     public Date getCreateTime()
