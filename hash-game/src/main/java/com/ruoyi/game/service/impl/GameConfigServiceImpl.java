@@ -88,6 +88,9 @@ public class GameConfigServiceImpl implements IGameConfigService {
     @Override
     public int deleteGameConfigByIds(String[] ids) {
         int i = gameConfigMapper.deleteGameConfigByIds(ids);
+        if (i>0){
+            gameRedis.deleteGameConfigList();
+        }
         return i;
     }
 
