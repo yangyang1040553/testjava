@@ -11,7 +11,6 @@ public class Global {
     public final static String USER_SECRET_KEY = "HASH-GAME_2022_18888888888888";
 
 
-
     /***
      * 获取玩家id
      */
@@ -22,7 +21,6 @@ public class Global {
         }
         return null;
     }
-
 
 
     /***
@@ -38,8 +36,11 @@ public class Global {
      * @param amount
      * @return
      */
-    public static double getWalletAmountToReal(long amount) {
-        return amount / 10000;
+    public static Double getWalletAmountToReal(Long amount) {
+        if (amount != null) {
+            return amount * 1.0 / 10000;
+        }
+        return null;
     }
 
     /**
@@ -51,8 +52,6 @@ public class Global {
     public static String getWalletAmountStrToReal(long amount) {
         return String.valueOf(amount / 10000);
     }
-
-
 
 
 }

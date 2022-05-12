@@ -1,5 +1,6 @@
 package com.ruoyi.game.domain;
 
+import com.ruoyi.common.constant.Global;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
@@ -203,8 +204,8 @@ public class GameBetRecord extends BaseEntity {
         this.betAmount = betAmount;
     }
 
-    public Long getBetAmount() {
-        return betAmount;
+    public Double getBetAmount() {
+        return Global.getWalletAmountToReal(betAmount);
     }
 
     public void setBetPosition(String betPosition) {
