@@ -20,4 +20,11 @@ public class GameRedis {
     public void deleteGameConfig(String id) {
         redisCache.delCacheMapValue(RedisKey.game_config, id);
     }
+
+    /***
+     * 删除全部的配置缓存
+     */
+    public void deleteGameConfigList() {
+        redisCache.deleteObject(RedisKey.game_config);
+    }
 }
