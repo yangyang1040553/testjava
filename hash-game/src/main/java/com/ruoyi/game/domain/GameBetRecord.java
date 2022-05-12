@@ -54,7 +54,7 @@ public class GameBetRecord extends BaseEntity {
      * 赔率
      */
     @Excel(name = "赔率")
-    private Long odds;
+    private Double odds;
 
     /**
      * 投注的钱包类型USTD TRX
@@ -184,11 +184,11 @@ public class GameBetRecord extends BaseEntity {
         return nickName;
     }
 
-    public void setOdds(Long odds) {
+    public void setOdds(Double odds) {
         this.odds = odds;
     }
 
-    public Long getOdds() {
+    public Double getOdds() {
         return odds;
     }
 
