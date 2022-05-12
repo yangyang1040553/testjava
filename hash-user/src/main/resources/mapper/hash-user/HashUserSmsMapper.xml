@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.hashuser.mapper.HashUserSmsMapper">
+    
+    <resultMap type="HashUserSms" id="HashUserSmsResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="areaCode"    column="area_code"    />
+        <result property="phone"    column="phone"    />
+        <result property="ok"    column="ok"    />
+        <result property="responseData"    column="response_data"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectHashUserSmsVo">
+        select id, user_id, area_code, phone, ok, response_data, create_time from t_user_sms
+    </sql>
+
+    <select id="selectHashUserSmsList" parameterType="HashUserSms" resultMap="HashUserSmsResult">
+        <include refid="selectHashUserSmsVo"/>
+        <where>  
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="areaCode != null  and areaCode != ''"> and area_code = #{areaCode}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="ok != null "> and ok = #{ok}</if>
+        </where>
+    </select>
+    
+    <select id="selectHashUserSmsById" parameterType="String" resultMap="HashUserSmsResult">
+        <include refid="selectHashUserSmsVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertHashUserSms" parameterType="HashUserSms">
+        insert into t_user_sms
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="areaCode != null">area_code,</if>
+            <if test="phone != null">phone,</if>
+            <if test="ok != null">ok,</if>
+            <if test="responseData != null">response_data,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="areaCode != null">#{areaCode},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="ok != null">#{ok},</if>
+            <if test="responseData != null">#{responseData},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateHashUserSms" parameterType="HashUserSms">
+        update t_user_sms
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="areaCode != null">area_code = #{areaCode},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="ok != null">ok = #{ok},</if>
+            <if test="responseData != null">response_data = #{responseData},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteHashUserSmsById" parameterType="String">
+        delete from t_user_sms where id = #{id}
+    </delete>
+
+    <delete id="deleteHashUserSmsByIds" parameterType="String">
+        delete from t_user_sms where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

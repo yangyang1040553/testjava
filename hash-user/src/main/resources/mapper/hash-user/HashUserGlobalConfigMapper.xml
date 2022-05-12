@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.hashuser.mapper.HashUserGlobalConfigMapper">
+    
+    <resultMap type="HashUserGlobalConfig" id="HashUserGlobalConfigResult">
+        <result property="id"    column="id"    />
+        <result property="newDomainAddr"    column="new_domain_addr"    />
+        <result property="onlineServiceAddr"    column="online_service_addr"    />
+        <result property="groupAddr"    column="group_addr"    />
+        <result property="regProtocolAddr"    column="reg_protocol_addr"    />
+    </resultMap>
+
+    <sql id="selectHashUserGlobalConfigVo">
+        select id, new_domain_addr, online_service_addr, group_addr, reg_protocol_addr from t_user_global_config
+    </sql>
+
+    <select id="selectHashUserGlobalConfigList" parameterType="HashUserGlobalConfig" resultMap="HashUserGlobalConfigResult">
+        <include refid="selectHashUserGlobalConfigVo"/>
+        <where>  
+            <if test="newDomainAddr != null  and newDomainAddr != ''"> and new_domain_addr = #{newDomainAddr}</if>
+            <if test="onlineServiceAddr != null  and onlineServiceAddr != ''"> and online_service_addr = #{onlineServiceAddr}</if>
+            <if test="groupAddr != null  and groupAddr != ''"> and group_addr = #{groupAddr}</if>
+            <if test="regProtocolAddr != null  and regProtocolAddr != ''"> and reg_protocol_addr = #{regProtocolAddr}</if>
+        </where>
+    </select>
+    
+    <select id="selectHashUserGlobalConfigById" parameterType="String" resultMap="HashUserGlobalConfigResult">
+        <include refid="selectHashUserGlobalConfigVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertHashUserGlobalConfig" parameterType="HashUserGlobalConfig">
+        insert into t_user_global_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="newDomainAddr != null">new_domain_addr,</if>
+            <if test="onlineServiceAddr != null">online_service_addr,</if>
+            <if test="groupAddr != null">group_addr,</if>
+            <if test="regProtocolAddr != null">reg_protocol_addr,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="newDomainAddr != null">#{newDomainAddr},</if>
+            <if test="onlineServiceAddr != null">#{onlineServiceAddr},</if>
+            <if test="groupAddr != null">#{groupAddr},</if>
+            <if test="regProtocolAddr != null">#{regProtocolAddr},</if>
+         </trim>
+    </insert>
+
+    <update id="updateHashUserGlobalConfig" parameterType="HashUserGlobalConfig">
+        update t_user_global_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="newDomainAddr != null">new_domain_addr = #{newDomainAddr},</if>
+            <if test="onlineServiceAddr != null">online_service_addr = #{onlineServiceAddr},</if>
+            <if test="groupAddr != null">group_addr = #{groupAddr},</if>
+            <if test="regProtocolAddr != null">reg_protocol_addr = #{regProtocolAddr},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteHashUserGlobalConfigById" parameterType="String">
+        delete from t_user_global_config where id = #{id}
+    </delete>
+
+    <delete id="deleteHashUserGlobalConfigByIds" parameterType="String">
+        delete from t_user_global_config where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
