@@ -228,8 +228,8 @@ public class GameBetRecord extends BaseEntity {
         this.taxAmount = taxAmount;
     }
 
-    public Long getTaxAmount() {
-        return taxAmount;
+    public Double getTaxAmount() {
+        return Global.getWalletAmountToReal(taxAmount);
     }
 
     public void setHashValue(String hashValue) {
