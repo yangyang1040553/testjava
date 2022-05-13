@@ -75,6 +75,12 @@ public class GameConfig extends BaseEntity {
     private Long isActivity;
 
     /**
+     * 游戏菜单ID
+     */
+    @Excel(name = "游戏菜单ID")
+    private Long menuId;
+
+    /**
      * 结束时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:MM:ss")
@@ -89,6 +95,22 @@ public class GameConfig extends BaseEntity {
     private int usdtMax;
     private int trxMax;
     private int trxMin;
+
+    public Long getIsActivity() {
+        return isActivity;
+    }
+
+    public void setIsActivity(Long isActivity) {
+        this.isActivity = isActivity;
+    }
+
+    public Long getMenuId() {
+        return menuId;
+    }
+
+    public void setMenuId(Long menuId) {
+        this.menuId = menuId;
+    }
 
     public List<BetRule> getBetRuleList() {
         return betRuleList;
@@ -228,13 +250,6 @@ public class GameConfig extends BaseEntity {
         return open;
     }
 
-    public void setisActivity(Long isActivity) {
-        this.isActivity = isActivity;
-    }
-
-    public Long getisActivity() {
-        return isActivity;
-    }
 
     public void setFinishTime(Date finishTime) {
         this.finishTime = finishTime;
@@ -255,7 +270,7 @@ public class GameConfig extends BaseEntity {
                 .append("odds", getOdds())
                 .append("tax", getTax())
                 .append("open", getOpen())
-                .append("isActivity", getisActivity())
+                .append("isActivity", getIsActivity())
                 .append("finishTime", getFinishTime())
                 .append("createTime", getCreateTime())
                 .append("createBy", getCreateBy())

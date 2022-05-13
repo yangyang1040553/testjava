@@ -19,6 +19,7 @@
         <result property="createBy" column="create_by"/>
         <result property="updateTime" column="update_time"/>
         <result property="updateBy" column="update_by"/>
+        <result property="menuId" column="menu_id"/>
     </resultMap>
 
     <sql id="selectGameConfigVo">
@@ -28,7 +29,7 @@
                game_session,
                bet_rule,
                odds,
-               tax, open, is_activity, finish_time, create_time, create_by, update_time, update_by
+               tax, open, is_activity, finish_time, create_time, create_by, update_time, update_by,menu_id
         from t_game_config
     </sql>
 
@@ -42,7 +43,7 @@
             <if test="isActivity != null ">and is_activity = #{isActivity}</if>
             <if test="finishTime != null ">and finish_time = #{finishTime}</if>
         </where>
-        <if test="sort != null "> order by finish_time ${sort}</if>
+        <if test="sort != null ">order by finish_time ${sort}</if>
     </select>
 
     <select id="selectGameConfigById" parameterType="String" resultMap="GameConfigResult">
@@ -67,6 +68,7 @@
             <if test="createBy != null">create_by,</if>
             <if test="updateTime != null">update_time,</if>
             <if test="updateBy != null">update_by,</if>
+            <if test="menuId != null">menu_id,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -83,6 +85,7 @@
             <if test="createBy != null">#{createBy},</if>
             <if test="updateTime != null">#{updateTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
+            <if test="menuId != null">#{menuId},</if>
         </trim>
     </insert>
 
@@ -102,6 +105,7 @@
             <if test="createBy != null">create_by = #{createBy},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="menuId != null">menu_id = #{menuId},</if>
         </trim>
         where id = #{id}
     </update>
