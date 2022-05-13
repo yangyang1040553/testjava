@@ -72,7 +72,7 @@ public class GameConfig extends BaseEntity {
      * 是否活动场 0否 1是
      */
     @Excel(name = "是否活动场 0否 1是")
-    private Long isActivty;
+    private Long isActivity;
 
     /**
      * 结束时间
@@ -228,12 +228,12 @@ public class GameConfig extends BaseEntity {
         return open;
     }
 
-    public void setIsActivty(Long isActivty) {
-        this.isActivty = isActivty;
+    public void setisActivity(Long isActivity) {
+        this.isActivity = isActivity;
     }
 
-    public Long getIsActivty() {
-        return isActivty;
+    public Long getisActivity() {
+        return isActivity;
     }
 
     public void setFinishTime(Date finishTime) {
@@ -255,7 +255,7 @@ public class GameConfig extends BaseEntity {
                 .append("odds", getOdds())
                 .append("tax", getTax())
                 .append("open", getOpen())
-                .append("isActivty", getIsActivty())
+                .append("isActivity", getisActivity())
                 .append("finishTime", getFinishTime())
                 .append("createTime", getCreateTime())
                 .append("createBy", getCreateBy())

@@ -220,8 +220,8 @@ public class GameBetRecord extends BaseEntity {
         this.awardAmount = awardAmount;
     }
 
-    public Long getAwardAmount() {
-        return awardAmount;
+    public Double getAwardAmount() {
+        return Global.getWalletAmountToReal(awardAmount);
     }
 
     public void setTaxAmount(Long taxAmount) {

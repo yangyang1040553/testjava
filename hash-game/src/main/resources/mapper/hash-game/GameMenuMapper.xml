@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.game.mapper.GameMenuMapper">
+    
+    <resultMap type="GameMenu" id="GameMenuResult">
+        <result property="id"    column="id"    />
+        <result property="menuName"    column="menu_name"    />
+        <result property="weight"    column="weight"    />
+        <result property="activity"    column="activity"    />
+    </resultMap>
+
+    <sql id="selectGameMenuVo">
+        select id, menu_name, weight, activity from t_game_menu
+    </sql>
+
+    <select id="selectGameMenuList" parameterType="GameMenu" resultMap="GameMenuResult">
+        <include refid="selectGameMenuVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+            <if test="menuName != null  and menuName != ''"> and menu_name like concat('%', #{menuName}, '%')</if>
+            <if test="weight != null "> and weight = #{weight}</if>
+            <if test="activity != null  and activity != ''"> and activity = #{activity}</if>
+        </where>
+    </select>
+    
+    <select id="selectGameMenuById" parameterType="Long" resultMap="GameMenuResult">
+        <include refid="selectGameMenuVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertGameMenu" parameterType="GameMenu" useGeneratedKeys="true" keyProperty="id">
+        insert into t_game_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="menuName != null">menu_name,</if>
+            <if test="weight != null">weight,</if>
+            <if test="activity != null">activity,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="menuName != null">#{menuName},</if>
+            <if test="weight != null">#{weight},</if>
+            <if test="activity != null">#{activity},</if>
+         </trim>
+    </insert>
+
+    <update id="updateGameMenu" parameterType="GameMenu">
+        update t_game_menu
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="menuName != null">menu_name = #{menuName},</if>
+            <if test="weight != null">weight = #{weight},</if>
+            <if test="activity != null">activity = #{activity},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteGameMenuById" parameterType="Long">
+        delete from t_game_menu where id = #{id}
+    </delete>
+
+    <delete id="deleteGameMenuByIds" parameterType="String">
+        delete from t_game_menu where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

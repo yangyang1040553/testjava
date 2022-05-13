@@ -13,7 +13,7 @@
         <result property="odds" column="odds"/>
         <result property="tax" column="tax"/>
         <result property="open" column="open"/>
-        <result property="isActivty" column="is_activty"/>
+        <result property="isActivity" column="is_activity"/>
         <result property="finishTime" column="finish_time"/>
         <result property="createTime" column="create_time"/>
         <result property="createBy" column="create_by"/>
@@ -28,7 +28,7 @@
                game_session,
                bet_rule,
                odds,
-               tax, open, is_activty, finish_time, create_time, create_by, update_time, update_by
+               tax, open, is_activity, finish_time, create_time, create_by, update_time, update_by
         from t_game_config
     </sql>
 
@@ -39,7 +39,7 @@
             <if test="gameSession != null ">and game_session = #{gameSession}</if>
             <if test="odds != null ">and odds = #{odds}</if>
             <if test="open != null ">and open = #{open}</if>
-            <if test="isActivty != null ">and is_activty = #{isActivty}</if>
+            <if test="isActivity != null ">and is_activity = #{isActivity}</if>
             <if test="finishTime != null ">and finish_time = #{finishTime}</if>
         </where>
         <if test="sort != null "> order by finish_time ${sort}</if>
@@ -61,7 +61,7 @@
             <if test="odds != null">odds,</if>
             <if test="tax != null">tax,</if>
             <if test="open != null">open,</if>
-            <if test="isActivty != null">is_activty,</if>
+            <if test="isActivity != null">is_activity,</if>
             <if test="finishTime != null">finish_time,</if>
             <if test="createTime != null">create_time,</if>
             <if test="createBy != null">create_by,</if>
@@ -77,7 +77,7 @@
             <if test="odds != null">#{odds},</if>
             <if test="tax != null">#{tax},</if>
             <if test="open != null">#{open},</if>
-            <if test="isActivty != null">#{isActivty},</if>
+            <if test="isActivity != null">#{isActivity},</if>
             <if test="finishTime != null">#{finishTime},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="createBy != null">#{createBy},</if>
@@ -96,7 +96,7 @@
             <if test="odds != null">odds = #{odds},</if>
             <if test="tax != null">tax = #{tax},</if>
             <if test="open != null">open = #{open},</if>
-            <if test="isActivty != null">is_activty = #{isActivty},</if>
+            <if test="isActivity != null">is_activity = #{isActivity},</if>
             <if test="finishTime != null">finish_time = #{finishTime},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
