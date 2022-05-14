@@ -81,6 +81,12 @@ public class GameBetRecord extends BaseEntity {
     private Long awardAmount;
 
     /**
+     * 到账金额
+     */
+    @Excel(name = "到账金额")
+    private Long incomeAmount;
+
+    /**
      * 手续费
      */
     @Excel(name = "手续费")
@@ -119,6 +125,14 @@ public class GameBetRecord extends BaseEntity {
 
     private String sort;
     private String prop;
+
+    public Long getIncomeAmount() {
+        return incomeAmount;
+    }
+
+    public void setIncomeAmount(Long incomeAmount) {
+        this.incomeAmount = incomeAmount;
+    }
 
     public String getSort() {
         return sort;

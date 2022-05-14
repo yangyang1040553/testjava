@@ -24,6 +24,7 @@
         <result property="gameCollect" column="game_collect"/>
         <result property="createTime" column="create_time"/>
         <result property="finishTime" column="finish_time"/>
+        <result property="incomeAmount" column="income_amount"/>
     </resultMap>
 
     <sql id="selectGameBetRecordVo">
@@ -45,7 +46,8 @@
                winner,
                game_collect,
                create_time,
-               finish_time
+               finish_time,
+               income_amount
         from t_game_bet_record
     </sql>
 
