@@ -126,8 +126,8 @@ public class GameBetRecord extends BaseEntity {
     private String sort;
     private String prop;
 
-    public Long getIncomeAmount() {
-        return incomeAmount;
+    public Double getIncomeAmount() {
+        return  Global.getWalletAmountToReal(incomeAmount);
     }
 
     public void setIncomeAmount(Long incomeAmount) {
