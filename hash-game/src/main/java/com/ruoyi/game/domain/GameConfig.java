@@ -80,6 +80,13 @@ public class GameConfig extends BaseEntity {
     @Excel(name = "游戏菜单ID")
     private Long menuId;
 
+
+    /**
+     * 是否参与返佣
+     */
+    @Excel(name = "是否参与返佣")
+    private Integer isBrokerage;
+
     /**
      * 结束时间
      */
@@ -95,6 +102,14 @@ public class GameConfig extends BaseEntity {
     private int usdtMax;
     private int trxMax;
     private int trxMin;
+
+    public Integer getIsBrokerage() {
+        return isBrokerage;
+    }
+
+    public void setIsBrokerage(Integer isBrokerage) {
+        this.isBrokerage = isBrokerage;
+    }
 
     public Long getIsActivity() {
         return isActivity;
