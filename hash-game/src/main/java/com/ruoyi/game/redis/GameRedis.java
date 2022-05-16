@@ -14,17 +14,16 @@ public class GameRedis {
 
 
     /***
-     * 删除游戏配置缓存
-     * @param id
-     */
-    public void deleteGameConfig(String id) {
-        redisCache.delCacheMapValue(RedisKey.game_config, id);
-    }
-
-    /***
      * 删除全部的配置缓存
      */
     public void deleteGameConfigList() {
         redisCache.deleteObject(RedisKey.game_config);
+    }
+
+    /***
+     * 删除游戏菜单
+     */
+    public void deleteGameMenu() {
+        redisCache.deleteObject(RedisKey.game_menu);
     }
 }

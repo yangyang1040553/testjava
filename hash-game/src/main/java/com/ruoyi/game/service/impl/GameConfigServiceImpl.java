@@ -79,7 +79,7 @@ public class GameConfigServiceImpl implements IGameConfigService {
         gameConfig.setUpdateTime(DateUtils.getNowDate());
         int i = gameConfigMapper.updateGameConfig(gameConfig);
         if (i > 0) {
-            gameRedis.deleteGameConfig(gameConfig.getId());
+            gameRedis.deleteGameConfigList();
         }
         return i;
     }
@@ -112,7 +112,7 @@ public class GameConfigServiceImpl implements IGameConfigService {
     public int deleteGameConfigById(String id) {
         int i = gameConfigMapper.deleteGameConfigById(id);
         if (i > 0) {
-            gameRedis.deleteGameConfig(id);
+            gameRedis.deleteGameConfigList();
         }
         return i;
     }

@@ -30,6 +30,8 @@ public class RedisKey {
     //=====================2游戏相关key=====================
     //游戏配置
     public final static String game_config = "game_config:";
+    //游戏菜单
+    public final static String game_menu = "game_menu:";
 
     //玩家订单id
     public final static String game_player_bet_order = "game_player_bet_order:";

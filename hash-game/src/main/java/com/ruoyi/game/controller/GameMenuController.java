@@ -2,6 +2,8 @@ package com.ruoyi.game.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.game.redis.GameRedis;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,24 +25,25 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 游戏菜单Controller
- * 
+ *
  * @author xxk
  * @date 2022-05-12
  */
 @RestController
 @RequestMapping("/hash-game/gameMenu")
-public class GameMenuController extends BaseController
-{
+public class GameMenuController extends BaseController {
     @Autowired
     private IGameMenuService gameMenuService;
+
+    @Autowired
+    private GameRedis gameRedis;
 
     /**
      * 查询游戏菜单列表
      */
     @PreAuthorize("@ss.hasPermi('hash-game:gameMenu:list')")
     @GetMapping("/list")
-    public TableDataInfo list(GameMenu gameMenu)
-    {
+    public TableDataInfo list(GameMenu gameMenu) {
         startPage();
         List<GameMenu> list = gameMenuService.selectGameMenuList(gameMenu);
         return getDataTable(list);
@@ -52,8 +55,7 @@ public class GameMenuController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-game:gameMenu:export')")
     @Log(title = "游戏菜单", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, GameMenu gameMenu)
-    {
+    public void export(HttpServletResponse response, GameMenu gameMenu) {
         List<GameMenu> list = gameMenuService.selectGameMenuList(gameMenu);
         ExcelUtil<GameMenu> util = new ExcelUtil<GameMenu>(GameMenu.class);
         util.exportExcel(response, list, "游戏菜单数据");
@@ -64,8 +66,7 @@ public class GameMenuController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-game:gameMenu:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") Long id)
-    {
+    public AjaxResult getInfo(@PathVariable("id") Long id) {
         return AjaxResult.success(gameMenuService.selectGameMenuById(id));
     }
 
@@ -75,8 +76,8 @@ public class GameMenuController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-game:gameMenu:add')")
     @Log(title = "游戏菜单", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody GameMenu gameMenu)
-    {
+    public AjaxResult add(@RequestBody GameMenu gameMenu) {
+        gameRedis.deleteGameMenu();
         return toAjax(gameMenuService.insertGameMenu(gameMenu));
     }
 
@@ -86,8 +87,8 @@ public class GameMenuController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-game:gameMenu:edit')")
     @Log(title = "游戏菜单", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody GameMenu gameMenu)
-    {
+    public AjaxResult edit(@RequestBody GameMenu gameMenu) {
+        gameRedis.deleteGameMenu();
         return toAjax(gameMenuService.updateGameMenu(gameMenu));
     }
 
@@ -96,9 +97,9 @@ public class GameMenuController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-game:gameMenu:remove')")
     @Log(title = "游戏菜单", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable Long[] ids)
-    {
+    @DeleteMapping("/{ids}")
+    public AjaxResult remove(@PathVariable Long[] ids) {
+        gameRedis.deleteGameMenu();
         return toAjax(gameMenuService.deleteGameMenuByIds(ids));
     }
 }
