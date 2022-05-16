@@ -20,6 +20,7 @@
         <result property="updateTime" column="update_time"/>
         <result property="updateBy" column="update_by"/>
         <result property="menuId" column="menu_id"/>
+        <result property="isBrokerage" column="is_brokerage"/>
     </resultMap>
 
     <sql id="selectGameConfigVo">
@@ -29,7 +30,7 @@
                game_session,
                bet_rule,
                odds,
-               tax, open, is_activity, finish_time, create_time, create_by, update_time, update_by,menu_id
+               tax, open, is_activity, finish_time, create_time, create_by, update_time, update_by,menu_id,is_brokerage
         from t_game_config
     </sql>
 
@@ -42,6 +43,7 @@
             <if test="open != null ">and open = #{open}</if>
             <if test="isActivity != null ">and is_activity = #{isActivity}</if>
             <if test="finishTime != null ">and finish_time = #{finishTime}</if>
+            <if test="isBrokerage != null ">and is_brokerage = #{isBrokerage}</if>
         </where>
         <if test="sort != null ">order by finish_time ${sort}</if>
     </select>
@@ -69,6 +71,7 @@
             <if test="updateTime != null">update_time,</if>
             <if test="updateBy != null">update_by,</if>
             <if test="menuId != null">menu_id,</if>
+            <if test="isBrokerage != null">is_brokerage,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -86,6 +89,7 @@
             <if test="updateTime != null">#{updateTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
             <if test="menuId != null">#{menuId},</if>
+            <if test="isBrokerage != null">#{isBrokerage},</if>
         </trim>
     </insert>
 
@@ -106,6 +110,7 @@
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="updateBy != null">update_by = #{updateBy},</if>
             <if test="menuId != null">menu_id = #{menuId},</if>
+            <if test="isBrokerage != null"> is_brokerage =  #{isBrokerage},</if>
         </trim>
         where id = #{id}
     </update>
