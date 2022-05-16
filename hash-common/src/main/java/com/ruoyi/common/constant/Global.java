@@ -40,7 +40,7 @@ public class Global {
         if (amount != null) {
             return amount * 1.0 / 10000;
         }
-        return null;
+        return 0.00d;
     }
 
     /**
