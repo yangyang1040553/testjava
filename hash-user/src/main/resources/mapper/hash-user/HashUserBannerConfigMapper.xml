@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.hashuser.mapper.HashUserBannerConfigMapper">
+
+    <resultMap type="com.ruoyi.hashuser.domain.HashUserBannerConfig" id="HashUserBannerConfigResult">
+        <result property="id" column="id"/>
+        <result property="bannerUrl" column="banner_url"/>
+        <result property="isSkip" column="is_skip"/>
+        <result property="skipUrl" column="skip_url"/>
+        <result property="weight" column="weight"/>
+        <result property="createTime" column="create_time"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="updateBy" column="update_by"/>
+    </resultMap>
+
+    <sql id="selectHashUserBannerConfigVo">
+        select id,
+               banner_url,
+               is_skip,
+               skip_url,
+               weight,
+               create_time,
+               create_by,
+               update_time,
+               update_by
+        from t_user_banner_config
+    </sql>
+
+    <select id="selectHashUserBannerConfigList" parameterType="HashUserBannerConfig"
+            resultMap="HashUserBannerConfigResult">
+        <include refid="selectHashUserBannerConfigVo"/>
+        <where>
+            <if test="bannerUrl != null  and bannerUrl != ''">and banner_url = #{bannerUrl}</if>
+            <if test="isSkip != null ">and is_skip = #{isSkip}</if>
+            <if test="skipUrl != null  and skipUrl != ''">and skip_url = #{skipUrl}</if>
+            <if test="weight != null ">and weight = #{weight}</if>
+        </where>
+        <if test="sort != null ">order by #{prop} ${sort}</if>
+    </select>
+
+    <select id="selectHashUserBannerConfigById" parameterType="Long" resultMap="HashUserBannerConfigResult">
+        <include refid="selectHashUserBannerConfigVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertHashUserBannerConfig" parameterType="HashUserBannerConfig" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into t_user_banner_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bannerUrl != null and bannerUrl != ''">banner_url,</if>
+            <if test="isSkip != null">is_skip,</if>
+            <if test="skipUrl != null and skipUrl != ''">skip_url,</if>
+            <if test="weight != null">weight,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="updateBy != null and updateBy != ''">update_by,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bannerUrl != null and bannerUrl != ''">#{bannerUrl},</if>
+            <if test="isSkip != null">#{isSkip},</if>
+            <if test="skipUrl != null and skipUrl != ''">#{skipUrl},</if>
+            <if test="weight != null">#{weight},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="updateBy != null and updateBy != ''">#{updateBy},</if>
+        </trim>
+    </insert>
+
+    <update id="updateHashUserBannerConfig" parameterType="HashUserBannerConfig">
+        update t_user_banner_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="bannerUrl != null and bannerUrl != ''">banner_url = #{bannerUrl},</if>
+            <if test="isSkip != null">is_skip = #{isSkip},</if>
+            <if test="skipUrl != null and skipUrl != ''">skip_url = #{skipUrl},</if>
+            <if test="weight != null">weight = #{weight},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteHashUserBannerConfigById" parameterType="Long">
+        delete
+        from t_user_banner_config
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteHashUserBannerConfigByIds" parameterType="String">
+        delete from t_user_banner_config where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
