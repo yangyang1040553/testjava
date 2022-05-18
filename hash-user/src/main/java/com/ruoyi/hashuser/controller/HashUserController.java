@@ -2,6 +2,8 @@ package com.ruoyi.hashuser.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.hashuser.redis.UserRedis;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,24 +25,24 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 用户Controller
- * 
+ *
  * @author xxk
  * @date 2022-05-08
  */
 @RestController
 @RequestMapping("/hash-user/HashUserService")
-public class HashUserController extends BaseController
-{
+public class HashUserController extends BaseController {
     @Autowired
     private IHashUserService hashUserService;
+    @Autowired
+    private UserRedis userRedis;
 
     /**
      * 查询用户列表
      */
     @PreAuthorize("@ss.hasPermi('hash-user:HashUserService:list')")
     @GetMapping("/list")
-    public TableDataInfo list(HashUser hashUser)
-    {
+    public TableDataInfo list(HashUser hashUser) {
         startPage();
         List<HashUser> list = hashUserService.selectHashUserList(hashUser);
         return getDataTable(list);
@@ -52,8 +54,7 @@ public class HashUserController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-user:HashUserService:export')")
     @Log(title = "用户", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, HashUser hashUser)
-    {
+    public void export(HttpServletResponse response, HashUser hashUser) {
         List<HashUser> list = hashUserService.selectHashUserList(hashUser);
         ExcelUtil<HashUser> util = new ExcelUtil<HashUser>(HashUser.class);
         util.exportExcel(response, list, "用户数据");
@@ -64,8 +65,7 @@ public class HashUserController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-user:HashUserService:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") String id)
-    {
+    public AjaxResult getInfo(@PathVariable("id") String id) {
         return AjaxResult.success(hashUserService.selectHashUserById(id));
     }
 
@@ -75,8 +75,7 @@ public class HashUserController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-user:HashUserService:add')")
     @Log(title = "用户", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody HashUser hashUser)
-    {
+    public AjaxResult add(@RequestBody HashUser hashUser) {
         return toAjax(hashUserService.insertHashUser(hashUser));
     }
 
@@ -86,9 +85,17 @@ public class HashUserController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-user:HashUserService:edit')")
     @Log(title = "用户", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody HashUser hashUser)
-    {
-        return toAjax(hashUserService.updateHashUser(hashUser));
+    public AjaxResult edit(@RequestBody HashUser hashUser) {
+        final int i = hashUserService.updateHashUser(hashUser);
+        if (i > 0) {
+            if (hashUser.getStatus() == 1) {
+                //冻结玩家
+                userRedis.delUserToken(hashUser.getId());
+            }
+
+        }
+
+        return toAjax(i);
     }
 
     /**
@@ -96,9 +103,8 @@ public class HashUserController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-user:HashUserService:remove')")
     @Log(title = "用户", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable String[] ids)
-    {
+    @DeleteMapping("/{ids}")
+    public AjaxResult remove(@PathVariable String[] ids) {
         return toAjax(hashUserService.deleteHashUserByIds(ids));
     }
 }
