@@ -44,6 +44,7 @@ public class HashUserController extends BaseController {
     @GetMapping("/list")
     public TableDataInfo list(HashUser hashUser) {
         startPage();
+        startOrderBy();
         List<HashUser> list = hashUserService.selectHashUserList(hashUser);
         return getDataTable(list);
     }

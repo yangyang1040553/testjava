@@ -42,6 +42,7 @@ public class HashUserActivityController extends BaseController
     public TableDataInfo list(HashUserActivity hashUserActivity)
     {
         startPage();
+        startOrderBy();
         List<HashUserActivity> list = hashUserActivityService.selectHashUserActivityList(hashUserActivity);
         return getDataTable(list);
     }

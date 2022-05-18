@@ -36,7 +36,6 @@
             <if test="isOpen != null ">and open = #{isOpen}</if>
             <if test="createTime != null ">and create_time >= #{createTime}</if>
         </where>
-        <if test="sort != null"> order by #{prop} ${sort}</if>
     </select>
 
     <select id="selectHashUserNoticeById" parameterType="String" resultMap="HashUserNoticeResult">

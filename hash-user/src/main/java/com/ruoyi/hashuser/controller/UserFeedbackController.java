@@ -42,6 +42,7 @@ public class UserFeedbackController extends BaseController
     public TableDataInfo list(UserFeedback userFeedback)
     {
         startPage();
+        startOrderBy();
         List<UserFeedback> list = userFeedbackService.selectUserFeedbackList(userFeedback);
         return getDataTable(list);
     }

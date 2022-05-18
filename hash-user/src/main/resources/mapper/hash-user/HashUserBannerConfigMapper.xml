@@ -38,7 +38,6 @@
             <if test="skipUrl != null  and skipUrl != ''">and skip_url = #{skipUrl}</if>
             <if test="weight != null ">and weight = #{weight}</if>
         </where>
-        <if test="sort != null ">order by #{prop} ${sort}</if>
     </select>
 
     <select id="selectHashUserBannerConfigById" parameterType="Long" resultMap="HashUserBannerConfigResult">

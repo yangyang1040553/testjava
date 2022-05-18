@@ -42,6 +42,7 @@ public class HashUserNoticeController extends BaseController
     public TableDataInfo list(HashUserNotice hashUserNotice)
     {
         startPage();
+        startOrderBy();
         List<HashUserNotice> list = hashUserNoticeService.selectHashUserNoticeList(hashUserNotice);
         return getDataTable(list);
     }

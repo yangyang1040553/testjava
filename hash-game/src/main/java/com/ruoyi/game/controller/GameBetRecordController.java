@@ -2,6 +2,8 @@ package com.ruoyi.game.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.utils.LogUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +36,8 @@ public class GameBetRecordController extends BaseController
     @Autowired
     private IGameBetRecordService gameBetRecordService;
 
+
+
     /**
      * 查询游戏投注记录列表
      */
@@ -42,7 +46,9 @@ public class GameBetRecordController extends BaseController
     public TableDataInfo list(GameBetRecord gameBetRecord)
     {
         startPage();
+        startOrderBy();
         List<GameBetRecord> list = gameBetRecordService.selectGameBetRecordList(gameBetRecord);
+        LogUtils.getBlock(list);
         return getDataTable(list);
     }
 

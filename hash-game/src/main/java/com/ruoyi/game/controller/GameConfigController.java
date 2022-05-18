@@ -41,6 +41,7 @@ public class GameConfigController extends BaseController {
     @GetMapping("/list")
     public TableDataInfo list(GameConfig gameConfig) {
         startPage();
+        startOrderBy();
         List<GameConfig> list = gameConfigService.selectGameConfigList(gameConfig);
         return getDataTable(list);
     }

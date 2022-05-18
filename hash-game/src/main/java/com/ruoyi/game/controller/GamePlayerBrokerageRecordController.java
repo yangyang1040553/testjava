@@ -42,6 +42,7 @@ public class GamePlayerBrokerageRecordController extends BaseController
     public TableDataInfo list(GamePlayerBrokerageRecord gamePlayerBrokerageRecord)
     {
         startPage();
+        startOrderBy();
         List<GamePlayerBrokerageRecord> list = gamePlayerBrokerageRecordService.selectGamePlayerBrokerageRecordList(gamePlayerBrokerageRecord);
         return getDataTable(list);
     }

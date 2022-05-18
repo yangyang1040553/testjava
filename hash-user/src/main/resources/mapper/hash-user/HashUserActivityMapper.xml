@@ -30,7 +30,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="open != null "> and open = #{open}</if>
             <if test="finishTime != null "> and finish_time >= #{finishTime}</if>
         </where>
-        <if test="sort != null"> order by #{prop} ${sort}</if>
     </select>
     
     <select id="selectHashUserActivityById" parameterType="Long" resultMap="HashUserActivityResult">

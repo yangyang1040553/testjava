@@ -44,6 +44,7 @@ public class HashUserBannerConfigController extends BaseController
     public TableDataInfo list(HashUserBannerConfig hashUserBannerConfig)
     {
         startPage();
+        startOrderBy();
         List<HashUserBannerConfig> list = hashUserBannerConfigService.selectHashUserBannerConfigList(hashUserBannerConfig);
         return getDataTable(list);
     }

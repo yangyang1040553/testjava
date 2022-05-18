@@ -45,7 +45,6 @@
             <if test="finishTime != null ">and finish_time = #{finishTime}</if>
             <if test="isBrokerage != null ">and is_brokerage = #{isBrokerage}</if>
         </where>
-        <if test="sort != null ">order by finish_time ${sort}</if>
     </select>
 
     <select id="selectGameConfigById" parameterType="String" resultMap="GameConfigResult">
