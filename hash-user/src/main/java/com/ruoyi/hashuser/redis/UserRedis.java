@@ -20,4 +20,8 @@ public class UserRedis {
         redisCache.delCacheMapValue(RedisKey.user_token, userId);
     }
 
+    public void delUserGlobalConfig() {
+        redisCache.deleteObject(RedisKey.user_global_config);
+    }
+
 }

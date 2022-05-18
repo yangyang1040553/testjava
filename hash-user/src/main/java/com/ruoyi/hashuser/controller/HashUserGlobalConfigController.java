@@ -2,6 +2,8 @@ package com.ruoyi.hashuser.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.hashuser.redis.UserRedis;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,24 +25,24 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 用户全局配置Controller
- * 
+ *
  * @author xxk
  * @date 2022-05-12
  */
 @RestController
 @RequestMapping("/hash-user/hashUserConfig")
-public class HashUserGlobalConfigController extends BaseController
-{
+public class HashUserGlobalConfigController extends BaseController {
     @Autowired
     private IHashUserGlobalConfigService hashUserGlobalConfigService;
+    @Autowired
+    private UserRedis userRedis;
 
     /**
      * 查询用户全局配置列表
      */
     @PreAuthorize("@ss.hasPermi('hash-user:hashUserConfig:list')")
     @GetMapping("/list")
-    public TableDataInfo list(HashUserGlobalConfig hashUserGlobalConfig)
-    {
+    public TableDataInfo list(HashUserGlobalConfig hashUserGlobalConfig) {
         startPage();
         List<HashUserGlobalConfig> list = hashUserGlobalConfigService.selectHashUserGlobalConfigList(hashUserGlobalConfig);
         return getDataTable(list);
@@ -52,8 +54,7 @@ public class HashUserGlobalConfigController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-user:hashUserConfig:export')")
     @Log(title = "用户全局配置", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, HashUserGlobalConfig hashUserGlobalConfig)
-    {
+    public void export(HttpServletResponse response, HashUserGlobalConfig hashUserGlobalConfig) {
         List<HashUserGlobalConfig> list = hashUserGlobalConfigService.selectHashUserGlobalConfigList(hashUserGlobalConfig);
         ExcelUtil<HashUserGlobalConfig> util = new ExcelUtil<HashUserGlobalConfig>(HashUserGlobalConfig.class);
         util.exportExcel(response, list, "用户全局配置数据");
@@ -64,8 +65,7 @@ public class HashUserGlobalConfigController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-user:hashUserConfig:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") String id)
-    {
+    public AjaxResult getInfo(@PathVariable("id") String id) {
         return AjaxResult.success(hashUserGlobalConfigService.selectHashUserGlobalConfigById(id));
     }
 
@@ -75,8 +75,7 @@ public class HashUserGlobalConfigController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-user:hashUserConfig:add')")
     @Log(title = "用户全局配置", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody HashUserGlobalConfig hashUserGlobalConfig)
-    {
+    public AjaxResult add(@RequestBody HashUserGlobalConfig hashUserGlobalConfig) {
         return toAjax(hashUserGlobalConfigService.insertHashUserGlobalConfig(hashUserGlobalConfig));
     }
 
@@ -86,9 +85,13 @@ public class HashUserGlobalConfigController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-user:hashUserConfig:edit')")
     @Log(title = "用户全局配置", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody HashUserGlobalConfig hashUserGlobalConfig)
-    {
-        return toAjax(hashUserGlobalConfigService.updateHashUserGlobalConfig(hashUserGlobalConfig));
+    public AjaxResult edit(@RequestBody HashUserGlobalConfig hashUserGlobalConfig) {
+        final int i = hashUserGlobalConfigService.updateHashUserGlobalConfig(hashUserGlobalConfig);
+        if (i > 0) {
+            userRedis.delUserGlobalConfig();
+        }
+
+        return toAjax(i);
     }
 
     /**
@@ -96,9 +99,8 @@ public class HashUserGlobalConfigController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-user:hashUserConfig:remove')")
     @Log(title = "用户全局配置", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable String[] ids)
-    {
+    @DeleteMapping("/{ids}")
+    public AjaxResult remove(@PathVariable String[] ids) {
         return toAjax(hashUserGlobalConfigService.deleteHashUserGlobalConfigByIds(ids));
     }
 }
