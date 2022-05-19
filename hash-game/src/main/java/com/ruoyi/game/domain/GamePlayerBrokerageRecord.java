@@ -42,7 +42,7 @@ public class GamePlayerBrokerageRecord extends BaseEntity {
      * 下注金额
      */
     @Excel(name = "下注金额")
-    private Long betAmount;
+    private Double betAmount;
 
     /**
      * 反佣类型1游戏2代理
@@ -54,7 +54,7 @@ public class GamePlayerBrokerageRecord extends BaseEntity {
      * 反佣金额
      */
     @Excel(name = "反佣金额")
-    private Long brokerageAmount;
+    private Double brokerageAmount;
 
     /**
      * 下级玩家id（产生收益者）
@@ -110,12 +110,12 @@ public class GamePlayerBrokerageRecord extends BaseEntity {
         return walletType;
     }
 
-    public void setBetAmount(Long betAmount) {
-        this.betAmount = betAmount;
+    public void setBetAmount(Double betAmount) {
+        this.betAmount = Global.getWalletAmountToReal(betAmount);
     }
 
     public Double getBetAmount() {
-        return Global.getWalletAmountToReal(betAmount);
+        return betAmount;
     }
 
     public void setBrokerageType(Integer brokerageType) {
@@ -126,12 +126,12 @@ public class GamePlayerBrokerageRecord extends BaseEntity {
         return brokerageType;
     }
 
-    public void setBrokerageAmount(Long brokerageAmount) {
-        this.brokerageAmount = brokerageAmount;
+    public void setBrokerageAmount(Double brokerageAmount) {
+        this.brokerageAmount = Global.getWalletAmountToReal(brokerageAmount);
     }
 
     public Double getBrokerageAmount() {
-        return Global.getWalletAmountToReal(brokerageAmount);
+        return brokerageAmount;
     }
 
     public void setChildUserId(String childUserId) {

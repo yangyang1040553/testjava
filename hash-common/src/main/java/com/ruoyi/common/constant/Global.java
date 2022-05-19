@@ -49,6 +49,19 @@ public class Global {
      * @param amount
      * @return
      */
+    public static Double getWalletAmountToReal(Double amount) {
+        if (amount != null) {
+            return amount * 1.00 / 10000;
+        }
+        return null;
+    }
+
+    /**
+     * 得到钱包余额的真实值
+     *
+     * @param amount
+     * @return
+     */
     public static String getWalletAmountStrToReal(long amount) {
         return String.valueOf(amount / 10000);
     }

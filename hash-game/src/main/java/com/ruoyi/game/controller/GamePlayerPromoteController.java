@@ -1,7 +1,10 @@
 package com.ruoyi.game.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.collections4.ListUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,14 +26,13 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 推广记录Controller
- * 
+ *
  * @author xxk
  * @date 2022-05-19
  */
 @RestController
 @RequestMapping("/hash-game/promote")
-public class GamePlayerPromoteController extends BaseController
-{
+public class GamePlayerPromoteController extends BaseController {
     @Autowired
     private IGamePlayerPromoteService gamePlayerPromoteService;
 
@@ -39,8 +41,7 @@ public class GamePlayerPromoteController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-game:promote:list')")
     @GetMapping("/list")
-    public TableDataInfo list(GamePlayerPromote gamePlayerPromote)
-    {
+    public TableDataInfo list(GamePlayerPromote gamePlayerPromote) {
         startPage();
         startOrderBy();
         List<GamePlayerPromote> list = gamePlayerPromoteService.selectGamePlayerPromoteList(gamePlayerPromote);
@@ -53,11 +54,10 @@ public class GamePlayerPromoteController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-game:promote:export')")
     @Log(title = "推广记录", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, GamePlayerPromote gamePlayerPromote)
-    {
+    public void export(HttpServletResponse response, GamePlayerPromote gamePlayerPromote) throws CloneNotSupportedException {
         List<GamePlayerPromote> list = gamePlayerPromoteService.selectGamePlayerPromoteList(gamePlayerPromote);
         ExcelUtil<GamePlayerPromote> util = new ExcelUtil<GamePlayerPromote>(GamePlayerPromote.class);
-        util.exportExcel(response, list, "推广记录数据");
+        util.exportExcel(response,list, "推广记录数据");
     }
 
     /**
@@ -65,8 +65,7 @@ public class GamePlayerPromoteController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-game:promote:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") String id)
-    {
+    public AjaxResult getInfo(@PathVariable("id") String id) {
         return AjaxResult.success(gamePlayerPromoteService.selectGamePlayerPromoteById(id));
     }
 
@@ -76,8 +75,7 @@ public class GamePlayerPromoteController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-game:promote:add')")
     @Log(title = "推广记录", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody GamePlayerPromote gamePlayerPromote)
-    {
+    public AjaxResult add(@RequestBody GamePlayerPromote gamePlayerPromote) {
         return toAjax(gamePlayerPromoteService.insertGamePlayerPromote(gamePlayerPromote));
     }
 
@@ -87,8 +85,7 @@ public class GamePlayerPromoteController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-game:promote:edit')")
     @Log(title = "推广记录", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody GamePlayerPromote gamePlayerPromote)
-    {
+    public AjaxResult edit(@RequestBody GamePlayerPromote gamePlayerPromote) {
         return toAjax(gamePlayerPromoteService.updateGamePlayerPromote(gamePlayerPromote));
     }
 
@@ -97,9 +94,8 @@ public class GamePlayerPromoteController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-game:promote:remove')")
     @Log(title = "推广记录", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable String[] ids)
-    {
+    @DeleteMapping("/{ids}")
+    public AjaxResult remove(@PathVariable String[] ids) {
         return toAjax(gamePlayerPromoteService.deleteGamePlayerPromoteByIds(ids));
     }
 }

@@ -66,7 +66,7 @@ public class GameBetRecord extends BaseEntity {
      * 投注金额
      */
     @Excel(name = "投注金额")
-    private Long betAmount;
+    private Double betAmount;
 
     /**
      * 投注位置
@@ -78,19 +78,19 @@ public class GameBetRecord extends BaseEntity {
      * 中奖金额或退回金额
      */
     @Excel(name = "中奖金额或退回金额")
-    private Long awardAmount;
+    private Double awardAmount;
 
     /**
      * 到账金额
      */
     @Excel(name = "到账金额")
-    private Long incomeAmount;
+    private Double incomeAmount;
 
     /**
      * 手续费
      */
     @Excel(name = "手续费")
-    private Long taxAmount;
+    private Double taxAmount;
 
     /**
      * hash值
@@ -127,11 +127,11 @@ public class GameBetRecord extends BaseEntity {
     private String prop;
 
     public Double getIncomeAmount() {
-        return  Global.getWalletAmountToReal(incomeAmount);
+        return incomeAmount;
     }
 
-    public void setIncomeAmount(Long incomeAmount) {
-        this.incomeAmount = incomeAmount;
+    public void setIncomeAmount(Double incomeAmount) {
+        this.incomeAmount = Global.getWalletAmountToReal(incomeAmount);
     }
 
     public String getSort() {
@@ -214,12 +214,12 @@ public class GameBetRecord extends BaseEntity {
         return betWalletType;
     }
 
-    public void setBetAmount(Long betAmount) {
-        this.betAmount = betAmount;
+    public void setBetAmount(Double betAmount) {
+        this.betAmount = Global.getWalletAmountToReal(betAmount);
     }
 
     public Double getBetAmount() {
-        return Global.getWalletAmountToReal(betAmount);
+        return betAmount;
     }
 
     public void setBetPosition(String betPosition) {
@@ -230,20 +230,20 @@ public class GameBetRecord extends BaseEntity {
         return betPosition;
     }
 
-    public void setAwardAmount(Long awardAmount) {
-        this.awardAmount = awardAmount;
+    public void setAwardAmount(Double awardAmount) {
+        this.awardAmount = Global.getWalletAmountToReal(awardAmount);
     }
 
     public Double getAwardAmount() {
-        return Global.getWalletAmountToReal(awardAmount);
+        return awardAmount;
     }
 
-    public void setTaxAmount(Long taxAmount) {
-        this.taxAmount = taxAmount;
+    public void setTaxAmount(Double taxAmount) {
+        this.taxAmount = Global.getWalletAmountToReal(taxAmount);
     }
 
     public Double getTaxAmount() {
-        return Global.getWalletAmountToReal(taxAmount);
+        return taxAmount;
     }
 
     public void setHashValue(String hashValue) {
