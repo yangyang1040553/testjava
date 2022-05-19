@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="invitationCode != null  and invitationCode != ''"> and invitation_code = #{invitationCode}</if>
             <if test="fatherUserId != null  and fatherUserId != ''"> and father_user_id = #{fatherUserId}</if>
             <if test="fatherInvitationCode != null  and fatherInvitationCode != ''"> and father_invitation_code = #{fatherInvitationCode}</if>
-            <if test="createTime != null "> and create_time = #{createTime}</if>
+            <if test="createTime != null "> and create_time >= #{createTime}</if>
         </where>
     </select>
     
