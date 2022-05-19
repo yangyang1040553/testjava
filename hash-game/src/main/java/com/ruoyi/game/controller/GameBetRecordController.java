@@ -48,7 +48,7 @@ public class GameBetRecordController extends BaseController
         startPage();
         startOrderBy();
         List<GameBetRecord> list = gameBetRecordService.selectGameBetRecordList(gameBetRecord);
-        LogUtils.getBlock(list);
+//        LogUtils.getBlock(list);
         return getDataTable(list);
     }
 
