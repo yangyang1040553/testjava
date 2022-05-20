@@ -1,7 +1,7 @@
-package com.ruoyi.wallet.service;
+package com.ruoyi.game.service;
 
 import java.util.List;
-import com.ruoyi.wallet.domain.GameWithdrawRecord;
+import com.ruoyi.game.domain.GameWithdrawRecord;
 
 /**
  * 佣金提现记录Service接口

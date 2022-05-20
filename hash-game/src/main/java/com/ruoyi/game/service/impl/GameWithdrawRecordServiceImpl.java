@@ -1,12 +1,12 @@
-package com.ruoyi.wallet.service.impl;
+package com.ruoyi.game.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.wallet.mapper.GameWithdrawRecordMapper;
-import com.ruoyi.wallet.domain.GameWithdrawRecord;
-import com.ruoyi.wallet.service.IGameWithdrawRecordService;
+import com.ruoyi.game.mapper.GameWithdrawRecordMapper;
+import com.ruoyi.game.domain.GameWithdrawRecord;
+import com.ruoyi.game.service.IGameWithdrawRecordService;
 
 /**
  * 佣金提现记录Service业务层处理

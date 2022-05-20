@@ -1,4 +1,4 @@
-package com.ruoyi.wallet.controller;
+package com.ruoyi.game.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
@@ -16,8 +16,8 @@ import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.wallet.domain.GameWithdrawRecord;
-import com.ruoyi.wallet.service.IGameWithdrawRecordService;
+import com.ruoyi.game.domain.GameWithdrawRecord;
+import com.ruoyi.game.service.IGameWithdrawRecordService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 
@@ -28,7 +28,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @date 2022-05-19
  */
 @RestController
-@RequestMapping("/hash-wallet/widthdrawRecord")
+@RequestMapping("/hash-game/widthdrawRecord")
 public class GameWithdrawRecordController extends BaseController
 {
     @Autowired
@@ -37,7 +37,7 @@ public class GameWithdrawRecordController extends BaseController
     /**
      * 查询佣金提现记录列表
      */
-    @PreAuthorize("@ss.hasPermi('hash-wallet:widthdrawRecord:list')")
+    @PreAuthorize("@ss.hasPermi('hash-game:widthdrawRecord:list')")
     @GetMapping("/list")
     public TableDataInfo list(GameWithdrawRecord gameWithdrawRecord)
     {
@@ -50,7 +50,7 @@ public class GameWithdrawRecordController extends BaseController
     /**
      * 导出佣金提现记录列表
      */
-    @PreAuthorize("@ss.hasPermi('hash-wallet:widthdrawRecord:export')")
+    @PreAuthorize("@ss.hasPermi('hash-game:widthdrawRecord:export')")
     @Log(title = "佣金提现记录", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, GameWithdrawRecord gameWithdrawRecord)
@@ -63,7 +63,7 @@ public class GameWithdrawRecordController extends BaseController
     /**
      * 获取佣金提现记录详细信息
      */
-    @PreAuthorize("@ss.hasPermi('hash-wallet:widthdrawRecord:query')")
+    @PreAuthorize("@ss.hasPermi('hash-game:widthdrawRecord:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") String id)
     {
@@ -73,7 +73,7 @@ public class GameWithdrawRecordController extends BaseController
     /**
      * 新增佣金提现记录
      */
-    @PreAuthorize("@ss.hasPermi('hash-wallet:widthdrawRecord:add')")
+    @PreAuthorize("@ss.hasPermi('hash-game:widthdrawRecord:add')")
     @Log(title = "佣金提现记录", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody GameWithdrawRecord gameWithdrawRecord)
@@ -84,7 +84,7 @@ public class GameWithdrawRecordController extends BaseController
     /**
      * 修改佣金提现记录
      */
-    @PreAuthorize("@ss.hasPermi('hash-wallet:widthdrawRecord:edit')")
+    @PreAuthorize("@ss.hasPermi('hash-game:widthdrawRecord:edit')")
     @Log(title = "佣金提现记录", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody GameWithdrawRecord gameWithdrawRecord)
@@ -95,7 +95,7 @@ public class GameWithdrawRecordController extends BaseController
     /**
      * 删除佣金提现记录
      */
-    @PreAuthorize("@ss.hasPermi('hash-wallet:widthdrawRecord:remove')")
+    @PreAuthorize("@ss.hasPermi('hash-game:widthdrawRecord:remove')")
     @Log(title = "佣金提现记录", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable String[] ids)
