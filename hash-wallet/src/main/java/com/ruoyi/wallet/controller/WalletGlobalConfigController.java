@@ -42,6 +42,7 @@ public class WalletGlobalConfigController extends BaseController {
     @GetMapping("/list")
     public TableDataInfo list(WalletGlobalConfig walletGlobalConfig) {
         startPage();
+        startOrderBy();
         List<WalletGlobalConfig> list = walletGlobalConfigService.selectWalletGlobalConfigList(walletGlobalConfig);
         return getDataTable(list);
     }
