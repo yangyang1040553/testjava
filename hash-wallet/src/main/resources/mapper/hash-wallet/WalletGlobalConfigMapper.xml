@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.wallet.mapper.WalletGlobalConfigMapper">
+    
+    <resultMap type="WalletGlobalConfig" id="WalletGlobalConfigResult">
+        <result property="id"    column="id"    />
+        <result property="merchantNo"    column="merchant_no"    />
+        <result property="publicKey"    column="public_key"    />
+        <result property="privateKey"    column="private_key"    />
+        <result property="trxTransUsdtScale"    column="trx_trans_usdt_scale"    />
+        <result property="usdtTransTrxScale"    column="usdt_trans_trx_scale"    />
+        <result property="minerScala"    column="miner_scala"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <sql id="selectWalletGlobalConfigVo">
+        select id, merchant_no, public_key, private_key, trx_trans_usdt_scale, usdt_trans_trx_scale, miner_scala, create_time, create_by, update_time, update_by from t_wallet_global_config
+    </sql>
+
+    <select id="selectWalletGlobalConfigList" parameterType="WalletGlobalConfig" resultMap="WalletGlobalConfigResult">
+        <include refid="selectWalletGlobalConfigVo"/>
+        <where>  
+            <if test="merchantNo != null  and merchantNo != ''"> and merchant_no = #{merchantNo}</if>
+            <if test="publicKey != null  and publicKey != ''"> and public_key = #{publicKey}</if>
+            <if test="privateKey != null  and privateKey != ''"> and private_key = #{privateKey}</if>
+            <if test="trxTransUsdtScale != null  and trxTransUsdtScale != ''"> and trx_trans_usdt_scale = #{trxTransUsdtScale}</if>
+            <if test="usdtTransTrxScale != null  and usdtTransTrxScale != ''"> and usdt_trans_trx_scale = #{usdtTransTrxScale}</if>
+            <if test="minerScala != null "> and miner_scala = #{minerScala}</if>
+        </where>
+    </select>
+    
+    <select id="selectWalletGlobalConfigById" parameterType="String" resultMap="WalletGlobalConfigResult">
+        <include refid="selectWalletGlobalConfigVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertWalletGlobalConfig" parameterType="WalletGlobalConfig">
+        insert into t_wallet_global_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="merchantNo != null and merchantNo != ''">merchant_no,</if>
+            <if test="publicKey != null and publicKey != ''">public_key,</if>
+            <if test="privateKey != null and privateKey != ''">private_key,</if>
+            <if test="trxTransUsdtScale != null and trxTransUsdtScale != ''">trx_trans_usdt_scale,</if>
+            <if test="usdtTransTrxScale != null and usdtTransTrxScale != ''">usdt_trans_trx_scale,</if>
+            <if test="minerScala != null">miner_scala,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="updateBy != null">update_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="merchantNo != null and merchantNo != ''">#{merchantNo},</if>
+            <if test="publicKey != null and publicKey != ''">#{publicKey},</if>
+            <if test="privateKey != null and privateKey != ''">#{privateKey},</if>
+            <if test="trxTransUsdtScale != null and trxTransUsdtScale != ''">#{trxTransUsdtScale},</if>
+            <if test="usdtTransTrxScale != null and usdtTransTrxScale != ''">#{usdtTransTrxScale},</if>
+            <if test="minerScala != null">#{minerScala},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateWalletGlobalConfig" parameterType="WalletGlobalConfig">
+        update t_wallet_global_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="merchantNo != null and merchantNo != ''">merchant_no = #{merchantNo},</if>
+            <if test="publicKey != null and publicKey != ''">public_key = #{publicKey},</if>
+            <if test="privateKey != null and privateKey != ''">private_key = #{privateKey},</if>
+            <if test="trxTransUsdtScale != null and trxTransUsdtScale != ''">trx_trans_usdt_scale = #{trxTransUsdtScale},</if>
+            <if test="usdtTransTrxScale != null and usdtTransTrxScale != ''">usdt_trans_trx_scale = #{usdtTransTrxScale},</if>
+            <if test="minerScala != null">miner_scala = #{minerScala},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteWalletGlobalConfigById" parameterType="String">
+        delete from t_wallet_global_config where id = #{id}
+    </delete>
+
+    <delete id="deleteWalletGlobalConfigByIds" parameterType="String">
+        delete from t_wallet_global_config where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
