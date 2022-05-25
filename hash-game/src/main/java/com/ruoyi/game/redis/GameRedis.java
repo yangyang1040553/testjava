@@ -26,4 +26,11 @@ public class GameRedis {
     public void deleteGameMenu() {
         redisCache.deleteObject(RedisKey.game_menu);
     }
+
+    /***
+     * 删除游戏全局配置缓存
+     */
+    public void deleteGameGlobalConfig() {
+        redisCache.deleteObject(RedisKey.game_global_config);
+    }
 }
