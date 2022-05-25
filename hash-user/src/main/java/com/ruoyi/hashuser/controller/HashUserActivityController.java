@@ -2,6 +2,8 @@ package com.ruoyi.hashuser.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.hashuser.redis.UserRedis;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,24 +25,24 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 用户的活动Controller
- * 
+ *
  * @author xxk
  * @date 2022-05-11
  */
 @RestController
 @RequestMapping("/hash-user/activity")
-public class HashUserActivityController extends BaseController
-{
+public class HashUserActivityController extends BaseController {
     @Autowired
     private IHashUserActivityService hashUserActivityService;
+    @Autowired
+    UserRedis userRedis;
 
     /**
      * 查询用户的活动列表
      */
     @PreAuthorize("@ss.hasPermi('hash-user:activity:list')")
     @GetMapping("/list")
-    public TableDataInfo list(HashUserActivity hashUserActivity)
-    {
+    public TableDataInfo list(HashUserActivity hashUserActivity) {
         startPage();
         startOrderBy();
         List<HashUserActivity> list = hashUserActivityService.selectHashUserActivityList(hashUserActivity);
@@ -53,8 +55,7 @@ public class HashUserActivityController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-user:activity:export')")
     @Log(title = "用户的活动", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, HashUserActivity hashUserActivity)
-    {
+    public void export(HttpServletResponse response, HashUserActivity hashUserActivity) {
         List<HashUserActivity> list = hashUserActivityService.selectHashUserActivityList(hashUserActivity);
         ExcelUtil<HashUserActivity> util = new ExcelUtil<HashUserActivity>(HashUserActivity.class);
         util.exportExcel(response, list, "用户的活动数据");
@@ -65,8 +66,7 @@ public class HashUserActivityController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-user:activity:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") Long id)
-    {
+    public AjaxResult getInfo(@PathVariable("id") Long id) {
         return AjaxResult.success(hashUserActivityService.selectHashUserActivityById(id));
     }
 
@@ -76,8 +76,8 @@ public class HashUserActivityController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-user:activity:add')")
     @Log(title = "用户的活动", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody HashUserActivity hashUserActivity)
-    {
+    public AjaxResult add(@RequestBody HashUserActivity hashUserActivity) {
+        userRedis.delUserActivity();
         return toAjax(hashUserActivityService.insertHashUserActivity(hashUserActivity));
     }
 
@@ -87,8 +87,8 @@ public class HashUserActivityController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-user:activity:edit')")
     @Log(title = "用户的活动", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody HashUserActivity hashUserActivity)
-    {
+    public AjaxResult edit(@RequestBody HashUserActivity hashUserActivity) {
+        userRedis.delUserActivity();
         return toAjax(hashUserActivityService.updateHashUserActivity(hashUserActivity));
     }
 
@@ -97,9 +97,9 @@ public class HashUserActivityController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-user:activity:remove')")
     @Log(title = "用户的活动", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable Long[] ids)
-    {
+    @DeleteMapping("/{ids}")
+    public AjaxResult remove(@PathVariable Long[] ids) {
+        userRedis.delUserActivity();
         return toAjax(hashUserActivityService.deleteHashUserActivityByIds(ids));
     }
 }

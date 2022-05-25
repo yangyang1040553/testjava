@@ -2,6 +2,8 @@ package com.ruoyi.hashuser.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.hashuser.redis.UserRedis;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +35,8 @@ public class HashUserNoticeController extends BaseController
 {
     @Autowired
     private IHashUserNoticeService hashUserNoticeService;
+    @Autowired
+    UserRedis userRedis;
 
     /**
      * 查询用户公告列表
@@ -78,6 +82,7 @@ public class HashUserNoticeController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody HashUserNotice hashUserNotice)
     {
+        userRedis.delUserNotice();
         return toAjax(hashUserNoticeService.insertHashUserNotice(hashUserNotice));
     }
 
@@ -89,6 +94,7 @@ public class HashUserNoticeController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody HashUserNotice hashUserNotice)
     {
+        userRedis.delUserNotice();
         return toAjax(hashUserNoticeService.updateHashUserNotice(hashUserNotice));
     }
 
@@ -100,6 +106,7 @@ public class HashUserNoticeController extends BaseController
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable String[] ids)
     {
+        userRedis.delUserNotice();
         return toAjax(hashUserNoticeService.deleteHashUserNoticeByIds(ids));
     }
 }

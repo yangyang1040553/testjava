@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.hashuser.domain.HashUserBannerConfig;
+import com.ruoyi.hashuser.redis.UserRedis;
 import com.ruoyi.hashuser.service.IHashUserBannerConfigService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,24 +26,24 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 用户首页的banner列Controller
- * 
+ *
  * @author xxk
  * @date 2022-05-18
  */
 @RestController
 @RequestMapping("/hash-user/hashUserBannerConfig")
-public class HashUserBannerConfigController extends BaseController
-{
+public class HashUserBannerConfigController extends BaseController {
     @Autowired
     private IHashUserBannerConfigService hashUserBannerConfigService;
+    @Autowired
+    UserRedis userRedis;
 
     /**
      * 查询用户首页的banner列列表
      */
     @PreAuthorize("@ss.hasPermi('hash-user:hashUserBannerConfig:list')")
     @GetMapping("/list")
-    public TableDataInfo list(HashUserBannerConfig hashUserBannerConfig)
-    {
+    public TableDataInfo list(HashUserBannerConfig hashUserBannerConfig) {
         startPage();
         startOrderBy();
         List<HashUserBannerConfig> list = hashUserBannerConfigService.selectHashUserBannerConfigList(hashUserBannerConfig);
@@ -55,8 +56,7 @@ public class HashUserBannerConfigController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-user:hashUserBannerConfig:export')")
     @Log(title = "用户首页的banner列", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, HashUserBannerConfig hashUserBannerConfig)
-    {
+    public void export(HttpServletResponse response, HashUserBannerConfig hashUserBannerConfig) {
         List<HashUserBannerConfig> list = hashUserBannerConfigService.selectHashUserBannerConfigList(hashUserBannerConfig);
         ExcelUtil<HashUserBannerConfig> util = new ExcelUtil<HashUserBannerConfig>(HashUserBannerConfig.class);
         util.exportExcel(response, list, "用户首页的banner列数据");
@@ -67,8 +67,7 @@ public class HashUserBannerConfigController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-user:hashUserBannerConfig:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") Long id)
-    {
+    public AjaxResult getInfo(@PathVariable("id") Long id) {
         return AjaxResult.success(hashUserBannerConfigService.selectHashUserBannerConfigById(id));
     }
 
@@ -78,8 +77,8 @@ public class HashUserBannerConfigController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-user:hashUserBannerConfig:add')")
     @Log(title = "用户首页的banner列", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody HashUserBannerConfig hashUserBannerConfig)
-    {
+    public AjaxResult add(@RequestBody HashUserBannerConfig hashUserBannerConfig) {
+        userRedis.delUserBanner();
         hashUserBannerConfig.setCreateBy(getUsername());
         hashUserBannerConfig.setCreateTime(DateUtils.getNowDate());
         return toAjax(hashUserBannerConfigService.insertHashUserBannerConfig(hashUserBannerConfig));
@@ -91,8 +90,8 @@ public class HashUserBannerConfigController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-user:hashUserBannerConfig:edit')")
     @Log(title = "用户首页的banner列", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody HashUserBannerConfig hashUserBannerConfig)
-    {
+    public AjaxResult edit(@RequestBody HashUserBannerConfig hashUserBannerConfig) {
+        userRedis.delUserBanner();
         hashUserBannerConfig.setUpdateBy(getUsername());
         hashUserBannerConfig.setUpdateTime(DateUtils.getNowDate());
         return toAjax(hashUserBannerConfigService.updateHashUserBannerConfig(hashUserBannerConfig));
@@ -103,9 +102,9 @@ public class HashUserBannerConfigController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-user:hashUserBannerConfig:remove')")
     @Log(title = "用户首页的banner列", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable Long[] ids)
-    {
+    @DeleteMapping("/{ids}")
+    public AjaxResult remove(@PathVariable Long[] ids) {
+        userRedis.delUserBanner();
         return toAjax(hashUserBannerConfigService.deleteHashUserBannerConfigByIds(ids));
     }
 }

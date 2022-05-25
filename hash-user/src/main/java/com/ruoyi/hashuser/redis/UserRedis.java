@@ -20,8 +20,33 @@ public class UserRedis {
         redisCache.delCacheMapValue(RedisKey.user_token, userId);
     }
 
+    /***
+     * 删除全局配置缓存
+     */
     public void delUserGlobalConfig() {
         redisCache.deleteObject(RedisKey.user_global_config);
+    }
+
+
+    /**
+     * 删除公告缓存
+     */
+    public void delUserNotice() {
+        redisCache.deleteObject(RedisKey.user_notice);
+    }
+
+    /**
+     * 删除活动缓存
+     */
+    public void delUserActivity() {
+        redisCache.deleteObject(RedisKey.user_activity);
+    }
+
+    /**
+     * 删除Banner缓存
+     */
+    public void delUserBanner() {
+        redisCache.deleteObject(RedisKey.user_banner_config);
     }
 
 }
