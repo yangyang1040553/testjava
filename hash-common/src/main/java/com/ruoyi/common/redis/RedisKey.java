@@ -22,7 +22,8 @@ public class RedisKey {
     public final static String user_sms = "user_sms:";
     //用户全局配置
     public final static String user_global_config = "user_global_config:";
-
+    //用户banner配置
+    public final static String user_banner_config = "user_banner_config";
 
     //=====================1用户相关key=====================
 
