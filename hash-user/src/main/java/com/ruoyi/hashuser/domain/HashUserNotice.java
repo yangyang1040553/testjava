@@ -37,6 +37,27 @@ public class HashUserNotice extends BaseEntity
     @Excel(name = "公告结束时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date finishTime;
 
+    @Excel(name = "是否弹窗 0-否 1-是")
+    private  Integer isPop;
+
+    @Excel(name = "权重")
+    private  Integer weight;
+
+    public Integer getIsPop() {
+        return isPop;
+    }
+
+    public void setIsPop(Integer isPop) {
+        this.isPop = isPop;
+    }
+
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
+    }
 
     private String  sort;
 
