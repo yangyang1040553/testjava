@@ -24,11 +24,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="registerIp"    column="register_ip"    />
         <result property="loginTime"    column="login_time"    />
         <result property="loginIp"    column="login_ip"    />
+        <result property="inAmount"    column="in_amount"    />
+        <result property="outAmount"    column="out_amount"    />
+        <result property="betMount"    column="bet_amount"    />
     </resultMap>
 
     <sql id="selectHashUserVo">
         select id, user_type, area_code, phone, account, password, device_code, platform, nick_name, head, status, online, invitation_code, father_invitation_code, register_time, bind_time, register_ip, login_time, login_ip from t_user
     </sql>
+
+    <sql id="selectHashUserEveryDay">
+        select u.*,t.betAmount,t.user_id , a.in_amount, b.out_mount from  t_user u
+               left join
+        (select  user_id,sum(bet_amount) as betAmount   from t_game_bet_record  where  create_time  BETWEEN CONCAT(CURDATE(),' 00:00:00') and  CONCAT(CURDATE(),' 23:59:59') group by user_id) t on t.user_id = u.id
+              left join
+         (select  user_id,sum(amount) as in_amount from t_wallet_recharge_order  where create_time  BETWEEN CONCAT(CURDATE(),' 00:00:00') and  CONCAT(CURDATE(),' 23:59:59')  group by user_id) a on a.user_id = u.id
+              left join
+         (select  user_id,sum(amount) as out_mount from t_wallet_withdraw_order  where create_time  BETWEEN CONCAT(CURDATE(),' 00:00:00') and  CONCAT(CURDATE(),' 23:59:59')  group by user_id) b on b.user_id = u.id
+    </sql>
+
+    <select id="selectHashUserDetail" parameterType="HashUser" resultMap="HashUserResult">
+        <include refid="selectHashUserEveryDay"/>
+        <where>
+            <if test="id != null "> and id = #{id}</if>
+        </where>
+    </select>
 
     <select id="selectHashUserList" parameterType="HashUser" resultMap="HashUserResult">
         <include refid="selectHashUserVo"/>

@@ -70,6 +70,19 @@ public class HashUserController extends BaseController {
         return AjaxResult.success(hashUserService.selectHashUserById(id));
     }
 
+
+    /**
+     * 获取用户每日详细信息
+     */
+    @PreAuthorize("@ss.hasPermi('hash-user:HashUserService:queryDetail')")
+    @GetMapping(value = "/detail/{id}")
+    public AjaxResult getInfoDetail(@PathVariable("id") String id) {
+        return AjaxResult.success(hashUserService.selectHashUserDetail(id));
+    }
+
+
+
+
     /**
      * 新增用户
      */

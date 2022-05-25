@@ -20,6 +20,15 @@ public interface IHashUserService
     public HashUser selectHashUserById(String id);
 
     /**
+     * 查询用户
+     *
+     * @param id 用户主键
+     * @return 用户
+     */
+    public HashUser selectHashUserDetail(String id);
+
+
+    /**
      * 查询用户列表
      * 
      * @param hashUser 用户

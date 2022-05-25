@@ -3,6 +3,7 @@ package com.ruoyi.hashuser.domain;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ruoyi.common.constant.Global;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
@@ -100,39 +101,73 @@ public class HashUser extends BaseEntity {
     @Excel(name = "上级邀请码(不为空 就建立了绑定关系)")
     private String fatherInvitationCode;
 
-    /** 注册时间 */
+    /**
+     * 注册时间
+     */
     @JsonFormat(pattern = "yyyy-MM-dd HH:MM:ss")
     @Excel(name = "注册时间", width = 30, dateFormat = "yyyy-MM-dd HH:MM:ss")
     private Date registerTime;
 
-    /** 账户绑定时间 */
+    /**
+     * 账户绑定时间
+     */
     @JsonFormat(pattern = "yyyy-MM-dd HH:MM:ss")
     @Excel(name = "账户绑定时间", width = 30, dateFormat = "yyyy-MM-dd HH:MM:ss")
     private Date bindTime;
 
-    /** 注册ip */
+    /**
+     * 注册ip
+     */
     @Excel(name = "注册ip")
     private String registerIp;
 
-    /** 登录时间 */
+    /**
+     * 登录时间
+     */
     @JsonFormat(pattern = "yyyy-MM-dd HH:MM:ss")
     @Excel(name = "登录时间", width = 30, dateFormat = "yyyy-MM-dd HH:MM:ss")
     private Date loginTime;
 
-    /** 登录ip */
+    /**
+     * 登录ip
+     */
     @Excel(name = "登录ip")
     private String loginIp;
 
-    private String sort;
+    @Excel(name = "每日充值总金额")
+    private Double inAmount;
 
-    public String getSort() {
-        return sort;
+    @Excel(name = "每日提现总金额")
+    private Double outAmount;
+
+    @Excel(name = "每日投注总额")
+    private Double betAmount;
+
+
+
+    public Double getInAmount() {
+        return Global.getWalletAmountToReal(inAmount);
     }
 
-    public void setSort(String sort) {
-        this.sort = sort;
+    public void setInAmount(Double inAmount) {
+        this.inAmount = inAmount;
     }
 
+    public Double getOutAmount() {
+        return Global.getWalletAmountToReal(outAmount);
+    }
+
+    public void setOutAmount(Double outAmount) {
+        this.outAmount = outAmount;
+    }
+
+    public Double getBetAmount() {
+        return Global.getWalletAmountToReal(betAmount);
+    }
+
+    public void setBetAmount(Double betAmount) {
+        this.betAmount = betAmount;
+    }
 
     public void setId(String id) {
         this.id = id;
