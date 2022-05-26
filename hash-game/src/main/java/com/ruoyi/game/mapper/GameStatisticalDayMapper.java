@@ -28,7 +28,6 @@ public interface GameStatisticalDayMapper {
      */
     public List<GameStatisticalDay> selectGameStatisticalDayList(GameStatisticalDay gameStatisticalDay);
 
-//    public List<GameStatisticalDay> selectGameStatisticalDayList(Map sql);
 
     /**
      * 新增游戏日统计

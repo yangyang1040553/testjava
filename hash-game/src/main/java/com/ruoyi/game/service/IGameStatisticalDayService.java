@@ -27,6 +27,15 @@ public interface IGameStatisticalDayService
      */
     public List<GameStatisticalDay> selectGameStatisticalDayList(GameStatisticalDay gameStatisticalDay);
 
+
+    /**
+     * 查询游戏 具体投注位置的列表
+     *
+     * @param gameStatisticalDay 游戏日统计
+     * @return 游戏日统计集合
+     */
+    public List<GameStatisticalDay> selectGameChildrenList(GameStatisticalDay gameStatisticalDay);
+
     /**
      * 新增游戏日统计
      * 

@@ -2,6 +2,7 @@ package com.ruoyi.game.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,14 +24,13 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 游戏日统计Controller
- * 
+ *
  * @author xxk
  * @date 2022-05-26
  */
 @RestController
 @RequestMapping("/hash-game/statisticalGame")
-public class GameStatisticalDayController extends BaseController
-{
+public class GameStatisticalDayController extends BaseController {
     @Autowired
     private IGameStatisticalDayService gameStatisticalDayService;
 
@@ -39,10 +39,19 @@ public class GameStatisticalDayController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-game:statisticalGame:list')")
     @GetMapping("/list")
-    public TableDataInfo list(GameStatisticalDay gameStatisticalDay)
-    {
+    public TableDataInfo list(GameStatisticalDay gameStatisticalDay) {
         startPage();
         List<GameStatisticalDay> list = gameStatisticalDayService.selectGameStatisticalDayList(gameStatisticalDay);
+        return getDataTable(list);
+    }
+
+
+    /**
+     * 查询游戏日统计列表
+     */
+    @GetMapping("/childList")
+    public TableDataInfo childList(GameStatisticalDay gameStatisticalDay) {
+        List<GameStatisticalDay> list = gameStatisticalDayService.selectGameChildrenList(gameStatisticalDay);
         return getDataTable(list);
     }
 
@@ -52,8 +61,7 @@ public class GameStatisticalDayController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-game:statisticalGame:export')")
     @Log(title = "游戏日统计", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, GameStatisticalDay gameStatisticalDay)
-    {
+    public void export(HttpServletResponse response, GameStatisticalDay gameStatisticalDay) {
         List<GameStatisticalDay> list = gameStatisticalDayService.selectGameStatisticalDayList(gameStatisticalDay);
         ExcelUtil<GameStatisticalDay> util = new ExcelUtil<GameStatisticalDay>(GameStatisticalDay.class);
         util.exportExcel(response, list, "游戏日统计数据");
@@ -64,8 +72,7 @@ public class GameStatisticalDayController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-game:statisticalGame:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") String id)
-    {
+    public AjaxResult getInfo(@PathVariable("id") String id) {
         return AjaxResult.success(gameStatisticalDayService.selectGameStatisticalDayById(id));
     }
 
@@ -75,8 +82,7 @@ public class GameStatisticalDayController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-game:statisticalGame:add')")
     @Log(title = "游戏日统计", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody GameStatisticalDay gameStatisticalDay)
-    {
+    public AjaxResult add(@RequestBody GameStatisticalDay gameStatisticalDay) {
         return toAjax(gameStatisticalDayService.insertGameStatisticalDay(gameStatisticalDay));
     }
 
@@ -86,8 +92,7 @@ public class GameStatisticalDayController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-game:statisticalGame:edit')")
     @Log(title = "游戏日统计", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody GameStatisticalDay gameStatisticalDay)
-    {
+    public AjaxResult edit(@RequestBody GameStatisticalDay gameStatisticalDay) {
         return toAjax(gameStatisticalDayService.updateGameStatisticalDay(gameStatisticalDay));
     }
 
@@ -96,9 +101,8 @@ public class GameStatisticalDayController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-game:statisticalGame:remove')")
     @Log(title = "游戏日统计", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable String[] ids)
-    {
+    @DeleteMapping("/{ids}")
+    public AjaxResult remove(@PathVariable String[] ids) {
         return toAjax(gameStatisticalDayService.deleteGameStatisticalDayByIds(ids));
     }
 }

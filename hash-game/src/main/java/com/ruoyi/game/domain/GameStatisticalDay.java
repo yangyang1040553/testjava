@@ -64,6 +64,26 @@ public class GameStatisticalDay extends BaseEntity {
     private Double trxAwardAmount;
 
 
+    private String week;
+
+    public String getWeek() {
+        return week;
+    }
+
+    public void setWeek(String week) {
+        this.week = week;
+    }
+
+    private String betPosition;
+
+    public String getBetPosition() {
+        return betPosition;
+    }
+
+    public void setBetPosition(String betPosition) {
+        this.betPosition = betPosition;
+    }
+
     public Double getUsdtBetAmount() {
         return Global.getWalletAmountToReal(usdtBetAmount);
     }
