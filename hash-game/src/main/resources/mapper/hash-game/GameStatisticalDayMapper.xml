@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.game.mapper.GameStatisticalDayMapper">
+
+    <resultMap type="GameStatisticalDay" id="GameStatisticalDayResult">
+        <result property="id" column="id"/>
+        <result property="gameId" column="game_id"/>
+        <result property="gameName" column="game_name"/>
+        <result property="time" column="time"/>
+        <result property="usdtBetAmount" column="usdt_bet_amount"/>
+        <result property="usdtAwardAmount" column="usdt_award_amount"/>
+        <result property="trxBetAmount" column="trx_bet_amount"/>
+        <result property="trxAwardAmount" column="trx_award_amount"/>
+        <result property="betPosition" column="bet_position"/>
+    </resultMap>
+
+    <sql id="selectGameStatisticalDayVo">
+        select id, game_id, today_bet_amount, today_award_amount
+        from t_game_statistical_day
+    </sql>
+
+    <!--    <select id="selectGameStatisticalDayList" parameterType="GameStatisticalDay" resultMap="GameStatisticalDayResult">-->
+    <!--        <include refid="selectGameStatisticalDayVo"/>-->
+    <!--        <where>  -->
+    <!--            <if test="id != null  and id != ''"> and id = #{id}</if>-->
+    <!--            <if test="gameId != null "> and game_id = #{gameId}</if>-->
+    <!--            <if test="todayBetAmount != null "> and today_bet_amount = #{todayBetAmount}</if>-->
+    <!--            <if test="todayAwardAmount != null "> and today_award_amount = #{todayAwardAmount}</if>-->
+    <!--        </where>-->
+    <!--    </select>  -->
+    <select id="selectGameStatisticalDayList" parameterType="GameStatisticalDay" resultMap="GameStatisticalDayResult">
+        ${sql}
+    </select>
+
+    <select id="selectGameStatisticalDayById" parameterType="String" resultMap="GameStatisticalDayResult">
+        <include refid="selectGameStatisticalDayVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertGameStatisticalDay" parameterType="GameStatisticalDay">
+        insert into t_game_statistical_day
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="gameId != null">game_id,</if>
+            <if test="todayBetAmount != null">today_bet_amount,</if>
+            <if test="todayAwardAmount != null">today_award_amount,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="gameId != null">#{gameId},</if>
+            <if test="todayBetAmount != null">#{todayBetAmount},</if>
+            <if test="todayAwardAmount != null">#{todayAwardAmount},</if>
+        </trim>
+    </insert>
+
+    <update id="updateGameStatisticalDay" parameterType="GameStatisticalDay">
+        update t_game_statistical_day
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="gameId != null">game_id = #{gameId},</if>
+            <if test="todayBetAmount != null">today_bet_amount = #{todayBetAmount},</if>
+            <if test="todayAwardAmount != null">today_award_amount = #{todayAwardAmount},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteGameStatisticalDayById" parameterType="String">
+        delete
+        from t_game_statistical_day
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteGameStatisticalDayByIds" parameterType="String">
+        delete from t_game_statistical_day where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
