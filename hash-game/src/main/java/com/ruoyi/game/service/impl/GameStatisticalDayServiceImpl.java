@@ -56,12 +56,13 @@ public class GameStatisticalDayServiceImpl implements IGameStatisticalDayService
         }
 
 
-        String sql = "SELECT   DATE_FORMAT(id,'" + regex + "') as time  ,game_id,usdt_bet_amount,usdt_award_amount,trx_bet_amount,trx_award_amount from t_game_statistical_day \n";
+        String sql = "SELECT   DATE_FORMAT(id,'" + regex + "') as time  ,game_id,sum(trx_bet_amount)as trx_bet_amount,sum(trx_award_amount)as trx_award_amount,sum(usdt_bet_amount)as usdt_bet_amount\n" +
+                ",sum(usdt_award_amount)as usdt_award_amount from t_game_statistical_day \n";
 
         if (gameStatisticalDay.getGameId() != null) {
             sql += ("  where game_id =" + gameStatisticalDay.getGameId());
         }
-        sql += " GROUP BY time,game_id,usdt_bet_amount,usdt_award_amount,trx_bet_amount,trx_award_amount";
+        sql += " GROUP BY time,game_id";
 
         gameStatisticalDay.setSql(sql);
 
@@ -107,8 +108,13 @@ public class GameStatisticalDayServiceImpl implements IGameStatisticalDayService
         }
 
 
-        String sql = "SELECT  DATE_FORMAT(c.id,'" + regex + "') as time ,c.game_id,c.usdt_bet_amount,c.usdt_award_amount,c.trx_bet_amount,c.trx_award_amount,c.bet_position from (SELECT  a.id, a.game_id, a.usdt_bet_amount,a.usdt_award_amount,a.trx_bet_amount,a.trx_award_amount ,a.bet_position from t_game_statistical_position_day  a\n" +
-                "                LEFT  JOIN  t_game_statistical_day b on   a.id=b.id and a.game_id=b.game_id ) c ";
+        String sql = "SELECT  DATE_FORMAT(c.id,'" + regex + "') as time ,c.game_id, " +
+                " sum(c.trx_bet_amount)as trx_bet_amount," +
+                "sum(c.trx_award_amount)as trx_award_amount," +
+                "sum(c.usdt_bet_amount)as usdt_bet_amount\n" +
+                ",sum(c.usdt_award_amount)as usdt_award_amount " +
+                ",c.bet_position from (SELECT  a.id, a.game_id, a.usdt_bet_amount,a.usdt_award_amount,a.trx_bet_amount,a.trx_award_amount ,a.bet_position from t_game_statistical_position_day  a\n" +
+                "LEFT  JOIN  t_game_statistical_day b on   a.id=b.id and a.game_id=b.game_id ) c ";
 
 //        if (gameStatisticalDay.getGameId() != null && gameStatisticalDay.getTime() != null) {
 //            sql += (" where c.game_id= " + gameStatisticalDay.getGameId() + " and DATE_FORMAT(c.id,'" + regex + "')=DATE_FORMAT('" + gameStatisticalDay.getTime() + "','" + regex + "')");
@@ -142,7 +148,7 @@ public class GameStatisticalDayServiceImpl implements IGameStatisticalDayService
             }
         }
 
-        sql+=" group by time ,c.game_id,c.usdt_bet_amount,c.usdt_award_amount,c.trx_bet_amount,c.trx_award_amount,c.bet_position";
+        sql+=" group by time ,c.game_id";
 
 
         gameStatisticalDay.setSql(sql);
