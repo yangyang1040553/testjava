@@ -6,6 +6,9 @@ import com.ruoyi.common.redis.RedisKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.Set;
+
 @Component
 public class GameRedis {
 
@@ -32,5 +35,13 @@ public class GameRedis {
      */
     public void deleteGameGlobalConfig() {
         redisCache.deleteObject(RedisKey.game_global_config);
+    }
+
+    /***
+     * 获取在线人数列表
+     * @return
+     */
+    public Set<Object> getOnlineList() {
+        return redisCache.getCacheSet(RedisKey.game_player_online);
     }
 }
