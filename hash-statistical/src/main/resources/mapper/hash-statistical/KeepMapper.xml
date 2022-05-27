@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.statistical.mapper.KeepMapper">
+
+    <resultMap type="Keep" id="KeepResult">
+        <result property="registerTime"    column="register_time"    />
+        <result property="total"    column="total"    />
+        <result property="loginCount"    column="login_count"    />
+        <result property="one"    column="one"    />
+        <result property="two"    column="two"    />
+        <result property="three"    column="three"    />
+        <result property="four"    column="four"    />
+        <result property="five"    column="five"    />
+        <result property="six"    column="six"    />
+        <result property="seven"    column="seven"    />
+        <result property="eight"    column="eight"    />
+        <result property="nine"    column="nine"    />
+        <result property="ten"    column="ten"    />
+        <result property="eleven"    column="eleven"    />
+        <result property="twelve"    column="twelve"    />
+        <result property="thirteen"    column="thirteen"    />
+        <result property="fourteen"    column="fourteen"    />
+        <result property="fifteen"    column="fifteen"    />
+        <result property="sixteen"    column="sixteen"    />
+        <result property="seventeen"    column="seventeen"    />
+        <result property="eighteen"    column="eighteen"    />
+        <result property="nineteen"    column="nineteen"    />
+        <result property="twenty"    column="twenty"    />
+        <result property="twentyOne"    column="twenty_one"    />
+        <result property="twentyTwo"    column="twenty_two"    />
+        <result property="twentyThree"    column="twenty_three"    />
+        <result property="twentyFour"    column="twenty_four"    />
+        <result property="twentyFive"    column="twenty_five"    />
+        <result property="twentySix"    column="twenty_six"    />
+        <result property="twentySeven"    column="twenty_seven"    />
+        <result property="twentyEight"    column="twenty_eight"    />
+        <result property="twentyNine"    column="twenty_nine"    />
+        <result property="thirty"    column="thirty"    />
+    </resultMap>
+
+    <sql id="selectKeepVo">
+        select register_time, total, login_count, one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen, twenty, twenty_one, twenty_two, twenty_three, twenty_four, twenty_five, twenty_six, twenty_seven, twenty_eight, twenty_nine, thirty from keep
+    </sql>
+
+    <select id="selectKeepList" parameterType="Keep" resultMap="KeepResult">
+        <include refid="selectKeepVo"/>
+        <where>
+            <if test="params.beginRegisterTime != null and params.beginRegisterTime != '' and params.endRegisterTime != null and params.endRegisterTime != ''"> and register_time between #{params.beginRegisterTime} and #{params.endRegisterTime}</if>
+            <if test="total != null "> and total = #{total}</if>
+            <if test="loginCount != null "> and login_count = #{loginCount}</if>
+            <if test="one != null  and one != ''"> and one = #{one}</if>
+            <if test="two != null  and two != ''"> and two = #{two}</if>
+            <if test="three != null  and three != ''"> and three = #{three}</if>
+            <if test="four != null  and four != ''"> and four = #{four}</if>
+            <if test="five != null  and five != ''"> and five = #{five}</if>
+            <if test="six != null  and six != ''"> and six = #{six}</if>
+            <if test="seven != null  and seven != ''"> and seven = #{seven}</if>
+            <if test="eight != null  and eight != ''"> and eight = #{eight}</if>
+            <if test="nine != null  and nine != ''"> and nine = #{nine}</if>
+            <if test="ten != null  and ten != ''"> and ten = #{ten}</if>
+            <if test="eleven != null  and eleven != ''"> and eleven = #{eleven}</if>
+            <if test="twelve != null  and twelve != ''"> and twelve = #{twelve}</if>
+            <if test="thirteen != null  and thirteen != ''"> and thirteen = #{thirteen}</if>
+            <if test="fourteen != null  and fourteen != ''"> and fourteen = #{fourteen}</if>
+            <if test="fifteen != null  and fifteen != ''"> and fifteen = #{fifteen}</if>
+            <if test="sixteen != null  and sixteen != ''"> and sixteen = #{sixteen}</if>
+            <if test="seventeen != null  and seventeen != ''"> and seventeen = #{seventeen}</if>
+            <if test="eighteen != null  and eighteen != ''"> and eighteen = #{eighteen}</if>
+            <if test="nineteen != null  and nineteen != ''"> and nineteen = #{nineteen}</if>
+            <if test="twenty != null  and twenty != ''"> and twenty = #{twenty}</if>
+            <if test="twentyOne != null  and twentyOne != ''"> and twenty_one = #{twentyOne}</if>
+            <if test="twentyTwo != null  and twentyTwo != ''"> and twenty_two = #{twentyTwo}</if>
+            <if test="twentyThree != null  and twentyThree != ''"> and twenty_three = #{twentyThree}</if>
+            <if test="twentyFour != null  and twentyFour != ''"> and twenty_four = #{twentyFour}</if>
+            <if test="twentyFive != null  and twentyFive != ''"> and twenty_five = #{twentyFive}</if>
+            <if test="twentySix != null  and twentySix != ''"> and twenty_six = #{twentySix}</if>
+            <if test="twentySeven != null  and twentySeven != ''"> and twenty_seven = #{twentySeven}</if>
+            <if test="twentyEight != null  and twentyEight != ''"> and twenty_eight = #{twentyEight}</if>
+            <if test="twentyNine != null  and twentyNine != ''"> and twenty_nine = #{twentyNine}</if>
+            <if test="thirty != null  and thirty != ''"> and thirty = #{thirty}</if>
+        </where>
+    </select>
+
+    <select id="selectKeepByRegisterTime" parameterType="String" resultMap="KeepResult">
+        <include refid="selectKeepVo"/>
+        where register_time = #{registerTime}
+    </select>
+
+    <insert id="insertKeep" parameterType="Keep">
+        insert into keep
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="registerTime != null">register_time,</if>
+            <if test="total != null">total,</if>
+            <if test="loginCount != null">login_count,</if>
+            <if test="one != null">one,</if>
+            <if test="two != null">two,</if>
+            <if test="three != null">three,</if>
+            <if test="four != null">four,</if>
+            <if test="five != null">five,</if>
+            <if test="six != null">six,</if>
+            <if test="seven != null">seven,</if>
+            <if test="eight != null">eight,</if>
+            <if test="nine != null">nine,</if>
+            <if test="ten != null">ten,</if>
+            <if test="eleven != null">eleven,</if>
+            <if test="twelve != null">twelve,</if>
+            <if test="thirteen != null">thirteen,</if>
+            <if test="fourteen != null">fourteen,</if>
+            <if test="fifteen != null">fifteen,</if>
+            <if test="sixteen != null">sixteen,</if>
+            <if test="seventeen != null">seventeen,</if>
+            <if test="eighteen != null">eighteen,</if>
+            <if test="nineteen != null">nineteen,</if>
+            <if test="twenty != null">twenty,</if>
+            <if test="twentyOne != null">twenty_one,</if>
+            <if test="twentyTwo != null">twenty_two,</if>
+            <if test="twentyThree != null">twenty_three,</if>
+            <if test="twentyFour != null">twenty_four,</if>
+            <if test="twentyFive != null">twenty_five,</if>
+            <if test="twentySix != null">twenty_six,</if>
+            <if test="twentySeven != null">twenty_seven,</if>
+            <if test="twentyEight != null">twenty_eight,</if>
+            <if test="twentyNine != null">twenty_nine,</if>
+            <if test="thirty != null">thirty,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="registerTime != null">#{registerTime},</if>
+            <if test="total != null">#{total},</if>
+            <if test="loginCount != null">#{loginCount},</if>
+            <if test="one != null">#{one},</if>
+            <if test="two != null">#{two},</if>
+            <if test="three != null">#{three},</if>
+            <if test="four != null">#{four},</if>
+            <if test="five != null">#{five},</if>
+            <if test="six != null">#{six},</if>
+            <if test="seven != null">#{seven},</if>
+            <if test="eight != null">#{eight},</if>
+            <if test="nine != null">#{nine},</if>
+            <if test="ten != null">#{ten},</if>
+            <if test="eleven != null">#{eleven},</if>
+            <if test="twelve != null">#{twelve},</if>
+            <if test="thirteen != null">#{thirteen},</if>
+            <if test="fourteen != null">#{fourteen},</if>
+            <if test="fifteen != null">#{fifteen},</if>
+            <if test="sixteen != null">#{sixteen},</if>
+            <if test="seventeen != null">#{seventeen},</if>
+            <if test="eighteen != null">#{eighteen},</if>
+            <if test="nineteen != null">#{nineteen},</if>
+            <if test="twenty != null">#{twenty},</if>
+            <if test="twentyOne != null">#{twentyOne},</if>
+            <if test="twentyTwo != null">#{twentyTwo},</if>
+            <if test="twentyThree != null">#{twentyThree},</if>
+            <if test="twentyFour != null">#{twentyFour},</if>
+            <if test="twentyFive != null">#{twentyFive},</if>
+            <if test="twentySix != null">#{twentySix},</if>
+            <if test="twentySeven != null">#{twentySeven},</if>
+            <if test="twentyEight != null">#{twentyEight},</if>
+            <if test="twentyNine != null">#{twentyNine},</if>
+            <if test="thirty != null">#{thirty},</if>
+        </trim>
+    </insert>
+
+    <update id="updateKeep" parameterType="Keep">
+        update keep
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="total != null">total = #{total},</if>
+            <if test="loginCount != null">login_count = #{loginCount},</if>
+            <if test="one != null">one = #{one},</if>
+            <if test="two != null">two = #{two},</if>
+            <if test="three != null">three = #{three},</if>
+            <if test="four != null">four = #{four},</if>
+            <if test="five != null">five = #{five},</if>
+            <if test="six != null">six = #{six},</if>
+            <if test="seven != null">seven = #{seven},</if>
+            <if test="eight != null">eight = #{eight},</if>
+            <if test="nine != null">nine = #{nine},</if>
+            <if test="ten != null">ten = #{ten},</if>
+            <if test="eleven != null">eleven = #{eleven},</if>
+            <if test="twelve != null">twelve = #{twelve},</if>
+            <if test="thirteen != null">thirteen = #{thirteen},</if>
+            <if test="fourteen != null">fourteen = #{fourteen},</if>
+            <if test="fifteen != null">fifteen = #{fifteen},</if>
+            <if test="sixteen != null">sixteen = #{sixteen},</if>
+            <if test="seventeen != null">seventeen = #{seventeen},</if>
+            <if test="eighteen != null">eighteen = #{eighteen},</if>
+            <if test="nineteen != null">nineteen = #{nineteen},</if>
+            <if test="twenty != null">twenty = #{twenty},</if>
+            <if test="twentyOne != null">twenty_one = #{twentyOne},</if>
+            <if test="twentyTwo != null">twenty_two = #{twentyTwo},</if>
+            <if test="twentyThree != null">twenty_three = #{twentyThree},</if>
+            <if test="twentyFour != null">twenty_four = #{twentyFour},</if>
+            <if test="twentyFive != null">twenty_five = #{twentyFive},</if>
+            <if test="twentySix != null">twenty_six = #{twentySix},</if>
+            <if test="twentySeven != null">twenty_seven = #{twentySeven},</if>
+            <if test="twentyEight != null">twenty_eight = #{twentyEight},</if>
+            <if test="twentyNine != null">twenty_nine = #{twentyNine},</if>
+            <if test="thirty != null">thirty = #{thirty},</if>
+        </trim>
+        where register_time = #{registerTime}
+    </update>
+
+    <delete id="deleteKeepByRegisterTime" parameterType="String">
+        delete from keep where register_time = #{registerTime}
+    </delete>
+
+    <delete id="deleteKeepByRegisterTimes" parameterType="String">
+        delete from keep where register_time in
+        <foreach item="registerTime" collection="array" open="(" separator="," close=")">
+            #{registerTime}
+        </foreach>
+    </delete>
+</mapper>
