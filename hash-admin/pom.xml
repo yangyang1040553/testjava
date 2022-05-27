@@ -82,11 +82,21 @@
             <version>3.8.2</version>
         </dependency>
 
+
+        <dependency>
+            <groupId>com.hash</groupId>
+            <artifactId>hash-statistical</artifactId>
+            <version>3.8.2</version>
+        </dependency>
+
         <dependency>
             <groupId>com.hash</groupId>
             <artifactId>hash-user</artifactId>
             <version>3.8.2</version>
         </dependency>
+
+
+
 
     </dependencies>
 

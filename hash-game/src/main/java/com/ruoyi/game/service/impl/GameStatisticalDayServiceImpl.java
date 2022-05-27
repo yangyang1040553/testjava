@@ -148,7 +148,7 @@ public class GameStatisticalDayServiceImpl implements IGameStatisticalDayService
             }
         }
 
-        sql+=" group by time ,c.game_id";
+        sql+=" group by time ,c.game_id,c.bet_position";
 
 
         gameStatisticalDay.setSql(sql);
