@@ -82,6 +82,16 @@ public class GameStatisticalPlayerDay extends BaseEntity {
     @Excel(name = "统计时间", width = 30)
     private String time;
 
+    private String betPosition;
+
+
+    public String getBetPosition() {
+        return betPosition;
+    }
+
+    public void setBetPosition(String betPosition) {
+        this.betPosition = betPosition;
+    }
 
     public Integer getType() {
         return type;

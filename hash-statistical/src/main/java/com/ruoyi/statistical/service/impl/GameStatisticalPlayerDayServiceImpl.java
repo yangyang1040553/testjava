@@ -61,8 +61,8 @@ public class GameStatisticalPlayerDayServiceImpl implements IGameStatisticalPlay
                         "sum(usdt_bet_amount) AS usdt_bet_amount, \n" +
                         "sum(usdt_award_amount) AS usdt_award_amount FROM t_game_statistical_player_day ";
 
-        if (gameStatisticalPlayerDay.getGameId() != null) {
-            sql += ("  where game_id =" + gameStatisticalPlayerDay.getGameId());
+        if (gameStatisticalPlayerDay.getUserId() != null && !"".equals(gameStatisticalPlayerDay.getUserId())) {
+            sql += ("  where user_id =" + gameStatisticalPlayerDay.getUserId());
         }
         sql += " GROUP BY time, game_id ,user_id";
 
@@ -109,7 +109,7 @@ public class GameStatisticalPlayerDayServiceImpl implements IGameStatisticalPlay
 
 
         String sql = "SELECT\n" +
-                "\tDATE_FORMAT( c.id, '%Y-%m-%d' ) AS time,\n" +
+                "\tDATE_FORMAT( c.id, '" + regex + "' ) AS time,\n" +
                 "\tc.game_id,\n" +
                 "\tsum( c.trx_bet_amount ) AS trx_bet_amount,\n" +
                 "\tsum( c.trx_award_amount ) AS trx_award_amount,\n" +
@@ -133,7 +133,7 @@ public class GameStatisticalPlayerDayServiceImpl implements IGameStatisticalPlay
                 "\t\tLEFT JOIN t_game_statistical_player_day b ON a.id = b.id \n" +
                 "\t\tAND a.game_id = b.game_id \n" +
                 "\t\tAND a.user_id = b.user_id \n" +
-                "\t) c \n" ;
+                "\t) c \n";
 
 //        if (gameStatisticalDay.getGameId() != null && gameStatisticalDay.getTime() != null) {
 //            sql += (" where c.game_id= " + gameStatisticalDay.getGameId() + " and DATE_FORMAT(c.id,'" + regex + "')=DATE_FORMAT('" + gameStatisticalDay.getTime() + "','" + regex + "')");
@@ -141,36 +141,30 @@ public class GameStatisticalPlayerDayServiceImpl implements IGameStatisticalPlay
 
         if (gameStatisticalPlayerDay.getType() == 1) {
             //按日查
-            if (gameStatisticalPlayerDay.getGameId() != null && gameStatisticalPlayerDay.getTime() != null) {
-                sql += (" where c.game_id= " + gameStatisticalPlayerDay.getGameId() +
-                        " and DATE_FORMAT(c.id,'" + regex + "')=DATE_FORMAT('" + gameStatisticalPlayerDay.getTime() + "','" + regex + "')" +
-                        " and c.user_id=" + gameStatisticalPlayerDay.getUserId());
-            }
+            sql += (" where c.game_id= " + gameStatisticalPlayerDay.getGameId() +
+                    " and DATE_FORMAT(c.id,'" + regex + "')=DATE_FORMAT('" + gameStatisticalPlayerDay.getTime() + "','" + regex + "')" +
+                    " and c.user_id=" + gameStatisticalPlayerDay.getUserId());
         } else if (gameStatisticalPlayerDay.getType() == 3) {
             //按月查
-            if (gameStatisticalPlayerDay.getGameId() != null && gameStatisticalPlayerDay.getTime() != null) {
-                sql += (" where c.game_id= " + gameStatisticalPlayerDay.getGameId() +
-                        " and DATE_FORMAT(c.id,'" + regex + "')='" + gameStatisticalPlayerDay.getTime() + "'"+
-                        " and c.user_id=" + gameStatisticalPlayerDay.getUserId());
-            }
+            sql += (" where  c.game_id=" + gameStatisticalPlayerDay.getGameId() +
+                    " and DATE_FORMAT(c.id,'" + regex + "')='" + gameStatisticalPlayerDay.getTime() + "'" +
+                    " and c.user_id=" + gameStatisticalPlayerDay.getUserId());
         } else if (gameStatisticalPlayerDay.getType() == 2) {
             //按月查
-            if (gameStatisticalPlayerDay.getGameId() != null && gameStatisticalPlayerDay.getTime() != null) {
 
-                String[] date = gameStatisticalPlayerDay.getWeek().split("-");
+            String[] date = gameStatisticalPlayerDay.getWeek().split("-");
 
-                WeekFields weekFields = WeekFields.ISO;
-                LocalDate now = LocalDate.now();
-                //输入你想要的年份和周数
-                LocalDate localDate = now.withYear(Integer.parseInt(date[0])).with(weekFields.weekOfYear(), Integer.parseInt(date[1]));
-                //周一
-                LocalDate monday = localDate.with(weekFields.dayOfWeek(), 1L);
-                //周日
-                LocalDate sunday = localDate.with(weekFields.dayOfWeek(), 7L);
-                sql += (" where c.game_id= " + gameStatisticalPlayerDay.getGameId() +
-                        " and c.id BETWEEN '" + monday.toString() + "'  and '" + sunday.toString() + "'"+
-                        " and c.user_id=" + gameStatisticalPlayerDay.getUserId());
-            }
+            WeekFields weekFields = WeekFields.ISO;
+            LocalDate now = LocalDate.now();
+            //输入你想要的年份和周数
+            LocalDate localDate = now.withYear(Integer.parseInt(date[0])).with(weekFields.weekOfYear(), Integer.parseInt(date[1]));
+            //周一
+            LocalDate monday = localDate.with(weekFields.dayOfWeek(), 1L);
+            //周日
+            LocalDate sunday = localDate.with(weekFields.dayOfWeek(), 7L);
+            sql += (" where   c.id BETWEEN '" + monday.toString() + "'  and '" + sunday.toString() + "'" +
+                    " and c.game_id= " + gameStatisticalPlayerDay.getGameId() +
+                    " and c.user_id=" + gameStatisticalPlayerDay.getUserId());
         }
 
         sql += " group by time,\n" +
