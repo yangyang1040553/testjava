@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.game.mapper.GameStatisticalPositionDayMapper">
+    
+    <resultMap type="GameStatisticalPositionDay" id="GameStatisticalPositionDayResult">
+        <result property="id" column="id"/>
+        <result property="gameId" column="game_id"/>
+        <result property="gameName" column="game_name"/>
+        <result property="time" column="time"/>
+        <result property="usdtBetAmount" column="usdt_bet_amount"/>
+        <result property="usdtAwardAmount" column="usdt_award_amount"/>
+        <result property="trxBetAmount" column="trx_bet_amount"/>
+        <result property="trxAwardAmount" column="trx_award_amount"/>
+        <result property="betPosition" column="bet_position"/>
+    </resultMap>
+
+    <sql id="selectGameStatisticalPositionDayVo">
+        select id, game_id, bet_position, usdt_bet_amount, usdt_award_amount, trx_bet_amount, trx_award_amount from t_game_statistical_position_day
+    </sql>
+
+
+    <select id="selectGameStatisticalPositionDayList" parameterType="GameStatisticalPositionDay" resultMap="GameStatisticalPositionDayResult">
+        ${sql}
+    </select>
+
+<!--    <select id="selectGameStatisticalPositionDayList" parameterType="GameStatisticalPositionDay" resultMap="GameStatisticalPositionDayResult">-->
+<!--        <include refid="selectGameStatisticalPositionDayVo"/>-->
+<!--        <where>  -->
+<!--            <if test="gameId != null "> and game_id = #{gameId}</if>-->
+<!--        </where>-->
+<!--    </select>-->
+    
+    <select id="selectGameStatisticalPositionDayById" parameterType="String" resultMap="GameStatisticalPositionDayResult">
+        <include refid="selectGameStatisticalPositionDayVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertGameStatisticalPositionDay" parameterType="GameStatisticalPositionDay">
+        insert into t_game_statistical_position_day
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">id,</if>
+            <if test="gameId != null">game_id,</if>
+            <if test="betPosition != null">bet_position,</if>
+            <if test="usdtBetAmount != null">usdt_bet_amount,</if>
+            <if test="usdtAwardAmount != null">usdt_award_amount,</if>
+            <if test="trxBetAmount != null">trx_bet_amount,</if>
+            <if test="trxAwardAmount != null">trx_award_amount,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">#{id},</if>
+            <if test="gameId != null">#{gameId},</if>
+            <if test="betPosition != null">#{betPosition},</if>
+            <if test="usdtBetAmount != null">#{usdtBetAmount},</if>
+            <if test="usdtAwardAmount != null">#{usdtAwardAmount},</if>
+            <if test="trxBetAmount != null">#{trxBetAmount},</if>
+            <if test="trxAwardAmount != null">#{trxAwardAmount},</if>
+         </trim>
+    </insert>
+
+    <update id="updateGameStatisticalPositionDay" parameterType="GameStatisticalPositionDay">
+        update t_game_statistical_position_day
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="gameId != null">game_id = #{gameId},</if>
+            <if test="betPosition != null">bet_position = #{betPosition},</if>
+            <if test="usdtBetAmount != null">usdt_bet_amount = #{usdtBetAmount},</if>
+            <if test="usdtAwardAmount != null">usdt_award_amount = #{usdtAwardAmount},</if>
+            <if test="trxBetAmount != null">trx_bet_amount = #{trxBetAmount},</if>
+            <if test="trxAwardAmount != null">trx_award_amount = #{trxAwardAmount},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteGameStatisticalPositionDayById" parameterType="String">
+        delete from t_game_statistical_position_day where id = #{id}
+    </delete>
+
+    <delete id="deleteGameStatisticalPositionDayByIds" parameterType="String">
+        delete from t_game_statistical_position_day where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
