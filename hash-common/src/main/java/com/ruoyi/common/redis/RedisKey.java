@@ -39,6 +39,9 @@ public class RedisKey {
     //玩家订单id
     public final static String game_player_bet_order = "game_player_bet_order";
 
+    //游戏玩家在线人数
+    public final static String game_player_online = "game_player_online";
+
     //=====================2游戏相关key=====================
 
 }
