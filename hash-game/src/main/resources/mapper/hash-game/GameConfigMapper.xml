@@ -40,6 +40,7 @@
             <if test="gameName != null  and gameName != ''">and game_name like concat('%', #{gameName}, '%')</if>
             <if test="gameSession != null ">and game_session = #{gameSession}</if>
             <if test="odds != null ">and odds = #{odds}</if>
+            <if test="gameId != null ">and game_id = #{gameId}</if>
             <if test="open != null ">and open = #{open}</if>
             <if test="isActivity != null ">and is_activity = #{isActivity}</if>
             <if test="finishTime != null ">and finish_time = #{finishTime}</if>
