@@ -6,8 +6,10 @@ import com.ruoyi.common.redis.RedisKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
 public class GameRedis {
@@ -41,7 +43,8 @@ public class GameRedis {
      * 获取在线人数列表
      * @return
      */
-    public Set<Object> getOnlineList() {
-        return redisCache.getCacheSet(RedisKey.game_player_online);
+    public List<Object> getOnlineList() {
+        final Set<String> cacheSet = redisCache.getCacheSet(RedisKey.game_player_online);
+        return new ArrayList<>(cacheSet);
     }
 }
