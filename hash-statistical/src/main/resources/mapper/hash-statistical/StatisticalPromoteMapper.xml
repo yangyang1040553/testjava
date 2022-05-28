@@ -1,44 +1,56 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.statistical.mapper.StatisticalPromoteMapper">
-    
+
     <resultMap type="StatisticalPromote" id="StatisticalPromoteResult">
-        <result property="id"    column="id"    />
-        <result property="level1Person"    column="level1_person"    />
-        <result property="level2Person"    column="level2_person"    />
-        <result property="level3Person"    column="level3_person"    />
-        <result property="areaCode"    column="area_code"    />
-        <result property="phone"    column="phone"    />
-        <result property="nickName"    column="nick_name"    />
-        <result property="account"    column="account"    />
-        <result property="registerTime"    column="register_time"    />
-        <result property="promoteOdds"    column="promote_odds"    />
-        <result property="sharePromoteOdds"    column="share_promote_odds"    />
-        <result property="sumnumber"    column="sumNumber"    />
+        <result property="id" column="id"/>
+        <result property="level1Person" column="level1_person"/>
+        <result property="level2Person" column="level2_person"/>
+        <result property="level3Person" column="level3_person"/>
+        <result property="areaCode" column="area_code"/>
+        <result property="phone" column="phone"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="account" column="account"/>
+        <result property="registerTime" column="register_time"/>
+        <result property="promoteOdds" column="promote_odds"/>
+        <result property="sharePromoteOdds" column="share_promote_odds"/>
+        <result property="sumnumber" column="sumNumber"/>
     </resultMap>
 
     <sql id="selectStatisticalPromoteVo">
-        select id, level1_person, level2_person, level3_person, area_code, phone, nick_name, account, register_time, promote_odds, share_promote_odds, sumNumber from statistical_promote
+        select id,
+               level1_person,
+               level2_person,
+               level3_person,
+               area_code,
+               phone,
+               nick_name,
+               account,
+               register_time,
+               promote_odds,
+               share_promote_odds,
+               sumNumber
+        from statistical_promote
     </sql>
 
     <select id="selectStatisticalPromoteList" parameterType="StatisticalPromote" resultMap="StatisticalPromoteResult">
         <include refid="selectStatisticalPromoteVo"/>
-        <where>  
-            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
-            <if test="account != null  and account != ''"> and account = #{account}</if>
-            <if test="registerTime != null "> and register_time = #{registerTime}</if>
-            <if test="promoteOdds != null "> and promote_odds = #{promoteOdds}</if>
-            <if test="sharePromoteOdds != null "> and share_promote_odds = #{sharePromoteOdds}</if>
+        <where>
+            <if test="phone != null  and phone != ''">and phone = #{phone}</if>
+            <if test="account != null  and account != ''">and account = #{account}</if>
+            <if test="registerTime != null ">and register_time = #{registerTime}</if>
+            <if test="promoteOdds != null ">and promote_odds = #{promoteOdds}</if>
+            <if test="sharePromoteOdds != null ">and share_promote_odds = #{sharePromoteOdds}</if>
         </where>
     </select>
-    
+
     <select id="selectStatisticalPromoteById" parameterType="String" resultMap="StatisticalPromoteResult">
         <include refid="selectStatisticalPromoteVo"/>
         where id = #{id}
     </select>
-        
+
     <insert id="insertStatisticalPromote" parameterType="StatisticalPromote">
         insert into statistical_promote
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -54,7 +66,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="promoteOdds != null">promote_odds,</if>
             <if test="sharePromoteOdds != null">share_promote_odds,</if>
             <if test="sumnumber != null">sumNumber,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null and id != ''">#{id},</if>
             <if test="level1Person != null">#{level1Person},</if>
@@ -68,7 +80,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="promoteOdds != null">#{promoteOdds},</if>
             <if test="sharePromoteOdds != null">#{sharePromoteOdds},</if>
             <if test="sumnumber != null">#{sumnumber},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateStatisticalPromote" parameterType="StatisticalPromote">
@@ -90,11 +102,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteStatisticalPromoteById" parameterType="String">
-        delete from statistical_promote where id = #{id}
+        delete
+        from statistical_promote
+        where id = #{id}
     </delete>
 
     <delete id="deleteStatisticalPromoteByIds" parameterType="String">
-        delete from statistical_promote where id in 
+        delete from statistical_promote where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

@@ -37,6 +37,9 @@ public interface HashUserMapper
      */
     public List<HashUser> selectHashUserList(HashUser hashUser);
 
+
+    public List<HashUser> selectHashUserListByIds(String ids);
+
     /**
      * 新增用户
      * 

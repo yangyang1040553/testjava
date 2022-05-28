@@ -1,71 +1,105 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.hashuser.mapper.HashUserMapper">
-    
+
     <resultMap type="HashUser" id="HashUserResult">
-        <result property="id"    column="id"    />
-        <result property="userType"    column="user_type"    />
-        <result property="areaCode"    column="area_code"    />
-        <result property="phone"    column="phone"    />
-        <result property="account"    column="account"    />
-        <result property="password"    column="password"    />
-        <result property="deviceCode"    column="device_code"    />
-        <result property="platform"    column="platform"    />
-        <result property="nickName"    column="nick_name"    />
-        <result property="head"    column="head"    />
-        <result property="status"    column="status"    />
-        <result property="online"    column="online"    />
-        <result property="invitationCode"    column="invitation_code"    />
-        <result property="fatherInvitationCode"    column="father_invitation_code"    />
-        <result property="registerTime"    column="register_time"    />
-        <result property="bindTime"    column="bind_time"    />
-        <result property="registerIp"    column="register_ip"    />
-        <result property="loginTime"    column="login_time"    />
-        <result property="loginIp"    column="login_ip"    />
-        <result property="inAmount"    column="in_amount"    />
-        <result property="outAmount"    column="out_amount"    />
-        <result property="betMount"    column="bet_amount"    />
+        <result property="id" column="id"/>
+        <result property="userType" column="user_type"/>
+        <result property="areaCode" column="area_code"/>
+        <result property="phone" column="phone"/>
+        <result property="account" column="account"/>
+        <result property="password" column="password"/>
+        <result property="deviceCode" column="device_code"/>
+        <result property="platform" column="platform"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="head" column="head"/>
+        <result property="status" column="status"/>
+        <result property="online" column="online"/>
+        <result property="invitationCode" column="invitation_code"/>
+        <result property="fatherInvitationCode" column="father_invitation_code"/>
+        <result property="registerTime" column="register_time"/>
+        <result property="bindTime" column="bind_time"/>
+        <result property="registerIp" column="register_ip"/>
+        <result property="loginTime" column="login_time"/>
+        <result property="loginIp" column="login_ip"/>
+        <result property="inAmount" column="in_amount"/>
+        <result property="outAmount" column="out_amount"/>
+        <result property="betMount" column="bet_amount"/>
     </resultMap>
 
     <sql id="selectHashUserVo">
-        select id, user_type, area_code, phone, account, password, device_code, platform, nick_name, head, status, online, invitation_code, father_invitation_code, register_time, bind_time, register_ip, login_time, login_ip from t_user
+        select id,
+               user_type,
+               area_code,
+               phone,
+               account,
+               password,
+               device_code,
+               platform,
+               nick_name,
+               head,
+               status,
+               online,
+               invitation_code,
+               father_invitation_code,
+               register_time,
+               bind_time,
+               register_ip,
+               login_time,
+               login_ip
+        from t_user
     </sql>
 
     <sql id="selectHashUserEveryDay">
-        select u.*,t.betAmount,t.user_id , a.in_amount, b.out_mount from  t_user u
-               left join
-        (select  user_id,sum(bet_amount) as betAmount   from t_game_bet_record  where  create_time  BETWEEN CONCAT(CURDATE(),' 00:00:00') and  CONCAT(CURDATE(),' 23:59:59') group by user_id) t on t.user_id = u.id
-              left join
-         (select  user_id,sum(amount) as in_amount from t_wallet_recharge_order  where create_time  BETWEEN CONCAT(CURDATE(),' 00:00:00') and  CONCAT(CURDATE(),' 23:59:59')  group by user_id) a on a.user_id = u.id
-              left join
-         (select  user_id,sum(amount) as out_mount from t_wallet_withdraw_order  where create_time  BETWEEN CONCAT(CURDATE(),' 00:00:00') and  CONCAT(CURDATE(),' 23:59:59')  group by user_id) b on b.user_id = u.id
+        select u.*, t.betAmount, t.user_id, a.in_amount, b.out_mount
+        from t_user u
+                 left join
+             (select user_id, sum(bet_amount) as betAmount
+              from t_game_bet_record
+              where create_time BETWEEN CONCAT(CURDATE(), ' 00:00:00') and CONCAT(CURDATE(), ' 23:59:59')
+              group by user_id) t on t.user_id = u.id
+                 left join
+             (select user_id, sum(amount) as in_amount
+              from t_wallet_recharge_order
+              where create_time BETWEEN CONCAT(CURDATE(), ' 00:00:00') and CONCAT(CURDATE(), ' 23:59:59')
+              group by user_id) a on a.user_id = u.id
+                 left join
+             (select user_id, sum(amount) as out_mount
+              from t_wallet_withdraw_order
+              where create_time BETWEEN CONCAT(CURDATE(), ' 00:00:00') and CONCAT(CURDATE(), ' 23:59:59')
+              group by user_id) b on b.user_id = u.id
     </sql>
 
     <select id="selectHashUserDetail" parameterType="HashUser" resultMap="HashUserResult">
         <include refid="selectHashUserEveryDay"/>
         <where>
-            <if test="id != null "> and id = #{id}</if>
+            <if test="id != null ">and id = #{id}</if>
         </where>
     </select>
 
     <select id="selectHashUserList" parameterType="HashUser" resultMap="HashUserResult">
         <include refid="selectHashUserVo"/>
-        <where>  
-            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
-            <if test="account != null  and account != ''"> and account = #{account}</if>
-            <if test="nickName != null  and nickName != ''"> and nick_name like concat('%', #{nickName}, '%')</if>
-            <if test="status != null "> and status = #{status}</if>
-            <if test="online != null "> and online = #{online}</if>
+        <where>
+            <if test="phone != null  and phone != ''">and phone = #{phone}</if>
+            <if test="account != null  and account != ''">and account = #{account}</if>
+            <if test="nickName != null  and nickName != ''">and nick_name like concat('%', #{nickName}, '%')</if>
+            <if test="status != null ">and status = #{status}</if>
+            <if test="online != null ">and online = #{online}</if>
         </where>
     </select>
-    
+
+
+    <select id="selectHashUserListByIds" parameterType="string" resultMap="HashUserResult">
+        ${sql}
+    </select>
+
     <select id="selectHashUserById" parameterType="String" resultMap="HashUserResult">
         <include refid="selectHashUserVo"/>
         where id = #{id}
     </select>
-        
+
     <insert id="insertHashUser" parameterType="HashUser">
         insert into t_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -88,7 +122,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="registerIp != null">register_ip,</if>
             <if test="loginTime != null">login_time,</if>
             <if test="loginIp != null">login_ip,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
             <if test="userType != null">#{userType},</if>
@@ -109,7 +143,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="registerIp != null">#{registerIp},</if>
             <if test="loginTime != null">#{loginTime},</if>
             <if test="loginIp != null">#{loginIp},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateHashUser" parameterType="HashUser">
@@ -138,13 +172,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteHashUserById" parameterType="String">
-        delete from t_user where id = #{id}
+        delete
+        from t_user
+        where id = #{id}
     </delete>
 
     <delete id="deleteHashUserByIds" parameterType="String">
-        delete from t_user where id in 
+        delete from t_user where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
+
+
+
+
+    <sql id="selectStatisticalPromoteVo">
+        select id, level1_person, level2_person, level3_person, area_code, phone, nick_name, account, register_time, promote_odds, share_promote_odds, sumNumber from statistical_promote
+    </sql>
+
 </mapper>

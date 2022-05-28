@@ -143,7 +143,81 @@ public class HashUser extends BaseEntity {
     @Excel(name = "每日投注总额")
     private Double betAmount;
 
+    private Integer pageNum;
+    private Integer pageSize;
 
+
+    /**
+     * 一级代理人数
+     */
+    @Excel(name = "一级代理人数")
+    private Long level1Person;
+
+    /**
+     * 二级代理人数
+     */
+    @Excel(name = "二级代理人数")
+    private Long level2Person;
+
+    /**
+     * 三级代理人数
+     */
+    @Excel(name = "三级代理人数")
+    private Long level3Person;
+
+    /**
+     * $column.columnComment
+     */
+    @Excel(name = "总代理人数")
+    private Long sumNumber;
+
+    public Long getLevel1Person() {
+        return level1Person;
+    }
+
+    public void setLevel1Person(Long level1Person) {
+        this.level1Person = level1Person;
+    }
+
+    public Long getLevel2Person() {
+        return level2Person;
+    }
+
+    public void setLevel2Person(Long level2Person) {
+        this.level2Person = level2Person;
+    }
+
+    public Long getLevel3Person() {
+        return level3Person;
+    }
+
+    public void setLevel3Person(Long level3Person) {
+        this.level3Person = level3Person;
+    }
+
+    public Long getSumNumber() {
+        return sumNumber;
+    }
+
+    public void setSumNumber(Long sumNumber) {
+        this.sumNumber = sumNumber;
+    }
+
+    public Integer getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(Integer pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
 
     public Double getInAmount() {
         return Global.getWalletAmountToReal(inAmount);

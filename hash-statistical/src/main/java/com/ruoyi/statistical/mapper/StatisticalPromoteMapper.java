@@ -1,19 +1,19 @@
 package com.ruoyi.statistical.mapper;
 
 import java.util.List;
+
 import com.ruoyi.statistical.domain.StatisticalPromote;
 
 /**
  * VIEWMapper接口
- * 
+ *
  * @author xxk
  * @date 2022-05-28
  */
-public interface StatisticalPromoteMapper 
-{
+public interface StatisticalPromoteMapper {
     /**
      * 查询VIEW
-     * 
+     *
      * @param id VIEW主键
      * @return VIEW
      */
@@ -21,7 +21,7 @@ public interface StatisticalPromoteMapper
 
     /**
      * 查询VIEW列表
-     * 
+     *
      * @param statisticalPromote VIEW
      * @return VIEW集合
      */
@@ -29,7 +29,7 @@ public interface StatisticalPromoteMapper
 
     /**
      * 新增VIEW
-     * 
+     *
      * @param statisticalPromote VIEW
      * @return 结果
      */
@@ -37,7 +37,7 @@ public interface StatisticalPromoteMapper
 
     /**
      * 修改VIEW
-     * 
+     *
      * @param statisticalPromote VIEW
      * @return 结果
      */
@@ -45,7 +45,7 @@ public interface StatisticalPromoteMapper
 
     /**
      * 删除VIEW
-     * 
+     *
      * @param id VIEW主键
      * @return 结果
      */
@@ -53,7 +53,7 @@ public interface StatisticalPromoteMapper
 
     /**
      * 批量删除VIEW
-     * 
+     *
      * @param ids 需要删除的数据主键集合
      * @return 结果
      */

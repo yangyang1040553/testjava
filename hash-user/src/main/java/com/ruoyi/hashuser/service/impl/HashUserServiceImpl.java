@@ -2,6 +2,8 @@ package com.ruoyi.hashuser.service.impl;
 
 import java.util.List;
 
+import com.ruoyi.hashuser.domain.UserPromote;
+import com.ruoyi.hashuser.mapper.UserPromoteMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.hashuser.mapper.HashUserMapper;
@@ -19,6 +21,10 @@ public class HashUserServiceImpl implements IHashUserService {
     @Autowired
     private HashUserMapper hashUserMapper;
 
+
+    @Autowired
+    private UserPromoteMapper userPromoteMapper;
+
     /**
      * 查询用户
      *
@@ -27,11 +33,18 @@ public class HashUserServiceImpl implements IHashUserService {
      */
     @Override
     public HashUser selectHashUserById(String id) {
-        return hashUserMapper.selectHashUserById(id);
+        UserPromote userPromote = userPromoteMapper.selectUserlPromoteById(id);
+        HashUser hashUser = hashUserMapper.selectHashUserById(id);
+        hashUser.setLevel1Person(userPromote.getLevel1Person());
+        hashUser.setLevel2Person(userPromote.getLevel2Person());
+        hashUser.setLevel3Person(userPromote.getLevel3Person());
+        hashUser.setSumNumber(userPromote.getSumnumber());
+        return hashUser;
     }
 
     @Override
     public HashUser selectHashUserDetail(String id) {
+
         return hashUserMapper.selectHashUserDetail(id);
     }
 

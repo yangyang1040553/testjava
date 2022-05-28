@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.statistical.mapper.UserOperationDataMapper">
+    
+    <resultMap type="UserOperationData" id="UserOperationDataResult">
+        <result property="id"    column="id"    />
+        <result property="activeCount"    column="active_count"    />
+        <result property="registerCount"    column="register_count"    />
+        <result property="promoteCount"    column="promote_count"    />
+    </resultMap>
+
+    <sql id="selectUserOperationDataVo">
+        select id, active_count, register_count, promote_count from t_user_operation_data
+    </sql>
+
+    <select id="selectUserOperationDataList" parameterType="UserOperationData" resultMap="UserOperationDataResult">
+        <include refid="selectUserOperationDataVo"/>
+        <where>  
+            <if test="id != null  and id != ''"> and id = #{id}</if>
+            <if test="activeCount != null "> and active_count = #{activeCount}</if>
+            <if test="registerCount != null "> and register_count = #{registerCount}</if>
+            <if test="promoteCount != null "> and promote_count = #{promoteCount}</if>
+        </where>
+    </select>
+    
+    <select id="selectUserOperationDataById" parameterType="String" resultMap="UserOperationDataResult">
+        <include refid="selectUserOperationDataVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertUserOperationData" parameterType="UserOperationData">
+        insert into t_user_operation_data
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="activeCount != null">active_count,</if>
+            <if test="registerCount != null">register_count,</if>
+            <if test="promoteCount != null">promote_count,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="activeCount != null">#{activeCount},</if>
+            <if test="registerCount != null">#{registerCount},</if>
+            <if test="promoteCount != null">#{promoteCount},</if>
+         </trim>
+    </insert>
+
+    <update id="updateUserOperationData" parameterType="UserOperationData">
+        update t_user_operation_data
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="activeCount != null">active_count = #{activeCount},</if>
+            <if test="registerCount != null">register_count = #{registerCount},</if>
+            <if test="promoteCount != null">promote_count = #{promoteCount},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUserOperationDataById" parameterType="String">
+        delete from t_user_operation_data where id = #{id}
+    </delete>
+
+    <delete id="deleteUserOperationDataByIds" parameterType="String">
+        delete from t_user_operation_data where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
