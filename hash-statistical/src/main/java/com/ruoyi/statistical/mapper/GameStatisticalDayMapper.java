@@ -1,9 +1,8 @@
-package com.ruoyi.game.mapper;
+package com.ruoyi.statistical.mapper;
 
 import java.util.List;
-import java.util.Map;
 
-import com.ruoyi.game.domain.GameStatisticalDay;
+import com.ruoyi.statistical.domain.GameStatisticalDay;
 
 /**
  * 游戏日统计Mapper接口

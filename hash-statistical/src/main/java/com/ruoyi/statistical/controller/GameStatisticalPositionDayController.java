@@ -1,7 +1,10 @@
-package com.ruoyi.game.controller;
+package com.ruoyi.statistical.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.statistical.domain.GameStatisticalPositionDay;
+import com.ruoyi.statistical.service.IGameStatisticalPositionDayService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +19,6 @@ import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.game.domain.GameStatisticalPositionDay;
-import com.ruoyi.game.service.IGameStatisticalPositionDayService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 
@@ -28,7 +29,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @date 2022-05-27
  */
 @RestController
-@RequestMapping("/hash-game/gameStatistcalDay")
+@RequestMapping("/hash-statistical/gameStatistcalDay")
 public class GameStatisticalPositionDayController extends BaseController
 {
     @Autowired
@@ -37,7 +38,7 @@ public class GameStatisticalPositionDayController extends BaseController
     /**
      * 查询游戏押注位置日统计列表
      */
-    @PreAuthorize("@ss.hasPermi('hash-game:gameStatistcalDay:list')")
+    @PreAuthorize("@ss.hasPermi('hash-statistical:gameStatistcalDay:list')")
     @GetMapping("/list")
     public TableDataInfo list(GameStatisticalPositionDay gameStatisticalPositionDay)
     {
@@ -49,7 +50,7 @@ public class GameStatisticalPositionDayController extends BaseController
     /**
      * 导出游戏押注位置日统计列表
      */
-    @PreAuthorize("@ss.hasPermi('hash-game:gameStatistcalDay:export')")
+    @PreAuthorize("@ss.hasPermi('hash-statistical:gameStatistcalDay:export')")
     @Log(title = "游戏押注位置日统计", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, GameStatisticalPositionDay gameStatisticalPositionDay)
@@ -62,7 +63,7 @@ public class GameStatisticalPositionDayController extends BaseController
     /**
      * 获取游戏押注位置日统计详细信息
      */
-    @PreAuthorize("@ss.hasPermi('hash-game:gameStatistcalDay:query')")
+    @PreAuthorize("@ss.hasPermi('hash-statistical:gameStatistcalDay:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") String id)
     {
@@ -72,7 +73,7 @@ public class GameStatisticalPositionDayController extends BaseController
     /**
      * 新增游戏押注位置日统计
      */
-    @PreAuthorize("@ss.hasPermi('hash-game:gameStatistcalDay:add')")
+    @PreAuthorize("@ss.hasPermi('hash-statistical:gameStatistcalDay:add')")
     @Log(title = "游戏押注位置日统计", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody GameStatisticalPositionDay gameStatisticalPositionDay)
@@ -83,7 +84,7 @@ public class GameStatisticalPositionDayController extends BaseController
     /**
      * 修改游戏押注位置日统计
      */
-    @PreAuthorize("@ss.hasPermi('hash-game:gameStatistcalDay:edit')")
+    @PreAuthorize("@ss.hasPermi('hash-statistical:gameStatistcalDay:edit')")
     @Log(title = "游戏押注位置日统计", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody GameStatisticalPositionDay gameStatisticalPositionDay)
@@ -94,7 +95,7 @@ public class GameStatisticalPositionDayController extends BaseController
     /**
      * 删除游戏押注位置日统计
      */
-    @PreAuthorize("@ss.hasPermi('hash-game:gameStatistcalDay:remove')")
+    @PreAuthorize("@ss.hasPermi('hash-statistical:gameStatistcalDay:remove')")
     @Log(title = "游戏押注位置日统计", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable String[] ids)

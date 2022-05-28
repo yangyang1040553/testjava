@@ -1,15 +1,15 @@
-package com.ruoyi.game.service.impl;
+package com.ruoyi.statistical.service.impl;
 
 import java.time.LocalDate;
 import java.time.temporal.WeekFields;
 import java.util.List;
 
-import com.ruoyi.game.domain.GameStatisticalDay;
+import com.ruoyi.common.constant.Global;
+import com.ruoyi.statistical.domain.GameStatisticalPositionDay;
+import com.ruoyi.statistical.mapper.GameStatisticalPositionDayMapper;
+import com.ruoyi.statistical.service.IGameStatisticalPositionDayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.game.mapper.GameStatisticalPositionDayMapper;
-import com.ruoyi.game.domain.GameStatisticalPositionDay;
-import com.ruoyi.game.service.IGameStatisticalPositionDayService;
 
 /**
  * 游戏押注位置日统计Service业务层处理
@@ -42,13 +42,13 @@ public class GameStatisticalPositionDayServiceImpl implements IGameStatisticalPo
     @Override
     public List<GameStatisticalPositionDay> selectGameStatisticalPositionDayList(GameStatisticalPositionDay gameStatisticalPositionDay) {
         String regex = "";
-        if (gameStatisticalPositionDay.getType() == 1) {
+        if (gameStatisticalPositionDay.getType() == Global.TYPE_DAY) {
             //按日查
             regex = "%Y-%m-%d";
-        } else if (gameStatisticalPositionDay.getType() == 2) {
+        } else if (gameStatisticalPositionDay.getType() == Global.TYPE_WEEK) {
             //按周查
             regex = "%Y-%u";
-        } else if (gameStatisticalPositionDay.getType() == 3) {
+        } else if (gameStatisticalPositionDay.getType() == Global.TYPE_MONTH) {
             //按月查
             regex = "%Y-%m";
         }
@@ -62,9 +62,21 @@ public class GameStatisticalPositionDayServiceImpl implements IGameStatisticalPo
                         "sum(usdt_bet_amount) AS usdt_bet_amount, \n" +
                         "sum(usdt_award_amount) AS usdt_award_amount FROM t_game_statistical_position_day ";
 
-        if (gameStatisticalPositionDay.getGameId() != null) {
-            sql += ("  where game_id =" + gameStatisticalPositionDay.getGameId());
+
+        if (gameStatisticalPositionDay.getType() == Global.TYPE_DAY) {
+            sql += "WHERE id < CURRENT_DATE";
         }
+        if (gameStatisticalPositionDay.getGameId() != null) {
+            if (sql.contains("WHERE")) {
+                sql += (" and  game_id =" + gameStatisticalPositionDay.getGameId());
+            } else {
+                sql += (" WHERE  game_id =" + gameStatisticalPositionDay.getGameId());
+            }
+        }
+
+//        if (gameStatisticalPositionDay.getGameId() != null) {
+//            sql += ("  where game_id =" + gameStatisticalPositionDay.getGameId());
+//        }
         sql += " GROUP BY time, game_id ,bet_position";
 
         gameStatisticalPositionDay.setSql(sql);

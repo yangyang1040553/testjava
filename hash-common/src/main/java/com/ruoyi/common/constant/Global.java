@@ -8,6 +8,16 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class Global {
 
+
+    public static final int TYPE_DAY = 1;//日
+    public static final int TYPE_WEEK = 2;//周
+    public static final int TYPE_MONTH = 3;//月
+
+
+    public static final int TYPE_SEVEN = 1;//七日
+    public static final int TYPE_FIFTEEN = 2;//十五日
+    public static final int TYPE_THIRTY = 3;//三十日
+
     public final static String USER_SECRET_KEY = "HASH-GAME_2022_18888888888888";
 
 

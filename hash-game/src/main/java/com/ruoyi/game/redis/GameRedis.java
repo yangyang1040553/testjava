@@ -43,7 +43,7 @@ public class GameRedis {
      * 获取在线人数列表
      * @return
      */
-    public List<Object> getOnlineList() {
+    public List<String> getOnlineList() {
         final Set<String> cacheSet = redisCache.getCacheSet(RedisKey.game_player_online);
         return new ArrayList<>(cacheSet);
     }

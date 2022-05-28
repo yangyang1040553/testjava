@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.temporal.WeekFields;
 import java.util.List;
 
+import com.ruoyi.common.constant.Global;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.statistical.mapper.GameStatisticalPositionPlayerDayMapper;
@@ -41,13 +42,13 @@ public class GameStatisticalPositionPlayerDayServiceImpl implements IGameStatist
     @Override
     public List<GameStatisticalPositionPlayerDay> selectGameStatisticalPositionPlayerDayList(GameStatisticalPositionPlayerDay gameStatisticalPositionPlayerDay) {
         String regex = "";
-        if (gameStatisticalPositionPlayerDay.getType() == 1) {
+        if (gameStatisticalPositionPlayerDay.getType() == Global.TYPE_DAY) {
             //按日查
             regex = "%Y-%m-%d";
-        } else if (gameStatisticalPositionPlayerDay.getType() == 2) {
+        } else if (gameStatisticalPositionPlayerDay.getType() == Global.TYPE_WEEK) {
             //按周查
             regex = "%Y-%u";
-        } else if (gameStatisticalPositionPlayerDay.getType() == 3) {
+        } else if (gameStatisticalPositionPlayerDay.getType() == Global.TYPE_MONTH) {
             //按月查
             regex = "%Y-%m";
         }
@@ -72,7 +73,7 @@ public class GameStatisticalPositionPlayerDayServiceImpl implements IGameStatist
         List<GameStatisticalPositionPlayerDay> gameStatisticalDays = gameStatisticalPositionPlayerDayMapper.selectGameStatisticalPositionPlayerDayList(gameStatisticalPositionPlayerDay);
 
         // TODO: 2022/5/26   查询参数为周时 获取当前周 对应的 周一 的日期
-        if (gameStatisticalPositionPlayerDay.getType() == 2) {
+        if (gameStatisticalPositionPlayerDay.getType() == Global.TYPE_WEEK) {
             for (GameStatisticalPositionPlayerDay statisticalDay : gameStatisticalDays) {
                 String time = statisticalDay.getTime();
                 statisticalDay.setWeek(time);

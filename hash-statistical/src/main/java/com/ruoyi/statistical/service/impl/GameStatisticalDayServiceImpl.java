@@ -1,16 +1,15 @@
-package com.ruoyi.game.service.impl;
+package com.ruoyi.statistical.service.impl;
 
 import java.time.LocalDate;
 import java.time.temporal.WeekFields;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import com.ruoyi.common.constant.Global;
+import com.ruoyi.statistical.domain.GameStatisticalDay;
+import com.ruoyi.statistical.mapper.GameStatisticalDayMapper;
+import com.ruoyi.statistical.service.IGameStatisticalDayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.game.mapper.GameStatisticalDayMapper;
-import com.ruoyi.game.domain.GameStatisticalDay;
-import com.ruoyi.game.service.IGameStatisticalDayService;
 
 /**
  * 游戏日统计Service业务层处理
@@ -44,23 +43,30 @@ public class GameStatisticalDayServiceImpl implements IGameStatisticalDayService
     public List<GameStatisticalDay> selectGameStatisticalDayList(GameStatisticalDay gameStatisticalDay) {
 
         String regex = "";
-        if (gameStatisticalDay.getType() == 1) {
+        if (gameStatisticalDay.getType() == Global.TYPE_DAY) {
             //按日查
             regex = "%Y-%m-%d";
-        } else if (gameStatisticalDay.getType() == 2) {
+        } else if (gameStatisticalDay.getType() == Global.TYPE_WEEK) {
             //按周查
             regex = "%Y-%u";
-        } else if (gameStatisticalDay.getType() == 3) {
+        } else if (gameStatisticalDay.getType() == Global.TYPE_MONTH) {
             //按月查
             regex = "%Y-%m";
         }
 
 
         String sql = "SELECT   DATE_FORMAT(id,'" + regex + "') as time  ,game_id,sum(trx_bet_amount)as trx_bet_amount,sum(trx_award_amount)as trx_award_amount,sum(usdt_bet_amount)as usdt_bet_amount\n" +
-                ",sum(usdt_award_amount)as usdt_award_amount from t_game_statistical_day \n";
+                ",sum(usdt_award_amount)as usdt_award_amount from t_game_statistical_day ";
 
+        if (gameStatisticalDay.getType()== Global.TYPE_DAY){
+            sql+="WHERE id < CURRENT_DATE";
+        }
         if (gameStatisticalDay.getGameId() != null) {
-            sql += ("  where game_id =" + gameStatisticalDay.getGameId());
+            if (sql.contains("WHERE")){
+                sql += (" and  game_id =" + gameStatisticalDay.getGameId());
+            }else {
+                sql += (" WHERE  game_id =" + gameStatisticalDay.getGameId());
+            }
         }
         sql += " GROUP BY time,game_id";
 
@@ -69,7 +75,7 @@ public class GameStatisticalDayServiceImpl implements IGameStatisticalDayService
         List<GameStatisticalDay> gameStatisticalDays = gameStatisticalDayMapper.selectGameStatisticalDayList(gameStatisticalDay);
 
         // TODO: 2022/5/26   查询参数为周时 获取当前周 对应的 周一 的日期
-        if (gameStatisticalDay.getType() == 2) {
+        if (gameStatisticalDay.getType() ==  Global.TYPE_WEEK) {
             for (GameStatisticalDay statisticalDay : gameStatisticalDays) {
                 String time = statisticalDay.getTime();
                 statisticalDay.setWeek(time);
@@ -96,16 +102,17 @@ public class GameStatisticalDayServiceImpl implements IGameStatisticalDayService
 
 
         String regex = "";
-        if (gameStatisticalDay.getType() == 1) {
+        if (gameStatisticalDay.getType() == Global.TYPE_DAY) {
             //按日查
             regex = "%Y-%m-%d";
-        } else if (gameStatisticalDay.getType() == 2) {
+        } else if (gameStatisticalDay.getType() == Global.TYPE_WEEK) {
             //按周查
             regex = "%Y-%u";
-        } else if (gameStatisticalDay.getType() == 3) {
+        } else if (gameStatisticalDay.getType() == Global.TYPE_MONTH) {
             //按月查
             regex = "%Y-%m";
         }
+
 
 
         String sql = "SELECT  DATE_FORMAT(c.id,'" + regex + "') as time ,c.game_id, " +
@@ -120,18 +127,18 @@ public class GameStatisticalDayServiceImpl implements IGameStatisticalDayService
 //            sql += (" where c.game_id= " + gameStatisticalDay.getGameId() + " and DATE_FORMAT(c.id,'" + regex + "')=DATE_FORMAT('" + gameStatisticalDay.getTime() + "','" + regex + "')");
 //        }
 
-        if (gameStatisticalDay.getType() == 1) {
+        if (gameStatisticalDay.getType() == Global.TYPE_DAY) {
             //按日查
             if (gameStatisticalDay.getGameId() != null && gameStatisticalDay.getTime() != null) {
                 sql += (" where c.game_id= " + gameStatisticalDay.getGameId() + " and DATE_FORMAT(c.id,'" + regex + "')=DATE_FORMAT('" + gameStatisticalDay.getTime() + "','" + regex + "')");
             }
-        } else if (gameStatisticalDay.getType() == 3) {
+        } else if (gameStatisticalDay.getType() == Global.TYPE_MONTH) {
             //按月查
             if (gameStatisticalDay.getGameId() != null && gameStatisticalDay.getTime() != null) {
                 sql += (" where c.game_id= " + gameStatisticalDay.getGameId() + " and DATE_FORMAT(c.id,'" + regex + "')='" + gameStatisticalDay.getTime() + "'");
             }
-        } else if (gameStatisticalDay.getType() == 2) {
-            //按月查
+        } else if (gameStatisticalDay.getType() == Global.TYPE_WEEK) {
+            //按周查
             if (gameStatisticalDay.getGameId() != null && gameStatisticalDay.getTime() != null) {
 
                 String[] date = gameStatisticalDay.getWeek().split("-");

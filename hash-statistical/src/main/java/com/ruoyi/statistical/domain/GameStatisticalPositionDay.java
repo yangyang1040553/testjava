@@ -1,4 +1,4 @@
-package com.ruoyi.game.domain;
+package com.ruoyi.statistical.domain;
 
 import com.ruoyi.common.constant.Global;
 import org.apache.commons.lang3.builder.ToStringBuilder;

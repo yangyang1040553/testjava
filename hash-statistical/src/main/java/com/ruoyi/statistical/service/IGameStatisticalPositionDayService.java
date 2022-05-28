@@ -1,7 +1,7 @@
-package com.ruoyi.game.service;
+package com.ruoyi.statistical.service;
 
 import java.util.List;
-import com.ruoyi.game.domain.GameStatisticalPositionDay;
+import com.ruoyi.statistical.domain.GameStatisticalPositionDay;
 
 /**
  * 游戏押注位置日统计Service接口

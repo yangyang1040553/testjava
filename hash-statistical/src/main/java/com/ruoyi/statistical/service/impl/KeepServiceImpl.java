@@ -2,6 +2,7 @@ package com.ruoyi.statistical.service.impl;
 
 import java.util.List;
 
+import com.ruoyi.common.constant.Global;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.statistical.mapper.KeepMapper;
@@ -41,8 +42,8 @@ public class KeepServiceImpl implements IKeepService {
 
 
         String sql = "";
-        if (keep.getType() == 1) {
-            sql="SELECT\n" +
+        if (keep.getType() == Global.TYPE_SEVEN) {
+            sql = "SELECT\n" +
                     "\tregister_time,\n" +
                     "\ttotal,\n" +
                     "\tlogin_count,\n" +
@@ -56,8 +57,8 @@ public class KeepServiceImpl implements IKeepService {
                     "FROM\n" +
                     "\tkeep ";
 
-        } else if (keep.getType()==2){
-            sql="SELECT\n" +
+        } else if (keep.getType() == Global.TYPE_FIFTEEN) {
+            sql = "SELECT\n" +
                     "\tregister_time,\n" +
                     "\ttotal,\n" +
                     "\tlogin_count,\n" +
@@ -79,7 +80,7 @@ public class KeepServiceImpl implements IKeepService {
                     "FROM\n" +
                     "\tkeep ";
         } else {
-            sql="SELECT\n" +
+            sql = "SELECT\n" +
                     "\tregister_time,\n" +
                     "\ttotal,\n" +
                     "\tlogin_count,\n" +
