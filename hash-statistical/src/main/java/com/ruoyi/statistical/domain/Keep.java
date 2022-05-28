@@ -147,6 +147,25 @@ public class Keep extends BaseEntity
     @Excel(name = "三十日留存")
     private String thirty;
 
+    private int type;
+    private String sql;
+
+    public String getSql() {
+        return sql;
+    }
+
+    public void setSql(String sql) {
+        this.sql = sql;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
     public void setRegisterTime(String registerTime)
     {
         this.registerTime = registerTime;
