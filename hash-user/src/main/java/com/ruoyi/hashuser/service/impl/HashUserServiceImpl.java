@@ -35,10 +35,12 @@ public class HashUserServiceImpl implements IHashUserService {
     public HashUser selectHashUserById(String id) {
         UserPromote userPromote = userPromoteMapper.selectUserlPromoteById(id);
         HashUser hashUser = hashUserMapper.selectHashUserById(id);
-        hashUser.setLevel1Person(userPromote.getLevel1Person());
-        hashUser.setLevel2Person(userPromote.getLevel2Person());
-        hashUser.setLevel3Person(userPromote.getLevel3Person());
-        hashUser.setSumNumber(userPromote.getSumnumber());
+        if (userPromote != null) {
+            hashUser.setLevel1Person(userPromote.getLevel1Person());
+            hashUser.setLevel2Person(userPromote.getLevel2Person());
+            hashUser.setLevel3Person(userPromote.getLevel3Person());
+            hashUser.setSumNumber(userPromote.getSumnumber());
+        }
         return hashUser;
     }
 
