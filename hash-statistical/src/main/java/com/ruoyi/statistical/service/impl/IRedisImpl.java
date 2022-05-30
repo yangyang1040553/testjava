@@ -30,9 +30,9 @@ public class IRedisImpl implements IRedisService {
     @Override
     public List<HashUser> getOnLineList(HashUser hashUser) {
 
-
         List<String> onlineList = gameRedis.getOnlineList();
 
+        // TODO: 2022/5/30    redis 为空直接返回
         if (onlineList == null || onlineList.size() == 0) {
             return new ArrayList<HashUser>();
         }
@@ -63,6 +63,8 @@ public class IRedisImpl implements IRedisService {
                 "               login_time,\n" +
                 "               login_ip\n" +
                 "        from t_user";
+
+        // TODO: 2022/5/30 redis 中数量小于上限值 只查询 redis中的数据 拼接id    in 查询
         if (onlineList.size() < LIMIT) {
             for (String id : onlineList) {
                 ids = ids + id + ",";
@@ -70,6 +72,7 @@ public class IRedisImpl implements IRedisService {
             return getHashUsers(ids, sql);
         } else {
 
+            // TODO: 2022/5/30 上限值大于 redis 中的数量时 ，分页 分段 获取ID 拼接  in 查询
             int maxCount = page * pageSize;
             int startIndex = maxCount - pageSize;
             int endIndex = maxCount;
