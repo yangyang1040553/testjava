@@ -37,7 +37,7 @@ public class UserOperationDataController extends BaseController {
     /**
      * 查询玩家运营数据列表
      */
-    @PreAuthorize("@ss.hasPermi('hash-statistical:statisticalOperation:list')")
+//    @PreAuthorize("@ss.hasPermi('hash-statistical:statisticalOperation:list')")
     @GetMapping("/list")
     public TableDataInfo list(UserOperationData userOperationData) {
         startPage();
@@ -61,7 +61,7 @@ public class UserOperationDataController extends BaseController {
     /**
      * 获取玩家运营数据详细信息
      */
-    @PreAuthorize("@ss.hasPermi('hash-statistical:statisticalOperation:query')")
+//    @PreAuthorize("@ss.hasPermi('hash-statistical:statisticalOperation:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") String id) {
         return AjaxResult.success(userOperationDataService.selectUserOperationDataById(id));
