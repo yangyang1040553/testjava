@@ -65,10 +65,9 @@ public class IRedisImpl implements IRedisService {
                 "        from t_user";
         if (onlineList.size() < LIMIT) {
             for (String id : onlineList) {
-                ids = ids + ",";
+                ids = ids + id + ",";
             }
             return getHashUsers(ids, sql);
-
         } else {
 
             int maxCount = page * pageSize;
