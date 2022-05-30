@@ -27,6 +27,11 @@
         <result property="inAmount" column="in_amount"/>
         <result property="outAmount" column="out_amount"/>
         <result property="betMount" column="bet_amount"/>
+
+        <result property="usdtAmount" column="usdt_amount"/>
+        <result property="trxAmount" column="trx_amount"/>
+        <result property="ipAddr" column="ip_addr"/>
+
     </resultMap>
 
     <sql id="selectHashUserVo">
@@ -96,8 +101,9 @@
     </select>
 
     <select id="selectHashUserById" parameterType="String" resultMap="HashUserResult">
-        <include refid="selectHashUserVo"/>
-        where id = #{id}
+<!--        <include refid="selectHashUserVo"/>-->
+        select   a.* ,b.usdt_amount,b.trx_amount ,c.ip_addr from t_user a left JOIN t_wallet_player_data b on a.id=b.id LEFT JOIN t_user_ip_register c on a.login_ip=c.ip
+        where a.id = #{id}
     </select>
 
     <insert id="insertHashUser" parameterType="HashUser">

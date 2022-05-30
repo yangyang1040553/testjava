@@ -165,6 +165,48 @@ public class HashUser extends BaseEntity {
     @Excel(name = "三级代理人数")
     private Long level3Person;
 
+
+    /**
+     * 三级代理人数
+     */
+    @Excel(name = "用户USDT总额")
+    private Double usdtAmount;
+    /**
+     * 三级代理人数
+     */
+    @Excel(name = "用户TRX总额")
+    private Double trxAmount;
+    /**
+     * 三级代理人数
+     */
+    @Excel(name = "IP地址")
+    private String ipAddr;
+
+
+    public Double getUsdtAmount() {
+        return Global.getWalletAmountToReal(usdtAmount);
+    }
+
+    public void setUsdtAmount(Double usdtAmount) {
+        this.usdtAmount = usdtAmount;
+    }
+
+    public Double getTrxAmount() {
+        return Global.getWalletAmountToReal(trxAmount);
+    }
+
+    public void setTrxAmount(Double trxAmount) {
+        this.trxAmount = trxAmount;
+    }
+
+    public String getIpAddr() {
+        return ipAddr;
+    }
+
+    public void setIpAddr(String ipAddr) {
+        this.ipAddr = ipAddr;
+    }
+
     /**
      * $column.columnComment
      */
