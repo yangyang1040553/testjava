@@ -115,7 +115,7 @@ public class WalletPlayerDataController extends BaseController {
         final String hash = Md5Utils.hash(Global.USER_SECRET_KEY + walletInOutMoneyVo.getId() + walletInOutMoneyVo.getWalletType() + walletInOutMoneyVo.getAmount());
         param.put("sign", hash);
 
-        final String s = HttpUtils.sendPost(serviceWalletAddr + "/feign/wallet/backAddMoney", param);
+        final String s = HttpUtils.sendPost(serviceWalletAddr + "/wallet/back/backAddMoney", param);
         if (StringUtils.isBlank(s)) {
             return AjaxResult.error();
         }
