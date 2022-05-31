@@ -105,13 +105,16 @@ public class HttpUtils {
             return "";
         }
         StringBuilder sb = new StringBuilder();
-
         final Set<String> set = param.keySet();
         for (String key : set) {
             final Object o = param.get(key);
-            sb.append(key).append(o);
+            sb.append(key).append("=").append(o).append("&");
         }
-        return sb.toString();
+
+        String result = sb.toString();
+        result = result.substring(0, result.length() - 1);
+
+        return result;
     }
 
     /**
@@ -137,7 +140,8 @@ public class HttpUtils {
             conn.setDoOutput(true);
             conn.setDoInput(true);
             out = new PrintWriter(conn.getOutputStream());
-            out.print(parseParam(param));
+            String parseParam = parseParam(param);
+            out.print(parseParam);
             out.flush();
             in = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
             String line;

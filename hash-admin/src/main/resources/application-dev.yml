@@ -59,4 +59,4 @@ spring:
 
 #请求
 service:
-    wallet-addr: 18.136.193.171:8099
+    wallet-addr: http://18.136.193.171:8099
