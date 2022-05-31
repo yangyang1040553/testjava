@@ -42,7 +42,7 @@ public class RidesDataController extends BaseController {
     public TableDataInfo list(@RequestBody HashUser hashUser) {
         startPage();
         startOrderBy();
-        return getDataTable(iRedisService.getOnLineList(hashUser));
+        return iRedisService.getOnLineList(hashUser);
     }
 
 

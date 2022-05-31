@@ -1,17 +1,18 @@
 package com.ruoyi.statistical.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageInfo;
+import com.ruoyi.common.constant.HttpStatus;
+import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.hashuser.domain.HashUser;
 import com.ruoyi.hashuser.mapper.HashUserMapper;
 import com.ruoyi.statistical.redis.GameRedis;
 import com.ruoyi.statistical.service.IRedisService;
-import com.ruoyi.statistical.service.IStatisticalPromoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class IRedisImpl implements IRedisService {
@@ -28,14 +29,22 @@ public class IRedisImpl implements IRedisService {
     public static final int LIMIT = 10;
 
     @Override
-    public List<HashUser> getOnLineList(HashUser hashUser) {
+    public TableDataInfo getOnLineList(HashUser hashUser) {
 
         List<String> onlineList = gameRedis.getOnlineList();
 
+        TableDataInfo rspData = new TableDataInfo();
+        rspData.setCode(HttpStatus.SUCCESS);
+        rspData.setMsg("查询成功");
+
         // TODO: 2022/5/30    redis 为空直接返回
         if (onlineList == null || onlineList.size() == 0) {
-            return new ArrayList<HashUser>();
+            rspData.setRows(new ArrayList<>());
+            rspData.setTotal(0);
+            return rspData;
         }
+        rspData.setTotal(onlineList.size());
+
 
         int page = hashUser.getPageNum();
         int pageSize = hashUser.getPageSize();
@@ -69,7 +78,7 @@ public class IRedisImpl implements IRedisService {
             for (String id : onlineList) {
                 ids = ids + id + ",";
             }
-            return getHashUsers(ids, sql);
+            return getHashUsers(ids, sql, rspData);
         } else {
 
             // TODO: 2022/5/30 上限值大于 redis 中的数量时 ，分页 分段 获取ID 拼接  in 查询
@@ -86,19 +95,22 @@ public class IRedisImpl implements IRedisService {
                     ids = onlineList.get(i) + ",";
                 }
             }
-            return getHashUsers(ids, sql);
+            return getHashUsers(ids, sql, rspData);
         }
     }
 
-    private List<HashUser> getHashUsers(String ids, String sql) {
+    private TableDataInfo getHashUsers(String ids, String sql, TableDataInfo tableDataInfo) {
+
         if (ids.length() > 0) {
             ids = ids.substring(0, ids.length() - 1);
         }
         if (!"".equals(ids)) {
             sql = sql + " where id in ( " + ids + " )";
-        }else {
-            return new ArrayList<HashUser>();
+        } else {
+            return tableDataInfo;
         }
-        return hashUserMapper.selectHashUserListByIds(sql);
+        List<HashUser> hashUsers = hashUserMapper.selectHashUserListByIds(sql);
+        tableDataInfo.setRows(hashUsers);
+        return tableDataInfo;
     }
 }

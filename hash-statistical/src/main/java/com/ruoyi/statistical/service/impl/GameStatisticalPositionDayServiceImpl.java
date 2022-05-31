@@ -64,7 +64,7 @@ public class GameStatisticalPositionDayServiceImpl implements IGameStatisticalPo
 
 
         if (gameStatisticalPositionDay.getType() == Global.TYPE_DAY) {
-            sql += "WHERE id < CURRENT_DATE";
+            sql += "WHERE id <= CURRENT_DATE";
         }
         if (gameStatisticalPositionDay.getGameId() != null) {
             if (sql.contains("WHERE")) {

@@ -55,27 +55,46 @@ public class GameStatisticalDayServiceImpl implements IGameStatisticalDayService
         }
 
 
-        String sql = "SELECT   DATE_FORMAT(id,'" + regex + "') as time  ,game_id,sum(trx_bet_amount)as trx_bet_amount,sum(trx_award_amount)as trx_award_amount,sum(usdt_bet_amount)as usdt_bet_amount\n" +
+        String sql = "SELECT   DATE_FORMAT(id,'" + regex + "') as time  ," +
+                "game_id,sum(trx_bet_amount)as trx_bet_amount," +
+                "sum(trx_award_amount)as trx_award_amount," +
+                "sum(usdt_bet_amount)as usdt_bet_amount\n" +
                 ",sum(usdt_award_amount)as usdt_award_amount from t_game_statistical_day ";
 
-        if (gameStatisticalDay.getType()== Global.TYPE_DAY){
-            sql+="WHERE id < CURRENT_DATE";
+        if (gameStatisticalDay.getType() == Global.TYPE_DAY) {
+            sql = "SELECT\n" +
+                    "\tDATE_FORMAT( id, '%Y-%m-%d' ) AS time,\n" +
+                    "\tgame_id,\n" +
+                    "  trx_bet_amount,\n" +
+                    "\ttrx_award_amount,\n" +
+                    "\tusdt_bet_amount,   \n" +
+                    "\tusdt_award_amount \n" +
+                    "FROM\n" +
+                    "\tt_game_statistical_day \n" +
+                    "WHERE\n" +
+                    "\tid <= CURRENT_DATE \n" +
+                    "ORDER BY\n" +
+                    "\ttime DESC \t";
         }
         if (gameStatisticalDay.getGameId() != null) {
-            if (sql.contains("WHERE")){
+            if (sql.contains("WHERE")) {
                 sql += (" and  game_id =" + gameStatisticalDay.getGameId());
-            }else {
+            } else {
                 sql += (" WHERE  game_id =" + gameStatisticalDay.getGameId());
             }
         }
-        sql += " GROUP BY time,game_id";
+
+        if (gameStatisticalDay.getType() != Global.TYPE_DAY) {
+            sql += " GROUP BY time,game_id";
+        }
+
 
         gameStatisticalDay.setSql(sql);
 
         List<GameStatisticalDay> gameStatisticalDays = gameStatisticalDayMapper.selectGameStatisticalDayList(gameStatisticalDay);
 
         // TODO: 2022/5/26   查询参数为周时 获取当前周 对应的 周一 的日期
-        if (gameStatisticalDay.getType() ==  Global.TYPE_WEEK) {
+        if (gameStatisticalDay.getType() == Global.TYPE_WEEK) {
             for (GameStatisticalDay statisticalDay : gameStatisticalDays) {
                 String time = statisticalDay.getTime();
                 statisticalDay.setWeek(time);
@@ -112,7 +131,6 @@ public class GameStatisticalDayServiceImpl implements IGameStatisticalDayService
             //按月查
             regex = "%Y-%m";
         }
-
 
 
         String sql = "SELECT  DATE_FORMAT(c.id,'" + regex + "') as time ,c.game_id, " +
@@ -155,7 +173,7 @@ public class GameStatisticalDayServiceImpl implements IGameStatisticalDayService
             }
         }
 
-        sql+=" group by time ,c.game_id,c.bet_position";
+        sql += " group by time ,c.game_id,c.bet_position";
 
 
         gameStatisticalDay.setSql(sql);

@@ -1,5 +1,6 @@
 package com.ruoyi.statistical.domain;
 
+import com.ruoyi.common.constant.Global;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
@@ -7,43 +8,58 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 游戏玩家押注位置日统计对象 t_game_statistical_position_player_day
- * 
+ *
  * @author xxk
  * @date 2022-05-27
  */
-public class GameStatisticalPositionPlayerDay extends BaseEntity
-{
+public class GameStatisticalPositionPlayerDay extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
-    /** id-天为单位 */
+    /**
+     * id-天为单位
+     */
     @Excel(name = "id-天为单位")
     private String id;
 
-    /** 用户id */
+    /**
+     * 用户id
+     */
     @Excel(name = "用户id")
     private String userId;
 
-    /** 游戏id */
+    /**
+     * 游戏id
+     */
     @Excel(name = "游戏id")
     private Long gameId;
 
-    /** 押注位置 */
+    /**
+     * 押注位置
+     */
     @Excel(name = "押注位置")
     private String betPosition;
 
-    /** 今天usdt总押注金额 */
+    /**
+     * 今天usdt总押注金额
+     */
     @Excel(name = "今天usdt总押注金额")
     private Long usdtBetAmount;
 
-    /** 今天usdt总中奖金额 */
+    /**
+     * 今天usdt总中奖金额
+     */
     @Excel(name = "今天usdt总中奖金额")
     private Long usdtAwardAmount;
 
-    /** 今日trx押注金额 */
+    /**
+     * 今日trx押注金额
+     */
     @Excel(name = "今日trx押注金额")
     private Long trxBetAmount;
 
-    /** 今日trx中奖金额 */
+    /**
+     * 今日trx中奖金额
+     */
     @Excel(name = "今日trx中奖金额")
     private Long trxAwardAmount;
 
@@ -96,90 +112,81 @@ public class GameStatisticalPositionPlayerDay extends BaseEntity
         this.week = week;
     }
 
-    public void setId(String id)
-    {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getId() 
-    {
+    public String getId() {
         return id;
     }
-    public void setUserId(String userId) 
-    {
+
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    public String getUserId() 
-    {
+    public String getUserId() {
         return userId;
     }
-    public void setGameId(Long gameId) 
-    {
+
+    public void setGameId(Long gameId) {
         this.gameId = gameId;
     }
 
-    public Long getGameId() 
-    {
+    public Long getGameId() {
         return gameId;
     }
-    public void setBetPosition(String betPosition) 
-    {
+
+    public void setBetPosition(String betPosition) {
         this.betPosition = betPosition;
     }
 
-    public String getBetPosition() 
-    {
+    public String getBetPosition() {
         return betPosition;
     }
-    public void setUsdtBetAmount(Long usdtBetAmount) 
-    {
+
+    public void setUsdtBetAmount(Long usdtBetAmount) {
         this.usdtBetAmount = usdtBetAmount;
     }
 
-    public Long getUsdtBetAmount() 
-    {
-        return usdtBetAmount;
+    public Double getUsdtBetAmount() {
+        return Global.getWalletAmountToReal(usdtBetAmount);
     }
-    public void setUsdtAwardAmount(Long usdtAwardAmount) 
-    {
+
+    public void setUsdtAwardAmount(Long usdtAwardAmount) {
         this.usdtAwardAmount = usdtAwardAmount;
     }
 
-    public Long getUsdtAwardAmount() 
-    {
-        return usdtAwardAmount;
+    public Double getUsdtAwardAmount() {
+        return Global.getWalletAmountToReal(usdtAwardAmount);
     }
-    public void setTrxBetAmount(Long trxBetAmount) 
-    {
+
+    public void setTrxBetAmount(Long trxBetAmount) {
         this.trxBetAmount = trxBetAmount;
     }
 
-    public Long getTrxBetAmount() 
-    {
-        return trxBetAmount;
+    public Double getTrxBetAmount() {
+        return Global.getWalletAmountToReal(trxBetAmount);
     }
-    public void setTrxAwardAmount(Long trxAwardAmount) 
-    {
+
+    public void setTrxAwardAmount(Long trxAwardAmount) {
         this.trxAwardAmount = trxAwardAmount;
     }
 
-    public Long getTrxAwardAmount() 
-    {
-        return trxAwardAmount;
+    public Double getTrxAwardAmount() {
+        return Global.getWalletAmountToReal(trxAwardAmount);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("userId", getUserId())
-            .append("gameId", getGameId())
-            .append("betPosition", getBetPosition())
-            .append("usdtBetAmount", getUsdtBetAmount())
-            .append("usdtAwardAmount", getUsdtAwardAmount())
-            .append("trxBetAmount", getTrxBetAmount())
-            .append("trxAwardAmount", getTrxAwardAmount())
-            .toString();
+        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+                .append("id", getId())
+                .append("userId", getUserId())
+                .append("gameId", getGameId())
+                .append("betPosition", getBetPosition())
+                .append("usdtBetAmount", getUsdtBetAmount())
+                .append("usdtAwardAmount", getUsdtAwardAmount())
+                .append("trxBetAmount", getTrxBetAmount())
+                .append("trxAwardAmount", getTrxAwardAmount())
+                .toString();
     }
 }
