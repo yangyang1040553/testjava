@@ -65,6 +65,16 @@ public class GameStatisticalPlayerDayServiceImpl implements IGameStatisticalPlay
         if (gameStatisticalPlayerDay.getUserId() != null && !"".equals(gameStatisticalPlayerDay.getUserId())) {
             sql += ("  where user_id =" + gameStatisticalPlayerDay.getUserId());
         }
+
+        if (gameStatisticalPlayerDay.getGameId() != null) {
+            if (sql.contains("where")){
+                sql+=" and game_id="+gameStatisticalPlayerDay.getGameId();
+            } else {
+                sql+=" where game_id="+gameStatisticalPlayerDay.getGameId();
+            }
+        }
+
+
         sql += " GROUP BY time, game_id ,user_id";
 
         gameStatisticalPlayerDay.setSql(sql);
