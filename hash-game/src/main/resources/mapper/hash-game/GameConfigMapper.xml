@@ -21,6 +21,8 @@
         <result property="updateBy" column="update_by"/>
         <result property="menuId" column="menu_id"/>
         <result property="isBrokerage" column="is_brokerage"/>
+        <result property="activityDesc" column="activity_desc"/>
+        <result property="weight" column="weight"/>
     </resultMap>
 
     <sql id="selectGameConfigVo">
@@ -30,7 +32,17 @@
                game_session,
                bet_rule,
                odds,
-               tax, open, is_activity, finish_time, create_time, create_by, update_time, update_by,menu_id,is_brokerage
+               tax, open,
+            is_activity,
+            finish_time,
+            create_time,
+            create_by,
+            update_time,
+            update_by,
+            menu_id,
+            is_brokerage,
+            activity_desc,
+            weight
         from t_game_config
     </sql>
 
@@ -45,6 +57,7 @@
             <if test="isActivity != null ">and is_activity = #{isActivity}</if>
             <if test="finishTime != null ">and finish_time = #{finishTime}</if>
             <if test="isBrokerage != null ">and is_brokerage = #{isBrokerage}</if>
+            <if test="weight != null ">and weight = #{weight}</if>
         </where>
     </select>
 
@@ -72,6 +85,8 @@
             <if test="updateBy != null">update_by,</if>
             <if test="menuId != null">menu_id,</if>
             <if test="isBrokerage != null">is_brokerage,</if>
+            <if test="weight != null">weight,</if>
+            <if test="activityDesc != null">activity_desc,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -90,6 +105,8 @@
             <if test="updateBy != null">#{updateBy},</if>
             <if test="menuId != null">#{menuId},</if>
             <if test="isBrokerage != null">#{isBrokerage},</if>
+            <if test="weight != null">#{weight},</if>
+            <if test="activityDesc != null">#{activityDesc},</if>
         </trim>
     </insert>
 
@@ -110,7 +127,9 @@
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="updateBy != null">update_by = #{updateBy},</if>
             <if test="menuId != null">menu_id = #{menuId},</if>
-            <if test="isBrokerage != null"> is_brokerage =  #{isBrokerage},</if>
+            <if test="isBrokerage != null">is_brokerage = #{isBrokerage},</if>
+            <if test="weight != null">is_brokerage = #{weight},</if>
+            <if test="activityDesc != null">activity_desc = #{activityDesc},</if>
         </trim>
         where id = #{id}
     </update>

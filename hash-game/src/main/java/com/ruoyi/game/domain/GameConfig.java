@@ -74,6 +74,9 @@ public class GameConfig extends BaseEntity {
     @Excel(name = "是否活动场 0否 1是")
     private Long isActivity;
 
+    @Excel(name = "活动场描述")
+    private  String activityDesc;
+
     /**
      * 游戏菜单ID
      */
@@ -95,6 +98,12 @@ public class GameConfig extends BaseEntity {
     private Date finishTime;
 
 
+
+
+    @Excel(name = "权重")
+    private  Integer weight;
+
+
     private List<BetRule> betRuleList;
 
     private String sort;
@@ -102,6 +111,22 @@ public class GameConfig extends BaseEntity {
     private int usdtMax;
     private int trxMax;
     private int trxMin;
+
+    public String getActivityDesc() {
+        return activityDesc;
+    }
+
+    public void setActivityDesc(String activityDesc) {
+        this.activityDesc = activityDesc;
+    }
+
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
+    }
 
     public Integer getIsBrokerage() {
         return isBrokerage;
