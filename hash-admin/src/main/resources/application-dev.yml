@@ -55,3 +55,8 @@ spring:
                 wall:
                     config:
                         multi-statement-allow: true
+
+
+#请求
+service:
+    wllet-addr: 18.136.193.171:8099
