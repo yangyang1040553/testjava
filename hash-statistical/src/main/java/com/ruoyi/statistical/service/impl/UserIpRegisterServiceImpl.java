@@ -32,7 +32,7 @@ public class UserIpRegisterServiceImpl implements IUserIpRegisterService {
     private UserRedis userRedis;
 
     //  IP 被禁用
-    public static final int DISABLE = 0;
+    public static final int DISABLE = 1;
 
     /**
      * 查询用户ip注册次数
