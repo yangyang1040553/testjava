@@ -5,6 +5,8 @@ import com.ruoyi.common.redis.RedisKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class UserRedis {
 
@@ -18,6 +20,14 @@ public class UserRedis {
      */
     public void delUserToken(String userId) {
         redisCache.delCacheMapValue(RedisKey.user_token, userId);
+    }
+
+    /***
+     * 删除玩家token
+     * 封禁和踢下线可以调用这个方法
+     */
+    public void delUserToken(List<String> userIdList) {
+        redisCache.delCacheMapValue(RedisKey.user_token, userIdList);
     }
 
     /***
