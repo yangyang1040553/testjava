@@ -3,6 +3,7 @@ package com.ruoyi.hashuser.controller;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.hashuser.redis.UserRedis;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,6 +77,8 @@ public class HashUserGlobalConfigController extends BaseController {
     @Log(title = "用户全局配置", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody HashUserGlobalConfig hashUserGlobalConfig) {
+        hashUserGlobalConfig.setCreateBy(getUsername());
+        hashUserGlobalConfig.setCreateTime(DateUtils.getNowDate());
         return toAjax(hashUserGlobalConfigService.insertHashUserGlobalConfig(hashUserGlobalConfig));
     }
 
@@ -86,6 +89,8 @@ public class HashUserGlobalConfigController extends BaseController {
     @Log(title = "用户全局配置", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody HashUserGlobalConfig hashUserGlobalConfig) {
+        hashUserGlobalConfig.setUpdateBy(getUsername());
+        hashUserGlobalConfig.setUpdateTime(DateUtils.getNowDate());
         final int i = hashUserGlobalConfigService.updateHashUserGlobalConfig(hashUserGlobalConfig);
         if (i > 0) {
             userRedis.delUserGlobalConfig();
