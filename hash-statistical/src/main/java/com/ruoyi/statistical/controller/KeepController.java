@@ -42,6 +42,7 @@ public class KeepController extends BaseController
     public TableDataInfo list(Keep keep)
     {
         startPage();
+        startOrderBy();
         List<Keep> list = keepService.selectKeepList(keep);
         return getDataTable(list);
     }

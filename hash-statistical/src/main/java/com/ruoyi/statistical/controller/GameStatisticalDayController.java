@@ -41,6 +41,7 @@ public class GameStatisticalDayController extends BaseController {
     @GetMapping("/list")
     public TableDataInfo list(GameStatisticalDay gameStatisticalDay) {
         startPage();
+        startOrderBy();
         List<GameStatisticalDay> list = gameStatisticalDayService.selectGameStatisticalDayList(gameStatisticalDay);
         return getDataTable(list);
     }

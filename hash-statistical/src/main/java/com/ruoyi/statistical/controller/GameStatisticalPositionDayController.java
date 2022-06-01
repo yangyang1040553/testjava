@@ -43,6 +43,7 @@ public class GameStatisticalPositionDayController extends BaseController
     public TableDataInfo list(GameStatisticalPositionDay gameStatisticalPositionDay)
     {
         startPage();
+        startOrderBy();
         List<GameStatisticalPositionDay> list = gameStatisticalPositionDayService.selectGameStatisticalPositionDayList(gameStatisticalPositionDay);
         return getDataTable(list);
     }

@@ -42,6 +42,7 @@ public class StatisticalPromoteController extends BaseController
     public TableDataInfo list(StatisticalPromote statisticalPromote)
     {
         startPage();
+        startOrderBy();
         List<StatisticalPromote> list = statisticalPromoteService.selectStatisticalPromoteList(statisticalPromote);
         return getDataTable(list);
     }
