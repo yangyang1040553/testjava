@@ -27,7 +27,18 @@ public class UserIpRegister extends BaseEntity
     @Excel(name = "注册次数")
     private Long regCount;
 
-    public void setIp(String ip) 
+    @Excel(name = "是否启用")
+    private Integer isDisable;
+
+    public Integer getIsDisable() {
+        return isDisable;
+    }
+
+    public void setIsDisable(Integer isDisable) {
+        this.isDisable = isDisable;
+    }
+
+    public void setIp(String ip)
     {
         this.ip = ip;
     }

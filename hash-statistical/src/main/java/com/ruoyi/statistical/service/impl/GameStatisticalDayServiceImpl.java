@@ -72,9 +72,7 @@ public class GameStatisticalDayServiceImpl implements IGameStatisticalDayService
                     "FROM\n" +
                     "\tt_game_statistical_day \n" +
                     "WHERE\n" +
-                    "\tid <= CURRENT_DATE \n" +
-                    "ORDER BY\n" +
-                    "\ttime DESC \t";
+                    "\tid <= CURRENT_DATE \n";
         }
         if (gameStatisticalDay.getGameId() != null) {
             if (sql.contains("WHERE")) {
@@ -87,8 +85,7 @@ public class GameStatisticalDayServiceImpl implements IGameStatisticalDayService
         if (gameStatisticalDay.getType() != Global.TYPE_DAY) {
             sql += " GROUP BY time,game_id";
         }
-
-
+        sql += " ORDER BY time DESC";
         gameStatisticalDay.setSql(sql);
 
         List<GameStatisticalDay> gameStatisticalDays = gameStatisticalDayMapper.selectGameStatisticalDayList(gameStatisticalDay);
