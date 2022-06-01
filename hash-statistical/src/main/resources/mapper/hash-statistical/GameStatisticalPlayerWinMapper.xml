@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.statistical.mapper.GameStatisticalPlayerWinMapper">
+
+    <resultMap type="GameStatisticalPlayerWin" id="GameStatisticalPlayerWinResult">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="usdtBetAmount" column="usdt_bet_amount"/>
+        <result property="usdtAwardAmount" column="usdt_award_amount"/>
+        <result property="usdtWinAmount" column="usdt_win_amount"/>
+        <result property="trxBetAmount" column="trx_bet_amount"/>
+        <result property="trxAwardAmount" column="trx_award_amount"/>
+        <result property="trxWinAmount" column="trx_win_amount"/>
+    </resultMap>
+
+    <sql id="selectGameStatisticalPlayerWinVo">
+        select id,
+               user_id,
+               usdt_bet_amount,
+               usdt_award_amount,
+               usdt_win_amount,
+               trx_bet_amount,
+               trx_award_amount,
+               trx_win_amount
+        from t_game_statistical_player_win
+    </sql>
+
+    <sql id="selectWinListToday">
+        SELECT user_id,
+               SUM(usdt_bet_amount)                          AS usdt_bet_amount,
+               SUM(usdt_award_amount)                        AS usdt_award_amount,
+               SUM(usdt_award_amount) - SUM(usdt_bet_amount) AS usdt_win_amount,
+               SUM(trx_bet_amount)                           AS trx_bet_amount,
+               SUM(trx_award_amount)                         AS trx_award_amount,
+               SUM(trx_award_amount) - SUM(trx_bet_amount)   AS trx_win_amount
+        FROM t_game_statistical_player_day
+        WHERE id = CURRENT_DATE
+        GROUP BY user_id
+    </sql>
+
+    <select id="selectGameStatisticalPlayerWinList" parameterType="GameStatisticalPlayerWin"
+            resultMap="GameStatisticalPlayerWinResult">
+        <choose>
+            <when test="userId != null  and userId != '' ">
+                <include refid="selectGameStatisticalPlayerWinVo"/>
+            </when>
+            <when test="params.beginId != null  and params.beginId != '' ">
+                <include refid="selectGameStatisticalPlayerWinVo"/>
+            </when>
+            <otherwise>
+                <include refid="selectWinListToday"/>
+            </otherwise>
+        </choose>
+        <where>
+            <if test="params.beginId != null and params.beginId != '' and params.endId != null and params.endId != ''">
+                and id between #{params.beginId} and #{params.endId}
+            </if>
+            <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
+            <if test="usdtBetAmount != null ">and usdt_bet_amount = #{usdtBetAmount}</if>
+            <if test="usdtAwardAmount != null ">and usdt_award_amount = #{usdtAwardAmount}</if>
+            <if test="usdtWinAmount != null ">and usdt_win_amount = #{usdtWinAmount}</if>
+            <if test="trxBetAmount != null ">and trx_bet_amount = #{trxBetAmount}</if>
+            <if test="trxAwardAmount != null ">and trx_award_amount = #{trxAwardAmount}</if>
+            <if test="trxWinAmount != null ">and trx_win_amount = #{trxWinAmount}</if>
+        </where>
+    </select>
+
+    <select id="selectGameStatisticalPlayerWinById" parameterType="String" resultMap="GameStatisticalPlayerWinResult">
+        <include refid="selectGameStatisticalPlayerWinVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertGameStatisticalPlayerWin" parameterType="GameStatisticalPlayerWin">
+        insert into t_game_statistical_player_win
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="usdtBetAmount != null">usdt_bet_amount,</if>
+            <if test="usdtAwardAmount != null">usdt_award_amount,</if>
+            <if test="usdtWinAmount != null">usdt_win_amount,</if>
+            <if test="trxBetAmount != null">trx_bet_amount,</if>
+            <if test="trxAwardAmount != null">trx_award_amount,</if>
+            <if test="trxWinAmount != null">trx_win_amount,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="usdtBetAmount != null">#{usdtBetAmount},</if>
+            <if test="usdtAwardAmount != null">#{usdtAwardAmount},</if>
+            <if test="usdtWinAmount != null">#{usdtWinAmount},</if>
+            <if test="trxBetAmount != null">#{trxBetAmount},</if>
+            <if test="trxAwardAmount != null">#{trxAwardAmount},</if>
+            <if test="trxWinAmount != null">#{trxWinAmount},</if>
+        </trim>
+    </insert>
+
+    <update id="updateGameStatisticalPlayerWin" parameterType="GameStatisticalPlayerWin">
+        update t_game_statistical_player_win
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="usdtBetAmount != null">usdt_bet_amount = #{usdtBetAmount},</if>
+            <if test="usdtAwardAmount != null">usdt_award_amount = #{usdtAwardAmount},</if>
+            <if test="usdtWinAmount != null">usdt_win_amount = #{usdtWinAmount},</if>
+            <if test="trxBetAmount != null">trx_bet_amount = #{trxBetAmount},</if>
+            <if test="trxAwardAmount != null">trx_award_amount = #{trxAwardAmount},</if>
+            <if test="trxWinAmount != null">trx_win_amount = #{trxWinAmount},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteGameStatisticalPlayerWinById" parameterType="String">
+        delete
+        from t_game_statistical_player_win
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteGameStatisticalPlayerWinByIds" parameterType="String">
+        delete from t_game_statistical_player_win where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
