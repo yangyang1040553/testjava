@@ -42,6 +42,7 @@ public class GameStatisticalPlayerWinController extends BaseController
     public TableDataInfo list(GameStatisticalPlayerWin gameStatisticalPlayerWin)
     {
         startPage();
+        startOrderBy();
         List<GameStatisticalPlayerWin> list = gameStatisticalPlayerWinService.selectGameStatisticalPlayerWinList(gameStatisticalPlayerWin);
         return getDataTable(list);
     }
