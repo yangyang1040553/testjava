@@ -43,9 +43,16 @@ public class HashUserServiceImpl implements IHashUserService {
             hashUser.setSumNumber(userPromote.getSumnumber());
         }
         if (detail != null) {
-            hashUser.setBetAmount(detail.getBetAmount());
-            hashUser.setInAmount(detail.getInAmount());
-            hashUser.setOutAmount(detail.getOutAmount());
+            if (detail.getBetAmount() != null) {
+                hashUser.setBetAmount(detail.getBetAmount()*10000);
+            }
+            if (detail.getInAmount() != null) {
+                hashUser.setInAmount(detail.getInAmount()*10000);
+            }
+
+            if (detail.getOutAmount() != null) {
+                hashUser.setOutAmount(detail.getOutAmount()*10000);
+            }
         }
         return hashUser;
     }
