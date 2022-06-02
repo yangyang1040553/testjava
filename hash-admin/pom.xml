@@ -88,6 +88,11 @@
             <artifactId>hash-statistical</artifactId>
             <version>3.8.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.hash</groupId>
+            <artifactId>hash-audit</artifactId>
+            <version>3.8.2</version>
+        </dependency>
 
         <dependency>
             <groupId>com.hash</groupId>
