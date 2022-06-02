@@ -128,7 +128,7 @@
             <if test="updateBy != null">update_by = #{updateBy},</if>
             <if test="menuId != null">menu_id = #{menuId},</if>
             <if test="isBrokerage != null">is_brokerage = #{isBrokerage},</if>
-            <if test="weight != null">is_brokerage = #{weight},</if>
+            <if test="weight != null">weight = #{weight},</if>
             <if test="activityDesc != null">activity_desc = #{activityDesc},</if>
         </trim>
         where id = #{id}
