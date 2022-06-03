@@ -38,7 +38,30 @@ public class HashUserSms extends BaseEntity
     @Excel(name = "返回数据")
     private String responseData;
 
-    public void setId(String id) 
+
+    @Excel(name = "IP")
+    private String ip;
+
+    @Excel(name = "验证码")
+    private String checkCode;
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public String getCheckCode() {
+        return checkCode;
+    }
+
+    public void setCheckCode(String checkCode) {
+        this.checkCode = checkCode;
+    }
+
+    public void setId(String id)
     {
         this.id = id;
     }

@@ -1,38 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.hashuser.mapper.HashUserSmsMapper">
-    
+
     <resultMap type="HashUserSms" id="HashUserSmsResult">
-        <result property="id"    column="id"    />
-        <result property="userId"    column="user_id"    />
-        <result property="areaCode"    column="area_code"    />
-        <result property="phone"    column="phone"    />
-        <result property="ok"    column="ok"    />
-        <result property="responseData"    column="response_data"    />
-        <result property="createTime"    column="create_time"    />
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="areaCode" column="area_code"/>
+        <result property="phone" column="phone"/>
+        <result property="ok" column="ok"/>
+        <result property="responseData" column="response_data"/>
+        <result property="createTime" column="create_time"/>
+        <result property="ip" column="ip"/>
+        <result property="checkCode" column="check_code"/>
     </resultMap>
 
     <sql id="selectHashUserSmsVo">
-        select id, user_id, area_code, phone, ok, response_data, create_time from t_user_sms
+        select id, user_id, area_code, phone, ok, response_data, create_time,ip,check_code
+        from t_user_sms
     </sql>
 
     <select id="selectHashUserSmsList" parameterType="HashUserSms" resultMap="HashUserSmsResult">
         <include refid="selectHashUserSmsVo"/>
-        <where>  
-            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
-            <if test="areaCode != null  and areaCode != ''"> and area_code = #{areaCode}</if>
-            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
-            <if test="ok != null "> and ok = #{ok}</if>
+        <where>
+            <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
+            <if test="areaCode != null  and areaCode != ''">and area_code = #{areaCode}</if>
+            <if test="phone != null  and phone != ''">and phone = #{phone}</if>
+            <if test="ok != null ">and ok = #{ok}</if>
         </where>
     </select>
-    
+
     <select id="selectHashUserSmsById" parameterType="String" resultMap="HashUserSmsResult">
         <include refid="selectHashUserSmsVo"/>
         where id = #{id}
     </select>
-        
+
     <insert id="insertHashUserSms" parameterType="HashUserSms">
         insert into t_user_sms
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -43,7 +46,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="ok != null">ok,</if>
             <if test="responseData != null">response_data,</if>
             <if test="createTime != null">create_time,</if>
-         </trim>
+            <if test="ip != null">ip,</if>
+            <if test="checkCode != null">check_code,</if>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
             <if test="userId != null">#{userId},</if>
@@ -52,7 +57,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="ok != null">#{ok},</if>
             <if test="responseData != null">#{responseData},</if>
             <if test="createTime != null">#{createTime},</if>
-         </trim>
+            <if test="ip != null">#{ip},</if>
+            <if test="checkCode != null">#{checkCode},</if>
+        </trim>
     </insert>
 
     <update id="updateHashUserSms" parameterType="HashUserSms">
@@ -69,11 +76,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteHashUserSmsById" parameterType="String">
-        delete from t_user_sms where id = #{id}
+        delete
+        from t_user_sms
+        where id = #{id}
     </delete>
 
     <delete id="deleteHashUserSmsByIds" parameterType="String">
-        delete from t_user_sms where id in 
+        delete from t_user_sms where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
