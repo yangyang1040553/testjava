@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.ruoyi.hashuser.domain.UserPromote;
 import com.ruoyi.hashuser.mapper.UserPromoteMapper;
+import com.ruoyi.hashuser.redis.GameRedis;
+import com.ruoyi.hashuser.redis.UserRedis;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.hashuser.mapper.HashUserMapper;
@@ -25,6 +27,9 @@ public class HashUserServiceImpl implements IHashUserService {
     @Autowired
     private UserPromoteMapper userPromoteMapper;
 
+    @Autowired
+    private GameRedis gameRedis;
+
     /**
      * 查询用户
      *
@@ -44,16 +49,21 @@ public class HashUserServiceImpl implements IHashUserService {
         }
         if (detail != null) {
             if (detail.getBetAmount() != null) {
-                hashUser.setBetAmount(detail.getBetAmount()*10000);
+                hashUser.setBetAmount(detail.getBetAmount() * 10000);
             }
             if (detail.getInAmount() != null) {
-                hashUser.setInAmount(detail.getInAmount()*10000);
+                hashUser.setInAmount(detail.getInAmount() * 10000);
             }
 
             if (detail.getOutAmount() != null) {
-                hashUser.setOutAmount(detail.getOutAmount()*10000);
+                hashUser.setOutAmount(detail.getOutAmount() * 10000);
             }
         }
+
+
+        //1 在线 0 不在线
+        hashUser.setOnline(gameRedis.userIsOnline(hashUser.getId()) ? 1L : 0L);
+
         return hashUser;
     }
 

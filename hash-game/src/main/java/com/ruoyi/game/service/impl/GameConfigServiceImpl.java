@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.uuid.IdUtils;
-import com.ruoyi.statistical.redis.GameRedis;
+import com.ruoyi.hashuser.redis.GameRedis;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.game.mapper.GameConfigMapper;

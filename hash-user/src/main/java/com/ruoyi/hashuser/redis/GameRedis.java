@@ -1,4 +1,4 @@
-package com.ruoyi.statistical.redis;
+package com.ruoyi.hashuser.redis;
 
 
 import com.ruoyi.common.core.redis.RedisCache;

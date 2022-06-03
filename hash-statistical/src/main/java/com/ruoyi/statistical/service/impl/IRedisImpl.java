@@ -1,12 +1,10 @@
 package com.ruoyi.statistical.service.impl;
 
-import com.alibaba.fastjson.JSONObject;
-import com.github.pagehelper.PageInfo;
 import com.ruoyi.common.constant.HttpStatus;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.hashuser.domain.HashUser;
 import com.ruoyi.hashuser.mapper.HashUserMapper;
-import com.ruoyi.statistical.redis.GameRedis;
+import com.ruoyi.hashuser.redis.GameRedis;
 import com.ruoyi.statistical.service.IRedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
