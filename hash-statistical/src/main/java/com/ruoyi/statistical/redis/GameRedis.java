@@ -46,4 +46,13 @@ public class GameRedis {
         final Set<String> cacheSet = redisCache.getCacheSet(RedisKey.game_player_online);
         return new ArrayList<>(cacheSet);
     }
+
+    /***
+     * 判断玩家是否在线
+     * @param userId
+     * @return
+     */
+    public boolean userIsOnline(String userId) {
+        return redisCache.getCacheSetExist(RedisKey.game_player_online, userId);
+    }
 }

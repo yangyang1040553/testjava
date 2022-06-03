@@ -149,6 +149,16 @@ public class RedisCache {
     }
 
     /**
+     * 获得缓存的set 是否存在
+     *
+     * @param key
+     * @return
+     */
+    public Boolean getCacheSetExist(final String key, String userId) {
+        return redisTemplate.opsForSet().isMember(key, userId);
+    }
+
+    /**
      * 缓存Map
      *
      * @param key
@@ -203,6 +213,7 @@ public class RedisCache {
         HashOperations hashOperations = redisTemplate.opsForHash();
         hashOperations.delete(key, hKey);
     }
+
     /**
      * 删除Hash中的数据
      *
