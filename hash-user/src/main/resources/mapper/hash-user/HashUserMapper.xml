@@ -98,6 +98,7 @@
             <if test="online != null ">and online = #{online}</if>
             <if test="registerIp != null ">and register_ip = #{registerIp}</if>
             <if test="id != null "> and id = #{id}</if>
+            <if test="invitationCode != null "> and invitation_code = #{invitationCode}</if>
             <if test="fatherInvitationCode != null and fatherInvitationCode != ''"> and father_invitation_code = #{fatherInvitationCode}</if>
         </where>
     </select>

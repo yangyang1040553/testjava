@@ -12,22 +12,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="hashAddressTrx"    column="hash_address_trx"    />
         <result property="rechargeTotal"    column="recharge_total"    />
         <result property="withdrawTotal"    column="withdraw_total"    />
+        <result property="invitationCode"    column="invitation_code"    />
     </resultMap>
 
     <sql id="selectWalletPlayerDataVo">
-        select id, usdt_amount, trx_amount, hash_address_usdt, hash_address_trx, recharge_total, withdraw_total from t_wallet_player_data
+        SELECT
+            a.id,
+            a.usdt_amount,
+            a.trx_amount,
+            a.hash_address_usdt,
+            a.hash_address_trx,
+            a.recharge_total,
+            a.withdraw_total ,
+            b.invitation_code
+        FROM
+            t_wallet_player_data a LEFT JOIN t_user b on a.id=b.id
     </sql>
 
     <select id="selectWalletPlayerDataList" parameterType="WalletPlayerData" resultMap="WalletPlayerDataResult">
         <include refid="selectWalletPlayerDataVo"/>
         <where>  
-            <if test="id != null  and id != ''"> and id = #{id}</if>
-            <if test="usdtAmount != null and usdtAmount != ''"> and usdt_amount = #{usdtAmount}</if>
-            <if test="trxAmount != null and trxAmount != ''"> and trx_amount = #{trxAmount}</if>
-            <if test="hashAddressUsdt != null  and hashAddressUsdt != ''"> and hash_address_usdt = #{hashAddressUsdt}</if>
-            <if test="hashAddressTrx != null  and hashAddressTrx != ''"> and hash_address_trx = #{hashAddressTrx}</if>
-            <if test="rechargeTotal != null  and rechargeTotal != ''"> and recharge_total = #{rechargeTotal}</if>
-            <if test="withdrawTotal != null and withdrawTotal != '' "> and withdraw_total = #{withdrawTotal}</if>
+            <if test="id != null  and id != ''"> and a.id = #{id}</if>
+            <if test="usdtAmount != null and usdtAmount != ''"> and a.usdt_amount = #{usdtAmount}</if>
+            <if test="trxAmount != null and trxAmount != ''"> and a.trx_amount = #{trxAmount}</if>
+            <if test="hashAddressUsdt != null  and hashAddressUsdt != ''"> and a.hash_address_usdt = #{hashAddressUsdt}</if>
+            <if test="hashAddressTrx != null  and hashAddressTrx != ''"> and a.hash_address_trx = #{hashAddressTrx}</if>
+            <if test="rechargeTotal != null  and rechargeTotal != ''"> and a.recharge_total = #{rechargeTotal}</if>
+            <if test="withdrawTotal != null and withdrawTotal != '' "> and a.withdraw_total = #{withdrawTotal}</if>
+            <if test="invitationCode != null and invitationCode != '' "> and b.invitation_code = #{invitationCode}</if>
         </where>
     </select>
     
