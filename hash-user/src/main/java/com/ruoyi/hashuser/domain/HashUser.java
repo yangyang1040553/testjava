@@ -182,6 +182,27 @@ public class HashUser extends BaseEntity {
     @Excel(name = "IP地址")
     private String ipAddr;
 
+    @Excel(name = "代理返佣赔率")
+    private Double promoteOdds;
+
+    @Excel(name = "分享代理返佣赔率")
+    private Double sharePromoteOdds;
+
+    public Double getPromoteOdds() {
+        return promoteOdds;
+    }
+
+    public void setPromoteOdds(Double promoteOdds) {
+        this.promoteOdds = promoteOdds;
+    }
+
+    public Double getSharePromoteOdds() {
+        return sharePromoteOdds;
+    }
+
+    public void setSharePromoteOdds(Double sharePromoteOdds) {
+        this.sharePromoteOdds = sharePromoteOdds;
+    }
 
     public Double getUsdtAmount() {
         return Global.getWalletAmountToReal(usdtAmount);

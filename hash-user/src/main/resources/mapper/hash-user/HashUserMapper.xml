@@ -31,6 +31,8 @@
         <result property="usdtAmount" column="usdt_amount"/>
         <result property="trxAmount" column="trx_amount"/>
         <result property="ipAddr" column="ip_addr"/>
+        <result property="promoteOdds" column="promote_odds"/>
+        <result property="sharePromoteOdds" column="share_promote_odds"/>
 
     </resultMap>
 
@@ -53,7 +55,9 @@
                bind_time,
                register_ip,
                login_time,
-               login_ip
+               login_ip,
+               promote_odds,
+               share_promote_odds
         from t_user
     </sql>
 
@@ -94,6 +98,7 @@
             <if test="online != null ">and online = #{online}</if>
             <if test="registerIp != null ">and register_ip = #{registerIp}</if>
             <if test="id != null "> and id = #{id}</if>
+            <if test="fatherInvitationCode != null"> and father_invitation_code = #{fatherInvitationCode}</if>
         </where>
     </select>
 
