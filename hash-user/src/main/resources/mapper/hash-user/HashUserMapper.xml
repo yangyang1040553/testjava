@@ -93,6 +93,7 @@
             <if test="status != null ">and status = #{status}</if>
             <if test="online != null ">and online = #{online}</if>
             <if test="registerIp != null ">and register_ip = #{registerIp}</if>
+            <if test="id != null "> and id = #{id}</if>
         </where>
     </select>
 
