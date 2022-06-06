@@ -103,12 +103,12 @@
             <if test="nickName != null  and nickName != ''">and nick_name like concat('%', #{nickName}, '%')</if>
             <if test="status != null ">and status = #{status}</if>
             <if test="online != null ">and online = #{online}</if>
-            <if test="registerIp != null ">and register_ip = #{registerIp}</if>
-            <if test="id != null ">and id = #{id}</if>
-            <if test="invitationCode != null ">and invitation_code = #{invitationCode}</if>
-            <if test="fatherInvitationCode != null and fatherInvitationCode != ''">and father_invitation_code =
-                #{fatherInvitationCode}
-            </if>
+            <if test="registerIp != null and registerIp!=''">and register_ip = #{registerIp}</if>
+            <if test="id != null and id !='' ">and id = #{id}</if>
+            <if test="invitationCode != null and invitationCode !='' ">and invitation_code = #{invitationCode}</if>
+            <if test="fatherInvitationCode != null and fatherInvitationCode != ''">and father_invitation_code = #{fatherInvitationCode}</if>
+            <if test="tgId != null and tgId != ''">and tg_id = #{tgId}</if>
+            <if test="tgAccount != null and tgAccount != ''">and tg_account = #{tgAccount}</if>
         </where>
     </select>
 
