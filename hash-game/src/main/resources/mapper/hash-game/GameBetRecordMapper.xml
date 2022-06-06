@@ -54,7 +54,8 @@
     <select id="selectGameBetRecordList" parameterType="GameBetRecord" resultMap="GameBetRecordResult">
         <include refid="selectGameBetRecordVo"/>
         <where>
-            <if test="gameId != null ">and game_id = #{gameId}</if>
+            <if test="id != null and id !='' ">and id = #{id}</if>
+            <if test="gameId != null and gameId !='' ">and game_id = #{gameId}</if>
             <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
             <if test="nickName != null  and nickName != ''">and nick_name like concat('%', #{nickName}, '%')</if>
             <if test="odds != null ">and odds = #{odds}</if>

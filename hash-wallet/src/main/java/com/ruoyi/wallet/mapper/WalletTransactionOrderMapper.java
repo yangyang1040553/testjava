@@ -1,7 +1,7 @@
-package com.ruoyi.audit.mapper;
+package com.ruoyi.wallet.mapper;
 
 import java.util.List;
-import com.ruoyi.audit.domain.WalletTransactionOrder;
+import com.ruoyi.wallet.domain.WalletTransactionOrder;
 
 /**
  * 转换订单Mapper接口

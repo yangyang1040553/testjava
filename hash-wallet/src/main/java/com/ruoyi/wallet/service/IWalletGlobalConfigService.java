@@ -1,7 +1,7 @@
-package com.ruoyi.audit.service;
+package com.ruoyi.wallet.service;
 
 import java.util.List;
-import com.ruoyi.audit.domain.WalletGlobalConfig;
+import com.ruoyi.wallet.domain.WalletGlobalConfig;
 
 /**
  * 钱包全局配置Service接口

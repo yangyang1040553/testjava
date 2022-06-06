@@ -1,7 +1,7 @@
-package com.ruoyi.audit.service;
+package com.ruoyi.wallet.service;
 
 import java.util.List;
-import com.ruoyi.audit.domain.WalletPlayerData;
+import com.ruoyi.wallet.domain.WalletPlayerData;
 
 /**
  * 用户钱包Service接口

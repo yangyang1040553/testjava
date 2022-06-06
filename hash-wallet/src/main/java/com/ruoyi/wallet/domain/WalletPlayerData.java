@@ -1,4 +1,4 @@
-package com.ruoyi.audit.domain;
+package com.ruoyi.wallet.domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;

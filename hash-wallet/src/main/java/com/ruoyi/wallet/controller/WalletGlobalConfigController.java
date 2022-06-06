@@ -1,4 +1,4 @@
-package com.ruoyi.audit.controller;
+package com.ruoyi.wallet.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
@@ -18,8 +18,8 @@ import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.audit.domain.WalletGlobalConfig;
-import com.ruoyi.audit.service.IWalletGlobalConfigService;
+import com.ruoyi.wallet.domain.WalletGlobalConfig;
+import com.ruoyi.wallet.service.IWalletGlobalConfigService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 

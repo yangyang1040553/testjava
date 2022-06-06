@@ -1,12 +1,12 @@
-package com.ruoyi.audit.service.impl;
+package com.ruoyi.wallet.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.wallet.domain.WalletTransactionOrder;
+import com.ruoyi.wallet.mapper.WalletTransactionOrderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.audit.mapper.WalletTransactionOrderMapper;
-import com.ruoyi.audit.domain.WalletTransactionOrder;
-import com.ruoyi.audit.service.IWalletTransactionOrderService;
+import com.ruoyi.wallet.service.IWalletTransactionOrderService;
 
 /**
  * 转换订单Service业务层处理

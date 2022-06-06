@@ -1,11 +1,11 @@
-package com.ruoyi.audit.service.impl;
+package com.ruoyi.wallet.service.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.audit.mapper.WalletPlayerDataMapper;
-import com.ruoyi.audit.domain.WalletPlayerData;
-import com.ruoyi.audit.service.IWalletPlayerDataService;
+import com.ruoyi.wallet.mapper.WalletPlayerDataMapper;
+import com.ruoyi.wallet.domain.WalletPlayerData;
+import com.ruoyi.wallet.service.IWalletPlayerDataService;
 
 /**
  * 用户钱包Service业务层处理

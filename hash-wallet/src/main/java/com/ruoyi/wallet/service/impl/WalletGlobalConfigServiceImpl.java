@@ -1,13 +1,13 @@
-package com.ruoyi.audit.service.impl;
+package com.ruoyi.wallet.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.uuid.IdUtils;
+import com.ruoyi.wallet.domain.WalletGlobalConfig;
+import com.ruoyi.wallet.mapper.WalletGlobalConfigMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.audit.mapper.WalletGlobalConfigMapper;
-import com.ruoyi.audit.domain.WalletGlobalConfig;
-import com.ruoyi.audit.service.IWalletGlobalConfigService;
+import com.ruoyi.wallet.service.IWalletGlobalConfigService;
 
 /**
  * 钱包全局配置Service业务层处理

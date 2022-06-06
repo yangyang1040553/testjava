@@ -1,4 +1,4 @@
-package com.ruoyi.audit.controller;
+package com.ruoyi.wallet.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +10,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.common.constant.Global;
 import com.ruoyi.common.utils.http.HttpUtils;
 import com.ruoyi.common.utils.sign.Md5Utils;
-import com.ruoyi.audit.vo.WalletInOutMoneyVo;
+import com.ruoyi.wallet.vo.WalletInOutMoneyVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -28,8 +28,8 @@ import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.audit.domain.WalletPlayerData;
-import com.ruoyi.audit.service.IWalletPlayerDataService;
+import com.ruoyi.wallet.domain.WalletPlayerData;
+import com.ruoyi.wallet.service.IWalletPlayerDataService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 

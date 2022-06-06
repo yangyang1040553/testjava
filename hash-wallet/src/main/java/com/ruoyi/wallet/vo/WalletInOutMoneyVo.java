@@ -1,4 +1,4 @@
-package com.ruoyi.audit.vo;
+package com.ruoyi.wallet.vo;
 
 /**
  * 用户钱包出入款VO

@@ -62,7 +62,9 @@ public class HashUserServiceImpl implements IHashUserService {
 
 
         //1 在线 0 不在线
-        hashUser.setOnline(gameRedis.userIsOnline(hashUser.getId()) ? 1L : 0L);
+        if (hashUser != null) {
+            hashUser.setOnline(gameRedis.userIsOnline(hashUser.getId()) ? 1L : 0L);
+        }
 
         return hashUser;
     }

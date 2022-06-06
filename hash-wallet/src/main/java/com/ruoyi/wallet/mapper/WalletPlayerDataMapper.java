@@ -1,7 +1,7 @@
-package com.ruoyi.audit.mapper;
+package com.ruoyi.wallet.mapper;
 
 import java.util.List;
-import com.ruoyi.audit.domain.WalletPlayerData;
+import com.ruoyi.wallet.domain.WalletPlayerData;
 
 /**
  * 用户钱包Mapper接口

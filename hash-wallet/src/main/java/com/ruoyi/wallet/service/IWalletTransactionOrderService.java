@@ -1,7 +1,7 @@
-package com.ruoyi.audit.service;
+package com.ruoyi.wallet.service;
 
 import java.util.List;
-import com.ruoyi.audit.domain.WalletTransactionOrder;
+import com.ruoyi.wallet.domain.WalletTransactionOrder;
 
 /**
  * 转换订单Service接口
