@@ -45,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="selectWalletPlayerDataById" parameterType="String" resultMap="WalletPlayerDataResult">
         <include refid="selectWalletPlayerDataVo"/>
-        where id = #{id}
+        where a.id = #{id}
     </select>
         
     <insert id="insertWalletPlayerData" parameterType="WalletPlayerData">
