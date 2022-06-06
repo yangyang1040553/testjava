@@ -188,6 +188,40 @@ public class HashUser extends BaseEntity {
     @Excel(name = "分享代理返佣赔率")
     private Double sharePromoteOdds;
 
+
+    @Excel(name = "用户备注")
+    private String noteName;
+
+    @Excel(name = "飞机ID")
+    private String tgId;
+
+    @Excel(name = "飞机账号")
+    private String tgAccount;
+
+    public String getNoteName() {
+        return noteName;
+    }
+
+    public void setNoteName(String noteName) {
+        this.noteName = noteName;
+    }
+
+    public String getTgId() {
+        return tgId;
+    }
+
+    public void setTgId(String tgId) {
+        this.tgId = tgId;
+    }
+
+    public String getTgAccount() {
+        return tgAccount;
+    }
+
+    public void setTgAccount(String tgAccount) {
+        this.tgAccount = tgAccount;
+    }
+
     public Double getPromoteOdds() {
         return promoteOdds;
     }

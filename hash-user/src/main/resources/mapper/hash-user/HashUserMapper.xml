@@ -34,6 +34,10 @@
         <result property="promoteOdds" column="promote_odds"/>
         <result property="sharePromoteOdds" column="share_promote_odds"/>
 
+        <result property="noteName" column="note_name"/>
+        <result property="tgId" column="tg_id"/>
+        <result property="tgAccount" column="tg_account"/>
+
     </resultMap>
 
     <sql id="selectHashUserVo">
@@ -57,7 +61,10 @@
                login_time,
                login_ip,
                promote_odds,
-               share_promote_odds
+               share_promote_odds,
+               note_name,
+               tg_id,
+               tg_account
         from t_user
     </sql>
 
@@ -97,9 +104,11 @@
             <if test="status != null ">and status = #{status}</if>
             <if test="online != null ">and online = #{online}</if>
             <if test="registerIp != null ">and register_ip = #{registerIp}</if>
-            <if test="id != null "> and id = #{id}</if>
-            <if test="invitationCode != null "> and invitation_code = #{invitationCode}</if>
-            <if test="fatherInvitationCode != null and fatherInvitationCode != ''"> and father_invitation_code = #{fatherInvitationCode}</if>
+            <if test="id != null ">and id = #{id}</if>
+            <if test="invitationCode != null ">and invitation_code = #{invitationCode}</if>
+            <if test="fatherInvitationCode != null and fatherInvitationCode != ''">and father_invitation_code =
+                #{fatherInvitationCode}
+            </if>
         </where>
     </select>
 
@@ -109,8 +118,9 @@
     </select>
 
     <select id="selectHashUserById" parameterType="String" resultMap="HashUserResult">
-<!--        <include refid="selectHashUserVo"/>-->
-        select   a.* ,b.usdt_amount,b.trx_amount ,c.ip_addr from t_user a left JOIN t_wallet_player_data b on a.id=b.id LEFT JOIN t_user_ip_register c on a.register_ip=c.ip
+        <!--        <include refid="selectHashUserVo"/>-->
+        select a.* ,b.usdt_amount,b.trx_amount ,c.ip_addr from t_user a left JOIN t_wallet_player_data b on a.id=b.id
+        LEFT JOIN t_user_ip_register c on a.register_ip=c.ip
         where a.id = #{id}
     </select>
 
@@ -181,6 +191,9 @@
             <if test="registerIp != null">register_ip = #{registerIp},</if>
             <if test="loginTime != null">login_time = #{loginTime},</if>
             <if test="loginIp != null">login_ip = #{loginIp},</if>
+            <if test="noteName != null">note_name = #{noteName},</if>
+            <if test="tgId != null">tg_id = #{tgId},</if>
+            <if test="tgAccount != null">tg_account = #{tgAccount},</if>
         </trim>
         where id = #{id}
     </update>
@@ -199,10 +212,20 @@
     </delete>
 
 
-
-
     <sql id="selectStatisticalPromoteVo">
-        select id, level1_person, level2_person, level3_person, area_code, phone, nick_name, account, register_time, promote_odds, share_promote_odds, sumNumber from statistical_promote
+        select id,
+               level1_person,
+               level2_person,
+               level3_person,
+               area_code,
+               phone,
+               nick_name,
+               account,
+               register_time,
+               promote_odds,
+               share_promote_odds,
+               sumNumber
+        from statistical_promote
     </sql>
 
 </mapper>
