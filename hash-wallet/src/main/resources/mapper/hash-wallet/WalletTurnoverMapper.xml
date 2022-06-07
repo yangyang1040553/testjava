@@ -1,56 +1,57 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.wallet.mapper.WalletTurnoverMapper">
-    
+
     <resultMap type="WalletTurnover" id="WalletTurnoverResult">
-        <result property="id"    column="id"    />
-        <result property="userId"    column="user_id"    />
-        <result property="code"    column="code"    />
-        <result property="walletType"    column="wallet_type"    />
-        <result property="amount"    column="amount"    />
-        <result property="currentAmount"    column="current_amount"    />
-        <result property="afterAmount"    column="after_amount"    />
-        <result property="linkedOrder"    column="linked_order"    />
-        <result property="createTime"    column="create_time"    />
-        <result property="invitationCode"    column="invitation_code"    />
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="code" column="code"/>
+        <result property="walletType" column="wallet_type"/>
+        <result property="amount" column="amount"/>
+        <result property="currentAmount" column="current_amount"/>
+        <result property="afterAmount" column="after_amount"/>
+        <result property="linkedOrder" column="linked_order"/>
+        <result property="createTime" column="create_time"/>
+        <result property="invitationCode" column="invitation_code"/>
     </resultMap>
 
     <sql id="selectWalletTurnoverVo">
-        SELECT
-            a.id,
-            a.user_id,
-            a.CODE,
-            a.wallet_type,
-            a.amount,
-            a.current_amount,
-            a.after_amount,
-            a.linked_order,
-            a.create_time,
-            b.invitation_code
-        FROM
-            t_wallet_turnover a
-                LEFT JOIN t_user b ON a.user_id = b.id
+        SELECT a.id,
+               a.user_id,
+               a.CODE,
+               a.wallet_type,
+               a.amount,
+               a.current_amount,
+               a.after_amount,
+               a.linked_order,
+               a.create_time,
+               b.invitation_code
+        FROM t_wallet_turnover a
+                 LEFT JOIN t_user b ON a.user_id = b.id
     </sql>
 
     <select id="selectWalletTurnoverList" parameterType="WalletTurnover" resultMap="WalletTurnoverResult">
         <include refid="selectWalletTurnoverVo"/>
-        <where>  
-            <if test="id != null  and id != ''"> and a.id = #{id}</if>
-            <if test="userId != null  and userId != ''"> and a.user_id = #{userId}</if>
-            <if test="code != null "> and a.code = #{code}</if>
-            <if test="walletType != null  and walletType != ''"> and a.wallet_type = #{walletType}</if>
-            <if test="createTime != null "> and a.create_time >= #{createTime}</if>
-            <if test="invitationCode != null and invitationCode !=''  "> and b.invitation_code = #{invitationCode}</if>
+        <where>
+            <if test="id != null  and id != ''">and a.id = #{id}</if>
+            <if test="userId != null  and userId != ''">and a.user_id = #{userId}</if>
+            <if test="code != null ">and a.code = #{code}</if>
+            <if test="walletType != null  and walletType != ''">and a.wallet_type = #{walletType}</if>
+            <if test="invitationCode != null and invitationCode !=''  ">and b.invitation_code = #{invitationCode}</if>
+            <choose>
+                <when test="createTime !=null ">and DATE_FORMAT(a.create_time,'%Y-%m-%d') = DATE_FORMAT(#{createTime},'%Y-%m-%d')</when>
+                <otherwise>and DATE_FORMAT(a.create_time,'%Y-%m-%d') = CURRENT_DATE</otherwise>
+            </choose>
         </where>
     </select>
-    
+
     <select id="selectWalletTurnoverById" parameterType="String" resultMap="WalletTurnoverResult">
         <include refid="selectWalletTurnoverVo"/>
         where id = #{id}
     </select>
-        
+
     <insert id="insertWalletTurnover" parameterType="WalletTurnover">
         insert into t_wallet_turnover
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -63,7 +64,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="afterAmount != null">after_amount,</if>
             <if test="linkedOrder != null">linked_order,</if>
             <if test="createTime != null">create_time,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
             <if test="userId != null">#{userId},</if>
@@ -74,7 +75,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="afterAmount != null">#{afterAmount},</if>
             <if test="linkedOrder != null">#{linkedOrder},</if>
             <if test="createTime != null">#{createTime},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateWalletTurnover" parameterType="WalletTurnover">
@@ -93,11 +94,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteWalletTurnoverById" parameterType="String">
-        delete from t_wallet_turnover where id = #{id}
+        delete
+        from t_wallet_turnover
+        where id = #{id}
     </delete>
 
     <delete id="deleteWalletTurnoverByIds" parameterType="String">
-        delete from t_wallet_turnover where id in 
+        delete from t_wallet_turnover where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

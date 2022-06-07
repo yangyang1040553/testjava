@@ -70,6 +70,17 @@ public class GamePlayerBrokerageRecord extends BaseEntity {
 
     private String sort;
 
+    @Excel(name = "玩家昵称")
+    private String nickName;
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
     public String getSort() {
         return sort;
     }
