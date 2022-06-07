@@ -40,10 +40,11 @@
             <if test="code != null ">and a.code = #{code}</if>
             <if test="walletType != null  and walletType != ''">and a.wallet_type = #{walletType}</if>
             <if test="invitationCode != null and invitationCode !=''  ">and b.invitation_code = #{invitationCode}</if>
-            <choose>
-                <when test="createTime !=null ">and DATE_FORMAT(a.create_time,'%Y-%m-%d') = DATE_FORMAT(#{createTime},'%Y-%m-%d')</when>
-                <otherwise>and DATE_FORMAT(a.create_time,'%Y-%m-%d') = CURRENT_DATE</otherwise>
-            </choose>
+            <if test="createTime != null">and DATE_FORMAT(a.create_time,'%Y-%m-%d') = DATE_FORMAT(#{createTime},'%Y-%m-%d')</if>
+<!--            <choose>-->
+<!--                <when test="createTime !=null ">and DATE_FORMAT(a.create_time,'%Y-%m-%d') = DATE_FORMAT(#{createTime},'%Y-%m-%d')</when>-->
+<!--                <otherwise >and DATE_FORMAT(a.create_time,'%Y-%m-%d') = CURRENT_DATE</otherwise>-->
+<!--            </choose>-->
         </where>
     </select>
 

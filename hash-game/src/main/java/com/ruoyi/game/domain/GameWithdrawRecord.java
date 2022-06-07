@@ -45,11 +45,26 @@ public class GameWithdrawRecord extends BaseEntity {
     @Excel(name = "提现后剩余金额")
     private Double afterAmount;
 
+
+    @Excel(name = "提现后剩余金额")
+    private String nickName;
+
+
+
     /**
      * 提现状态 1成功 2转入钱包异常
      */
     @Excel(name = "提现状态 1成功 2转入钱包异常")
     private Long status;
+
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
 
     public void setId(String id) {
         this.id = id;

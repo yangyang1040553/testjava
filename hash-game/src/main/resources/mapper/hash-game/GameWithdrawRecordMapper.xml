@@ -12,10 +12,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="afterAmount"    column="after_amount"    />
         <result property="status"    column="status"    />
         <result property="createTime"    column="create_time"    />
+        <result property="nickName"    column="nick_name"    />
     </resultMap>
 
     <sql id="selectGameWithdrawRecordVo">
-        select id, user_id, withdraw_amount, wallet_type, after_amount, status, create_time from t_game_withdraw_record
+        select id, user_id, withdraw_amount, wallet_type, after_amount, status, create_time  ,nick_name from t_game_withdraw_record
     </sql>
 
     <select id="selectGameWithdrawRecordList" parameterType="GameWithdrawRecord" resultMap="GameWithdrawRecordResult">
