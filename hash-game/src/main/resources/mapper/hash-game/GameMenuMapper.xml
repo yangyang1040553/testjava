@@ -9,10 +9,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="menuName"    column="menu_name"    />
         <result property="weight"    column="weight"    />
         <result property="activity"    column="activity"    />
+        <result property="selectedAddr"    column="selected_addr"    />
+        <result property="unSelectedAddr"    column="unselected_addr"    />
     </resultMap>
 
     <sql id="selectGameMenuVo">
-        select id, menu_name, weight, activity from t_game_menu
+        select id, menu_name, weight, activity ,selected_addr,unselected_addr  from t_game_menu
     </sql>
 
     <select id="selectGameMenuList" parameterType="GameMenu" resultMap="GameMenuResult">
@@ -36,11 +38,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="menuName != null">menu_name,</if>
             <if test="weight != null">weight,</if>
             <if test="activity != null">activity,</if>
+            <if test="selectedAddr != null">selected_addr,</if>
+            <if test="unSelectedAddr != null">unselected_addr,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="menuName != null">#{menuName},</if>
             <if test="weight != null">#{weight},</if>
             <if test="activity != null">#{activity},</if>
+            <if test="selectedAddr != null">#{selectedAddr},</if>
+            <if test="unSelectedAddr != null">#{unSelectedAddr},</if>
          </trim>
     </insert>
 
@@ -50,6 +56,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="menuName != null">menu_name = #{menuName},</if>
             <if test="weight != null">weight = #{weight},</if>
             <if test="activity != null">activity = #{activity},</if>
+            <if test="selectedAddr != null">selected_addr = #{selectedAddr},</if>
+            <if test="unSelectedAddr != null">unselected_addr = #{unSelectedAddr},</if>
         </trim>
         where id = #{id}
     </update>
