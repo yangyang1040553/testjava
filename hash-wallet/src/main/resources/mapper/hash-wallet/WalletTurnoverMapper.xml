@@ -15,6 +15,7 @@
         <result property="linkedOrder" column="linked_order"/>
         <result property="createTime" column="create_time"/>
         <result property="invitationCode" column="invitation_code"/>
+        <result property="nickName" column="nick_name"/>
     </resultMap>
 
     <sql id="selectWalletTurnoverVo">
@@ -27,7 +28,8 @@
                a.after_amount,
                a.linked_order,
                a.create_time,
-               b.invitation_code
+               b.invitation_code,
+               b.nick_name
         FROM t_wallet_turnover a
                  LEFT JOIN t_user b ON a.user_id = b.id
     </sql>

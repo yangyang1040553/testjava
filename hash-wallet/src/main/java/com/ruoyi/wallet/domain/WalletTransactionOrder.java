@@ -42,6 +42,8 @@ public class WalletTransactionOrder extends BaseEntity
     @Excel(name = "收款地址")
     private String collectionAddress;
 
+
+
     /** 源金额 */
     @Excel(name = "源金额")
     private Long sourceAmount;
@@ -58,7 +60,8 @@ public class WalletTransactionOrder extends BaseEntity
     @Excel(name = "转入状态")
     private Long status;
 
-    public void setId(String id) 
+
+    public void setId(String id)
     {
         this.id = id;
     }

@@ -69,6 +69,18 @@ public class WalletTurnover extends BaseEntity {
     @Excel(name = "玩家邀请码")
     private String invitationCode;
 
+    @Excel(name = "昵称")
+    private String nickName;
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+
     public String getInvitationCode() {
         return invitationCode;
     }

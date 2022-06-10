@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.statistical.mapper.UserRegionRegisterMapper">
+    
+    <resultMap type="UserRegionRegister" id="UserRegionRegisterResult">
+        <result property="region"    column="region"    />
+        <result property="regCount"    column="reg_count"    />
+    </resultMap>
+
+    <sql id="selectUserRegionRegisterVo">
+        select region, reg_count from t_user_region_register
+    </sql>
+
+    <select id="selectUserRegionRegisterList" parameterType="UserRegionRegister" resultMap="UserRegionRegisterResult">
+        <include refid="selectUserRegionRegisterVo"/>
+        <where>  
+            <if test="region != null  and region != ''"> and region = #{region}</if>
+            <if test="regCount != null "> and reg_count = #{regCount}</if>
+        </where>
+    </select>
+    
+    <select id="selectUserRegionRegisterByRegion" parameterType="String" resultMap="UserRegionRegisterResult">
+        <include refid="selectUserRegionRegisterVo"/>
+        where region = #{region}
+    </select>
+        
+    <insert id="insertUserRegionRegister" parameterType="UserRegionRegister">
+        insert into t_user_region_register
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="region != null">region,</if>
+            <if test="regCount != null">reg_count,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="region != null">#{region},</if>
+            <if test="regCount != null">#{regCount},</if>
+         </trim>
+    </insert>
+
+    <update id="updateUserRegionRegister" parameterType="UserRegionRegister">
+        update t_user_region_register
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="regCount != null">reg_count = #{regCount},</if>
+        </trim>
+        where region = #{region}
+    </update>
+
+    <delete id="deleteUserRegionRegisterByRegion" parameterType="String">
+        delete from t_user_region_register where region = #{region}
+    </delete>
+
+    <delete id="deleteUserRegionRegisterByRegions" parameterType="String">
+        delete from t_user_region_register where region in 
+        <foreach item="region" collection="array" open="(" separator="," close=")">
+            #{region}
+        </foreach>
+    </delete>
+</mapper>
