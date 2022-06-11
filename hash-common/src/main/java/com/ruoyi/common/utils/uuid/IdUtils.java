@@ -21,7 +21,7 @@ public class IdUtils {
 
     public static String getID12Str() {
         int num = RandomUtils.nextInt(0, 99999) + 100000;
-        return DateUtils.dateTimeNow("HHmmss") + num;
+        return DateUtils.dateTimeNow("yyyyss") + num;
     }
 
     public static String getIDStr(Class<?> clazz) {
