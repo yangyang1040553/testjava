@@ -22,6 +22,9 @@ public class UserRedis {
         redisCache.delCacheMapValue(RedisKey.user_token, userId);
     }
 
+    public void delUserTokenAll(){
+        redisCache.deleteObject(RedisKey.user_token);
+    }
     /***
      * 删除玩家token
      * 封禁和踢下线可以调用这个方法

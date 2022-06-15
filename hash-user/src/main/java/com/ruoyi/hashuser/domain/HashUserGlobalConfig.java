@@ -55,6 +55,11 @@ public class HashUserGlobalConfig extends BaseEntity
     @Excel(name = "安卓版本号")
     private String androidVersion;
 
+    /**
+     * 是否强制更新
+     */
+    private int force;
+
     public void setId(String id)
     {
         this.id = id;
@@ -144,6 +149,14 @@ public class HashUserGlobalConfig extends BaseEntity
     public String getAndroidVersion()
     {
         return androidVersion;
+    }
+
+    public int getForce() {
+        return force;
+    }
+
+    public void setForce(int force) {
+        this.force = force;
     }
 
     @Override

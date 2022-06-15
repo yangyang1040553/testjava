@@ -91,6 +91,16 @@ public class HashUserGlobalConfigController extends BaseController {
     public AjaxResult edit(@RequestBody HashUserGlobalConfig hashUserGlobalConfig) {
         hashUserGlobalConfig.setUpdateBy(getUsername());
         hashUserGlobalConfig.setUpdateTime(DateUtils.getNowDate());
+
+        if (hashUserGlobalConfig.getForce() == 1) {
+            //强制更新
+            final HashUserGlobalConfig config = hashUserGlobalConfigService.selectHashUserGlobalConfigById(hashUserGlobalConfig.getId());
+            if (!config.getAndroidVersion().equals(hashUserGlobalConfig.getAndroidVersion())
+                    || !config.getIosVersion().equals(hashUserGlobalConfig.getIosVersion())) {
+                userRedis.delUserTokenAll();
+            }
+        }
+
         final int i = hashUserGlobalConfigService.updateHashUserGlobalConfig(hashUserGlobalConfig);
         if (i > 0) {
             userRedis.delUserGlobalConfig();
