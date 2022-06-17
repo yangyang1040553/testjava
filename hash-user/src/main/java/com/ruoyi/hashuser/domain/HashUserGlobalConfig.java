@@ -77,8 +77,7 @@ public class HashUserGlobalConfig extends BaseEntity {
     /**
      * 是否强制更新
      */
-    private int force;
-
+    private transient int force;
 
     public void setId(String id) {
         this.id = id;

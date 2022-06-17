@@ -5,6 +5,7 @@ import com.ruoyi.common.redis.RedisKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -19,18 +20,26 @@ public class UserRedis {
      * 封禁和踢下线可以调用这个方法
      */
     public void delUserToken(String userId) {
-        redisCache.delCacheMapValue(RedisKey.user_token, userId);
+        redisCache.deleteObject(RedisKey.user_token + userId);
+//        redisCache.delCacheMapValue(RedisKey.user_token, userId);
     }
 
-    public void delUserTokenAll(){
-        redisCache.deleteObject(RedisKey.user_token);
+    public void delUserTokenAll() {
+        redisCache.deleteObject(RedisKey.user_token + "*");
     }
+
     /***
      * 删除玩家token
      * 封禁和踢下线可以调用这个方法
      */
     public void delUserToken(List<String> userIdList) {
-        redisCache.delCacheMapValue(RedisKey.user_token, userIdList);
+        List<String> dels = new ArrayList<>();
+        for (String id : userIdList) {
+            dels.add(RedisKey.user_token + id);
+        }
+
+        redisCache.deleteObject(dels);
+//        redisCache.delCacheMapValue(RedisKey.user_token, userIdList);
     }
 
     /***
