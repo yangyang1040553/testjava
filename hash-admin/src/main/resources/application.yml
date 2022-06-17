@@ -74,11 +74,11 @@ spring:
     lettuce:
       pool:
         # 连接池中的最小空闲连接
-        min-idle: 1
+        min-idle: 5
         # 连接池中的最大空闲连接
-        max-idle: 8
+        max-idle: 20
         # 连接池的最大数据库连接数
-        max-active: 8
+        max-active: 20
         # #连接池最大阻塞等待时间（使用负值表示没有限制）
         max-wait: -1ms
 

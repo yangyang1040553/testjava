@@ -76,6 +76,28 @@ public class GamePlayerBrokerageRecord extends BaseEntity {
     @Excel(name = "下级玩家昵称")
     private String childNickName;
 
+    @Excel(name = "玩家邀请啊")
+    private String invitationCode;
+
+    @Excel(name = "下级玩家邀请啊")
+    private String childInvitationCode;
+
+    public String getChildInvitationCode() {
+        return childInvitationCode;
+    }
+
+    public void setChildInvitationCode(String childInvitationCode) {
+        this.childInvitationCode = childInvitationCode;
+    }
+
+    public String getInvitationCode() {
+        return invitationCode;
+    }
+
+    public void setInvitationCode(String invitationCode) {
+        this.invitationCode = invitationCode;
+    }
+
     public String getChildNickName() {
         return childNickName;
     }

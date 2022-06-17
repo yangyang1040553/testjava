@@ -17,6 +17,8 @@
         <result property="createTime" column="create_time"/>
         <result property="nickName" column="nick_name"/>
         <result property="childNickName" column="child_nick_name"/>
+        <result property="invitationCode" column="invitation_code"/>
+        <result property="childInvitationCode" column="child_invitation_code"/>
     </resultMap>
 
     <sql id="selectGamePlayerBrokerageRecordVo">
@@ -31,7 +33,9 @@
                status,
                create_time,
                nick_name,
-               child_nick_name
+               child_nick_name,
+               invitation_code,
+               child_invitation_code
         from t_game_player_brokerage_record
     </sql>
 
@@ -46,6 +50,8 @@
             <if test="childUserId != null  and childUserId != ''">and child_user_id = #{childUserId}</if>
             <if test="status != null ">and status = #{status}</if>
             <if test="createTime != null ">and create_time >= #{createTime}</if>
+            <if test="invitationCode != null and invitationCode !='' ">and invitation_code = #{invitationCode}</if>
+            <if test="childInvitationCode != null and childInvitationCode !='' ">and child_invitation_code = #{childInvitationCode}</if>
         </where>
     </select>
 
