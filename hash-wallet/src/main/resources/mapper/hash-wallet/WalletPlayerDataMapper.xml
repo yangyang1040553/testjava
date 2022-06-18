@@ -18,6 +18,7 @@
         <result property="nickName" column="nick_name"/>
         <result property="usdtRemoteAmount" column="usdt_remote_amount"/>
         <result property="trxRemoteAmount" column="trx_remote_amount"/>
+        <result property="hashTransAddressTrx" column="hash_trans_address_trx"/>
     </resultMap>
 
     <sql id="selectWalletPlayerDataVo">
@@ -33,7 +34,8 @@
                b.invitation_code,
                b.nick_name,
                a.usdt_remote_amount,
-               a.trx_remote_amount
+               a.trx_remote_amount,
+               a.hash_trans_address_trx
         FROM t_wallet_player_data a
                  LEFT JOIN t_user b on a.id = b.id
     </sql>

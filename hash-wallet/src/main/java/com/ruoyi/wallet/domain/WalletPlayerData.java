@@ -65,6 +65,18 @@ public class WalletPlayerData extends BaseEntity {
     @Excel(name = "trx远程余额")
     private Long trxRemoteAmount;
 
+
+    @Excel(name = "trc转换")
+    private String hashTransAddressTrx;
+
+    public String getHashTransAddressTrx() {
+        return hashTransAddressTrx;
+    }
+
+    public void setHashTransAddressTrx(String hashTransAddressTrx) {
+        this.hashTransAddressTrx = hashTransAddressTrx;
+    }
+
     public Double getUsdtRemoteAmount() {
         return Global.getWalletAmountToReal(usdtRemoteAmount);
     }
