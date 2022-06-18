@@ -16,6 +16,8 @@
         <result property="trxWithdrawTotal" column="trx_withdraw_total"/>
         <result property="invitationCode" column="invitation_code"/>
         <result property="nickName" column="nick_name"/>
+        <result property="usdtRemoteAmount" column="usdt_remote_amount"/>
+        <result property="trxRemoteAmount" column="trx_remote_amount"/>
     </resultMap>
 
     <sql id="selectWalletPlayerDataVo">
@@ -29,7 +31,9 @@
                a.usdt_withdraw_total,
                a.trx_withdraw_total,
                b.invitation_code,
-               b.nick_name
+               b.nick_name,
+               a.usdt_remote_amount,
+               a.trx_remote_amount
         FROM t_wallet_player_data a
                  LEFT JOIN t_user b on a.id = b.id
     </sql>

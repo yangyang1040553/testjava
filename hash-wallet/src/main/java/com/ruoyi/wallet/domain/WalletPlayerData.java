@@ -60,6 +60,26 @@ public class WalletPlayerData extends BaseEntity {
     @Excel(name = "邀请码")
     private String invitationCode;
 
+    @Excel(name = "usdt远程余额")
+    private Long usdtRemoteAmount;
+    @Excel(name = "trx远程余额")
+    private Long trxRemoteAmount;
+
+    public Double getUsdtRemoteAmount() {
+        return Global.getWalletAmountToReal(usdtRemoteAmount);
+    }
+
+    public void setUsdtRemoteAmount(Long usdtRemoteAmount) {
+        this.usdtRemoteAmount = usdtRemoteAmount;
+    }
+
+    public Double getTrxRemoteAmount() {
+        return Global.getWalletAmountToReal(trxRemoteAmount);
+    }
+
+    public void setTrxRemoteAmount(Long trxRemoteAmount) {
+        this.trxRemoteAmount = trxRemoteAmount;
+    }
 
     public String getNickName() {
         return nickName;
@@ -121,16 +141,16 @@ public class WalletPlayerData extends BaseEntity {
         this.usdtAmount = usdtAmount;
     }
 
-    public Long getUsdtAmount() {
-        return usdtAmount;
+    public Double getUsdtAmount() {
+        return Global.getWalletAmountToReal(usdtAmount);
     }
 
     public void setTrxAmount(Long trxAmount) {
         this.trxAmount = trxAmount;
     }
 
-    public Long getTrxAmount() {
-        return trxAmount;
+    public Double getTrxAmount() {
+        return Global.getWalletAmountToReal(trxAmount);
     }
 
     public void setHashAddressUsdt(String hashAddressUsdt) {
