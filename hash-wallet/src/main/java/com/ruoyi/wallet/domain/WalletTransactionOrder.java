@@ -1,5 +1,6 @@
 package com.ruoyi.wallet.domain;
 
+import com.ruoyi.common.constant.Global;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
@@ -178,24 +179,24 @@ public class WalletTransactionOrder extends BaseEntity {
         this.sourceAmount = sourceAmount;
     }
 
-    public Long getSourceAmount() {
-        return sourceAmount;
+    public Double getSourceAmount() {
+        return Global.getWalletAmountToReal(sourceAmount);
     }
 
     public void setToAmount(Long toAmount) {
         this.toAmount = toAmount;
     }
 
-    public Long getToAmount() {
-        return toAmount;
+    public Double getToAmount() {
+        return Global.getWalletAmountToReal(toAmount);
     }
 
     public void setMinerAmount(Long minerAmount) {
         this.minerAmount = minerAmount;
     }
 
-    public Long getMinerAmount() {
-        return minerAmount;
+    public Double getMinerAmount() {
+        return Global.getWalletAmountToReal(minerAmount);
     }
 
     public void setStatus(Long status) {
