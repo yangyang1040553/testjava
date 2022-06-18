@@ -5,27 +5,45 @@
 <mapper namespace="com.ruoyi.hashuser.mapper.HashUserGlobalConfigMapper">
 
     <resultMap type="HashUserGlobalConfig" id="HashUserGlobalConfigResult">
-        <result property="id"    column="id"    />
-        <result property="newDomainAddr"    column="new_domain_addr"    />
-        <result property="onlineServiceAddr"    column="online_service_addr"    />
-        <result property="groupAddr"    column="group_addr"    />
-        <result property="regProtocolAddr"    column="reg_protocol_addr"    />
-        <result property="promoteAddr"    column="promote_addr"    />
-        <result property="iosDownloadAddr"    column="ios_download_addr"    />
-        <result property="iosVersion"    column="ios_version"    />
-        <result property="androidDownloadAddr"    column="android_download_addr"    />
-        <result property="androidVersion"    column="android_version"    />
-        <result property="createTime"    column="create_time"    />
-        <result property="createBy"    column="create_by"    />
-        <result property="updateTime"    column="update_time"    />
-        <result property="updateBy"    column="update_by"    />
+        <result property="id" column="id"/>
+        <result property="newDomainAddr" column="new_domain_addr"/>
+        <result property="onlineServiceAddr" column="online_service_addr"/>
+        <result property="groupAddr" column="group_addr"/>
+        <result property="regProtocolAddr" column="reg_protocol_addr"/>
+        <result property="promoteAddr" column="promote_addr"/>
+        <result property="iosDownloadAddr" column="ios_download_addr"/>
+        <result property="iosVersion" column="ios_version"/>
+        <result property="androidDownloadAddr" column="android_download_addr"/>
+        <result property="androidVersion" column="android_version"/>
+        <result property="createTime" column="create_time"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="blockChainAddr" column="block_chain_addr"/>
+
     </resultMap>
 
     <sql id="selectHashUserGlobalConfigVo">
-        select id, new_domain_addr, online_service_addr, group_addr, reg_protocol_addr, promote_addr, ios_download_addr, ios_version, android_download_addr, android_version, create_time, create_by, update_time, update_by from t_user_global_config
+        select id,
+               new_domain_addr,
+               online_service_addr,
+               group_addr,
+               reg_protocol_addr,
+               promote_addr,
+               ios_download_addr,
+               ios_version,
+               android_download_addr,
+               android_version,
+               create_time,
+               create_by,
+               update_time,
+               update_by,
+               block_chain_addr
+        from t_user_global_config
     </sql>
 
-    <select id="selectHashUserGlobalConfigList" parameterType="HashUserGlobalConfig" resultMap="HashUserGlobalConfigResult">
+    <select id="selectHashUserGlobalConfigList" parameterType="HashUserGlobalConfig"
+            resultMap="HashUserGlobalConfigResult">
         <include refid="selectHashUserGlobalConfigVo"/>
         <where>
         </where>
@@ -76,7 +94,9 @@
         update t_user_global_config
         <trim prefix="SET" suffixOverrides=",">
             <if test="newDomainAddr != null and newDomainAddr != ''">new_domain_addr = #{newDomainAddr},</if>
-            <if test="onlineServiceAddr != null and onlineServiceAddr != ''">online_service_addr = #{onlineServiceAddr},</if>
+            <if test="onlineServiceAddr != null and onlineServiceAddr != ''">online_service_addr =
+                #{onlineServiceAddr},
+            </if>
             <if test="groupAddr != null and groupAddr != ''">group_addr = #{groupAddr},</if>
             <if test="regProtocolAddr != null and regProtocolAddr != ''">reg_protocol_addr = #{regProtocolAddr},</if>
             <if test="promoteAddr != null">promote_addr = #{promoteAddr},</if>
@@ -93,7 +113,9 @@
     </update>
 
     <delete id="deleteHashUserGlobalConfigById" parameterType="String">
-        delete from t_user_global_config where id = #{id}
+        delete
+        from t_user_global_config
+        where id = #{id}
     </delete>
 
     <delete id="deleteHashUserGlobalConfigByIds" parameterType="String">
