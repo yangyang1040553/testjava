@@ -81,6 +81,17 @@ public class WalletRechargeOrder extends BaseEntity {
     @Excel(name = "邀请码")
     private String invitationCode;
 
+    @Excel(name = "说明")
+    private String note;
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
     public String getNickName() {
         return nickName;
     }

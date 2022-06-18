@@ -93,6 +93,15 @@ public class WalletTransactionOrder extends BaseEntity {
     @Excel(name = "昵称")
     private String nickName;
 
+
+    @Excel(name = "说明")
+    private String note;
+
+    public String getNote() {
+        return note;
+    }
+
+
     public String getInvitationCode() {
         return invitationCode;
     }

@@ -20,6 +20,7 @@
         <result property="updateTime" column="update_time"/>
         <result property="nickName" column="nick_name"/>
         <result property="invitationCode" column="invitation_code"/>
+        <result property="note" column="note"/>
     </resultMap>
 
     <sql id="selectWalletTransactionOrderVo">
@@ -37,7 +38,8 @@
                create_time,
                update_time,
                nick_name,
-               invitation_code
+               invitation_code,
+               note
 
         from t_wallet_transaction_order
     </sql>

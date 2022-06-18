@@ -18,25 +18,27 @@
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
         <result property="invitationCode" column="invitation_code"/>
+        <result property="note" column="note"/>
     </resultMap>
 
     <sql id="selectWalletRechargeOrderVo">
-        SELECT a.id,
-               a.transaction_no,
-               a.user_id,
-               a.wallet_type,
-               a.payment_address,
-               a.collection_address,
-               a.amount,
-               a.pay_amount,
-               a.miner_amount,
-               a.STATUS,
-               a.create_time,
-               a.update_time,
-               b.invitation_code,
-               a.nick_name
-        FROM t_wallet_recharge_order a
-                 LEFT JOIN t_user b ON a.user_id = b.id
+        SELECT id,
+               transaction_no,
+               user_id,
+               wallet_type,
+               payment_address,
+               collection_address,
+               amount,
+               pay_amount,
+               miner_amount,
+               STATUS,
+               create_time,
+               update_time,
+               invitation_code,
+               nick_name,
+               note
+        FROM t_wallet_recharge_order
+
     </sql>
 
     <select id="selectWalletRechargeOrderList" parameterType="WalletRechargeOrder"
@@ -48,7 +50,7 @@
             <if test="walletType != null  and walletType != ''">and wallet_type = #{walletType}</if>
             <if test="status != null ">and status = #{status}</if>
             <if test="createTime != null ">and create_time >= #{createTime}</if>
-            <if test="invitationCode != null and invitationCode!='' ">and b.invitation_code = #{invitationCode}</if>
+            <if test="invitationCode != null and invitationCode!='' ">and invitation_code = #{invitationCode}</if>
         </where>
     </select>
 
