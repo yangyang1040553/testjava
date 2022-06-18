@@ -1,48 +1,72 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.wallet.mapper.WalletTransactionOrderMapper">
-    
+
     <resultMap type="WalletTransactionOrder" id="WalletTransactionOrderResult">
-        <result property="id"    column="id"    />
-        <result property="transactionNo"    column="transaction_no"    />
-        <result property="userId"    column="user_id"    />
-        <result property="sourceWalletType"    column="source_wallet_type"    />
-        <result property="toWalletType"    column="to_wallet_type"    />
-        <result property="paymentAddress"    column="payment_address"    />
-        <result property="collectionAddress"    column="collection_address"    />
-        <result property="sourceAmount"    column="source_amount"    />
-        <result property="toAmount"    column="to_amount"    />
-        <result property="minerAmount"    column="miner_amount"    />
-        <result property="status"    column="status"    />
-        <result property="createTime"    column="create_time"    />
-        <result property="updateTime"    column="update_time"    />
+        <result property="id" column="id"/>
+        <result property="transactionNo" column="transaction_no"/>
+        <result property="userId" column="user_id"/>
+        <result property="sourceWalletType" column="source_wallet_type"/>
+        <result property="toWalletType" column="to_wallet_type"/>
+        <result property="paymentAddress" column="payment_address"/>
+        <result property="collectionAddress" column="collection_address"/>
+        <result property="sourceAmount" column="source_amount"/>
+        <result property="toAmount" column="to_amount"/>
+        <result property="minerAmount" column="miner_amount"/>
+        <result property="status" column="status"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="invitationCode" column="invitation_code"/>
     </resultMap>
 
     <sql id="selectWalletTransactionOrderVo">
-        select id, transaction_no, user_id, source_wallet_type, to_wallet_type, payment_address, collection_address, source_amount, to_amount, miner_amount, status, create_time, update_time from t_wallet_transaction_order
+        select id,
+               transaction_no,
+               user_id,
+               source_wallet_type,
+               to_wallet_type,
+               payment_address,
+               collection_address,
+               source_amount,
+               to_amount,
+               miner_amount,
+               status,
+               create_time,
+               update_time,
+               nick_name,
+               invitation_code
+
+        from t_wallet_transaction_order
     </sql>
 
-    <select id="selectWalletTransactionOrderList" parameterType="WalletTransactionOrder" resultMap="WalletTransactionOrderResult">
+    <select id="selectWalletTransactionOrderList" parameterType="WalletTransactionOrder"
+            resultMap="WalletTransactionOrderResult">
         <include refid="selectWalletTransactionOrderVo"/>
-        <where>  
-            <if test="transactionNo != null  and transactionNo != ''"> and transaction_no = #{transactionNo}</if>
-            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
-            <if test="sourceWalletType != null  and sourceWalletType != ''"> and source_wallet_type = #{sourceWalletType}</if>
-            <if test="toWalletType != null  and toWalletType != ''"> and to_wallet_type = #{toWalletType}</if>
-            <if test="paymentAddress != null  and paymentAddress != ''"> and payment_address = #{paymentAddress}</if>
-            <if test="collectionAddress != null  and collectionAddress != ''"> and collection_address = #{collectionAddress}</if>
-            <if test="status != null "> and status = #{status}</if>
-            <if test="createTime != null "> and create_time = #{createTime}</if>
+        <where>
+            <if test="transactionNo != null  and transactionNo != ''">and transaction_no = #{transactionNo}</if>
+            <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
+            <if test="sourceWalletType != null  and sourceWalletType != ''">and source_wallet_type =
+                #{sourceWalletType}
+            </if>
+            <if test="toWalletType != null  and toWalletType != ''">and to_wallet_type = #{toWalletType}</if>
+            <if test="paymentAddress != null  and paymentAddress != ''">and payment_address = #{paymentAddress}</if>
+            <if test="collectionAddress != null  and collectionAddress != ''">and collection_address =
+                #{collectionAddress}
+            </if>
+            <if test="status != null ">and status = #{status}</if>
+            <if test="createTime != null ">and create_time = #{createTime}</if>
+            <if test="invitationCode != null and invitationCode !='' ">and invitation_code = #{invitationCode}</if>
         </where>
     </select>
-    
+
     <select id="selectWalletTransactionOrderById" parameterType="String" resultMap="WalletTransactionOrderResult">
         <include refid="selectWalletTransactionOrderVo"/>
         where id = #{id}
     </select>
-        
+
     <insert id="insertWalletTransactionOrder" parameterType="WalletTransactionOrder">
         insert into t_wallet_transaction_order
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -59,7 +83,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="status != null">status,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateTime != null">update_time,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
             <if test="transactionNo != null">#{transactionNo},</if>
@@ -74,7 +98,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="status != null">#{status},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateTime != null">#{updateTime},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateWalletTransactionOrder" parameterType="WalletTransactionOrder">
@@ -97,11 +121,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteWalletTransactionOrderById" parameterType="String">
-        delete from t_wallet_transaction_order where id = #{id}
+        delete
+        from t_wallet_transaction_order
+        where id = #{id}
     </delete>
 
     <delete id="deleteWalletTransactionOrderByIds" parameterType="String">
-        delete from t_wallet_transaction_order where id in 
+        delete from t_wallet_transaction_order where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

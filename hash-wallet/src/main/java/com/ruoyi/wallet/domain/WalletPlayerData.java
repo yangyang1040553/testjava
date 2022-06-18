@@ -1,5 +1,6 @@
 package com.ruoyi.wallet.domain;
 
+import com.ruoyi.common.constant.Global;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
@@ -46,16 +47,59 @@ public class WalletPlayerData extends BaseEntity {
     /**
      * 总充值金额
      */
-    @Excel(name = "总充值金额")
-    private Long rechargeTotal;
-
-    /**
-     * 总提现金额
-     */
-    @Excel(name = "总提现金额")
-    private Long withdrawTotal;
-
+    @Excel(name = "TRX总充值金额")
+    private Long trxRechargeTotal;
+    @Excel(name = "USDT总充值金额")
+    private Long usdtRechargeTotal;
+    @Excel(name = "TRX总提现金额")
+    private Long trxWithdrawTotal;
+    @Excel(name = "TRX总提现金额")
+    private Long usdtWithdrawTotal;
+    @Excel(name = "昵称")
+    private String nickName;
+    @Excel(name = "邀请码")
     private String invitationCode;
+
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public Double getTrxRechargeTotal() {
+        return Global.getWalletAmountToReal(trxRechargeTotal);
+    }
+
+    public void setTrxRechargeTotal(Long trxRechargeTotal) {
+        this.trxRechargeTotal = trxRechargeTotal;
+    }
+
+    public Double getUsdtRechargeTotal() {
+        return Global.getWalletAmountToReal(usdtRechargeTotal);
+    }
+
+    public void setUsdtRechargeTotal(Long usdtRechargeTotal) {
+        this.usdtRechargeTotal = usdtRechargeTotal;
+    }
+
+    public Double getTrxWithdrawTotal() {
+        return Global.getWalletAmountToReal(trxWithdrawTotal);
+    }
+
+    public void setTrxWithdrawTotal(Long trxWithdrawTotal) {
+        this.trxWithdrawTotal = trxWithdrawTotal;
+    }
+
+    public Double getUsdtWithdrawTotal() {
+        return Global.getWalletAmountToReal(usdtWithdrawTotal);
+    }
+
+    public void setUsdtWithdrawTotal(Long usdtWithdrawTotal) {
+        this.usdtWithdrawTotal = usdtWithdrawTotal;
+    }
 
     public String getInvitationCode() {
         return invitationCode;
@@ -105,21 +149,6 @@ public class WalletPlayerData extends BaseEntity {
         return hashAddressTrx;
     }
 
-    public void setRechargeTotal(Long rechargeTotal) {
-        this.rechargeTotal = rechargeTotal;
-    }
-
-    public Long getRechargeTotal() {
-        return rechargeTotal;
-    }
-
-    public void setWithdrawTotal(Long withdrawTotal) {
-        this.withdrawTotal = withdrawTotal;
-    }
-
-    public Long getWithdrawTotal() {
-        return withdrawTotal;
-    }
 
     @Override
     public String toString() {
@@ -129,8 +158,10 @@ public class WalletPlayerData extends BaseEntity {
                 .append("trxAmount", getTrxAmount())
                 .append("hashAddressUsdt", getHashAddressUsdt())
                 .append("hashAddressTrx", getHashAddressTrx())
-                .append("rechargeTotal", getRechargeTotal())
-                .append("withdrawTotal", getWithdrawTotal())
+                .append("usdtRechargeTotal", getUsdtRechargeTotal())
+                .append("trxRechargeTotal", getTrxRechargeTotal())
+                .append("usdtWithdrawTotal", getUsdtWithdrawTotal())
+                .append("trxWithdrawTotal", getTrxWithdrawTotal())
                 .toString();
     }
 }

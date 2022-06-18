@@ -1,53 +1,57 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.wallet.mapper.WalletPlayerDataMapper">
-    
+
     <resultMap type="WalletPlayerData" id="WalletPlayerDataResult">
-        <result property="id"    column="id"    />
-        <result property="usdtAmount"    column="usdt_amount"    />
-        <result property="trxAmount"    column="trx_amount"    />
-        <result property="hashAddressUsdt"    column="hash_address_usdt"    />
-        <result property="hashAddressTrx"    column="hash_address_trx"    />
-        <result property="rechargeTotal"    column="recharge_total"    />
-        <result property="withdrawTotal"    column="withdraw_total"    />
-        <result property="invitationCode"    column="invitation_code"    />
+        <result property="id" column="id"/>
+        <result property="usdtAmount" column="usdt_amount"/>
+        <result property="trxAmount" column="trx_amount"/>
+        <result property="hashAddressUsdt" column="hash_address_usdt"/>
+        <result property="hashAddressTrx" column="hash_address_trx"/>
+        <result property="usdtRechargeTotal" column="usdt_recharge_total"/>
+        <result property="trxRechargeTotal" column="trx_recharge_total"/>
+        <result property="usdtWithdrawTotal" column="usdt_withdraw_total"/>
+        <result property="trxWithdrawTotal" column="trx_withdraw_total"/>
+        <result property="invitationCode" column="invitation_code"/>
+        <result property="nickName" column="nick_name"/>
     </resultMap>
 
     <sql id="selectWalletPlayerDataVo">
-        SELECT
-            a.id,
-            a.usdt_amount,
-            a.trx_amount,
-            a.hash_address_usdt,
-            a.hash_address_trx,
-            a.recharge_total,
-            a.withdraw_total ,
-            b.invitation_code
-        FROM
-            t_wallet_player_data a LEFT JOIN t_user b on a.id=b.id
+        SELECT a.id,
+               a.usdt_amount,
+               a.trx_amount,
+               a.hash_address_usdt,
+               a.hash_address_trx,
+               a.usdt_recharge_total,
+               a.trx_recharge_total,
+               a.usdt_withdraw_total,
+               a.trx_withdraw_total,
+               b.invitation_code,
+               b.nick_name
+        FROM t_wallet_player_data a
+                 LEFT JOIN t_user b on a.id = b.id
     </sql>
 
     <select id="selectWalletPlayerDataList" parameterType="WalletPlayerData" resultMap="WalletPlayerDataResult">
         <include refid="selectWalletPlayerDataVo"/>
-        <where>  
-            <if test="id != null  and id != ''"> and a.id = #{id}</if>
-            <if test="usdtAmount != null and usdtAmount != ''"> and a.usdt_amount = #{usdtAmount}</if>
-            <if test="trxAmount != null and trxAmount != ''"> and a.trx_amount = #{trxAmount}</if>
-            <if test="hashAddressUsdt != null  and hashAddressUsdt != ''"> and a.hash_address_usdt = #{hashAddressUsdt}</if>
-            <if test="hashAddressTrx != null  and hashAddressTrx != ''"> and a.hash_address_trx = #{hashAddressTrx}</if>
-            <if test="rechargeTotal != null  and rechargeTotal != ''"> and a.recharge_total = #{rechargeTotal}</if>
-            <if test="withdrawTotal != null and withdrawTotal != '' "> and a.withdraw_total = #{withdrawTotal}</if>
-            <if test="invitationCode != null and invitationCode != '' "> and b.invitation_code = #{invitationCode}</if>
+        <where>
+            <if test="id != null  and id != ''">and a.id = #{id}</if>
+            <if test="usdtAmount != null and usdtAmount != ''">and a.usdt_amount = #{usdtAmount}</if>
+            <if test="trxAmount != null and trxAmount != ''">and a.trx_amount = #{trxAmount}</if>
+            <if test="hashAddressUsdt != null  and hashAddressUsdt != ''">and a.hash_address_usdt = #{hashAddressUsdt}
+            </if>
+            <if test="hashAddressTrx != null  and hashAddressTrx != ''">and a.hash_address_trx = #{hashAddressTrx}</if>
+            <if test="invitationCode != null and invitationCode != '' ">and b.invitation_code = #{invitationCode}</if>
         </where>
     </select>
-    
+
     <select id="selectWalletPlayerDataById" parameterType="String" resultMap="WalletPlayerDataResult">
         <include refid="selectWalletPlayerDataVo"/>
         where a.id = #{id}
     </select>
-        
+
     <insert id="insertWalletPlayerData" parameterType="WalletPlayerData">
         insert into t_wallet_player_data
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -58,7 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="hashAddressTrx != null">hash_address_trx,</if>
             <if test="rechargeTotal != null">recharge_total,</if>
             <if test="withdrawTotal != null">withdraw_total,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
             <if test="usdtAmount != null">#{usdtAmount},</if>
@@ -67,7 +71,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="hashAddressTrx != null">#{hashAddressTrx},</if>
             <if test="rechargeTotal != null">#{rechargeTotal},</if>
             <if test="withdrawTotal != null">#{withdrawTotal},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateWalletPlayerData" parameterType="WalletPlayerData">
@@ -84,11 +88,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteWalletPlayerDataById" parameterType="String">
-        delete from t_wallet_player_data where id = #{id}
+        delete
+        from t_wallet_player_data
+        where id = #{id}
     </delete>
 
     <delete id="deleteWalletPlayerDataByIds" parameterType="String">
-        delete from t_wallet_player_data where id in 
+        delete from t_wallet_player_data where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
