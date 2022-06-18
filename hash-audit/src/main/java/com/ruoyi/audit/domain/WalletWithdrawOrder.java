@@ -132,8 +132,8 @@ public class WalletWithdrawOrder extends BaseEntity {
         this.amount = amount;
     }
 
-    public Double getAmount() {
-        return Global.getWalletAmountToReal(amount);
+    public Long getAmount() {
+        return amount;
     }
 
     public void setMinerAmount(Long minerAmount) {
