@@ -75,18 +75,18 @@ public class HashUserGlobalConfig extends BaseEntity {
     private String androidVersion;
 
     @Excel(name = "区块链地址")
-    private Double blockChainAddr;
+    private String blockChainAddr;
 
     /**
      * 是否强制更新
      */
     private transient int force;
 
-    public Double getBlockChainAddr() {
+    public String getBlockChainAddr() {
         return blockChainAddr;
     }
 
-    public void setBlockChainAddr(Double blockChainAddr) {
+    public void setBlockChainAddr(String blockChainAddr) {
         this.blockChainAddr = blockChainAddr;
     }
 
