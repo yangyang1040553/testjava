@@ -71,6 +71,7 @@
             <if test="createBy != null">create_by,</if>
             <if test="updateTime != null">update_time,</if>
             <if test="updateBy != null">update_by,</if>
+            <if test="blockChainAddr != null">block_chain_addr,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -87,6 +88,7 @@
             <if test="createBy != null">#{createBy},</if>
             <if test="updateTime != null">#{updateTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
+            <if test="blockChainAddr != null">#{blockChainAddr},</if>
         </trim>
     </insert>
 
@@ -108,6 +110,7 @@
             <if test="createBy != null">create_by = #{createBy},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="blockChainAddr != null">block_chain_addr = #{blockChainAddr},</if>
         </trim>
         where id = #{id}
     </update>
