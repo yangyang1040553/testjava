@@ -74,6 +74,15 @@ public class GameStatisticalDayServiceImpl implements IGameStatisticalDayService
                     "WHERE\n" +
                     "\tid <= CURRENT_DATE \n";
         }
+
+        if (gameStatisticalDay.getType() == Global.TYPE_WEEK) {
+            sql ="SELECT   DATE_FORMAT(id,'" + regex + "') as time  ," +
+                    "game_id,sum(trx_bet_amount)as trx_bet_amount," +
+                    "sum(trx_award_amount)as trx_award_amount," +
+                    "sum(usdt_bet_amount)as usdt_bet_amount\n" +
+                    ",sum(usdt_award_amount)as usdt_award_amount from t_game_statistical_day  WHERE  id <= CURRENT_DATE ";
+        }
+
         if (gameStatisticalDay.getGameId() != null) {
             if (sql.contains("WHERE")) {
                 sql += (" and  game_id =" + gameStatisticalDay.getGameId());
