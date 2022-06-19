@@ -32,6 +32,9 @@ public class GameStatisticalPlayerDay extends BaseEntity {
     @Excel(name = "游戏id")
     private Long gameId;
 
+    @Excel(name = "押注位置")
+    private String betPosition;
+
     /**
      * 今日usdt押注金额
      */
@@ -82,7 +85,7 @@ public class GameStatisticalPlayerDay extends BaseEntity {
     @Excel(name = "统计时间", width = 30)
     private String time;
 
-    private String betPosition;
+
 
 
     public String getBetPosition() {

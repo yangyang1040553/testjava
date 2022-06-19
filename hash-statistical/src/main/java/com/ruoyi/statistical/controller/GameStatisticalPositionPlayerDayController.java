@@ -2,6 +2,8 @@ package com.ruoyi.statistical.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.statistical.domain.GameStatisticalPositionDay;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,6 +59,13 @@ public class GameStatisticalPositionPlayerDayController extends BaseController
     {
         startOrderBy();
         List<GameStatisticalPositionPlayerDay> list = gameStatisticalPositionPlayerDayService.selectGameStatisticalPositionPlayerDayList(gameStatisticalPositionPlayerDay);
+        for (GameStatisticalPositionPlayerDay statisticalDay : list) {
+            statisticalDay.setTrxAwardAmount(statisticalDay.getTrxAwardAmount().longValue());
+            statisticalDay.setTrxBetAmount(statisticalDay.getTrxBetAmount().longValue());
+
+            statisticalDay.setUsdtAwardAmount(statisticalDay.getUsdtAwardAmount().longValue());
+            statisticalDay.setUsdtBetAmount(statisticalDay.getUsdtBetAmount().longValue());
+        }
         ExcelUtil<GameStatisticalPositionPlayerDay> util = new ExcelUtil<GameStatisticalPositionPlayerDay>(GameStatisticalPositionPlayerDay.class);
         util.exportExcel(response, list, "游戏玩家押注位置日统计数据");
     }

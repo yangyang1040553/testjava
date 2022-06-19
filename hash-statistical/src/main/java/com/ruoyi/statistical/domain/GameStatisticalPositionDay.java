@@ -72,6 +72,7 @@ public class GameStatisticalPositionDay extends BaseEntity
         this.week = week;
     }
 
+    @Excel(name = "押注位置")
     private String betPosition;
 
     public String getBetPosition() {
