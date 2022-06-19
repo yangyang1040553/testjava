@@ -55,6 +55,7 @@ public class UserIpRegisterController extends BaseController
     @PostMapping("/export")
     public void export(HttpServletResponse response, UserIpRegister userIpRegister)
     {
+        startOrderBy();
         List<UserIpRegister> list = userIpRegisterService.selectUserIpRegisterList(userIpRegister);
         ExcelUtil<UserIpRegister> util = new ExcelUtil<UserIpRegister>(UserIpRegister.class);
         util.exportExcel(response, list, "用户ip注册次数数据");

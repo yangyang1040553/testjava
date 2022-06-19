@@ -55,6 +55,7 @@ public class GameStatisticalPlayerWinController extends BaseController
     @PostMapping("/export")
     public void export(HttpServletResponse response, GameStatisticalPlayerWin gameStatisticalPlayerWin)
     {
+        startOrderBy();
         List<GameStatisticalPlayerWin> list = gameStatisticalPlayerWinService.selectGameStatisticalPlayerWinList(gameStatisticalPlayerWin);
         ExcelUtil<GameStatisticalPlayerWin> util = new ExcelUtil<GameStatisticalPlayerWin>(GameStatisticalPlayerWin.class);
         util.exportExcel(response, list, "玩家输赢数据");

@@ -55,6 +55,7 @@ public class GameWithdrawRecordController extends BaseController
     @PostMapping("/export")
     public void export(HttpServletResponse response, GameWithdrawRecord gameWithdrawRecord)
     {
+        startOrderBy();
         List<GameWithdrawRecord> list = gameWithdrawRecordService.selectGameWithdrawRecordList(gameWithdrawRecord);
         ExcelUtil<GameWithdrawRecord> util = new ExcelUtil<GameWithdrawRecord>(GameWithdrawRecord.class);
         util.exportExcel(response, list, "佣金提现记录数据");

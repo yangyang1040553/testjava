@@ -55,6 +55,7 @@ public class GameStatisticalPositionPlayerDayController extends BaseController
     @PostMapping("/export")
     public void export(HttpServletResponse response, GameStatisticalPositionPlayerDay gameStatisticalPositionPlayerDay)
     {
+        startOrderBy();
         List<GameStatisticalPositionPlayerDay> list = gameStatisticalPositionPlayerDayService.selectGameStatisticalPositionPlayerDayList(gameStatisticalPositionPlayerDay);
         ExcelUtil<GameStatisticalPositionPlayerDay> util = new ExcelUtil<GameStatisticalPositionPlayerDay>(GameStatisticalPositionPlayerDay.class);
         util.exportExcel(response, list, "游戏玩家押注位置日统计数据");

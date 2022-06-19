@@ -55,6 +55,7 @@ public class StatisticalPromoteController extends BaseController
     @PostMapping("/export")
     public void export(HttpServletResponse response, StatisticalPromote statisticalPromote)
     {
+        startOrderBy();
         List<StatisticalPromote> list = statisticalPromoteService.selectStatisticalPromoteList(statisticalPromote);
         ExcelUtil<StatisticalPromote> util = new ExcelUtil<StatisticalPromote>(StatisticalPromote.class);
         util.exportExcel(response, list, "VIEW数据");

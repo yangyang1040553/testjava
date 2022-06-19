@@ -56,6 +56,7 @@ public class HashUserGlobalConfigController extends BaseController {
     @Log(title = "用户全局配置", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, HashUserGlobalConfig hashUserGlobalConfig) {
+        startOrderBy();
         List<HashUserGlobalConfig> list = hashUserGlobalConfigService.selectHashUserGlobalConfigList(hashUserGlobalConfig);
         ExcelUtil<HashUserGlobalConfig> util = new ExcelUtil<HashUserGlobalConfig>(HashUserGlobalConfig.class);
         util.exportExcel(response, list, "用户全局配置数据");

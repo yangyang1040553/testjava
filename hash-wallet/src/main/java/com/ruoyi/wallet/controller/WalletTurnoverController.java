@@ -55,6 +55,7 @@ public class WalletTurnoverController extends BaseController
     @PostMapping("/export")
     public void export(HttpServletResponse response, WalletTurnover walletTurnover)
     {
+        startOrderBy();
         List<WalletTurnover> list = walletTurnoverService.selectWalletTurnoverList(walletTurnover);
         ExcelUtil<WalletTurnover> util = new ExcelUtil<WalletTurnover>(WalletTurnover.class);
         util.exportExcel(response, list, "钱包流水记录数据");

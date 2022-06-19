@@ -55,6 +55,7 @@ public class UserFeedbackController extends BaseController
     @PostMapping("/export")
     public void export(HttpServletResponse response, UserFeedback userFeedback)
     {
+        startOrderBy();
         List<UserFeedback> list = userFeedbackService.selectUserFeedbackList(userFeedback);
         ExcelUtil<UserFeedback> util = new ExcelUtil<UserFeedback>(UserFeedback.class);
         util.exportExcel(response, list, "用户意见反馈数据");

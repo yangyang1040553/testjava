@@ -56,6 +56,7 @@ public class GameMenuController extends BaseController {
     @Log(title = "游戏菜单", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, GameMenu gameMenu) {
+        startOrderBy();
         List<GameMenu> list = gameMenuService.selectGameMenuList(gameMenu);
         ExcelUtil<GameMenu> util = new ExcelUtil<GameMenu>(GameMenu.class);
         util.exportExcel(response, list, "游戏菜单数据");

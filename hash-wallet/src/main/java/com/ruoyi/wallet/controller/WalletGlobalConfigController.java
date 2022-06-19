@@ -54,6 +54,7 @@ public class WalletGlobalConfigController extends BaseController {
     @Log(title = "钱包全局配置", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, WalletGlobalConfig walletGlobalConfig) {
+        startOrderBy();
         List<WalletGlobalConfig> list = walletGlobalConfigService.selectWalletGlobalConfigList(walletGlobalConfig);
         ExcelUtil<WalletGlobalConfig> util = new ExcelUtil<WalletGlobalConfig>(WalletGlobalConfig.class);
         util.exportExcel(response, list, "钱包全局配置数据");

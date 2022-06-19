@@ -65,6 +65,7 @@ public class GameStatisticalPlayerDayController extends BaseController {
     @Log(title = "游戏玩家日统计", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, GameStatisticalPlayerDay gameStatisticalPlayerDay) {
+        startOrderBy();
         List<GameStatisticalPlayerDay> list = gameStatisticalPlayerDayService.selectGameStatisticalPlayerDayList(gameStatisticalPlayerDay);
         ExcelUtil<GameStatisticalPlayerDay> util = new ExcelUtil<GameStatisticalPlayerDay>(GameStatisticalPlayerDay.class);
         util.exportExcel(response, list, "游戏玩家日统计数据");

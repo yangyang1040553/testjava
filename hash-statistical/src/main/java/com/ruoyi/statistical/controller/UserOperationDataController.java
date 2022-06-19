@@ -53,6 +53,7 @@ public class UserOperationDataController extends BaseController {
     @Log(title = "玩家运营数据", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, UserOperationData userOperationData) {
+        startOrderBy();
         List<UserOperationData> list = userOperationDataService.selectUserOperationDataList(userOperationData);
         ExcelUtil<UserOperationData> util = new ExcelUtil<UserOperationData>(UserOperationData.class);
         util.exportExcel(response, list, "玩家运营数据数据");

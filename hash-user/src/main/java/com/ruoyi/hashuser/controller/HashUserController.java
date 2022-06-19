@@ -56,6 +56,7 @@ public class HashUserController extends BaseController {
     @Log(title = "用户", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, HashUser hashUser) {
+        startOrderBy();
         List<HashUser> list = hashUserService.selectHashUserList(hashUser);
         ExcelUtil<HashUser> util = new ExcelUtil<HashUser>(HashUser.class);
         util.exportExcel(response, list, "用户数据");

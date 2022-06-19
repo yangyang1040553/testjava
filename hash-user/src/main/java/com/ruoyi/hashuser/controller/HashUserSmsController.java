@@ -54,6 +54,7 @@ public class HashUserSmsController extends BaseController
     @PostMapping("/export")
     public void export(HttpServletResponse response, HashUserSms hashUserSms)
     {
+        startOrderBy();
         List<HashUserSms> list = hashUserSmsService.selectHashUserSmsList(hashUserSms);
         ExcelUtil<HashUserSms> util = new ExcelUtil<HashUserSms>(HashUserSms.class);
         util.exportExcel(response, list, "用户短信功能数据");

@@ -54,6 +54,7 @@ public class GameConfigController extends BaseController {
     @Log(title = "游戏配置 ", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, GameConfig gameConfig) {
+        startOrderBy();
         List<GameConfig> list = gameConfigService.selectGameConfigList(gameConfig);
         ExcelUtil<GameConfig> util = new ExcelUtil<GameConfig>(GameConfig.class);
         util.exportExcel(response, list, "游戏配置数据");
