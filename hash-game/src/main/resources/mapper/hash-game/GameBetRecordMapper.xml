@@ -25,6 +25,8 @@
         <result property="createTime" column="create_time"/>
         <result property="finishTime" column="finish_time"/>
         <result property="incomeAmount" column="income_amount"/>
+        <result property="awardCallback" column="award_callback"/>
+        <result property="note" column="note"/>
     </resultMap>
 
     <sql id="selectGameBetRecordVo">
