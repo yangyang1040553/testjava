@@ -1,5 +1,6 @@
 package com.ruoyi.statistical.domain;
 
+import com.ruoyi.common.constant.Global;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
@@ -29,11 +30,11 @@ public class GameStatisticalPromoteIncome extends BaseEntity
 
     /** usdt收益金额 */
     @Excel(name = "usdt收益金额")
-    private Long usdtIncomeAmount;
+    private Double usdtIncomeAmount;
 
     /** trx收益金额 */
     @Excel(name = "trx收益金额")
-    private Long trxIncomeAmount;
+    private Double trxIncomeAmount;
 
     public void setId(String id) 
     {
@@ -62,23 +63,23 @@ public class GameStatisticalPromoteIncome extends BaseEntity
     {
         return invitationCode;
     }
-    public void setUsdtIncomeAmount(Long usdtIncomeAmount) 
+    public void setUsdtIncomeAmount(Double usdtIncomeAmount)
     {
         this.usdtIncomeAmount = usdtIncomeAmount;
     }
 
-    public Long getUsdtIncomeAmount() 
+    public Double getUsdtIncomeAmount()
     {
-        return usdtIncomeAmount;
+        return Global.getWalletAmountToReal(usdtIncomeAmount);
     }
-    public void setTrxIncomeAmount(Long trxIncomeAmount) 
+    public void setTrxIncomeAmount(Double trxIncomeAmount)
     {
         this.trxIncomeAmount = trxIncomeAmount;
     }
 
-    public Long getTrxIncomeAmount() 
+    public Double getTrxIncomeAmount()
     {
-        return trxIncomeAmount;
+        return Global.getWalletAmountToReal(trxIncomeAmount);
     }
 
     @Override

@@ -60,11 +60,11 @@ public class GameStatisticalPositionPlayerDayController extends BaseController
         startOrderBy();
         List<GameStatisticalPositionPlayerDay> list = gameStatisticalPositionPlayerDayService.selectGameStatisticalPositionPlayerDayList(gameStatisticalPositionPlayerDay);
         for (GameStatisticalPositionPlayerDay statisticalDay : list) {
-            statisticalDay.setTrxAwardAmount(statisticalDay.getTrxAwardAmount().longValue());
-            statisticalDay.setTrxBetAmount(statisticalDay.getTrxBetAmount().longValue());
+            statisticalDay.setTrxAwardAmount(statisticalDay.getTrxAwardAmount());
+            statisticalDay.setTrxBetAmount(statisticalDay.getTrxBetAmount());
 
-            statisticalDay.setUsdtAwardAmount(statisticalDay.getUsdtAwardAmount().longValue());
-            statisticalDay.setUsdtBetAmount(statisticalDay.getUsdtBetAmount().longValue());
+            statisticalDay.setUsdtAwardAmount(statisticalDay.getUsdtAwardAmount());
+            statisticalDay.setUsdtBetAmount(statisticalDay.getUsdtBetAmount());
         }
         ExcelUtil<GameStatisticalPositionPlayerDay> util = new ExcelUtil<GameStatisticalPositionPlayerDay>(GameStatisticalPositionPlayerDay.class);
         util.exportExcel(response, list, "游戏玩家押注位置日统计数据");

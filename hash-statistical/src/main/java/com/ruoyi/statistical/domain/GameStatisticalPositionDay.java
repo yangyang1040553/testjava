@@ -8,12 +8,11 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 游戏押注位置日统计对象 t_game_statistical_position_day
- * 
+ *
  * @author xxk
  * @date 2022-05-27
  */
-public class GameStatisticalPositionDay extends BaseEntity
-{
+public class GameStatisticalPositionDay extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /**

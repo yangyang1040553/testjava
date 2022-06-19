@@ -43,25 +43,25 @@ public class GameStatisticalPositionPlayerDay extends BaseEntity {
      * 今天usdt总押注金额
      */
     @Excel(name = "今天usdt总押注金额")
-    private Long usdtBetAmount;
+    private Double usdtBetAmount;
 
     /**
      * 今天usdt总中奖金额
      */
     @Excel(name = "今天usdt总中奖金额")
-    private Long usdtAwardAmount;
+    private Double usdtAwardAmount;
 
     /**
      * 今日trx押注金额
      */
     @Excel(name = "今日trx押注金额")
-    private Long trxBetAmount;
+    private Double trxBetAmount;
 
     /**
      * 今日trx中奖金额
      */
     @Excel(name = "今日trx中奖金额")
-    private Long trxAwardAmount;
+    private Double trxAwardAmount;
 
     /**
      * 日周月  1、2、3
@@ -144,7 +144,7 @@ public class GameStatisticalPositionPlayerDay extends BaseEntity {
         return betPosition;
     }
 
-    public void setUsdtBetAmount(Long usdtBetAmount) {
+    public void setUsdtBetAmount(Double usdtBetAmount) {
         this.usdtBetAmount = usdtBetAmount;
     }
 
@@ -152,7 +152,7 @@ public class GameStatisticalPositionPlayerDay extends BaseEntity {
         return Global.getWalletAmountToReal(usdtBetAmount);
     }
 
-    public void setUsdtAwardAmount(Long usdtAwardAmount) {
+    public void setUsdtAwardAmount(Double usdtAwardAmount) {
         this.usdtAwardAmount = usdtAwardAmount;
     }
 
@@ -160,7 +160,7 @@ public class GameStatisticalPositionPlayerDay extends BaseEntity {
         return Global.getWalletAmountToReal(usdtAwardAmount);
     }
 
-    public void setTrxBetAmount(Long trxBetAmount) {
+    public void setTrxBetAmount(Double trxBetAmount) {
         this.trxBetAmount = trxBetAmount;
     }
 
@@ -168,7 +168,7 @@ public class GameStatisticalPositionPlayerDay extends BaseEntity {
         return Global.getWalletAmountToReal(trxBetAmount);
     }
 
-    public void setTrxAwardAmount(Long trxAwardAmount) {
+    public void setTrxAwardAmount(Double trxAwardAmount) {
         this.trxAwardAmount = trxAwardAmount;
     }
 
