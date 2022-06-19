@@ -123,6 +123,30 @@ public class GameBetRecord extends BaseEntity {
     private String gameCollect;
 
 
+    @Excel(name = "奖金回调状态")
+    private String awardCallback;
+
+    @Excel(name = "说明")
+    private String note;
+
+
+
+    public String getAwardCallback() {
+        return awardCallback;
+    }
+
+    public void setAwardCallback(String awardCallback) {
+        this.awardCallback = awardCallback;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
     private String sort;
     private String prop;
 

@@ -47,7 +47,9 @@
                game_collect,
                create_time,
                finish_time,
-               income_amount
+               income_amount,
+               award_callback,
+               note
         from t_game_bet_record
     </sql>
 
