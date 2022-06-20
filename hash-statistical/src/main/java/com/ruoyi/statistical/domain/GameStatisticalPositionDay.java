@@ -8,12 +8,11 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 游戏押注位置日统计对象 t_game_statistical_position_day
- * 
+ *
  * @author xxk
  * @date 2022-05-27
  */
-public class GameStatisticalPositionDay extends BaseEntity
-{
+public class GameStatisticalPositionDay extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /**
@@ -72,6 +71,7 @@ public class GameStatisticalPositionDay extends BaseEntity
         this.week = week;
     }
 
+    @Excel(name = "押注位置")
     private String betPosition;
 
     public String getBetPosition() {

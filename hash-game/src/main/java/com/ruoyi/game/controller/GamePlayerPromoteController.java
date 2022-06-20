@@ -55,6 +55,7 @@ public class GamePlayerPromoteController extends BaseController {
     @Log(title = "推广记录", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, GamePlayerPromote gamePlayerPromote) throws CloneNotSupportedException {
+        startOrderBy();
         List<GamePlayerPromote> list = gamePlayerPromoteService.selectGamePlayerPromoteList(gamePlayerPromote);
         ExcelUtil<GamePlayerPromote> util = new ExcelUtil<GamePlayerPromote>(GamePlayerPromote.class);
         util.exportExcel(response,list, "推广记录数据");

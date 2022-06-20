@@ -67,6 +67,7 @@ public class WalletWithdrawOrderController extends BaseController {
     @Log(title = "提现审核", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, WalletWithdrawOrder walletWithdrawOrder) {
+        startOrderBy();
         List<WalletWithdrawOrder> list = walletWithdrawOrderService.selectWalletWithdrawOrderList(walletWithdrawOrder);
         ExcelUtil<WalletWithdrawOrder> util = new ExcelUtil<WalletWithdrawOrder>(WalletWithdrawOrder.class);
         util.exportExcel(response, list, "提现审核数据");

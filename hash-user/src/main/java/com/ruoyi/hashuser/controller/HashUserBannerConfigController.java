@@ -57,6 +57,7 @@ public class HashUserBannerConfigController extends BaseController {
     @Log(title = "用户首页的banner列", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, HashUserBannerConfig hashUserBannerConfig) {
+        startOrderBy();
         List<HashUserBannerConfig> list = hashUserBannerConfigService.selectHashUserBannerConfigList(hashUserBannerConfig);
         ExcelUtil<HashUserBannerConfig> util = new ExcelUtil<HashUserBannerConfig>(HashUserBannerConfig.class);
         util.exportExcel(response, list, "用户首页的banner列数据");

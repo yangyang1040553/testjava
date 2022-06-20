@@ -55,6 +55,7 @@ public class WalletRechargeOrderController extends BaseController
     @PostMapping("/export")
     public void export(HttpServletResponse response, WalletRechargeOrder walletRechargeOrder)
     {
+        startOrderBy();
         List<WalletRechargeOrder> list = walletRechargeOrderService.selectWalletRechargeOrderList(walletRechargeOrder);
         ExcelUtil<WalletRechargeOrder> util = new ExcelUtil<WalletRechargeOrder>(WalletRechargeOrder.class);
         util.exportExcel(response, list, "充值数据");

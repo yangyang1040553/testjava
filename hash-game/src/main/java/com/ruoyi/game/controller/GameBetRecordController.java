@@ -60,6 +60,7 @@ public class GameBetRecordController extends BaseController
     @PostMapping("/export")
     public void export(HttpServletResponse response, GameBetRecord gameBetRecord)
     {
+        startOrderBy();
         List<GameBetRecord> list = gameBetRecordService.selectGameBetRecordList(gameBetRecord);
         ExcelUtil<GameBetRecord> util = new ExcelUtil<GameBetRecord>(GameBetRecord.class);
         util.exportExcel(response, list, "游戏投注记录数据");

@@ -59,6 +59,7 @@ public class HashUserNoticeController extends BaseController
     @PostMapping("/export")
     public void export(HttpServletResponse response, HashUserNotice hashUserNotice)
     {
+        startOrderBy();
         List<HashUserNotice> list = hashUserNoticeService.selectHashUserNoticeList(hashUserNotice);
         ExcelUtil<HashUserNotice> util = new ExcelUtil<HashUserNotice>(HashUserNotice.class);
         util.exportExcel(response, list, "用户公告数据");

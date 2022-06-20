@@ -55,6 +55,7 @@ public class UserRegionRegisterController extends BaseController
     @PostMapping("/export")
     public void export(HttpServletResponse response, UserRegionRegister userRegionRegister)
     {
+        startOrderBy();
         List<UserRegionRegister> list = userRegionRegisterService.selectUserRegionRegisterList(userRegionRegister);
         ExcelUtil<UserRegionRegister> util = new ExcelUtil<UserRegionRegister>(UserRegionRegister.class);
         util.exportExcel(response, list, "用户区域注册次数数据");

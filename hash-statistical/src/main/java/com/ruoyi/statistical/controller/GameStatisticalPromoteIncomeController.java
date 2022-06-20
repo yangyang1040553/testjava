@@ -55,6 +55,7 @@ public class GameStatisticalPromoteIncomeController extends BaseController
     @PostMapping("/export")
     public void export(HttpServletResponse response, GameStatisticalPromoteIncome gameStatisticalPromoteIncome)
     {
+        startOrderBy();
         List<GameStatisticalPromoteIncome> list = gameStatisticalPromoteIncomeService.selectGameStatisticalPromoteIncomeList(gameStatisticalPromoteIncome);
         ExcelUtil<GameStatisticalPromoteIncome> util = new ExcelUtil<GameStatisticalPromoteIncome>(GameStatisticalPromoteIncome.class);
         util.exportExcel(response, list, "代理每日收益金额数据");

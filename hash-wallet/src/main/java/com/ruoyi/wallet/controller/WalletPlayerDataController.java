@@ -68,6 +68,7 @@ public class WalletPlayerDataController extends BaseController {
     @Log(title = "用户钱包", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, WalletPlayerData walletPlayerData) {
+        startOrderBy();
         List<WalletPlayerData> list = walletPlayerDataService.selectWalletPlayerDataList(walletPlayerData);
         ExcelUtil<WalletPlayerData> util = new ExcelUtil<WalletPlayerData>(WalletPlayerData.class);
         util.exportExcel(response, list, "用户钱包数据");

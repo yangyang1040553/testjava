@@ -80,6 +80,27 @@ public class WalletWithdrawOrder extends BaseEntity {
     @Excel(name = "审核人")
     private String checkPerson;
 
+    @Excel(name = "到账金额")
+    private Long payAmount;
+    @Excel(name = "说明")
+    private String note;
+
+    public Long getPayAmount() {
+        return payAmount;
+    }
+
+    public void setPayAmount(Long payAmount) {
+        this.payAmount = payAmount;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
@@ -132,8 +153,8 @@ public class WalletWithdrawOrder extends BaseEntity {
         this.amount = amount;
     }
 
-    public Double getAmount() {
-        return Global.getWalletAmountToReal(amount);
+    public Long getAmount() {
+        return amount;
     }
 
     public void setMinerAmount(Long minerAmount) {

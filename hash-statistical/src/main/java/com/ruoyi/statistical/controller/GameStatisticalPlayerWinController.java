@@ -2,6 +2,8 @@ package com.ruoyi.statistical.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.statistical.domain.GameStatisticalPlayerDay;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,7 +57,17 @@ public class GameStatisticalPlayerWinController extends BaseController
     @PostMapping("/export")
     public void export(HttpServletResponse response, GameStatisticalPlayerWin gameStatisticalPlayerWin)
     {
+        startOrderBy();
         List<GameStatisticalPlayerWin> list = gameStatisticalPlayerWinService.selectGameStatisticalPlayerWinList(gameStatisticalPlayerWin);
+        for (GameStatisticalPlayerWin statisticalPlayerWin : list) {
+            statisticalPlayerWin.setTrxBetAmount(statisticalPlayerWin.getTrxBetAmount().longValue());
+            statisticalPlayerWin.setTrxAwardAmount(statisticalPlayerWin.getTrxAwardAmount().longValue());
+            statisticalPlayerWin.setTrxWinAmount(statisticalPlayerWin.getTrxWinAmount().longValue());
+
+            statisticalPlayerWin.setUsdtBetAmount(statisticalPlayerWin.getUsdtBetAmount().longValue());
+            statisticalPlayerWin.setUsdtAwardAmount(statisticalPlayerWin.getUsdtAwardAmount().longValue());
+            statisticalPlayerWin.setUsdtWinAmount(statisticalPlayerWin.getUsdtWinAmount().longValue());
+        }
         ExcelUtil<GameStatisticalPlayerWin> util = new ExcelUtil<GameStatisticalPlayerWin>(GameStatisticalPlayerWin.class);
         util.exportExcel(response, list, "玩家输赢数据");
     }

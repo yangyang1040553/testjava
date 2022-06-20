@@ -55,6 +55,7 @@ public class KeepController extends BaseController
     @PostMapping("/export")
     public void export(HttpServletResponse response, Keep keep)
     {
+        startOrderBy();
         List<Keep> list = keepService.selectKeepList(keep);
         ExcelUtil<Keep> util = new ExcelUtil<Keep>(Keep.class);
         util.exportExcel(response, list, "留存分析数据");

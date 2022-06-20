@@ -32,29 +32,32 @@ public class GameStatisticalPlayerDay extends BaseEntity {
     @Excel(name = "游戏id")
     private Long gameId;
 
+    @Excel(name = "押注位置")
+    private String betPosition;
+
     /**
      * 今日usdt押注金额
      */
     @Excel(name = "今日usdt押注金额")
-    private Long usdtBetAmount;
+    private Double usdtBetAmount;
 
     /**
      * 今日usdt中奖金额
      */
     @Excel(name = "今日usdt中奖金额")
-    private Long usdtAwardAmount;
+    private Double usdtAwardAmount;
 
     /**
      * 今日trx押注金额
      */
     @Excel(name = "今日trx押注金额")
-    private Long trxBetAmount;
+    private Double trxBetAmount;
 
     /**
      * 今日trx中奖金额
      */
     @Excel(name = "今日trx中奖金额")
-    private Long trxAwardAmount;
+    private Double trxAwardAmount;
 
 
     /**
@@ -82,7 +85,7 @@ public class GameStatisticalPlayerDay extends BaseEntity {
     @Excel(name = "统计时间", width = 30)
     private String time;
 
-    private String betPosition;
+
 
 
     public String getBetPosition() {
@@ -141,7 +144,7 @@ public class GameStatisticalPlayerDay extends BaseEntity {
         return gameId;
     }
 
-    public void setUsdtBetAmount(Long usdtBetAmount) {
+    public void setUsdtBetAmount(Double usdtBetAmount) {
         this.usdtBetAmount = usdtBetAmount;
     }
 
@@ -149,7 +152,7 @@ public class GameStatisticalPlayerDay extends BaseEntity {
         return Global.getWalletAmountToReal(usdtBetAmount);
     }
 
-    public void setUsdtAwardAmount(Long usdtAwardAmount) {
+    public void setUsdtAwardAmount(Double usdtAwardAmount) {
         this.usdtAwardAmount = usdtAwardAmount;
     }
 
@@ -157,7 +160,7 @@ public class GameStatisticalPlayerDay extends BaseEntity {
         return Global.getWalletAmountToReal(usdtAwardAmount);
     }
 
-    public void setTrxBetAmount(Long trxBetAmount) {
+    public void setTrxBetAmount(Double trxBetAmount) {
         this.trxBetAmount = trxBetAmount;
     }
 
@@ -165,7 +168,7 @@ public class GameStatisticalPlayerDay extends BaseEntity {
         return Global.getWalletAmountToReal(trxBetAmount);
     }
 
-    public void setTrxAwardAmount(Long trxAwardAmount) {
+    public void setTrxAwardAmount(Double trxAwardAmount) {
         this.trxAwardAmount = trxAwardAmount;
     }
 

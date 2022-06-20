@@ -55,6 +55,7 @@ public class GamePlayerBrokerageRecordController extends BaseController
     @PostMapping("/export")
     public void export(HttpServletResponse response, GamePlayerBrokerageRecord gamePlayerBrokerageRecord)
     {
+        startOrderBy();
         List<GamePlayerBrokerageRecord> list = gamePlayerBrokerageRecordService.selectGamePlayerBrokerageRecordList(gamePlayerBrokerageRecord);
         ExcelUtil<GamePlayerBrokerageRecord> util = new ExcelUtil<GamePlayerBrokerageRecord>(GamePlayerBrokerageRecord.class);
         util.exportExcel(response, list, "玩家返佣记录数据");
