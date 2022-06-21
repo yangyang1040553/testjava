@@ -6,11 +6,9 @@ spring:
         druid:
             # 主库数据源
             master:
-#                url: jdbc:mysql://18.136.193.171:3306/hash_project?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
-                url: jdbc:mysql://rm-3nstsd66buh42064r8o.mysql.rds.aliyuncs.com:3306/hash_project?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+                url: jdbc:mysql://18.136.193.171:3306/hash_project?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
                 username: root
-                password: MeutUPpaXi0iBGKcZ5Du
-#                password:
+                password: MySQL@Aws!0524
             # 从库数据源
             slave:
                 # 从数据源开关/默认关闭
@@ -61,4 +59,4 @@ spring:
 
 #请求
 service:
-    wallet-addr: https://hash-api.starops.work/
+    wallet-addr: http://18.142.223.68:8099

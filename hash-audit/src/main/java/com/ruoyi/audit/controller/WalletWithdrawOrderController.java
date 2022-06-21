@@ -116,11 +116,12 @@ public class WalletWithdrawOrderController extends BaseController {
             if (walletWithdrawOrder.getStatus() == 0) {
                 Map<String, Object> param = new HashMap<>();
                 param.put("orderId", walletWithdrawOrder.getId());
+                param.put("isPass", true);
 
                 final String hash = Md5Utils.hash(Global.USER_SECRET_KEY + walletWithdrawOrder.getId());
                 param.put("sign", hash);
 
-                final String s = HttpUtils.sendPost(serviceWalletAddr + "/wallet/back/withdrawPass", param);
+                final String s = HttpUtils.sendPost(serviceWalletAddr + "/wallet/back/withdrawResult", param);
                 if (StringUtils.isBlank(s)) {
                     return AjaxResult.error();
                 }
@@ -135,6 +136,24 @@ public class WalletWithdrawOrderController extends BaseController {
             }
 
 
+        } else if (walletWithdrawOrder.getCheckStatus() == 2) {
+            //提现拒绝
+            Map<String, Object> param = new HashMap<>();
+            param.put("orderId", walletWithdrawOrder.getId());
+            param.put("isPass", false);
+
+            final String hash = Md5Utils.hash(Global.USER_SECRET_KEY + walletWithdrawOrder.getId());
+            param.put("sign", hash);
+
+            final String s = HttpUtils.sendPost(serviceWalletAddr + "/wallet/back/withdrawResult", param);
+            if (StringUtils.isBlank(s)) {
+                return AjaxResult.error();
+            }
+            final JSONObject jsonObject = JSON.parseObject(s);
+
+            if (!jsonObject.getString("code").equals("200")) {
+                return AjaxResult.error(jsonObject.getString("msg"));
+            }
         }
 
 
