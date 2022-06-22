@@ -77,6 +77,18 @@ public class HashUserGlobalConfig extends BaseEntity {
     @Excel(name = "区块链地址")
     private String blockChainAddr;
 
+
+    @Excel(name = "是否官方客服地址")
+    private Integer isSelfOnline;
+
+    public Integer getIsSelfOnline() {
+        return isSelfOnline;
+    }
+
+    public void setIsSelfOnline(Integer isSelfOnline) {
+        this.isSelfOnline = isSelfOnline;
+    }
+
     /**
      * 是否强制更新
      */
