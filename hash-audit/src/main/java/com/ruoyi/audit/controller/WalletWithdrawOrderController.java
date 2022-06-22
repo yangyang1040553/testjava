@@ -111,7 +111,7 @@ public class WalletWithdrawOrderController extends BaseController {
         }
 
         //判断状态是否等于3
-        if (walletWithdrawOrder.getCheckStatus() == 3) {
+        if ("3".equals(walletWithdrawOrder.getCheckStatus())) {
 
             if (walletWithdrawOrder.getStatus() == 0) {
                 Map<String, Object> param = new HashMap<>();
@@ -136,7 +136,7 @@ public class WalletWithdrawOrderController extends BaseController {
             }
 
 
-        } else if (walletWithdrawOrder.getCheckStatus() == 2) {
+        } else if ("2".equals(walletWithdrawOrder.getCheckStatus())) {
             //提现拒绝
             Map<String, Object> param = new HashMap<>();
             param.put("orderId", walletWithdrawOrder.getId());

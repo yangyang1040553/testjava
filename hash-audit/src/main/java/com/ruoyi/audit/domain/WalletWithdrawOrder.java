@@ -72,7 +72,7 @@ public class WalletWithdrawOrder extends BaseEntity {
      * 审核状态 0：待审核 1：审核中 2：审核拒绝3：审核完成
      */
     @Excel(name = "审核状态 0：待审核 1：审核中 2：审核拒绝3：审核完成")
-    private Long checkStatus;
+    private String checkStatus;
 
     /**
      * 审核人
@@ -84,6 +84,8 @@ public class WalletWithdrawOrder extends BaseEntity {
     private Long payAmount;
     @Excel(name = "说明")
     private String note;
+
+
 
     public Long getPayAmount() {
         return payAmount;
@@ -173,11 +175,11 @@ public class WalletWithdrawOrder extends BaseEntity {
         return status;
     }
 
-    public void setCheckStatus(Long checkStatus) {
+    public void setCheckStatus(String checkStatus) {
         this.checkStatus = checkStatus;
     }
 
-    public Long getCheckStatus() {
+    public String getCheckStatus() {
         return checkStatus;
     }
 

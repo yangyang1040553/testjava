@@ -23,7 +23,7 @@ public class WalletWithdrawOrderServiceImpl implements IWalletWithdrawOrderServi
     //订单已经被领取 不得再次操作
     public static final int ORDER_HAD_CHECK = -200;
     //领取状态
-    public static final int CHECK_STATUS = 1;
+    public static final String CHECK_STATUS = "1";
 
     /**
      * 查询提现审核
@@ -68,7 +68,7 @@ public class WalletWithdrawOrderServiceImpl implements IWalletWithdrawOrderServi
     @Override
     public int updateWalletWithdrawOrder(WalletWithdrawOrder walletWithdrawOrder) {
         WalletWithdrawOrder order = walletWithdrawOrderMapper.selectWalletWithdrawOrderById(walletWithdrawOrder.getId());
-        if (order.getCheckPerson() != null && walletWithdrawOrder.getCheckStatus() == CHECK_STATUS) {
+        if (order.getCheckPerson() != null && CHECK_STATUS.equals(walletWithdrawOrder.getCheckStatus())) {
             return ORDER_HAD_CHECK;
         }
         walletWithdrawOrder.setUpdateTime(DateUtils.getNowDate());
