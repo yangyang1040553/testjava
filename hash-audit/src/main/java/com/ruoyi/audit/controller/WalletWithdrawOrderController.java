@@ -154,6 +154,8 @@ public class WalletWithdrawOrderController extends BaseController {
             if (!jsonObject.getString("code").equals("200")) {
                 return AjaxResult.error(jsonObject.getString("msg"));
             }
+            //设置状态为拒绝
+            walletWithdrawOrder.setStatus(2L);
         }
 
 
