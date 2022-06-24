@@ -2,6 +2,8 @@ package com.ruoyi.wallet.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.wallet.domain.WalletTransactionOrder;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,6 +46,17 @@ public class WalletRechargeOrderController extends BaseController
         startPage();
         startOrderBy();
         List<WalletRechargeOrder> list = walletRechargeOrderService.selectWalletRechargeOrderList(walletRechargeOrder);
+        return getDataTable(list);
+    }
+
+
+    /**
+     * 查询当日
+     */
+//    @PreAuthorize("@ss.hasPermi('hash-wallet:walletOrder:list')")
+    @GetMapping("/getCurrDay")
+    public TableDataInfo getCurrDay() {
+        List<WalletRechargeOrder> list = walletRechargeOrderService.selectCurrDay();
         return getDataTable(list);
     }
 

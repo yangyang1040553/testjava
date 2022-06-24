@@ -96,4 +96,9 @@ public class WalletWithdrawOrderServiceImpl implements IWalletWithdrawOrderServi
     public int deleteWalletWithdrawOrderById(String id) {
         return walletWithdrawOrderMapper.deleteWalletWithdrawOrderById(id);
     }
+
+    @Override
+    public List<WalletWithdrawOrder> selectCurrDay() {
+        return walletWithdrawOrderMapper.selectCurrDay();
+    }
 }

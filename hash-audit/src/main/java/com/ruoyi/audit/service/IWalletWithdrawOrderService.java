@@ -58,4 +58,6 @@ public interface IWalletWithdrawOrderService
      * @return 结果
      */
     public int deleteWalletWithdrawOrderById(String id);
+
+    List<WalletWithdrawOrder> selectCurrDay();
 }

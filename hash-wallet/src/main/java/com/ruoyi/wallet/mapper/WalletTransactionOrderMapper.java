@@ -27,6 +27,9 @@ public interface WalletTransactionOrderMapper
      */
     public List<WalletTransactionOrder> selectWalletTransactionOrderList(WalletTransactionOrder walletTransactionOrder);
 
+
+    public List<WalletTransactionOrder> selectCurrDay();
+
     /**
      * 新增转换订单
      * 

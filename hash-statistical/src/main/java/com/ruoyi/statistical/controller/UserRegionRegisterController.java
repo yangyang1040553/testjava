@@ -2,6 +2,8 @@ package com.ruoyi.statistical.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.statistical.domain.GameStatisticalDay;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,6 +59,7 @@ public class UserRegionRegisterController extends BaseController
     {
         startOrderBy();
         List<UserRegionRegister> list = userRegionRegisterService.selectUserRegionRegisterList(userRegionRegister);
+
         ExcelUtil<UserRegionRegister> util = new ExcelUtil<UserRegionRegister>(UserRegionRegister.class);
         util.exportExcel(response, list, "用户区域注册次数数据");
     }
