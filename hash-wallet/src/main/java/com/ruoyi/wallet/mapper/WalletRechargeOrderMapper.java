@@ -2,6 +2,7 @@ package com.ruoyi.wallet.mapper;
 
 import java.util.List;
 import com.ruoyi.wallet.domain.WalletRechargeOrder;
+import com.ruoyi.wallet.domain.WalletTransactionOrder;
 
 /**
  * 充值Mapper接口
@@ -58,4 +59,7 @@ public interface WalletRechargeOrderMapper
      * @return 结果
      */
     public int deleteWalletRechargeOrderByIds(String[] ids);
+
+
+    public List<WalletRechargeOrder> selectCurrDay();
 }

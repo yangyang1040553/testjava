@@ -58,4 +58,7 @@ public interface IWalletRechargeOrderService
      * @return 结果
      */
     public int deleteWalletRechargeOrderById(String id);
+
+    List<WalletRechargeOrder> selectCurrDay();
+
 }

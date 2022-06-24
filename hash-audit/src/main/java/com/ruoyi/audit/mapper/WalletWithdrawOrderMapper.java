@@ -27,6 +27,9 @@ public interface WalletWithdrawOrderMapper
      */
     public List<WalletWithdrawOrder> selectWalletWithdrawOrderList(WalletWithdrawOrder walletWithdrawOrder);
 
+
+    public List<WalletWithdrawOrder> selectCurrDay();
+
     /**
      * 新增提现审核
      * 

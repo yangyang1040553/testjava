@@ -61,6 +61,16 @@ public class WalletWithdrawOrderController extends BaseController {
     }
 
     /**
+     * 查询当日
+     */
+//    @PreAuthorize("@ss.hasPermi('hash-wallet:walletOrder:list')")
+    @GetMapping("/getCurrDay")
+    public TableDataInfo getCurrDay() {
+        List<WalletWithdrawOrder> list = walletWithdrawOrderService.selectCurrDay();
+        return getDataTable(list);
+    }
+
+    /**
      * 导出提现审核列表
      */
     @PreAuthorize("@ss.hasPermi('hash-audit:auditWidthdrawOrder:export')")

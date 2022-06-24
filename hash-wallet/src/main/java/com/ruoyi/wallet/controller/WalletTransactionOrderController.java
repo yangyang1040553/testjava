@@ -24,14 +24,13 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 转换订单Controller
- * 
+ *
  * @author xxk
  * @date 2022-05-26
  */
 @RestController
 @RequestMapping("/hash-wallet/walletOrder")
-public class WalletTransactionOrderController extends BaseController
-{
+public class WalletTransactionOrderController extends BaseController {
     @Autowired
     private IWalletTransactionOrderService walletTransactionOrderService;
 
@@ -40,11 +39,21 @@ public class WalletTransactionOrderController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-wallet:walletOrder:list')")
     @GetMapping("/list")
-    public TableDataInfo list(WalletTransactionOrder walletTransactionOrder)
-    {
+    public TableDataInfo list(WalletTransactionOrder walletTransactionOrder) {
         startPage();
         startOrderBy();
         List<WalletTransactionOrder> list = walletTransactionOrderService.selectWalletTransactionOrderList(walletTransactionOrder);
+        return getDataTable(list);
+    }
+
+
+    /**
+     * 查询当日
+     */
+//    @PreAuthorize("@ss.hasPermi('hash-wallet:walletOrder:list')")
+    @GetMapping("/getCurrDay")
+    public TableDataInfo getCurrDay() {
+        List<WalletTransactionOrder> list = walletTransactionOrderService.selectCurrDay();
         return getDataTable(list);
     }
 
@@ -54,8 +63,7 @@ public class WalletTransactionOrderController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-wallet:walletOrder:export')")
     @Log(title = "转换订单", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, WalletTransactionOrder walletTransactionOrder)
-    {
+    public void export(HttpServletResponse response, WalletTransactionOrder walletTransactionOrder) {
         startOrderBy();
         List<WalletTransactionOrder> list = walletTransactionOrderService.selectWalletTransactionOrderList(walletTransactionOrder);
         ExcelUtil<WalletTransactionOrder> util = new ExcelUtil<WalletTransactionOrder>(WalletTransactionOrder.class);
@@ -67,8 +75,7 @@ public class WalletTransactionOrderController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-wallet:walletOrder:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") String id)
-    {
+    public AjaxResult getInfo(@PathVariable("id") String id) {
         return AjaxResult.success(walletTransactionOrderService.selectWalletTransactionOrderById(id));
     }
 
@@ -78,8 +85,7 @@ public class WalletTransactionOrderController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-wallet:walletOrder:add')")
     @Log(title = "转换订单", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody WalletTransactionOrder walletTransactionOrder)
-    {
+    public AjaxResult add(@RequestBody WalletTransactionOrder walletTransactionOrder) {
         return toAjax(walletTransactionOrderService.insertWalletTransactionOrder(walletTransactionOrder));
     }
 
@@ -89,8 +95,7 @@ public class WalletTransactionOrderController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-wallet:walletOrder:edit')")
     @Log(title = "转换订单", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody WalletTransactionOrder walletTransactionOrder)
-    {
+    public AjaxResult edit(@RequestBody WalletTransactionOrder walletTransactionOrder) {
         return toAjax(walletTransactionOrderService.updateWalletTransactionOrder(walletTransactionOrder));
     }
 
@@ -99,9 +104,8 @@ public class WalletTransactionOrderController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-wallet:walletOrder:remove')")
     @Log(title = "转换订单", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable String[] ids)
-    {
+    @DeleteMapping("/{ids}")
+    public AjaxResult remove(@PathVariable String[] ids) {
         return toAjax(walletTransactionOrderService.deleteWalletTransactionOrderByIds(ids));
     }
 }

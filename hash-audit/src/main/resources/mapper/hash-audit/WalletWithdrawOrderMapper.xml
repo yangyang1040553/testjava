@@ -66,6 +66,14 @@
         </where>
     </select>
 
+    <select id="selectCurrDay" parameterType="String" resultMap="WalletWithdrawOrderResult">
+        SELECT SUM(pay_amount) as pay_amount, wallet_type
+        FROM t_wallet_withdraw_order
+        WHERE status = 1
+          and create_time BETWEEN CONCAT(CURDATE(), ' 00:00:00') and CONCAT(CURDATE(), ' 23:59:59')
+        group by wallet_type
+    </select>
+
     <select id="selectWalletWithdrawOrderById" parameterType="String" resultMap="WalletWithdrawOrderResult">
         <include refid="selectWalletWithdrawOrderVo"/>
         where id = #{id}

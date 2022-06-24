@@ -93,4 +93,9 @@ public class WalletTransactionOrderServiceImpl implements IWalletTransactionOrde
     {
         return walletTransactionOrderMapper.deleteWalletTransactionOrderById(id);
     }
+
+    @Override
+    public List<WalletTransactionOrder> selectCurrDay() {
+        return walletTransactionOrderMapper.selectCurrDay();
+    }
 }

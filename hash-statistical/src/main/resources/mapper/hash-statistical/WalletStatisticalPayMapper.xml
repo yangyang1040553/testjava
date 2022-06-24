@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.statistical.mapper.WalletStatisticalPayMapper">
+
+    <resultMap type="WalletStatisticalPay" id="WalletStatisticalPayResult">
+        <result property="id" column="id"/>
+        <result property="usdtAmountRecharge" column="usdt_amount_recharge"/>
+        <result property="trxAmountRecharge" column="trx_amount_recharge"/>
+        <result property="usdtAmountWithdraw" column="usdt_amount_withdraw"/>
+        <result property="trxAmountWithdraw" column="trx_amount_withdraw"/>
+    </resultMap>
+
+    <sql id="selectWalletStatisticalPayVo">
+        select id, usdt_amount_recharge, trx_amount_recharge, usdt_amount_withdraw, trx_amount_withdraw
+        from t_wallet_statistical_pay
+    </sql>
+
+    <select id="selectWalletStatisticalPayList" parameterType="WalletStatisticalPay"
+            resultMap="WalletStatisticalPayResult">
+        <include refid="selectWalletStatisticalPayVo"/>
+        <where>
+            <if test=" id !=null and id != ''">
+                and id =#{id}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectWalletStatisticalPayById" parameterType="String" resultMap="WalletStatisticalPayResult">
+        <include refid="selectWalletStatisticalPayVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertWalletStatisticalPay" parameterType="WalletStatisticalPay">
+        insert into t_wallet_statistical_pay
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="usdtAmountRecharge != null">usdt_amount_recharge,</if>
+            <if test="trxAmountRecharge != null">trx_amount_recharge,</if>
+            <if test="usdtAmountWithdraw != null">usdt_amount_withdraw,</if>
+            <if test="trxAmountWithdraw != null">trx_amount_withdraw,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="usdtAmountRecharge != null">#{usdtAmountRecharge},</if>
+            <if test="trxAmountRecharge != null">#{trxAmountRecharge},</if>
+            <if test="usdtAmountWithdraw != null">#{usdtAmountWithdraw},</if>
+            <if test="trxAmountWithdraw != null">#{trxAmountWithdraw},</if>
+        </trim>
+    </insert>
+
+    <update id="updateWalletStatisticalPay" parameterType="WalletStatisticalPay">
+        update t_wallet_statistical_pay
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="usdtAmountRecharge != null">usdt_amount_recharge = #{usdtAmountRecharge},</if>
+            <if test="trxAmountRecharge != null">trx_amount_recharge = #{trxAmountRecharge},</if>
+            <if test="usdtAmountWithdraw != null">usdt_amount_withdraw = #{usdtAmountWithdraw},</if>
+            <if test="trxAmountWithdraw != null">trx_amount_withdraw = #{trxAmountWithdraw},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteWalletStatisticalPayById" parameterType="String">
+        delete
+        from t_wallet_statistical_pay
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteWalletStatisticalPayByIds" parameterType="String">
+        delete from t_wallet_statistical_pay where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
