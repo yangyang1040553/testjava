@@ -59,4 +59,4 @@ spring:
 
 #请求
 service:
-  wallet-addr: https://hash-api.starops.work/hash/
+  wallet-addr: https://hash-api.starops.work/hash
