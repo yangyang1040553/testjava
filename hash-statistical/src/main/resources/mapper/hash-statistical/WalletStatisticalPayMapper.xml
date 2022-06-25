@@ -21,13 +21,13 @@
             resultMap="WalletStatisticalPayResult">
         <include refid="selectWalletStatisticalPayVo"/>
         <where>
-            <choose>
-                <when test="id !=null and id !='' ">and id =#{id}</when>
-                <otherwise>and id = current_date</otherwise>
-            </choose>
-<!--            <if test=" id !=null and id != ''">-->
-<!--                and id =#{id}-->
-<!--            </if>-->
+            <!--            <choose>-->
+            <!--                <when test="id !=null and id !='' ">and id =#{id}</when>-->
+            <!--                <otherwise>and id = current_date</otherwise>-->
+            <!--            </choose>-->
+            <if test=" id !=null and id != ''">
+                and id =#{id}
+            </if>
         </where>
     </select>
 
