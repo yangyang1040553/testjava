@@ -4,6 +4,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.hashuser.redis.GameRedis;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +36,9 @@ public class GameGlobalConfigController extends BaseController
 {
     @Autowired
     private IGameGlobalConfigService gameGlobalConfigService;
+
+    @Autowired
+    GameRedis gameRedis;
 
     /**
      * 查询游戏共用配置列表
@@ -93,6 +97,7 @@ public class GameGlobalConfigController extends BaseController
     {
         gameGlobalConfig.setUpdateTime(DateUtils.getNowDate());
         gameGlobalConfig.setUpdateBy(getUsername());
+        gameRedis.deleteGameGlobalConfig();
         return toAjax(gameGlobalConfigService.updateGameGlobalConfig(gameGlobalConfig));
     }
 
