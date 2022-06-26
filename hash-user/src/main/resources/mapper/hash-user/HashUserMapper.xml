@@ -38,6 +38,9 @@
         <result property="tgId" column="tg_id"/>
         <result property="tgAccount" column="tg_account"/>
 
+        <result property="hashAddressTrx" column="hash_address_trx"/>
+        <result property="hashTransAddressTrx" column="hash_trans_address_trx"/>
+
     </resultMap>
 
     <sql id="selectHashUserVo">
@@ -119,7 +122,7 @@
 
     <select id="selectHashUserById" parameterType="String" resultMap="HashUserResult">
         <!--        <include refid="selectHashUserVo"/>-->
-        select a.* ,b.usdt_amount,b.trx_amount ,c.ip_addr from t_user a left JOIN t_wallet_player_data b on a.id=b.id
+        select a.* ,b.usdt_amount,b.trx_amount ,c.ip_addr ,b.hash_address_trx,b.hash_trans_address_trx from t_user a left JOIN t_wallet_player_data b on a.id=b.id
         LEFT JOIN t_user_ip_register c on a.register_ip=c.ip
         where a.id = #{id}
     </select>

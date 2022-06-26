@@ -198,6 +198,28 @@ public class HashUser extends BaseEntity {
     @Excel(name = "飞机账号")
     private String tgAccount;
 
+    @Excel(name = "TRC地址")
+    private String hashAddressTrx;
+
+    @Excel(name = "TRC转换地址")
+    private String hashTransAddressTrx;
+
+    public String getHashAddressTrx() {
+        return hashAddressTrx;
+    }
+
+    public void setHashAddressTrx(String hashAddressTrx) {
+        this.hashAddressTrx = hashAddressTrx;
+    }
+
+    public String getHashTransAddressTrx() {
+        return hashTransAddressTrx;
+    }
+
+    public void setHashTransAddressTrx(String hashTransAddressTrx) {
+        this.hashTransAddressTrx = hashTransAddressTrx;
+    }
+
     public String getNoteName() {
         return noteName;
     }
