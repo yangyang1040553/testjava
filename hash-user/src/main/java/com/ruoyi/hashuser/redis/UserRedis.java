@@ -14,6 +14,12 @@ public class UserRedis {
     @Autowired
     RedisCache redisCache;
 
+    /***
+     * 设置版本更新时间
+     */
+    public void setVersionTime(){
+        redisCache.setCacheMapValue(RedisKey.common_config_update,"2",System.currentTimeMillis());
+    }
 
     /***
      * 删除玩家token
