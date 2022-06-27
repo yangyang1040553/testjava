@@ -4,6 +4,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.hashuser.redis.UserRedis;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +35,9 @@ import com.ruoyi.common.core.page.TableDataInfo;
 public class UserVersionController extends BaseController {
     @Autowired
     private IUserVersionService userVersionService;
+
+    @Autowired
+    UserRedis userRedis;
 
     /**
      * 查询版本更新列表
@@ -80,6 +84,7 @@ public class UserVersionController extends BaseController {
         userVersion.setCreateBy(getUsername());
         int i = userVersionService.insertUserVersion(userVersion);
         if (i > 0) {
+            userRedis.setVersionTime();
             return toAjax(1);
         }
         if (i == -1) {
@@ -97,6 +102,7 @@ public class UserVersionController extends BaseController {
     public AjaxResult edit(@RequestBody UserVersion userVersion) {
         userVersion.setUpdateTime(DateUtils.getNowDate());
         userVersion.setUpdateBy(getUsername());
+        userRedis.setVersionTime();
         return toAjax(userVersionService.updateUserVersion(userVersion));
     }
 
