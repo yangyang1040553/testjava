@@ -46,6 +46,7 @@ public class UserVersionController extends BaseController {
     @GetMapping("/list")
     public TableDataInfo list(UserVersion userVersion) {
         startPage();
+        startOrderBy();
         List<UserVersion> list = userVersionService.selectUserVersionList(userVersion);
         return getDataTable(list);
     }
