@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.operation.mapper.GameOperationActivityRecordMapper">
+
+    <resultMap type="GameOperationActivityRecord" id="GameOperationActivityRecordResult">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="walletType" column="wallet_type"/>
+        <result property="amount" column="amount"/>
+        <result property="aType" column="a_type"/>
+        <result property="status" column="status"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <sql id="selectGameOperationActivityRecordVo">
+        select id,
+               user_id,
+               nick_name,
+               wallet_type,
+               amount,
+               a_type,
+               status,
+               create_time
+        from t_game_operation_activity_record
+    </sql>
+
+    <select id="selectGameOperationActivityRecordList" parameterType="GameOperationActivityRecord"
+            resultMap="GameOperationActivityRecordResult">
+        <include refid="selectGameOperationActivityRecordVo"/>
+        <where>
+            <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
+            <if test="walletType != null  and walletType != ''">and wallet_type = #{walletType}</if>
+            <if test="aType != null ">and a_type = #{aType}</if>
+            <if test="status != null ">and status = #{status}</if>
+            <if test="createTime != null ">and create_time >= #{createTime}</if>
+        </where>
+    </select>
+
+    <select id="selectGameOperationActivityRecordById" parameterType="String"
+            resultMap="GameOperationActivityRecordResult">
+        <include refid="selectGameOperationActivityRecordVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertGameOperationActivityRecord" parameterType="GameOperationActivityRecord">
+        insert into t_game_operation_activity_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="nickName != null">nick_name,</if>
+            <if test="walletType != null">wallet_type,</if>
+            <if test="amount != null">amount,</if>
+            <if test="aType != null">a_type,</if>
+            <if test="status != null">status,</if>
+            <if test="createTime != null">create_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="nickName != null">#{nickName},</if>
+            <if test="walletType != null">#{walletType},</if>
+            <if test="amount != null">#{amount},</if>
+            <if test="aType != null">#{aType},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createTime != null">#{createTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateGameOperationActivityRecord" parameterType="GameOperationActivityRecord">
+        update t_game_operation_activity_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="nickName != null">nick_name = #{nickName},</if>
+            <if test="walletType != null">wallet_type = #{walletType},</if>
+            <if test="amount != null">amount = #{amount},</if>
+            <if test="aType != null">a_type = #{aType},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteGameOperationActivityRecordById" parameterType="String">
+        delete
+        from t_game_operation_activity_record
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteGameOperationActivityRecordByIds" parameterType="String">
+        delete from t_game_operation_activity_record where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
