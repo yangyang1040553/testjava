@@ -2,6 +2,8 @@ package com.ruoyi.operation.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.utils.uuid.IdUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -78,6 +80,7 @@ public class GameOperationActivityController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody GameOperationActivity gameOperationActivity)
     {
+//        gameOperationActivity.setId(IdUtils.getIDStr());
         return toAjax(gameOperationActivityService.insertGameOperationActivity(gameOperationActivity));
     }
 
