@@ -22,6 +22,7 @@ public class GameRedis {
      */
     public void deleteGameConfigList() {
         redisCache.deleteObject(RedisKey.game_config);
+        redisCache.setCacheMapValue(RedisKey.common_config_update, "1", System.currentTimeMillis());
     }
 
     /***

@@ -44,4 +44,6 @@ public class RedisKey {
 
     //=====================2游戏相关key=====================
 
+
+    public final static String common_config_update = "common_config_update";
 }
