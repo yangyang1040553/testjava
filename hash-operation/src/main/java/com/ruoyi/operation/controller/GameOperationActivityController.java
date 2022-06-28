@@ -3,6 +3,8 @@ package com.ruoyi.operation.controller;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ruoyi.common.core.redis.RedisCache;
+import com.ruoyi.common.redis.RedisKey;
 import com.ruoyi.common.utils.uuid.IdUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,24 +27,26 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 运营活动Controller
- * 
+ *
  * @author xxk
  * @date 2022-06-26
  */
 @RestController
 @RequestMapping("/hash-operation/activity")
-public class GameOperationActivityController extends BaseController
-{
+public class GameOperationActivityController extends BaseController {
     @Autowired
     private IGameOperationActivityService gameOperationActivityService;
+
+
+    @Autowired
+    RedisCache redisCache;
 
     /**
      * 查询运营活动列表
      */
     @PreAuthorize("@ss.hasPermi('hash-operation:activity:list')")
     @GetMapping("/list")
-    public TableDataInfo list(GameOperationActivity gameOperationActivity)
-    {
+    public TableDataInfo list(GameOperationActivity gameOperationActivity) {
         startPage();
         List<GameOperationActivity> list = gameOperationActivityService.selectGameOperationActivityList(gameOperationActivity);
         return getDataTable(list);
@@ -54,8 +58,7 @@ public class GameOperationActivityController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-operation:activity:export')")
     @Log(title = "运营活动", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, GameOperationActivity gameOperationActivity)
-    {
+    public void export(HttpServletResponse response, GameOperationActivity gameOperationActivity) {
         startOrderBy();
         List<GameOperationActivity> list = gameOperationActivityService.selectGameOperationActivityList(gameOperationActivity);
         ExcelUtil<GameOperationActivity> util = new ExcelUtil<GameOperationActivity>(GameOperationActivity.class);
@@ -67,8 +70,7 @@ public class GameOperationActivityController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-operation:activity:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") Long id)
-    {
+    public AjaxResult getInfo(@PathVariable("id") Long id) {
         return AjaxResult.success(gameOperationActivityService.selectGameOperationActivityById(id));
     }
 
@@ -78,8 +80,7 @@ public class GameOperationActivityController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-operation:activity:add')")
     @Log(title = "运营活动", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody GameOperationActivity gameOperationActivity)
-    {
+    public AjaxResult add(@RequestBody GameOperationActivity gameOperationActivity) {
 //        gameOperationActivity.setId(IdUtils.getIDStr());
         return toAjax(gameOperationActivityService.insertGameOperationActivity(gameOperationActivity));
     }
@@ -90,8 +91,8 @@ public class GameOperationActivityController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-operation:activity:edit')")
     @Log(title = "运营活动", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody GameOperationActivity gameOperationActivity)
-    {
+    public AjaxResult edit(@RequestBody GameOperationActivity gameOperationActivity) {
+        redisCache.delCacheMapValue(RedisKey.game_operation_activity, String.valueOf(gameOperationActivity.getId()));
         return toAjax(gameOperationActivityService.updateGameOperationActivity(gameOperationActivity));
     }
 
@@ -100,9 +101,8 @@ public class GameOperationActivityController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-operation:activity:remove')")
     @Log(title = "运营活动", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable Long[] ids)
-    {
+    @DeleteMapping("/{ids}")
+    public AjaxResult remove(@PathVariable Long[] ids) {
         return toAjax(gameOperationActivityService.deleteGameOperationActivityByIds(ids));
     }
 }
