@@ -42,6 +42,9 @@ public class RedisKey {
     //游戏玩家在线人数
     public final static String game_player_online = "game_player_online";
 
+    //游戏运营活动配置
+    public final static String game_operation_activity = "game_operation_activity";
+
     //=====================2游戏相关key=====================
 
 
