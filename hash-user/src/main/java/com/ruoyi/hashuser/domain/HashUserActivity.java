@@ -57,6 +57,16 @@ public class HashUserActivity extends BaseEntity {
 
     private String prop;
 
+    private String operationId;
+
+    public String getOperationId() {
+        return operationId;
+    }
+
+    public void setOperationId(String operationId) {
+        this.operationId = operationId;
+    }
+
     public String getProp() {
         return prop;
     }

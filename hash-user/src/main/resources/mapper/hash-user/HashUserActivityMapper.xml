@@ -1,42 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.hashuser.mapper.HashUserActivityMapper">
-    
+
     <resultMap type="HashUserActivity" id="HashUserActivityResult">
-        <result property="id"    column="id"    />
-        <result property="name"    column="name"    />
-        <result property="bannerUrl"    column="banner_url"    />
-        <result property="landingPageUrl"    column="landing_page_url"    />
-        <result property="open"    column="open"    />
-        <result property="finishTime"    column="finish_time"    />
-        <result property="createTime"    column="create_time"    />
-        <result property="createBy"    column="create_by"    />
-        <result property="updateTime"    column="update_time"    />
-        <result property="updateBy"    column="update_by"    />
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="bannerUrl" column="banner_url"/>
+        <result property="landingPageUrl" column="landing_page_url"/>
+        <result property="open" column="open"/>
+        <result property="finishTime" column="finish_time"/>
+        <result property="createTime" column="create_time"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="operationId" column="operation_id"/>
     </resultMap>
 
     <sql id="selectHashUserActivityVo">
-        select id, name, banner_url, landing_page_url, open, finish_time, create_time, create_by, update_time, update_by from t_user_activity
+        select id,
+               name,
+               banner_url,
+               landing_page_url, open, finish_time, create_time, create_by, update_time, update_by
+                , operation_id
+        from t_user_activity
     </sql>
 
     <select id="selectHashUserActivityList" parameterType="HashUserActivity" resultMap="HashUserActivityResult">
         <include refid="selectHashUserActivityVo"/>
-        <where>  
-            <if test="id != null "> and id = #{id}</if>
-            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
-            <if test="landingPageUrl != null  and landingPageUrl != ''"> and landing_page_url = #{landingPageUrl}</if>
-            <if test="open != null "> and open = #{open}</if>
-            <if test="finishTime != null "> and finish_time >= #{finishTime}</if>
+        <where>
+            <if test="id != null ">and id = #{id}</if>
+            <if test="name != null  and name != ''">and name like concat('%', #{name}, '%')</if>
+            <if test="landingPageUrl != null  and landingPageUrl != ''">and landing_page_url = #{landingPageUrl}</if>
+            <if test="open != null ">and open = #{open}</if>
+            <if test="finishTime != null ">and finish_time >= #{finishTime}</if>
+            <if test="operationId != null ">and operation_id >= #{operationId}</if>
         </where>
     </select>
-    
+
     <select id="selectHashUserActivityById" parameterType="Long" resultMap="HashUserActivityResult">
         <include refid="selectHashUserActivityVo"/>
         where id = #{id}
     </select>
-        
+
     <insert id="insertHashUserActivity" parameterType="HashUserActivity" useGeneratedKeys="true" keyProperty="id">
         insert into t_user_activity
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -49,7 +56,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createBy != null">create_by,</if>
             <if test="updateTime != null">update_time,</if>
             <if test="updateBy != null">update_by,</if>
-         </trim>
+            <if test="operationId != null">operation_id,</if>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="name != null">#{name},</if>
             <if test="bannerUrl != null">#{bannerUrl},</if>
@@ -60,7 +68,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createBy != null">#{createBy},</if>
             <if test="updateTime != null">#{updateTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
-         </trim>
+            <if test="operationId != null">#{operationId},</if>
+        </trim>
     </insert>
 
     <update id="updateHashUserActivity" parameterType="HashUserActivity">
@@ -75,16 +84,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createBy != null">create_by = #{createBy},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="operationId != null">operation_id = #{operationId},</if>
         </trim>
         where id = #{id}
     </update>
 
     <delete id="deleteHashUserActivityById" parameterType="Long">
-        delete from t_user_activity where id = #{id}
+        delete
+        from t_user_activity
+        where id = #{id}
     </delete>
 
     <delete id="deleteHashUserActivityByIds" parameterType="String">
-        delete from t_user_activity where id in 
+        delete from t_user_activity where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
