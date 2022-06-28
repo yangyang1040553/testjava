@@ -10,10 +10,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="isOpen"    column="is_open"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
+        <result property="content"    column="content"    />
     </resultMap>
 
     <sql id="selectGameOperationActivityVo">
-        select id, json, is_open, create_time, update_time from t_game_operation_activity
+        select id, json, is_open, create_time, update_time ,content from t_game_operation_activity
     </sql>
 
     <select id="selectGameOperationActivityList" parameterType="GameOperationActivity" resultMap="GameOperationActivityResult">
@@ -37,6 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="isOpen != null">is_open,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateTime != null">update_time,</if>
+            <if test="content != null">content,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -44,6 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="isOpen != null">#{isOpen},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateTime != null">#{updateTime},</if>
+            <if test="content != null">#{content},</if>
          </trim>
     </insert>
 
@@ -54,6 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="isOpen != null">is_open = #{isOpen},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="content != null">content = #{content},</if>
         </trim>
         where id = #{id}
     </update>
