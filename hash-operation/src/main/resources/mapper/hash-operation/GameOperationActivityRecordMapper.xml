@@ -13,6 +13,7 @@
         <result property="aType" column="a_type"/>
         <result property="status" column="status"/>
         <result property="createTime" column="create_time"/>
+        <result property="note" column="note"/>
     </resultMap>
 
     <sql id="selectGameOperationActivityRecordVo">
@@ -23,7 +24,8 @@
                amount,
                a_type,
                status,
-               create_time
+               create_time,
+               note
         from t_game_operation_activity_record
     </sql>
 

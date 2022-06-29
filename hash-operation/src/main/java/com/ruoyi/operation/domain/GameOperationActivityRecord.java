@@ -42,7 +42,18 @@ public class GameOperationActivityRecord extends BaseEntity
     @Excel(name = "是否发放0未发放 1已发放")
     private Long status;
 
-    public void setId(String id) 
+    @Excel(name = "说明")
+    private String note;
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public void setId(String id)
     {
         this.id = id;
     }
