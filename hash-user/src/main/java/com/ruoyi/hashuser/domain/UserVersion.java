@@ -34,11 +34,23 @@ public class UserVersion extends BaseEntity
     @Excel(name = "更新至版本号")
     private String upToVersion;
 
+
+    @Excel(name = "版本类型")
+    private Integer versionType;
+
     /** 是否强更 0否 1是 */
     @Excel(name = "是否强更 0否 1是")
     private int force;
 
-    public void setId(Long id) 
+    public Integer getVersionType() {
+        return versionType;
+    }
+
+    public void setVersionType(Integer versionType) {
+        this.versionType = versionType;
+    }
+
+    public void setId(Long id)
     {
         this.id = id;
     }
