@@ -1,5 +1,6 @@
 package com.ruoyi.operation.domain;
 
+import com.ruoyi.common.constant.Global;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
@@ -94,9 +95,9 @@ public class GameOperationActivityRecord extends BaseEntity
         this.amount = amount;
     }
 
-    public Long getAmount() 
+    public Double getAmount()
     {
-        return amount;
+        return Global.getWalletAmountToReal(amount);
     }
     public void setaType(Long aType) 
     {
