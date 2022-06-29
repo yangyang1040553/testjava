@@ -86,6 +86,9 @@ public class GameBetRecord extends BaseEntity {
     @Excel(name = "到账金额")
     private Double incomeAmount;
 
+    @Excel(name = "投注金额")
+    private Double winAmount;
+
     /**
      * 手续费
      */
@@ -129,7 +132,13 @@ public class GameBetRecord extends BaseEntity {
     @Excel(name = "说明")
     private String note;
 
+    public Double getWinAmount() {
+        return Global.getWalletAmountToReal(winAmount);
+    }
 
+    public void setWinAmount(Double winAmount) {
+        this.winAmount = winAmount;
+    }
 
     public String getAwardCallback() {
         return awardCallback;

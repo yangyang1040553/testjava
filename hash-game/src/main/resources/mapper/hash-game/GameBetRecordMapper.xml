@@ -27,6 +27,7 @@
         <result property="incomeAmount" column="income_amount"/>
         <result property="awardCallback" column="award_callback"/>
         <result property="note" column="note"/>
+        <result property="winAmount" column="win_amount"/>
     </resultMap>
 
     <sql id="selectGameBetRecordVo">
@@ -51,7 +52,8 @@
                finish_time,
                income_amount,
                award_callback,
-               note
+               note,
+               win_amount
         from t_game_bet_record
     </sql>
 
