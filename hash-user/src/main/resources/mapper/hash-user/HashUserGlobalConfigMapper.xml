@@ -21,6 +21,7 @@
         <result property="updateBy" column="update_by"/>
         <result property="blockChainAddr" column="block_chain_addr"/>
         <result property="isSelfOnline" column="is_self_online"/>
+        <result property="webAddr" column="web_addr"/>
 
     </resultMap>
 
@@ -40,7 +41,8 @@
                update_time,
                update_by,
                block_chain_addr,
-               is_self_online
+               is_self_online,
+               web_addr
         from t_user_global_config
     </sql>
 
@@ -75,6 +77,7 @@
             <if test="updateBy != null">update_by,</if>
             <if test="blockChainAddr != null">block_chain_addr,</if>
             <if test="isSelfOnline != null">is_self_online,</if>
+            <if test="webAddr != null">web_addr,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -93,6 +96,7 @@
             <if test="updateBy != null">#{updateBy},</if>
             <if test="blockChainAddr != null">#{blockChainAddr},</if>
             <if test="isSelfOnline != null">#{isSelfOnline},</if>
+            <if test="webAddr != null">#{webAddr},</if>
         </trim>
     </insert>
 
@@ -116,6 +120,7 @@
             <if test="updateBy != null">update_by = #{updateBy},</if>
             <if test="blockChainAddr != null">block_chain_addr = #{blockChainAddr},</if>
             <if test="isSelfOnline != null">is_self_online = #{isSelfOnline},</if>
+            <if test="webAddr != null">web_addr = #{webAddr},</if>
         </trim>
         where id = #{id}
     </update>

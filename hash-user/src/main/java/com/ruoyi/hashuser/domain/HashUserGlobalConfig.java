@@ -81,6 +81,18 @@ public class HashUserGlobalConfig extends BaseEntity {
     @Excel(name = "是否官方客服地址")
     private Integer isSelfOnline;
 
+
+    @Excel(name = "web地址")
+    private String webAddr;
+
+    public String getWebAddr() {
+        return webAddr;
+    }
+
+    public void setWebAddr(String webAddr) {
+        this.webAddr = webAddr;
+    }
+
     public Integer getIsSelfOnline() {
         return isSelfOnline;
     }
