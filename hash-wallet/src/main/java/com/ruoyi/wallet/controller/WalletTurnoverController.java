@@ -43,10 +43,6 @@ public class WalletTurnoverController extends BaseController {
     public TableDataInfo list(WalletTurnover walletTurnover) {
         startPage();
         startOrderBy();
-        if (walletTurnover.getCreateTime() == null) {
-            //默认查询查询今天
-            walletTurnover.setCreateTime(DateUtils.getNowDate());
-        }
         List<WalletTurnover> list = walletTurnoverService.selectWalletTurnoverList(walletTurnover);
         return getDataTable(list);
     }
