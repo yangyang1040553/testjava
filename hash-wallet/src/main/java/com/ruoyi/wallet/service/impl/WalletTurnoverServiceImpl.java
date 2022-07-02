@@ -46,7 +46,7 @@ public class WalletTurnoverServiceImpl implements IWalletTurnoverService {
                 walletTurnover.getWalletType() != null ||
                 walletTurnover.getCode() != null
         ) {
-            walletTurnover.setCreateTime(null);
+
         } else {
             if (walletTurnover.getCreateTime() == null) {
                 walletTurnover.setCreateTime(DateUtils.getNowDate());
