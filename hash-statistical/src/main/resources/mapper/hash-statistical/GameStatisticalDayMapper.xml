@@ -14,6 +14,8 @@
         <result property="trxBetAmount" column="trx_bet_amount"/>
         <result property="trxAwardAmount" column="trx_award_amount"/>
         <result property="betPosition" column="bet_position"/>
+        <result property="trxWin" column="trx_win"/>
+        <result property="usdtWin" column="usdt_win"/>
     </resultMap>
 
     <sql id="selectGameStatisticalDayVo">

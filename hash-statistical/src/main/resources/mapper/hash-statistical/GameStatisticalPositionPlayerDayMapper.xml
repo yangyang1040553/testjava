@@ -13,6 +13,8 @@
         <result property="usdtAwardAmount" column="usdt_award_amount"/>
         <result property="trxBetAmount" column="trx_bet_amount"/>
         <result property="trxAwardAmount" column="trx_award_amount"/>
+        <result property="trxWin" column="trx_win"/>
+        <result property="usdtWin" column="usdt_win"/>
     </resultMap>
 
     <sql id="selectGameStatisticalPositionPlayerDayVo">
@@ -23,7 +25,9 @@
                usdt_bet_amount,
                usdt_award_amount,
                trx_bet_amount,
-               trx_award_amount
+               trx_award_amount,
+               (usdt_award_amount - usdt_bet_amount) as usdt_win,
+               (trx_award_amount - trx_bet_amount) as trx_win
         from t_game_statistical_position_player_day
     </sql>
 

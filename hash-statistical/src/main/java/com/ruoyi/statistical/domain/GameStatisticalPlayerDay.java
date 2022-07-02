@@ -85,7 +85,27 @@ public class GameStatisticalPlayerDay extends BaseEntity {
     @Excel(name = "统计时间", width = 30)
     private String time;
 
+    @Excel(name = "USDT输赢金额")
+    private Double usdtWin;
 
+    @Excel(name = "TRX输赢金额")
+    private Double trxWin;
+
+    public Double getUsdtWin() {
+        return Global.getWalletAmountToReal(usdtWin);
+    }
+
+    public void setUsdtWin(Double usdtWin) {
+        this.usdtWin = usdtWin;
+    }
+
+    public Double getTrxWin() {
+        return Global.getWalletAmountToReal(trxWin);
+    }
+
+    public void setTrxWin(Double trxWin) {
+        this.trxWin = trxWin;
+    }
 
 
     public String getBetPosition() {

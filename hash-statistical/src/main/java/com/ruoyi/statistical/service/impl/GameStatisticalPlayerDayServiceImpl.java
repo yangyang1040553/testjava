@@ -60,7 +60,10 @@ public class GameStatisticalPlayerDayServiceImpl implements IGameStatisticalPlay
                         "sum(trx_bet_amount) AS trx_bet_amount, \n" +
                         "sum(trx_award_amount) AS trx_award_amount, \n" +
                         "sum(usdt_bet_amount) AS usdt_bet_amount, \n" +
-                        "sum(usdt_award_amount) AS usdt_award_amount FROM t_game_statistical_player_day ";
+                        "sum(usdt_award_amount) AS usdt_award_amount, " +
+                        "(usdt_award_amount-usdt_bet_amount) as usdt_win,\n" +
+                        "(trx_award_amount-trx_bet_amount) as trx_win "+
+                        "FROM t_game_statistical_player_day ";
 
         if (gameStatisticalPlayerDay.getUserId() != null && !"".equals(gameStatisticalPlayerDay.getUserId())) {
             sql += ("  where user_id =" + gameStatisticalPlayerDay.getUserId());
@@ -75,7 +78,7 @@ public class GameStatisticalPlayerDayServiceImpl implements IGameStatisticalPlay
         }
 
 
-        sql += " GROUP BY time, game_id ,user_id";
+        sql += " GROUP BY time, game_id ,user_id,usdt_win,trx_win";
 
         gameStatisticalPlayerDay.setSql(sql);
 

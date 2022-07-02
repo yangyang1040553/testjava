@@ -59,7 +59,10 @@ public class GameStatisticalDayServiceImpl implements IGameStatisticalDayService
                 "game_id,sum(trx_bet_amount)as trx_bet_amount," +
                 "sum(trx_award_amount)as trx_award_amount," +
                 "sum(usdt_bet_amount)as usdt_bet_amount\n" +
-                ",sum(usdt_award_amount)as usdt_award_amount from t_game_statistical_day ";
+                ",sum(usdt_award_amount)as usdt_award_amount, " +
+                "(usdt_award_amount-usdt_bet_amount) as usdt_win,\n" +
+                "(trx_award_amount-trx_bet_amount) as trx_win " +
+                "from t_game_statistical_day ";
 
         if (gameStatisticalDay.getType() == Global.TYPE_DAY) {
             sql = "SELECT\n" +
@@ -68,7 +71,9 @@ public class GameStatisticalDayServiceImpl implements IGameStatisticalDayService
                     "  trx_bet_amount,\n" +
                     "\ttrx_award_amount,\n" +
                     "\tusdt_bet_amount,   \n" +
-                    "\tusdt_award_amount \n" +
+                    "\tusdt_award_amount, \n" +
+                    "(usdt_award_amount-usdt_bet_amount) as usdt_win,\n" +
+                    "(trx_award_amount-trx_bet_amount) as trx_win " +
                     "FROM\n" +
                     "\tt_game_statistical_day \n" +
                     "WHERE\n" +
@@ -76,11 +81,14 @@ public class GameStatisticalDayServiceImpl implements IGameStatisticalDayService
         }
 
         if (gameStatisticalDay.getType() == Global.TYPE_WEEK) {
-            sql ="SELECT   DATE_FORMAT(id,'" + regex + "') as time  ," +
+            sql = "SELECT   DATE_FORMAT(id,'" + regex + "') as time  ," +
                     "game_id,sum(trx_bet_amount)as trx_bet_amount," +
                     "sum(trx_award_amount)as trx_award_amount," +
                     "sum(usdt_bet_amount)as usdt_bet_amount\n" +
-                    ",sum(usdt_award_amount)as usdt_award_amount from t_game_statistical_day  WHERE  id <= CURRENT_DATE ";
+                    ",sum(usdt_award_amount)as usdt_award_amount, " +
+                    "(usdt_award_amount-usdt_bet_amount) as usdt_win,\n" +
+                    "(trx_award_amount-trx_bet_amount) as trx_win " +
+                    "from t_game_statistical_day  WHERE  id <= CURRENT_DATE ";
         }
 
         if (gameStatisticalDay.getGameId() != null) {
@@ -92,7 +100,7 @@ public class GameStatisticalDayServiceImpl implements IGameStatisticalDayService
         }
 
         if (gameStatisticalDay.getType() != Global.TYPE_DAY) {
-            sql += " GROUP BY time,game_id";
+            sql += " GROUP BY time,game_id,usdt_win,trx_win";
         }
         sql += " ORDER BY time DESC";
         gameStatisticalDay.setSql(sql);
