@@ -39,19 +39,6 @@ public class WalletTurnoverServiceImpl implements IWalletTurnoverService {
      */
     @Override
     public List<WalletTurnover> selectWalletTurnoverList(WalletTurnover walletTurnover) {
-
-        if (walletTurnover.getId() != null ||
-                walletTurnover.getUserId() != null ||
-                walletTurnover.getInvitationCode() != null ||
-                walletTurnover.getWalletType() != null ||
-                walletTurnover.getCode() != null
-        ) {
-            walletTurnover.setCreateTime(null);
-        } else {
-            if (walletTurnover.getCreateTime() == null) {
-                walletTurnover.setCreateTime(DateUtils.getNowDate());
-            }
-        }
         return walletTurnoverMapper.selectWalletTurnoverList(walletTurnover);
     }
 
