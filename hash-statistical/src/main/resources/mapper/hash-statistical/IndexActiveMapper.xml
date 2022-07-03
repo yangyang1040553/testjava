@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.statistical.mapper.IndexActiveMapper">
+
+    <resultMap type="IndexActive" id="IndexActiveResult">
+        <result property="a_type" column="a_type"/>
+        <result property="amount" column="amount"/>
+        <result property="wallet_type" column="wallet_type"/>
+
+    </resultMap>
+
+
+    <sql id="selectCurrActiveVo">
+        SELECT a_type, wallet_type, SUM(amount) AS amount
+        FROM t_game_operation_activity_record
+        GROUP BY a_type, wallet_type
+        ORDER BY wallet_type, a_type ASC;
+    </sql>
+
+    <select id="selectCurrActive" resultMap="IndexActiveResult">
+        <include refid="selectCurrActiveVo"/>
+    </select>
+</mapper>

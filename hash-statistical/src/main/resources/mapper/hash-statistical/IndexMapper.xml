@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.statistical.mapper.IndexMapper">
+
+    <resultMap type="Index" id="IndexResult">
+        <result property="register_count" column="register_count"/>
+        <result property="recharge_count" column="recharge_count"/>
+        <result property="bet_count" column="bet_count"/>
+        <result property="bet_persion_count" column="bet_persion_count"/>
+        <result property="curr_trx_win_amount" column="curr_trx_win_amount"/>
+        <result property="curr_trx_win_rate" column="curr_trx_win_rate"/>
+        <result property="curr_usdt_win_amount" column="curr_usdt_win_amount"/>
+        <result property="curr_usdt_win_rate" column="curr_usdt_win_rate"/>
+        <result property="pre_trx_win_amount" column="pre_trx_win_amount"/>
+        <result property="pre_trx_win_rate" column="pre_trx_win_rate"/>
+        <result property="pre_usdt_win_amount" column="pre_usdt_win_amount"/>
+        <result property="pre_usdt_win_rate" column="pre_usdt_win_rate"/>
+        <result property="usdt_win_amount" column="usdt_win_amount"/>
+        <result property="trx_win_amount" column="trx_win_amount"/>
+        <result property="game_id" column="game_id"/>
+    </resultMap>
+
+    <sql id="selectIndexVo">
+        SELECT t1.register_count,
+               t2.recharge_count,
+               t3.bet_count,
+               t4.bet_persion_count,
+               t5.curr_trx_win_amount,
+               t5.curr_trx_win_rate,
+               t5.curr_usdt_win_amount,
+               t5.curr_usdt_win_rate,
+               t6.pre_trx_win_amount,
+               t6.pre_trx_win_rate,
+               t6.pre_usdt_win_amount,
+               t6.pre_usdt_win_rate
+        FROM (
+                 SELECT COUNT(1) AS register_count
+                 FROM t_user
+                 WHERE DATE_FORMAT(register_time, '%Y-%m-%d') = CURRENT_DATE
+             ) AS t1,
+             (
+                 SELECT count(1) AS recharge_count
+                 FROM t_wallet_recharge_order
+                 WHERE frist_recharge = 1
+                   AND create_time = DATE_FORMAT(create_time, '%Y-%m-%d') = CURRENT_DATE
+             ) AS t2,
+             (
+                 SELECT COUNT(1) AS bet_count
+                 FROM t_game_bet_record
+                 WHERE create_time = DATE_FORMAT(create_time, '%Y-%m-%d') = CURRENT_DATE
+             ) AS t3,
+             (
+                 SELECT COUNT(t_game.user_id) AS bet_persion_count
+                 FROM (
+                          SELECT user_id
+                          FROM t_game_bet_record
+                          WHERE CURRENT_DATE = DATE_FORMAT(create_time, '%Y-%m-%d')
+                          GROUP BY user_id
+                      ) AS t_game
+             ) AS t4,
+             (
+                 SELECT SUM(usdt_bet_amount) - SUM(usdt_award_amount)                            AS curr_usdt_win_amount,
+                        ((
+                             SUM(usdt_bet_amount) - SUM(usdt_award_amount)) /
+                         SUM(usdt_bet_amount))                                                   AS curr_usdt_win_rate,
+                        SUM(trx_bet_amount) - SUM(trx_award_amount)                              AS curr_trx_win_amount,
+                        ((
+                             SUM(trx_bet_amount) - SUM(trx_award_amount)) / SUM(trx_bet_amount)) AS curr_trx_win_rate
+                 FROM t_game_statistical_day
+                 WHERE DATE_FORMAT(CURRENT_DATE, '%Y-%m') = DATE_FORMAT(id, '%Y-%m')
+             ) AS t5,
+             (
+                 SELECT SUM(usdt_bet_amount) - SUM(usdt_award_amount)                            AS pre_usdt_win_amount,
+                        ((
+                             SUM(usdt_bet_amount) - SUM(usdt_award_amount)) /
+                         SUM(usdt_bet_amount))                                                   AS pre_usdt_win_rate,
+                        SUM(trx_bet_amount) - SUM(trx_award_amount)                              AS pre_trx_win_amount,
+                        ((
+                             SUM(trx_bet_amount) - SUM(trx_award_amount)) / SUM(trx_bet_amount)) AS pre_trx_win_rate
+                 FROM t_game_statistical_day
+                 WHERE date_format(date_sub(curdate(), INTERVAL 1 MONTH ), '%Y-%m') = DATE_FORMAT(id, '%Y-%m')
+             ) AS t6
+    </sql>
+
+    <sql id="selevtMinAndMaxVo">
+        SELECT game_id,
+               SUM(usdt_bet_amount) - SUM(usdt_award_amount) AS usdt_win_amount,
+               SUM(trx_bet_amount) - SUM(trx_award_amount)   AS trx_win_amount
+        FROM t_game_statistical_day
+        GROUP BY game_id
+    </sql>
+
+    <select id="selectIndex" resultMap="IndexResult">
+        <include refid="selectIndexVo"/>
+    </select>
+
+    <select id="selevtMinAndMax" resultMap="IndexResult">
+        <include refid="selevtMinAndMaxVo"/>
+    </select>
+</mapper>

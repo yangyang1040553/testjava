@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.statistical.mapper.IndexAmountMapper">
+
+    <resultMap type="IndexAmount" id="IndexAmountResult">
+        <result property="recharge_count" column="recharge_count"/>
+
+    </resultMap>
+
+
+    <sql id="selectCurrAmountInfoVo">
+        SELECT t1.usdt_paymount,
+               t2.trx_paymount,
+               t3.recharge_order_count,
+               t4.recharge_count,
+               t5.usdt_to_mount,
+               t6.trx_to_mount,
+               t7.transaction_count,
+               t8.transaction_people_count,
+               t9.in_usdt_amount,
+               t10.out_usdt_amount,
+               t11.usdt_out_amount,
+               t12.trx_out_amount,
+               t13.out_pay_count,
+               t14.out_pay_people_count,
+               t15.in_count_by_people,
+               t16.out_count_by_people,
+               t17.in_people_count,
+               t18.out_people_count,
+               t19.in_trx_amount,
+               t20.out_trx_amount
+        FROM (
+                 SELECT SUM(pay_amount) AS usdt_paymount
+                 FROM t_wallet_recharge_order
+                 WHERE STATUS = 1
+                   AND wallet_type = 'USDT'
+                   AND DATE_FORMAT(create_time, '%Y-%m-%d') = CURRENT_DATE
+             ) AS t1,
+             (
+                 SELECT SUM(pay_amount) AS trx_paymount
+                 FROM t_wallet_recharge_order
+                 WHERE STATUS = 1
+                   AND wallet_type = 'TRX'
+                   AND DATE_FORMAT(create_time, '%Y-%m-%d') = CURRENT_DATE
+             ) AS t2,
+             (
+                 SELECT count(1) AS recharge_order_count
+                 FROM t_wallet_recharge_order
+                 WHERE STATUS = 1
+                   AND DATE_FORMAT(create_time, '%Y-%m-%d') = CURRENT_DATE
+             ) AS t3,
+             (
+                 SELECT COUNT(temp.user_id) AS recharge_count
+                 FROM (
+                          SELECT user_id
+                          FROM t_wallet_recharge_order
+                          WHERE DATE_FORMAT(create_time, '%Y-%m-%d') = CURRENT_DATE
+                            and status = 1
+                          GROUP BY user_id
+                      ) AS temp
+             ) AS t4,
+             (
+                 SELECT SUM(to_amount) AS usdt_to_mount
+                 FROM t_wallet_transaction_order
+                 WHERE STATUS = 1
+                   AND to_wallet_type = 'USDT'
+                   AND DATE_FORMAT(create_time, '%Y-%m-%d') = CURRENT_DATE
+             ) AS t5,
+             (
+                 SELECT SUM(to_amount) AS trx_to_mount
+                 FROM t_wallet_transaction_order
+                 WHERE STATUS = 1
+                   AND to_wallet_type = 'TRX'
+                   AND DATE_FORMAT(create_time, '%Y-%m-%d') = CURRENT_DATE
+             ) AS t6,
+             (
+                 SELECT count(1) AS transaction_count
+                 FROM t_wallet_transaction_order
+                 WHERE STATUS = 1
+                   AND DATE_FORMAT(create_time, '%Y-%m-%d') = CURRENT_DATE
+             ) AS t7,
+             (
+                 SELECT COUNT(temp.user_id) AS transaction_people_count
+                 FROM (
+                          SELECT user_id
+                          FROM t_wallet_transaction_order
+                          WHERE DATE_FORMAT(create_time, '%Y-%m-%d') = CURRENT_DATE
+                            and status = 1
+                          GROUP BY user_id
+                      ) AS temp
+             ) AS t8,
+             (SELECT SUM(ABS(amount)) as in_usdt_amount
+              FROM t_wallet_turnover
+              WHERE code = 8
+                and DATE_FORMAT(create_time, '%Y-%m-%d') = CURRENT_DATE
+                and wallet_type = 'USDT') as t9,
+             (SELECT SUM(ABS(amount)) as out_usdt_amount
+              FROM t_wallet_turnover
+              WHERE code = 9
+                and DATE_FORMAT(create_time, '%Y-%m-%d') = CURRENT_DATE
+                and wallet_type = 'USDT') as t10,
+             (
+                 SELECT SUM(pay_amount) AS usdt_out_amount
+                 FROM t_wallet_withdraw_order
+                 WHERE STATUS = 3
+                   AND wallet_type = 'USDT'
+                   AND DATE_FORMAT(update_time, '%Y-%m-%d') = CURRENT_DATE
+             ) AS t11,
+             (
+                 SELECT SUM(pay_amount) AS trx_out_amount
+                 FROM t_wallet_withdraw_order
+                 WHERE STATUS = 3
+                   AND wallet_type = 'TRX'
+                   AND DATE_FORMAT(update_time, '%Y-%m-%d') = CURRENT_DATE
+             ) AS t12,
+             (
+                 SELECT count(1) AS out_pay_count
+                 FROM t_wallet_withdraw_order
+                 WHERE STATUS = 3
+                   AND DATE_FORMAT(update_time, '%Y-%m-%d') = CURRENT_DATE
+             ) AS t13,
+             (
+                 SELECT COUNT(temp.user_id) AS out_pay_people_count
+                 FROM (
+                          SELECT user_id
+                          FROM t_wallet_withdraw_order
+                          WHERE DATE_FORMAT(update_time, '%Y-%m-%d') = CURRENT_DATE
+                            and status = 3
+                          GROUP BY user_id
+                      ) AS temp
+             ) AS t14,
+             (
+                 SELECT count(1) AS in_count_by_people
+                 FROM t_wallet_turnover
+                 WHERE CODE = 8
+                   AND DATE_FORMAT(create_time, '%Y-%m-%d') = CURRENT_DATE
+             ) AS t15,
+             (
+                 SELECT count(1) AS out_count_by_people
+                 FROM t_wallet_turnover
+                 WHERE CODE = 9
+                   AND DATE_FORMAT(create_time, '%Y-%m-%d') = CURRENT_DATE
+             ) AS t16,
+             (
+                 SELECT COUNT(temp.user_id) AS in_people_count
+                 FROM (
+                          SELECT user_id
+                          FROM t_wallet_turnover
+                          WHERE CODE = 8
+                            AND DATE_FORMAT(create_time, '%Y-%m-%d') = CURRENT_DATE
+                          GROUP BY user_id
+                      ) AS temp
+             ) AS t17,
+             (
+                 SELECT COUNT(temp.user_id) AS out_people_count
+                 FROM (
+                          SELECT user_id
+                          FROM t_wallet_turnover
+                          WHERE CODE = 9
+                            AND DATE_FORMAT(create_time, '%Y-%m-%d') = CURRENT_DATE
+                          GROUP BY user_id
+                      ) AS temp
+             ) AS t18,
+             (
+                 SELECT SUM(ABS(amount)) as in_trx_amount
+                 FROM t_wallet_turnover
+                 WHERE code = 8
+                   and DATE_FORMAT(create_time, '%Y-%m-%d') = CURRENT_DATE
+                   and wallet_type = 'TRX') as t19,
+
+             (
+                 SELECT SUM(ABS(amount)) as out_trx_amount
+                 FROM t_wallet_turnover
+                 WHERE code = 9
+                   and DATE_FORMAT(create_time, '%Y-%m-%d') = CURRENT_DATE
+                   and wallet_type = 'TRX') as t20
+
+    </sql>
+
+    <select id="selectCurrAmountInfo" resultMap="IndexAmountResult">
+        <include refid="selectCurrAmountInfoVo"/>
+    </select>
+</mapper>
