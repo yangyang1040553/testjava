@@ -12,94 +12,170 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * @author xxk
  * @date 2022-05-19
  */
-public class GamePlayerPromote extends BaseEntity implements  Cloneable {
+public class GamePlayerPromote extends BaseEntity implements Cloneable {
     private static final long serialVersionUID = 1L;
 
-    /** 玩家id */
+    /**
+     * 玩家id
+     */
     @Excel(name = "玩家id")
     private String id;
 
-    /** 玩家的邀请码 */
+    /**
+     * 玩家的邀请码
+     */
     @Excel(name = "玩家的邀请码")
     private String invitationCode;
 
-    /** 上级玩家id */
+    /**
+     * 上级玩家id
+     */
     @Excel(name = "上级玩家id")
     private String fatherUserId;
 
-    /** 上级玩家的邀请码 */
+    /**
+     * 上级玩家的邀请码
+     */
     @Excel(name = "上级玩家的邀请码")
     private String fatherInvitationCode;
 
-    /** usdt总收益 */
+    /**
+     * usdt总收益
+     */
     @Excel(name = "usdt总收益")
     private Double incomeUsdtAmount;
 
-    /** usdt今日收益 */
+    /**
+     * usdt今日收益
+     */
     @Excel(name = "usdt今日收益")
     private Double incomeUsdtToday;
 
-    /** usdt昨日收益 */
+    /**
+     * usdt昨日收益
+     */
     @Excel(name = "usdt昨日收益")
     private Double incomeUsdtYesterday;
 
-    /** usdt直推收益 */
+    /**
+     * usdt直推收益
+     */
     @Excel(name = "usdt直推收益")
     private Double incomeUsdtDirectPromote;
 
-    /** trx总收益 */
+    /**
+     * trx总收益
+     */
     @Excel(name = "trx总收益")
     private Double incomeTrxAmount;
 
-    /** trx今日收益 */
+    /**
+     * trx今日收益
+     */
     @Excel(name = "trx今日收益")
     private Double incomeTrxToday;
 
-    /** trx昨日收益 */
+    /**
+     * trx昨日收益
+     */
     @Excel(name = "trx昨日收益")
     private Double incomeTrxYesterday;
 
-    /** trx直推收益 */
+    /**
+     * trx直推收益
+     */
     @Excel(name = "trx直推收益")
     private Double incomeTrxDirectPromote;
 
-    /** 可提现的usdt金额 */
+    /**
+     * 可提现的usdt金额
+     */
     @Excel(name = "可提现的usdt金额")
     private Double canWithdrawUsdtAmount;
 
-    /** 可提现的trx金额 */
+    /**
+     * 可提现的trx金额
+     */
     @Excel(name = "可提现的trx金额")
     private Double canWithdrawTrxAmount;
 
-    /** 一级代理人数 */
+    /**
+     * 一级代理人数
+     */
     @Excel(name = "一级代理人数")
     private Long level1Person;
 
-    /** 二级代理人数 */
+    /**
+     * 二级代理人数
+     */
     @Excel(name = "二级代理人数")
     private Long level2Person;
 
-    /** 三级代理人数 */
+    /**
+     * 三级代理人数
+     */
     @Excel(name = "三级代理人数")
     private Long level3Person;
 
-    /** usdt对直接上级的游戏返佣贡献 */
+    /**
+     * usdt对直接上级的游戏返佣贡献
+     */
     @Excel(name = "usdt对直接上级的游戏返佣贡献")
     private Double usdtGameBrokerageToFather;
 
-    /** usdt对直接上级的代理返佣贡献 */
+    /**
+     * usdt对直接上级的代理返佣贡献
+     */
     @Excel(name = "usdt对直接上级的代理返佣贡献")
     private Double usdtPromoteBrokerageToFather;
 
-    /** trx对直接上级的游戏返佣贡献 */
+    /**
+     * trx对直接上级的游戏返佣贡献
+     */
     @Excel(name = "trx对直接上级的游戏返佣贡献")
     private Double trxGameBrokerageToFather;
 
-    /** trx对直接上级的代理返佣贡献 */
+    /**
+     * trx对直接上级的代理返佣贡献
+     */
     @Excel(name = "trx对直接上级的代理返佣贡献")
     private Double trxPromoteBrokerageToFather;
+
     public void setId(String id) {
         this.id = id;
+    }
+
+
+    @Excel(name = "邀请奖励人数")
+    private String invite_award_person;
+    @Excel(name = "团队usdt总输赢")
+    private String team_usdt_win_amount;
+    @Excel(name = "团队trx总输赢")
+    private String team_trx_win_amount;
+
+
+    public String getInvite_award_person() {
+        return invite_award_person;
+    }
+
+    public void setInvite_award_person(String invite_award_person) {
+        this.invite_award_person = invite_award_person;
+    }
+
+    public String getTeam_usdt_win_amount() {
+        return team_usdt_win_amount;
+    }
+
+    public void setTeam_usdt_win_amount(String team_usdt_win_amount) {
+        this.team_usdt_win_amount = team_usdt_win_amount;
+    }
+
+    public String getTeam_trx_win_amount() {
+        return team_trx_win_amount;
+    }
+
+    public void setTeam_trx_win_amount(String team_trx_win_amount) {
+        this.team_trx_win_amount = team_trx_win_amount;
     }
 
     public String getId() {
@@ -139,7 +215,7 @@ public class GamePlayerPromote extends BaseEntity implements  Cloneable {
     }
 
     public void setIncomeUsdtToday(Double incomeUsdtToday) {
-        this.incomeUsdtToday =  Global.getWalletAmountToReal(incomeUsdtToday);
+        this.incomeUsdtToday = Global.getWalletAmountToReal(incomeUsdtToday);
     }
 
     public Double getIncomeUsdtToday() {
@@ -163,7 +239,7 @@ public class GamePlayerPromote extends BaseEntity implements  Cloneable {
     }
 
     public void setIncomeTrxAmount(Double incomeTrxAmount) {
-        this.incomeTrxAmount =Global.getWalletAmountToReal(incomeTrxAmount);
+        this.incomeTrxAmount = Global.getWalletAmountToReal(incomeTrxAmount);
     }
 
     public Double getIncomeTrxAmount() {
@@ -171,7 +247,7 @@ public class GamePlayerPromote extends BaseEntity implements  Cloneable {
     }
 
     public void setIncomeTrxToday(Double incomeTrxToday) {
-        this.incomeTrxToday =  Global.getWalletAmountToReal(incomeTrxToday);
+        this.incomeTrxToday = Global.getWalletAmountToReal(incomeTrxToday);
     }
 
     public Double getIncomeTrxToday() {
@@ -179,7 +255,7 @@ public class GamePlayerPromote extends BaseEntity implements  Cloneable {
     }
 
     public void setIncomeTrxYesterday(Double incomeTrxYesterday) {
-        this.incomeTrxYesterday =  Global.getWalletAmountToReal(incomeTrxYesterday);
+        this.incomeTrxYesterday = Global.getWalletAmountToReal(incomeTrxYesterday);
     }
 
     public Double getIncomeTrxYesterday() {
@@ -203,7 +279,7 @@ public class GamePlayerPromote extends BaseEntity implements  Cloneable {
     }
 
     public void setCanWithdrawTrxAmount(Double canWithdrawTrxAmount) {
-        this.canWithdrawTrxAmount =  Global.getWalletAmountToReal(canWithdrawTrxAmount);
+        this.canWithdrawTrxAmount = Global.getWalletAmountToReal(canWithdrawTrxAmount);
     }
 
     public Double getCanWithdrawTrxAmount() {
@@ -235,7 +311,7 @@ public class GamePlayerPromote extends BaseEntity implements  Cloneable {
     }
 
     public void setUsdtGameBrokerageToFather(Double usdtGameBrokerageToFather) {
-        this.usdtGameBrokerageToFather =Global.getWalletAmountToReal(usdtGameBrokerageToFather);
+        this.usdtGameBrokerageToFather = Global.getWalletAmountToReal(usdtGameBrokerageToFather);
     }
 
     public Double getUsdtGameBrokerageToFather() {
@@ -243,7 +319,7 @@ public class GamePlayerPromote extends BaseEntity implements  Cloneable {
     }
 
     public void setUsdtPromoteBrokerageToFather(Double usdtPromoteBrokerageToFather) {
-        this.usdtPromoteBrokerageToFather =  Global.getWalletAmountToReal(usdtPromoteBrokerageToFather);
+        this.usdtPromoteBrokerageToFather = Global.getWalletAmountToReal(usdtPromoteBrokerageToFather);
     }
 
     public Double getUsdtPromoteBrokerageToFather() {
@@ -251,7 +327,7 @@ public class GamePlayerPromote extends BaseEntity implements  Cloneable {
     }
 
     public void setTrxGameBrokerageToFather(Double trxGameBrokerageToFather) {
-        this.trxGameBrokerageToFather =  Global.getWalletAmountToReal(trxGameBrokerageToFather);
+        this.trxGameBrokerageToFather = Global.getWalletAmountToReal(trxGameBrokerageToFather);
     }
 
     public Double getTrxGameBrokerageToFather() {

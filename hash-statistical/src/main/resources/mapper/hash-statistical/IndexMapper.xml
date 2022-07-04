@@ -44,12 +44,12 @@
                  SELECT count(1) AS recharge_count
                  FROM t_wallet_recharge_order
                  WHERE frist_recharge = 1
-                   AND create_time = DATE_FORMAT(create_time, '%Y-%m-%d') = CURRENT_DATE
+                   AND DATE_FORMAT(create_time, '%Y-%m-%d') = CURRENT_DATE
              ) AS t2,
              (
                  SELECT COUNT(1) AS bet_count
                  FROM t_game_bet_record
-                 WHERE create_time = DATE_FORMAT(create_time, '%Y-%m-%d') = CURRENT_DATE
+                 WHERE DATE_FORMAT(create_time, '%Y-%m-%d') = CURRENT_DATE
              ) AS t3,
              (
                  SELECT COUNT(t_game.user_id) AS bet_persion_count
