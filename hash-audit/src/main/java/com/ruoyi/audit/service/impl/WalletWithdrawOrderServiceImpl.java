@@ -67,10 +67,10 @@ public class WalletWithdrawOrderServiceImpl implements IWalletWithdrawOrderServi
      */
     @Override
     public int updateWalletWithdrawOrder(WalletWithdrawOrder walletWithdrawOrder) {
-        WalletWithdrawOrder order = walletWithdrawOrderMapper.selectWalletWithdrawOrderById(walletWithdrawOrder.getId());
-        if (order.getCheckPerson() != null && CHECK_STATUS.equals(walletWithdrawOrder.getCheckStatus())) {
-            return ORDER_HAD_CHECK;
-        }
+//        WalletWithdrawOrder order = walletWithdrawOrderMapper.selectWalletWithdrawOrderById(walletWithdrawOrder.getId());
+//        if (order.getCheckPerson() != null && CHECK_STATUS.equals(walletWithdrawOrder.getCheckStatus())) {
+//            return ORDER_HAD_CHECK;
+//        }
         walletWithdrawOrder.setUpdateTime(DateUtils.getNowDate());
         return walletWithdrawOrderMapper.updateWalletWithdrawOrder(walletWithdrawOrder);
     }
