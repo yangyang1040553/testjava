@@ -50,6 +50,7 @@
             </if>
             <if test="hashAddressTrx != null  and hashAddressTrx != ''">and a.hash_address_trx = #{hashAddressTrx}</if>
             <if test="invitationCode != null and invitationCode != '' ">and b.invitation_code = #{invitationCode}</if>
+            <if test="hashTransAddressTrx != null and hashTransAddressTrx != '' ">and a.hash_trans_address_trx = #{hashTransAddressTrx}</if>
         </where>
     </select>
 

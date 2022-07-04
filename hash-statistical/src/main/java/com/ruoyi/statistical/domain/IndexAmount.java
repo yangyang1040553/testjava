@@ -123,7 +123,7 @@ public class IndexAmount extends BaseEntity {
     }
 
     public Double getUsdt_out_amount() {
-        return usdt_out_amount;
+        return Global.getWalletAmountToReal(usdt_out_amount);
     }
 
     public void setUsdt_out_amount(Double usdt_out_amount) {
@@ -131,7 +131,7 @@ public class IndexAmount extends BaseEntity {
     }
 
     public Double getTrx_out_amount() {
-        return trx_out_amount;
+        return Global.getWalletAmountToReal(trx_out_amount);
     }
 
     public void setTrx_out_amount(Double trx_out_amount) {

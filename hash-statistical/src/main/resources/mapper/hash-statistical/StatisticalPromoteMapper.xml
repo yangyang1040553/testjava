@@ -46,7 +46,7 @@
         <where>
             <if test="phone != null  and phone != ''">and phone = #{phone}</if>
             <if test="account != null  and account != ''">and account = #{account}</if>
-            <if test="registerTime != null ">and register_time = #{registerTime}</if>
+            <if test="registerTime != null ">and  DATE_FORMAT(register_time, '%Y-%m-%d') = DATE_FORMAT( #{registerTime}, '%Y-%m-%d') </if>
             <if test="promoteOdds != null ">and promote_odds = #{promoteOdds}</if>
             <if test="sharePromoteOdds != null ">and share_promote_odds = #{sharePromoteOdds}</if>
         </where>

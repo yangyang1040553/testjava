@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="code != null "> and code = #{code}</if>
             <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
             <if test="nickName != null  and nickName != ''"> and nick_name like concat('%', #{nickName}, '%')</if>
-            <if test="createTime != null "> and create_time >= #{createTime}</if>
+            <if test="createTime != null "> and DATE_FORMAT(create_time, '%Y-%m-%d') = DATE_FORMAT( #{createTime}, '%Y-%m-%d')</if>
         </where>
     </select>
     

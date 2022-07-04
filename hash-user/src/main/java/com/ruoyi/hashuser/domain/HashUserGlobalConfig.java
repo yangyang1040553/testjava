@@ -81,6 +81,16 @@ public class HashUserGlobalConfig extends BaseEntity {
     @Excel(name = "是否官方客服地址")
     private Integer isSelfOnline;
 
+    @Excel(name = "中间下载页面地址")
+    private String h5_qr_addr;
+
+    public String getH5_qr_addr() {
+        return h5_qr_addr;
+    }
+
+    public void setH5_qr_addr(String h5_qr_addr) {
+        this.h5_qr_addr = h5_qr_addr;
+    }
 
     @Excel(name = "web地址")
     private String webAddr;

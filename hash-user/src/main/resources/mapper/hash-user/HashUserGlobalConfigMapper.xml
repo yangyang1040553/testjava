@@ -22,6 +22,7 @@
         <result property="blockChainAddr" column="block_chain_addr"/>
         <result property="isSelfOnline" column="is_self_online"/>
         <result property="webAddr" column="web_addr"/>
+        <result property="h5_qr_addr" column="h5_qr_addr"/>
 
     </resultMap>
 
@@ -42,7 +43,8 @@
                update_by,
                block_chain_addr,
                is_self_online,
-               web_addr
+               web_addr,
+               h5_qr_addr
         from t_user_global_config
     </sql>
 
@@ -78,6 +80,7 @@
             <if test="blockChainAddr != null">block_chain_addr,</if>
             <if test="isSelfOnline != null">is_self_online,</if>
             <if test="webAddr != null">web_addr,</if>
+            <if test="h5_qr_addr != null">h5_qr_addr,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -97,6 +100,7 @@
             <if test="blockChainAddr != null">#{blockChainAddr},</if>
             <if test="isSelfOnline != null">#{isSelfOnline},</if>
             <if test="webAddr != null">#{webAddr},</if>
+            <if test="h5_qr_addr != null">#{h5_qr_addr},</if>
         </trim>
     </insert>
 
@@ -121,6 +125,7 @@
             <if test="blockChainAddr != null">block_chain_addr = #{blockChainAddr},</if>
             <if test="isSelfOnline != null">is_self_online = #{isSelfOnline},</if>
             <if test="webAddr != null">web_addr = #{webAddr},</if>
+            <if test="h5_qr_addr != null">h5_qr_addr = #{h5_qr_addr},</if>
         </trim>
         where id = #{id}
     </update>
