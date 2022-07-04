@@ -1,6 +1,7 @@
 package com.ruoyi.statistical.service;
 
 import com.ruoyi.statistical.domain.Index;
+import com.ruoyi.statistical.domain.IndexActive;
 import com.ruoyi.statistical.domain.IndexAmount;
 import com.ruoyi.statistical.domain.Keep;
 
@@ -16,4 +17,8 @@ public interface IIndexService {
     public Index selectIndex();
 
     public IndexAmount selectCurrAmountInfo();
+
+    public  List<IndexActive> selectCurrActive();
+
+    public IndexActive selectCurrActiveAmount();
 }

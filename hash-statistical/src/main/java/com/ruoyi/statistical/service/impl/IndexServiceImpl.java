@@ -2,8 +2,10 @@ package com.ruoyi.statistical.service.impl;
 
 import com.ruoyi.common.constant.Global;
 import com.ruoyi.statistical.domain.Index;
+import com.ruoyi.statistical.domain.IndexActive;
 import com.ruoyi.statistical.domain.IndexAmount;
 import com.ruoyi.statistical.domain.Keep;
+import com.ruoyi.statistical.mapper.IndexActiveMapper;
 import com.ruoyi.statistical.mapper.IndexAmountMapper;
 import com.ruoyi.statistical.mapper.IndexMapper;
 import com.ruoyi.statistical.mapper.KeepMapper;
@@ -26,6 +28,9 @@ public class IndexServiceImpl implements IIndexService {
     private IndexMapper indexMapper;
     @Autowired
     private IndexAmountMapper indexAmountMapper;
+
+    @Autowired
+    private IndexActiveMapper indexActiveMapper;
 
     @Override
     public Index selectIndex() {
@@ -81,5 +86,15 @@ public class IndexServiceImpl implements IIndexService {
     @Override
     public IndexAmount selectCurrAmountInfo() {
         return indexAmountMapper.selectCurrAmountInfo();
+    }
+
+    @Override
+    public List<IndexActive> selectCurrActive() {
+        return indexActiveMapper.selectCurrActive();
+    }
+
+    @Override
+    public IndexActive selectCurrActiveAmount() {
+        return indexActiveMapper.selectCurrActiveAmountInfo();
     }
 }

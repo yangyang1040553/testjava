@@ -41,4 +41,14 @@ public class IndexController extends BaseController {
     public AjaxResult currAmountInfo() {
         return AjaxResult.success(iIndexService.selectCurrAmountInfo());
     }
+
+    @GetMapping("/indexActive")
+    public AjaxResult indexActive() {
+        return AjaxResult.success(iIndexService.selectCurrActive());
+    }
+
+    @GetMapping("/selectCurrActiveAmount")
+    public AjaxResult selectCurrActiveAmount() {
+        return AjaxResult.success(iIndexService.selectCurrActiveAmount());
+    }
 }

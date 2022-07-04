@@ -43,7 +43,7 @@ public class Index extends BaseEntity {
 
 
     public Double getMinTrx() {
-        return minTrx;
+        return Global.getWalletAmountToReal(minTrx);
     }
 
     public void setMinTrx(Double minTrx) {
@@ -51,7 +51,7 @@ public class Index extends BaseEntity {
     }
 
     public Double getMinUsdt() {
-        return minUsdt;
+        return Global.getWalletAmountToReal(minUsdt);
     }
 
     public void setMinUsdt(Double minUsdt) {
@@ -59,7 +59,7 @@ public class Index extends BaseEntity {
     }
 
     public Double getMaxTrx() {
-        return maxTrx;
+        return Global.getWalletAmountToReal(maxTrx);
     }
 
     public void setMaxTrx(Double maxTrx) {
@@ -67,7 +67,7 @@ public class Index extends BaseEntity {
     }
 
     public Double getMaxUsdt() {
-        return maxUsdt;
+        return Global.getWalletAmountToReal(maxUsdt);
     }
 
     public void setMaxUsdt(Double maxUsdt) {
