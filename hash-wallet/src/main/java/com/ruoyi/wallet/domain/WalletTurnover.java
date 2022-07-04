@@ -43,19 +43,19 @@ public class WalletTurnover extends BaseEntity {
      * 流水金额
      */
     @Excel(name = "流水金额")
-    private Long amount;
+    private Double amount;
 
     /**
      * 当前金额
      */
     @Excel(name = "当前金额")
-    private Long currentAmount;
+    private Double currentAmount;
 
     /**
      * 之后金额
      */
     @Excel(name = "之后金额")
-    private Long afterAmount;
+    private Double afterAmount;
 
     /**
      * 关联订单
@@ -121,7 +121,7 @@ public class WalletTurnover extends BaseEntity {
         return walletType;
     }
 
-    public void setAmount(Long amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
@@ -129,7 +129,7 @@ public class WalletTurnover extends BaseEntity {
         return Global.getWalletAmountToReal(amount);
     }
 
-    public void setCurrentAmount(Long currentAmount) {
+    public void setCurrentAmount(Double currentAmount) {
         this.currentAmount = currentAmount;
     }
 
@@ -137,7 +137,7 @@ public class WalletTurnover extends BaseEntity {
          return Global.getWalletAmountToReal(currentAmount);
     }
 
-    public void setAfterAmount(Long afterAmount) {
+    public void setAfterAmount(Double afterAmount) {
         this.afterAmount = afterAmount;
     }
 

@@ -3,6 +3,7 @@ package com.ruoyi.wallet.controller;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ruoyi.wallet.domain.WalletPlayerData;
 import com.ruoyi.wallet.domain.WalletTransactionOrder;
 import com.ruoyi.wallet.service.IWalletTransactionOrderService;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -66,6 +67,11 @@ public class WalletTransactionOrderController extends BaseController {
     public void export(HttpServletResponse response, WalletTransactionOrder walletTransactionOrder) {
         startOrderBy();
         List<WalletTransactionOrder> list = walletTransactionOrderService.selectWalletTransactionOrderList(walletTransactionOrder);
+        for (WalletTransactionOrder statisticalPlayerDay : list) {
+            statisticalPlayerDay.setMinerAmount(statisticalPlayerDay.getMinerAmount());
+            statisticalPlayerDay.setSourceAmount(statisticalPlayerDay.getSourceAmount());
+            statisticalPlayerDay.setToAmount(statisticalPlayerDay.getToAmount());
+        }
         ExcelUtil<WalletTransactionOrder> util = new ExcelUtil<WalletTransactionOrder>(WalletTransactionOrder.class);
         util.exportExcel(response, list, "转换订单数据");
     }

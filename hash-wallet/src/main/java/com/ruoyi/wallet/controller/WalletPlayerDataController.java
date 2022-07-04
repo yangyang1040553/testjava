@@ -10,6 +10,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.common.constant.Global;
 import com.ruoyi.common.utils.http.HttpUtils;
 import com.ruoyi.common.utils.sign.Md5Utils;
+import com.ruoyi.wallet.domain.WalletRechargeOrder;
 import com.ruoyi.wallet.vo.WalletInOutMoneyVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -70,6 +71,16 @@ public class WalletPlayerDataController extends BaseController {
     public void export(HttpServletResponse response, WalletPlayerData walletPlayerData) {
         startOrderBy();
         List<WalletPlayerData> list = walletPlayerDataService.selectWalletPlayerDataList(walletPlayerData);
+        for (WalletPlayerData statisticalPlayerDay : list) {
+            statisticalPlayerDay.setTrxAmount(statisticalPlayerDay.getTrxAmount());
+            statisticalPlayerDay.setUsdtAmount(statisticalPlayerDay.getUsdtAmount());
+            statisticalPlayerDay.setTrxRemoteAmount(statisticalPlayerDay.getTrxRemoteAmount());
+            statisticalPlayerDay.setUsdtRemoteAmount(statisticalPlayerDay.getUsdtRemoteAmount());
+            statisticalPlayerDay.setTrxWithdrawTotal(statisticalPlayerDay.getTrxWithdrawTotal());
+            statisticalPlayerDay.setUsdtWithdrawTotal(statisticalPlayerDay.getUsdtWithdrawTotal());
+            statisticalPlayerDay.setTrxRechargeTotal(statisticalPlayerDay.getTrxRechargeTotal());
+            statisticalPlayerDay.setUsdtRechargeTotal(statisticalPlayerDay.getUsdtRechargeTotal());
+        }
         ExcelUtil<WalletPlayerData> util = new ExcelUtil<WalletPlayerData>(WalletPlayerData.class);
         util.exportExcel(response, list, "用户钱包数据");
     }

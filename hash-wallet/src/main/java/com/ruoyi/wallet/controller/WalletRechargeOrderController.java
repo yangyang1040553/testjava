@@ -70,6 +70,11 @@ public class WalletRechargeOrderController extends BaseController
     {
         startOrderBy();
         List<WalletRechargeOrder> list = walletRechargeOrderService.selectWalletRechargeOrderList(walletRechargeOrder);
+        for (WalletRechargeOrder statisticalPlayerDay : list) {
+            statisticalPlayerDay.setAmount(statisticalPlayerDay.getAmount());
+            statisticalPlayerDay.setPayAmount(statisticalPlayerDay.getPayAmount());
+            statisticalPlayerDay.setMinerAmount(statisticalPlayerDay.getMinerAmount());
+        }
         ExcelUtil<WalletRechargeOrder> util = new ExcelUtil<WalletRechargeOrder>(WalletRechargeOrder.class);
         util.exportExcel(response, list, "充值数据");
     }

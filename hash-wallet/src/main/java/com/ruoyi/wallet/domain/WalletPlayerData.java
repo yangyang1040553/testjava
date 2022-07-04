@@ -24,13 +24,13 @@ public class WalletPlayerData extends BaseEntity {
      * usdt余额
      */
     @Excel(name = "usdt余额")
-    private Long usdtAmount;
+    private Double usdtAmount;
 
     /**
      * trx余额
      */
     @Excel(name = "trx余额")
-    private Long trxAmount;
+    private Double trxAmount;
 
     /**
      * Usdt的hash地址
@@ -48,22 +48,22 @@ public class WalletPlayerData extends BaseEntity {
      * 总充值金额
      */
     @Excel(name = "TRX总充值金额")
-    private Long trxRechargeTotal;
+    private Double trxRechargeTotal;
     @Excel(name = "USDT总充值金额")
-    private Long usdtRechargeTotal;
+    private Double usdtRechargeTotal;
     @Excel(name = "TRX总提现金额")
-    private Long trxWithdrawTotal;
+    private Double trxWithdrawTotal;
     @Excel(name = "TRX总提现金额")
-    private Long usdtWithdrawTotal;
+    private Double usdtWithdrawTotal;
     @Excel(name = "昵称")
     private String nickName;
     @Excel(name = "邀请码")
     private String invitationCode;
 
     @Excel(name = "usdt远程余额")
-    private Long usdtRemoteAmount;
+    private Double usdtRemoteAmount;
     @Excel(name = "trx远程余额")
-    private Long trxRemoteAmount;
+    private Double trxRemoteAmount;
 
 
     @Excel(name = "trc转换")
@@ -81,7 +81,7 @@ public class WalletPlayerData extends BaseEntity {
         return Global.getWalletAmountToReal(usdtRemoteAmount);
     }
 
-    public void setUsdtRemoteAmount(Long usdtRemoteAmount) {
+    public void setUsdtRemoteAmount(Double usdtRemoteAmount) {
         this.usdtRemoteAmount = usdtRemoteAmount;
     }
 
@@ -89,7 +89,7 @@ public class WalletPlayerData extends BaseEntity {
         return Global.getWalletAmountToReal(trxRemoteAmount);
     }
 
-    public void setTrxRemoteAmount(Long trxRemoteAmount) {
+    public void setTrxRemoteAmount(Double trxRemoteAmount) {
         this.trxRemoteAmount = trxRemoteAmount;
     }
 
@@ -105,7 +105,7 @@ public class WalletPlayerData extends BaseEntity {
         return Global.getWalletAmountToReal(trxRechargeTotal);
     }
 
-    public void setTrxRechargeTotal(Long trxRechargeTotal) {
+    public void setTrxRechargeTotal(Double trxRechargeTotal) {
         this.trxRechargeTotal = trxRechargeTotal;
     }
 
@@ -113,7 +113,7 @@ public class WalletPlayerData extends BaseEntity {
         return Global.getWalletAmountToReal(usdtRechargeTotal);
     }
 
-    public void setUsdtRechargeTotal(Long usdtRechargeTotal) {
+    public void setUsdtRechargeTotal(Double usdtRechargeTotal) {
         this.usdtRechargeTotal = usdtRechargeTotal;
     }
 
@@ -121,7 +121,7 @@ public class WalletPlayerData extends BaseEntity {
         return Global.getWalletAmountToReal(trxWithdrawTotal);
     }
 
-    public void setTrxWithdrawTotal(Long trxWithdrawTotal) {
+    public void setTrxWithdrawTotal(Double trxWithdrawTotal) {
         this.trxWithdrawTotal = trxWithdrawTotal;
     }
 
@@ -129,7 +129,7 @@ public class WalletPlayerData extends BaseEntity {
         return Global.getWalletAmountToReal(usdtWithdrawTotal);
     }
 
-    public void setUsdtWithdrawTotal(Long usdtWithdrawTotal) {
+    public void setUsdtWithdrawTotal(Double usdtWithdrawTotal) {
         this.usdtWithdrawTotal = usdtWithdrawTotal;
     }
 
@@ -149,7 +149,7 @@ public class WalletPlayerData extends BaseEntity {
         return id;
     }
 
-    public void setUsdtAmount(Long usdtAmount) {
+    public void setUsdtAmount(Double usdtAmount) {
         this.usdtAmount = usdtAmount;
     }
 
@@ -157,7 +157,7 @@ public class WalletPlayerData extends BaseEntity {
         return Global.getWalletAmountToReal(usdtAmount);
     }
 
-    public void setTrxAmount(Long trxAmount) {
+    public void setTrxAmount(Double trxAmount) {
         this.trxAmount = trxAmount;
     }
 

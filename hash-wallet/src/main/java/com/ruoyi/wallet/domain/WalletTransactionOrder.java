@@ -61,19 +61,19 @@ public class WalletTransactionOrder extends BaseEntity {
      * 源金额
      */
     @Excel(name = "源金额")
-    private Long sourceAmount;
+    private Double sourceAmount;
 
     /**
      * 转入金额
      */
     @Excel(name = "转入金额")
-    private Long toAmount;
+    private Double toAmount;
 
     /**
      * 矿工费
      */
     @Excel(name = "矿工费")
-    private Long minerAmount;
+    private Double minerAmount;
 
     /**
      * 转入状态
@@ -175,7 +175,7 @@ public class WalletTransactionOrder extends BaseEntity {
         return collectionAddress;
     }
 
-    public void setSourceAmount(Long sourceAmount) {
+    public void setSourceAmount(Double sourceAmount) {
         this.sourceAmount = sourceAmount;
     }
 
@@ -183,7 +183,7 @@ public class WalletTransactionOrder extends BaseEntity {
         return Global.getWalletAmountToReal(sourceAmount);
     }
 
-    public void setToAmount(Long toAmount) {
+    public void setToAmount(Double toAmount) {
         this.toAmount = toAmount;
     }
 
@@ -191,7 +191,7 @@ public class WalletTransactionOrder extends BaseEntity {
         return Global.getWalletAmountToReal(toAmount);
     }
 
-    public void setMinerAmount(Long minerAmount) {
+    public void setMinerAmount(Double minerAmount) {
         this.minerAmount = minerAmount;
     }
 

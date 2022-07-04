@@ -54,19 +54,19 @@ public class WalletRechargeOrder extends BaseEntity {
      * 充值的金额
      */
     @Excel(name = "充值的金额")
-    private Long amount;
+    private Double amount;
 
     /**
      * 实际交易金额
      */
     @Excel(name = "实际交易金额")
-    private Long payAmount;
+    private Double payAmount;
 
     /**
      * 矿工费
      */
     @Excel(name = "矿工费")
-    private Long minerAmount;
+    private Double minerAmount;
 
     /**
      * 充值状态
@@ -152,7 +152,7 @@ public class WalletRechargeOrder extends BaseEntity {
         return collectionAddress;
     }
 
-    public void setAmount(Long amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
@@ -160,7 +160,7 @@ public class WalletRechargeOrder extends BaseEntity {
         return Global.getWalletAmountToReal(amount);
     }
 
-    public void setPayAmount(Long payAmount) {
+    public void setPayAmount(Double payAmount) {
         this.payAmount = payAmount;
     }
 
@@ -168,7 +168,7 @@ public class WalletRechargeOrder extends BaseEntity {
         return Global.getWalletAmountToReal(payAmount);
     }
 
-    public void setMinerAmount(Long minerAmount) {
+    public void setMinerAmount(Double minerAmount) {
         this.minerAmount = minerAmount;
     }
 

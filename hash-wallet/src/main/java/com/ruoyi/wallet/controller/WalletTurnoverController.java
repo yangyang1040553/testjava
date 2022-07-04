@@ -4,6 +4,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.wallet.domain.WalletTransactionOrder;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,6 +57,11 @@ public class WalletTurnoverController extends BaseController {
     public void export(HttpServletResponse response, WalletTurnover walletTurnover) {
         startOrderBy();
         List<WalletTurnover> list = walletTurnoverService.selectWalletTurnoverList(walletTurnover);
+        for (WalletTurnover statisticalPlayerDay : list) {
+            statisticalPlayerDay.setAmount(statisticalPlayerDay.getAmount());
+            statisticalPlayerDay.setAfterAmount(statisticalPlayerDay.getAfterAmount());
+            statisticalPlayerDay.setCurrentAmount(statisticalPlayerDay.getCurrentAmount());
+        }
         ExcelUtil<WalletTurnover> util = new ExcelUtil<WalletTurnover>(WalletTurnover.class);
         util.exportExcel(response, list, "钱包流水记录数据");
     }
