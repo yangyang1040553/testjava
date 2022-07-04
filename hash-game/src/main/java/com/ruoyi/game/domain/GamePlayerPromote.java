@@ -149,9 +149,9 @@ public class GamePlayerPromote extends BaseEntity implements Cloneable {
     @Excel(name = "邀请奖励人数")
     private String invite_award_person;
     @Excel(name = "团队usdt总输赢")
-    private String team_usdt_win_amount;
+    private Double team_usdt_win_amount;
     @Excel(name = "团队trx总输赢")
-    private String team_trx_win_amount;
+    private Double team_trx_win_amount;
 
 
     public String getInvite_award_person() {
@@ -162,19 +162,19 @@ public class GamePlayerPromote extends BaseEntity implements Cloneable {
         this.invite_award_person = invite_award_person;
     }
 
-    public String getTeam_usdt_win_amount() {
-        return team_usdt_win_amount;
+    public Double getTeam_usdt_win_amount() {
+        return Global.getWalletAmountToReal(team_usdt_win_amount);
     }
 
-    public void setTeam_usdt_win_amount(String team_usdt_win_amount) {
+    public void setTeam_usdt_win_amount(Double team_usdt_win_amount) {
         this.team_usdt_win_amount = team_usdt_win_amount;
     }
 
-    public String getTeam_trx_win_amount() {
-        return team_trx_win_amount;
+    public Double getTeam_trx_win_amount() {
+        return Global.getWalletAmountToReal(team_trx_win_amount);
     }
 
-    public void setTeam_trx_win_amount(String team_trx_win_amount) {
+    public void setTeam_trx_win_amount(Double team_trx_win_amount) {
         this.team_trx_win_amount = team_trx_win_amount;
     }
 

@@ -17,6 +17,9 @@
         <result property="promoteOdds" column="promote_odds"/>
         <result property="sharePromoteOdds" column="share_promote_odds"/>
         <result property="sumnumber" column="sumNumber"/>
+        <result property="invite_award_person" column="invite_award_person"/>
+        <result property="team_usdt_win_amount" column="team_usdt_win_amount"/>
+        <result property="team_trx_win_amount" column="team_trx_win_amount"/>
     </resultMap>
 
     <sql id="selectStatisticalPromoteVo">
@@ -31,7 +34,10 @@
                register_time,
                promote_odds,
                share_promote_odds,
-               sumNumber
+               sumNumber,
+               invite_award_person,
+               team_usdt_win_amount,
+               team_trx_win_amount
         from statistical_promote
     </sql>
 

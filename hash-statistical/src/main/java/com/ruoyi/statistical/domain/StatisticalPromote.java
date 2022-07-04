@@ -2,6 +2,7 @@ package com.ruoyi.statistical.domain;
 
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ruoyi.common.constant.Global;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
@@ -64,6 +65,41 @@ public class StatisticalPromote extends BaseEntity
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
     private Long sumnumber;
+
+
+    @Excel(name = "邀请奖励人数")
+    private String invite_award_person;
+    @Excel(name = "团队usdt总输赢")
+    private Double team_usdt_win_amount;
+    @Excel(name = "团队trx总输赢")
+    private Double team_trx_win_amount;
+
+
+    public String getInvite_award_person() {
+        return invite_award_person;
+    }
+
+    public void setInvite_award_person(String invite_award_person) {
+        this.invite_award_person = invite_award_person;
+    }
+
+    public Double getTeam_usdt_win_amount() {
+        return Global.getWalletAmountToReal(team_usdt_win_amount);
+    }
+
+    public void setTeam_usdt_win_amount(Double team_usdt_win_amount) {
+        this.team_usdt_win_amount = team_usdt_win_amount;
+    }
+
+    public Double getTeam_trx_win_amount() {
+        return Global.getWalletAmountToReal(team_trx_win_amount);
+    }
+
+    public void setTeam_trx_win_amount(Double team_trx_win_amount) {
+        this.team_trx_win_amount = team_trx_win_amount;
+    }
+
+
 
     public void setId(String id) 
     {
