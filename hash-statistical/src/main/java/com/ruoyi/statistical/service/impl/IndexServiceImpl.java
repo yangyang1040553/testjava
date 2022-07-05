@@ -50,17 +50,20 @@ public class IndexServiceImpl implements IIndexService {
                 minTrx = index.getTrx_win_amount();
                 minTrxGameId = index.getGame_id();
             }
-            if (index.getUsdt_win_amount() != null && index.getUsdt_win_amount() < minUsdt) {
-                minUsdt = index.getTrx_win_amount();
-                minUsdtGameId = index.getGame_id();
-            }
 
             if (index.getTrx_win_amount() != null && index.getTrx_win_amount() > maxTrx) {
                 maxTrx = index.getTrx_win_amount();
                 maxTrxGameId = index.getGame_id();
             }
+
+
+            if (index.getUsdt_win_amount() != null && index.getUsdt_win_amount() < minUsdt) {
+                minUsdt = index.getUsdt_win_amount();
+                minUsdtGameId = index.getGame_id();
+            }
+
             if (index.getUsdt_win_amount() != null && index.getUsdt_win_amount() > maxUsdt) {
-                maxUsdt = index.getTrx_win_amount();
+                maxUsdt = index.getUsdt_win_amount();
                 maxUsdtGameId = index.getGame_id();
             }
         }
