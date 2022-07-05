@@ -60,8 +60,8 @@ public class GameStatisticalDayServiceImpl implements IGameStatisticalDayService
                 "sum(trx_award_amount)as trx_award_amount," +
                 "sum(usdt_bet_amount)as usdt_bet_amount\n" +
                 ",sum(usdt_award_amount)as usdt_award_amount, " +
-                "(usdt_award_amount-usdt_bet_amount) as usdt_win,\n" +
-                "(trx_award_amount-trx_bet_amount) as trx_win " +
+                "( SUM(usdt_award_amount) - SUM(usdt_bet_amount) ) AS usdt_win,\n" +
+                "( SUM(trx_award_amount) - SUM(trx_bet_amount) ) AS trx_win " +
                 "from t_game_statistical_day ";
 
         if (gameStatisticalDay.getType() == Global.TYPE_DAY) {
@@ -72,8 +72,8 @@ public class GameStatisticalDayServiceImpl implements IGameStatisticalDayService
                     "\ttrx_award_amount,\n" +
                     "\tusdt_bet_amount,   \n" +
                     "\tusdt_award_amount, \n" +
-                    "(usdt_award_amount-usdt_bet_amount) as usdt_win,\n" +
-                    "(trx_award_amount-trx_bet_amount) as trx_win " +
+                    "\t(\tusdt_award_amount-usdt_bet_amount ) as usdt_win,\n" +
+                    "\t(\ttrx_award_amount-trx_bet_amount ) as trx_win  " +
                     "FROM\n" +
                     "\tt_game_statistical_day \n" +
                     "WHERE\n" +
@@ -86,8 +86,8 @@ public class GameStatisticalDayServiceImpl implements IGameStatisticalDayService
                     "sum(trx_award_amount)as trx_award_amount," +
                     "sum(usdt_bet_amount)as usdt_bet_amount\n" +
                     ",sum(usdt_award_amount)as usdt_award_amount, " +
-                    "(usdt_award_amount-usdt_bet_amount) as usdt_win,\n" +
-                    "(trx_award_amount-trx_bet_amount) as trx_win " +
+                    "( SUM(usdt_award_amount) - SUM(usdt_bet_amount) ) AS usdt_win,\n" +
+                    "( SUM(trx_award_amount) - SUM(trx_bet_amount) ) AS trx_win " +
                     "from t_game_statistical_day  WHERE  id <= CURRENT_DATE ";
         }
 
@@ -100,7 +100,7 @@ public class GameStatisticalDayServiceImpl implements IGameStatisticalDayService
         }
 
         if (gameStatisticalDay.getType() != Global.TYPE_DAY) {
-            sql += " GROUP BY time,game_id,usdt_win,trx_win";
+            sql += " GROUP BY time,game_id";
         }
         sql += " ORDER BY time DESC";
         gameStatisticalDay.setSql(sql);

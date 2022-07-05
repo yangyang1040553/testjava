@@ -61,8 +61,8 @@ public class GameStatisticalPositionDayServiceImpl implements IGameStatisticalPo
                         "sum(trx_award_amount) AS trx_award_amount, \n" +
                         "sum(usdt_bet_amount) AS usdt_bet_amount, \n" +
                         "sum(usdt_award_amount) AS usdt_award_amount," +
-                        "(usdt_award_amount-usdt_bet_amount) as usdt_win,\n" +
-                        "(trx_award_amount-trx_bet_amount) as trx_win"+
+                         "( SUM(usdt_award_amount) - SUM(usdt_bet_amount) ) AS usdt_win,\n" +
+                        "( SUM(trx_award_amount) - SUM(trx_bet_amount) ) AS trx_win "+
                         " FROM t_game_statistical_position_day ";
 
 
@@ -80,7 +80,7 @@ public class GameStatisticalPositionDayServiceImpl implements IGameStatisticalPo
 //        if (gameStatisticalPositionDay.getGameId() != null) {
 //            sql += ("  where game_id =" + gameStatisticalPositionDay.getGameId());
 //        }
-        sql += " GROUP BY time, game_id ,bet_position,usdt_win,trx_win";
+        sql += " GROUP BY time, game_id ,bet_position";
 
         gameStatisticalPositionDay.setSql(sql);
 
