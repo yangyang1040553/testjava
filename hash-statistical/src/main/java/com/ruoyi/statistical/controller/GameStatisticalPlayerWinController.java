@@ -67,6 +67,9 @@ public class GameStatisticalPlayerWinController extends BaseController
             statisticalPlayerWin.setUsdtBetAmount(statisticalPlayerWin.getUsdtBetAmount().longValue());
             statisticalPlayerWin.setUsdtAwardAmount(statisticalPlayerWin.getUsdtAwardAmount().longValue());
             statisticalPlayerWin.setUsdtWinAmount(statisticalPlayerWin.getUsdtWinAmount().longValue());
+
+
+
         }
         ExcelUtil<GameStatisticalPlayerWin> util = new ExcelUtil<GameStatisticalPlayerWin>(GameStatisticalPlayerWin.class);
         util.exportExcel(response, list, "玩家输赢数据");

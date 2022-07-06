@@ -54,13 +54,13 @@ public class WalletWithdrawOrder extends BaseEntity {
      * 提现的金额
      */
     @Excel(name = "提现的金额")
-    private Long amount;
+    private Double amount;
 
     /**
      * 矿工费
      */
     @Excel(name = "矿工费")
-    private Long minerAmount;
+    private Double minerAmount;
 
     /**
      * 状态  0：处理中 1：失败  2：拒绝  3：已完成
@@ -81,17 +81,17 @@ public class WalletWithdrawOrder extends BaseEntity {
     private String checkPerson;
 
     @Excel(name = "到账金额")
-    private Long payAmount;
+    private Double payAmount;
     @Excel(name = "说明")
     private String note;
 
 
 
-    public Long getPayAmount() {
+    public Double getPayAmount() {
         return payAmount;
     }
 
-    public void setPayAmount(Long payAmount) {
+    public void setPayAmount(Double payAmount) {
         this.payAmount = payAmount;
     }
 
@@ -151,20 +151,20 @@ public class WalletWithdrawOrder extends BaseEntity {
         return collectionAddress;
     }
 
-    public void setAmount(Long amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
-    public Long getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setMinerAmount(Long minerAmount) {
+    public void setMinerAmount(Double minerAmount) {
         this.minerAmount = minerAmount;
     }
 
     public Double getMinerAmount() {
-        return Global.getWalletAmountToReal(minerAmount);
+        return minerAmount;
     }
 
     public void setStatus(Long status) {

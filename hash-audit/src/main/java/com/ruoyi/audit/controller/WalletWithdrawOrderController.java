@@ -79,6 +79,11 @@ public class WalletWithdrawOrderController extends BaseController {
     public void export(HttpServletResponse response, WalletWithdrawOrder walletWithdrawOrder) {
         startOrderBy();
         List<WalletWithdrawOrder> list = walletWithdrawOrderService.selectWalletWithdrawOrderList(walletWithdrawOrder);
+        for (WalletWithdrawOrder withdrawOrder : list) {
+            withdrawOrder.setAmount(Global.getWalletAmountToReal(withdrawOrder.getAmount()));
+            withdrawOrder.setPayAmount(Global.getWalletAmountToReal(withdrawOrder.getPayAmount()));
+            withdrawOrder.setMinerAmount(Global.getWalletAmountToReal(withdrawOrder.getMinerAmount()));
+        }
         ExcelUtil<WalletWithdrawOrder> util = new ExcelUtil<WalletWithdrawOrder>(WalletWithdrawOrder.class);
         util.exportExcel(response, list, "提现审核数据");
     }

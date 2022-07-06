@@ -65,6 +65,9 @@ public class GameStatisticalPositionPlayerDayController extends BaseController
 
             statisticalDay.setUsdtAwardAmount(statisticalDay.getUsdtAwardAmount());
             statisticalDay.setUsdtBetAmount(statisticalDay.getUsdtBetAmount());
+
+            statisticalDay.setUsdtWin(statisticalDay.getUsdtWin());
+            statisticalDay.setTrxWin(statisticalDay.getTrxWin());
         }
         ExcelUtil<GameStatisticalPositionPlayerDay> util = new ExcelUtil<GameStatisticalPositionPlayerDay>(GameStatisticalPositionPlayerDay.class);
         util.exportExcel(response, list, "游戏玩家押注位置日统计数据");

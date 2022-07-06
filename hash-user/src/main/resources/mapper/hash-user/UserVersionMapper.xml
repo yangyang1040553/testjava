@@ -35,8 +35,8 @@
             <if test="platfrom != null  and platfrom != ''">and platfrom = #{platfrom}</if>
             <if test="version != null  and version != ''">and version = #{version}</if>
             <if test="upToVersion != null  and upToVersion != ''">and up_to_version = #{upToVersion}</if>
-            <if test="force != null  and force != ''">and is_force = #{force}</if>
-            <if test="createTime != null ">and create_time = #{createTime}</if>
+            <if test="force != null">and is_force = #{force}</if>
+            <if test="createTime != null ">and DATE_FORMAT(create_time, '%Y-%m-%d') =  DATE_FORMAT(#{createTime}, '%Y-%m-%d') </if>
             <if test="versionType != null ">and version_type = #{versionType}</if>
         </where>
     </select>

@@ -57,6 +57,10 @@ public class StatisticalPromoteController extends BaseController
     {
         startOrderBy();
         List<StatisticalPromote> list = statisticalPromoteService.selectStatisticalPromoteList(statisticalPromote);
+        for (StatisticalPromote promote : list) {
+            promote.setTeam_trx_win_amount(promote.getTeam_usdt_win_amount());
+            promote.setTeam_usdt_win_amount(promote.getTeam_usdt_win_amount());
+        }
         ExcelUtil<StatisticalPromote> util = new ExcelUtil<StatisticalPromote>(StatisticalPromote.class);
         util.exportExcel(response, list, "VIEW数据");
     }

@@ -40,7 +40,7 @@ public class UserVersion extends BaseEntity
 
     /** 是否强更 0否 1是 */
     @Excel(name = "是否强更 0否 1是")
-    private int force;
+    private Integer force;
 
     public Integer getVersionType() {
         return versionType;
@@ -95,12 +95,12 @@ public class UserVersion extends BaseEntity
     {
         return upToVersion;
     }
-    public void setForce(int force)
+    public void setForce(Integer force)
     {
         this.force = force;
     }
 
-    public int getForce()
+    public Integer getForce()
     {
         return force;
     }
