@@ -60,13 +60,13 @@ public class GameStatisticalPlayerWinController extends BaseController
         startOrderBy();
         List<GameStatisticalPlayerWin> list = gameStatisticalPlayerWinService.selectGameStatisticalPlayerWinList(gameStatisticalPlayerWin);
         for (GameStatisticalPlayerWin statisticalPlayerWin : list) {
-            statisticalPlayerWin.setTrxBetAmount(statisticalPlayerWin.getTrxBetAmount().longValue());
-            statisticalPlayerWin.setTrxAwardAmount(statisticalPlayerWin.getTrxAwardAmount().longValue());
-            statisticalPlayerWin.setTrxWinAmount(statisticalPlayerWin.getTrxWinAmount().longValue());
+            statisticalPlayerWin.setTrxBetAmount(statisticalPlayerWin.getTrxBetAmount());
+            statisticalPlayerWin.setTrxAwardAmount(statisticalPlayerWin.getTrxAwardAmount());
+            statisticalPlayerWin.setTrxWinAmount(statisticalPlayerWin.getTrxWinAmount());
 
-            statisticalPlayerWin.setUsdtBetAmount(statisticalPlayerWin.getUsdtBetAmount().longValue());
-            statisticalPlayerWin.setUsdtAwardAmount(statisticalPlayerWin.getUsdtAwardAmount().longValue());
-            statisticalPlayerWin.setUsdtWinAmount(statisticalPlayerWin.getUsdtWinAmount().longValue());
+            statisticalPlayerWin.setUsdtBetAmount(statisticalPlayerWin.getUsdtBetAmount());
+            statisticalPlayerWin.setUsdtAwardAmount(statisticalPlayerWin.getUsdtAwardAmount());
+            statisticalPlayerWin.setUsdtWinAmount(statisticalPlayerWin.getUsdtWinAmount());
 
 
 

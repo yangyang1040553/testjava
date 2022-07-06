@@ -31,37 +31,37 @@ public class GameStatisticalPlayerWin extends BaseEntity {
      * 今日usdt押注金额
      */
     @Excel(name = "今日usdt押注金额")
-    private Long usdtBetAmount;
+    private Double usdtBetAmount;
 
     /**
      * 今日usdt中奖金额
      */
     @Excel(name = "今日usdt中奖金额")
-    private Long usdtAwardAmount;
+    private Double usdtAwardAmount;
 
     /**
      * 今日usdt输赢金额
      */
     @Excel(name = "今日usdt输赢金额")
-    private Long usdtWinAmount;
+    private Double usdtWinAmount;
 
     /**
      * 今日trx押注金额
      */
     @Excel(name = "今日trx押注金额")
-    private Long trxBetAmount;
+    private Double trxBetAmount;
 
     /**
      * 今日trx中奖金额
      */
     @Excel(name = "今日trx中奖金额")
-    private Long trxAwardAmount;
+    private Double trxAwardAmount;
 
     /**
      * 今日trx输赢金额
      */
     @Excel(name = "今日trx输赢金额")
-    private Long trxWinAmount;
+    private Double trxWinAmount;
 
 
     public void setId(String id) {
@@ -80,7 +80,7 @@ public class GameStatisticalPlayerWin extends BaseEntity {
         return userId;
     }
 
-    public void setUsdtBetAmount(Long usdtBetAmount) {
+    public void setUsdtBetAmount(Double usdtBetAmount) {
         this.usdtBetAmount = usdtBetAmount;
     }
 
@@ -88,7 +88,7 @@ public class GameStatisticalPlayerWin extends BaseEntity {
         return Global.getWalletAmountToReal(usdtBetAmount);
     }
 
-    public void setUsdtAwardAmount(Long usdtAwardAmount) {
+    public void setUsdtAwardAmount(Double usdtAwardAmount) {
         this.usdtAwardAmount = usdtAwardAmount;
     }
 
@@ -96,7 +96,7 @@ public class GameStatisticalPlayerWin extends BaseEntity {
         return Global.getWalletAmountToReal(usdtAwardAmount);
     }
 
-    public void setUsdtWinAmount(Long usdtWinAmount) {
+    public void setUsdtWinAmount(Double usdtWinAmount) {
         this.usdtWinAmount = usdtWinAmount;
     }
 
@@ -104,7 +104,7 @@ public class GameStatisticalPlayerWin extends BaseEntity {
         return Global.getWalletAmountToReal(usdtWinAmount);
     }
 
-    public void setTrxBetAmount(Long trxBetAmount) {
+    public void setTrxBetAmount(Double trxBetAmount) {
         this.trxBetAmount = trxBetAmount;
     }
 
@@ -112,7 +112,7 @@ public class GameStatisticalPlayerWin extends BaseEntity {
         return Global.getWalletAmountToReal(trxBetAmount);
     }
 
-    public void setTrxAwardAmount(Long trxAwardAmount) {
+    public void setTrxAwardAmount(Double trxAwardAmount) {
         this.trxAwardAmount = trxAwardAmount;
     }
 
@@ -120,7 +120,7 @@ public class GameStatisticalPlayerWin extends BaseEntity {
         return Global.getWalletAmountToReal(trxAwardAmount);
     }
 
-    public void setTrxWinAmount(Long trxWinAmount) {
+    public void setTrxWinAmount(Double trxWinAmount) {
         this.trxWinAmount = trxWinAmount;
     }
 
