@@ -17,8 +17,8 @@ public class UserRedis {
     /***
      * 设置版本更新时间
      */
-    public void setVersionTime(){
-        redisCache.setCacheMapValue(RedisKey.common_config_update,"2",System.currentTimeMillis());
+    public void setVersionTime() {
+        redisCache.setCacheMapValue(RedisKey.common_config_update, "2", System.currentTimeMillis());
     }
 
     /***
@@ -75,6 +75,15 @@ public class UserRedis {
      */
     public void delUserBanner() {
         redisCache.deleteObject(RedisKey.user_banner_config);
+    }
+
+    /***
+     * 设置用户客户端日志时间
+     * @param userId
+     * @param time
+     */
+    public void setUserClientLog(String userId, long time) {
+        redisCache.setCacheObject(RedisKey.common_client_log + userId, String.valueOf(time));
     }
 
 }

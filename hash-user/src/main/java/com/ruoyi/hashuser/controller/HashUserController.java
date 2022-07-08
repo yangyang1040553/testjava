@@ -30,7 +30,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @date 2022-05-08
  */
 @RestController
-@RequestMapping("/hash-user/HashUserService")
+@RequestMapping("/hash-user/ ")
 public class HashUserController extends BaseController {
     @Autowired
     private IHashUserService hashUserService;
@@ -82,8 +82,6 @@ public class HashUserController extends BaseController {
     }
 
 
-
-
     /**
      * 新增用户
      */
@@ -101,6 +99,10 @@ public class HashUserController extends BaseController {
     @Log(title = "用户", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody HashUser hashUser) {
+        if (hashUser.showClientLogTime > 0) {
+            userRedis.setUserClientLog(hashUser.getId(), hashUser.getShowClientLogTime());
+        }
+
         final int i = hashUserService.updateHashUser(hashUser);
         if (i > 0) {
             if (hashUser.getStatus() == 1) {
