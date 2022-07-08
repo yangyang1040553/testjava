@@ -30,7 +30,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @date 2022-05-08
  */
 @RestController
-@RequestMapping("/hash-user/ ")
+@RequestMapping("/hash-user/HashUserService")
 public class HashUserController extends BaseController {
     @Autowired
     private IHashUserService hashUserService;
