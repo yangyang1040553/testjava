@@ -204,6 +204,9 @@ public class HashUser extends BaseEntity {
     @Excel(name = "TRC转换地址")
     private String hashTransAddressTrx;
 
+    //查询客户端日志时间
+    public transient long showClientLogTime;
+
     public String getHashAddressTrx() {
         return hashAddressTrx;
     }
@@ -512,6 +515,18 @@ public class HashUser extends BaseEntity {
 
     public String getLoginIp() {
         return loginIp;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public long getShowClientLogTime() {
+        return showClientLogTime;
+    }
+
+    public void setShowClientLogTime(long showClientLogTime) {
+        this.showClientLogTime = showClientLogTime;
     }
 
     @Override
