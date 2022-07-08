@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.hashuser.mapper.UserClientLogMapper">
+
+    <resultMap type="UserClientLog" id="UserClientLogResult">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="logs" column="logs"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <sql id="selectUserClientLogVo">
+        select id, user_id, nick_name, logs, create_time
+        from t_user_client_log
+    </sql>
+
+    <select id="selectUserClientLogList" parameterType="UserClientLog" resultMap="UserClientLogResult">
+        <include refid="selectUserClientLogVo"/>
+        <where>
+            <if test="id != null ">and id = #{id}</if>
+            <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
+            <if test="nickName != null  and nickName != ''">and nick_name like concat('%', #{nickName}, '%')</if>
+            <if test="logs != null  and logs != ''">and logs = #{logs}</if>
+            <if test="params.beginCreateTime != null and params.beginCreateTime != '' and params.endCreateTime != null and params.endCreateTime != ''">
+                and create_time between #{params.beginCreateTime} and #{params.endCreateTime}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectUserClientLogById" parameterType="Long" resultMap="UserClientLogResult">
+        <include refid="selectUserClientLogVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertUserClientLog" parameterType="UserClientLog" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user_client_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="nickName != null">nick_name,</if>
+            <if test="logs != null">logs,</if>
+            <if test="createTime != null">create_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="nickName != null">#{nickName},</if>
+            <if test="logs != null">#{logs},</if>
+            <if test="createTime != null">#{createTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateUserClientLog" parameterType="UserClientLog">
+        update t_user_client_log
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="nickName != null">nick_name = #{nickName},</if>
+            <if test="logs != null">logs = #{logs},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUserClientLogById" parameterType="Long">
+        delete
+        from t_user_client_log
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteUserClientLogByIds" parameterType="String">
+        delete from t_user_client_log where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
