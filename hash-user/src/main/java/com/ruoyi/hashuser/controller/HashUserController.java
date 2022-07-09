@@ -102,7 +102,7 @@ public class HashUserController extends BaseController {
     @PutMapping
     public AjaxResult edit(@RequestBody HashUser hashUser) {
         if (StringUtils.isNotBlank(hashUser.showClientLogTime)) {
-            long time = DateUtils.dateTime(DateUtils.YYYY_MM_DD_HH_MM_SS, hashUser.getShowClientLogTime()).getTime();
+            long time = DateUtils.dateTime(DateUtils.YYYY_MM_DD_HH_MM, hashUser.getShowClientLogTime()).getTime();
             userRedis.setUserClientLog(hashUser.getId(), time);
         }
 
