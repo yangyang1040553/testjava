@@ -10,10 +10,11 @@
         <result property="nickName" column="nick_name"/>
         <result property="logs" column="logs"/>
         <result property="createTime" column="create_time"/>
+        <result property="searchTime" column="search_time"/>
     </resultMap>
 
     <sql id="selectUserClientLogVo">
-        select id, user_id, nick_name, logs, create_time
+        select id, user_id, nick_name, logs, create_time, search_time
         from t_user_client_log
     </sql>
 
@@ -24,8 +25,8 @@
             <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
             <if test="nickName != null  and nickName != ''">and nick_name like concat('%', #{nickName}, '%')</if>
             <if test="logs != null  and logs != ''">and logs = #{logs}</if>
-            <if test="params.beginCreateTime != null and params.beginCreateTime != '' and params.endCreateTime != null and params.endCreateTime != ''">
-                and create_time between #{params.beginCreateTime} and #{params.endCreateTime}
+            <if test="searchTime != null and searchTime != ''">
+                and DATE_FORMAT(#{searchTime}, '%Y-%m-%d %H-%m') = DATE_FORMAT(search_Time, '%Y-%m-%d %H-%m')
             </if>
         </where>
     </select>
@@ -42,12 +43,14 @@
             <if test="nickName != null">nick_name,</if>
             <if test="logs != null">logs,</if>
             <if test="createTime != null">create_time,</if>
+            <if test="searchTime != null">search_time,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userId != null">#{userId},</if>
             <if test="nickName != null">#{nickName},</if>
             <if test="logs != null">#{logs},</if>
             <if test="createTime != null">#{createTime},</if>
+            <if test="searchTime != null">#{searchTime},</if>
         </trim>
     </insert>
 
@@ -58,6 +61,7 @@
             <if test="nickName != null">nick_name = #{nickName},</if>
             <if test="logs != null">logs = #{logs},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="searchTime != null">search_time = #{searchTime},</if>
         </trim>
         where id = #{id}
     </update>

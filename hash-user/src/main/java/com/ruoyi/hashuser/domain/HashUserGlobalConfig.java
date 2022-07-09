@@ -84,6 +84,20 @@ public class HashUserGlobalConfig extends BaseEntity {
     @Excel(name = "中间下载页面地址")
     private String h5_qr_addr;
 
+
+    @Excel(name = "web地址")
+    private String webAddr;
+
+    @Excel(name = "欢迎语")
+    private String welecome_txt;
+
+
+    /**
+     * 是否强制更新
+     */
+    private transient int force;
+
+
     public String getH5_qr_addr() {
         return h5_qr_addr;
     }
@@ -92,8 +106,14 @@ public class HashUserGlobalConfig extends BaseEntity {
         this.h5_qr_addr = h5_qr_addr;
     }
 
-    @Excel(name = "web地址")
-    private String webAddr;
+
+    public String getWelecome_txt() {
+        return welecome_txt;
+    }
+
+    public void setWelecome_txt(String welecome_txt) {
+        this.welecome_txt = welecome_txt;
+    }
 
     public String getWebAddr() {
         return webAddr;
@@ -111,10 +131,6 @@ public class HashUserGlobalConfig extends BaseEntity {
         this.isSelfOnline = isSelfOnline;
     }
 
-    /**
-     * 是否强制更新
-     */
-    private transient int force;
 
     public String getBlockChainAddr() {
         return blockChainAddr;

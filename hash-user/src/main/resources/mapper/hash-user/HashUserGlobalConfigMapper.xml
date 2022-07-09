@@ -23,6 +23,7 @@
         <result property="isSelfOnline" column="is_self_online"/>
         <result property="webAddr" column="web_addr"/>
         <result property="h5_qr_addr" column="h5_qr_addr"/>
+        <result property="welecome_txt" column="welecome_txt"/>
 
     </resultMap>
 
@@ -44,7 +45,8 @@
                block_chain_addr,
                is_self_online,
                web_addr,
-               h5_qr_addr
+               h5_qr_addr,
+               welecome_txt
         from t_user_global_config
     </sql>
 
@@ -81,6 +83,7 @@
             <if test="isSelfOnline != null">is_self_online,</if>
             <if test="webAddr != null">web_addr,</if>
             <if test="h5_qr_addr != null">h5_qr_addr,</if>
+            <if test="welecome_txt != null">welecome_txt,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -101,6 +104,7 @@
             <if test="isSelfOnline != null">#{isSelfOnline},</if>
             <if test="webAddr != null">#{webAddr},</if>
             <if test="h5_qr_addr != null">#{h5_qr_addr},</if>
+            <if test="welecome_txt != null">#{welecome_txt},</if>
         </trim>
     </insert>
 
@@ -126,6 +130,7 @@
             <if test="isSelfOnline != null">is_self_online = #{isSelfOnline},</if>
             <if test="webAddr != null">web_addr = #{webAddr},</if>
             <if test="h5_qr_addr != null">h5_qr_addr = #{h5_qr_addr},</if>
+            <if test="welecome_txt != null">welecome_txt = #{welecome_txt},</if>
         </trim>
         where id = #{id}
     </update>

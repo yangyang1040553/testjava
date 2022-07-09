@@ -31,10 +31,21 @@ public class UserClientLog extends BaseEntity
     @Excel(name = "日志")
     private String logs;
 
+    @Excel(name = "搜索时间")
+    private String searchTime;
+
     private String invitationCode;
 
     //查询客户端日志时间
     public transient String showClientLogTime;
+
+    public String getSearchTime() {
+        return searchTime;
+    }
+
+    public void setSearchTime(String searchTime) {
+        this.searchTime = searchTime;
+    }
 
     public String getShowClientLogTime() {
         return showClientLogTime;
