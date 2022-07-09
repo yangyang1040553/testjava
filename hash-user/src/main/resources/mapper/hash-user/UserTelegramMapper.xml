@@ -16,6 +16,8 @@
         <result property="status" column="status"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
+        <result property="tg_app_key" column="tg_app_key"/>
+        <result property="tg_random_no" column="tg_random_no"/>
     </resultMap>
 
     <sql id="selectUserTelegramVo">
@@ -29,7 +31,9 @@
                user_id,
                status,
                create_time,
-               update_time
+               update_time,
+               tg_app_key,
+               tg_random_no
         from t_user_telegram
     </sql>
 
@@ -45,7 +49,9 @@
             <if test="tgGourp != null  and tgGourp != ''">and tg_gourp = #{tgGourp}</if>
             <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
             <if test="status != null ">and status = #{status}</if>
-            <if test="createTime != null">and DATE_FORMAT(a.create_time,'%Y-%m-%d') = DATE_FORMAT(#{createTime},'%Y-%m-%d')</if>
+            <if test="createTime != null">and DATE_FORMAT(a.create_time,'%Y-%m-%d') =
+                DATE_FORMAT(#{createTime},'%Y-%m-%d')
+            </if>
         </where>
     </select>
 
@@ -67,6 +73,8 @@
             <if test="status != null">status,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateTime != null">update_time,</if>
+            <if test="tg_app_key != null">tg_app_key,</if>
+            <if test="tg_random_no != null">tg_random_no,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="tgAccount != null and tgAccount != ''">#{tgAccount},</if>
@@ -79,6 +87,8 @@
             <if test="status != null">#{status},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateTime != null">#{updateTime},</if>
+            <if test="tg_app_key != null">#{tg_app_key},</if>
+            <if test="tg_random_no != null">#{tg_random_no},</if>
         </trim>
     </insert>
 
@@ -95,6 +105,8 @@
             <if test="status != null">status = #{status},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="tg_app_key != null">#{tg_app_key},</if>
+            <if test="tg_random_no != null">#{tg_random_no},</if>
         </trim>
         where id = #{id}
     </update>

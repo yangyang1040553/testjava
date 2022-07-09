@@ -50,7 +50,30 @@ public class UserTelegram extends BaseEntity
     @Excel(name = "状态")
     private Long status;
 
-    public void setId(Long id) 
+
+    @Excel(name = "tg_app_key")
+    private String tg_app_key;
+
+    @Excel(name = "tg_random_no")
+    private String tg_random_no;
+
+    public String getTg_app_key() {
+        return tg_app_key;
+    }
+
+    public void setTg_app_key(String tg_app_key) {
+        this.tg_app_key = tg_app_key;
+    }
+
+    public String getTg_random_no() {
+        return tg_random_no;
+    }
+
+    public void setTg_random_no(String tg_random_no) {
+        this.tg_random_no = tg_random_no;
+    }
+
+    public void setId(Long id)
     {
         this.id = id;
     }
