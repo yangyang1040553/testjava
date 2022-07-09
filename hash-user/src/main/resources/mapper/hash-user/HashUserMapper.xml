@@ -98,6 +98,14 @@
         </where>
     </select>
 
+
+    <select id="selectHashUserByCode" parameterType="HashUser" resultMap="HashUserResult">
+        <include refid="selectHashUserVo"/>
+        <where>
+            <if test="invitationCode != null  and invitationCode!=''">and invitation_code = #{invitationCode}</if>
+        </where>
+    </select>
+
     <select id="selectHashUserList" parameterType="HashUser" resultMap="HashUserResult">
         <include refid="selectHashUserVo"/>
         <where>

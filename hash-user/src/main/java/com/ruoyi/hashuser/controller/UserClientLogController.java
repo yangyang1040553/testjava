@@ -2,6 +2,12 @@ package com.ruoyi.hashuser.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.hashuser.domain.HashUser;
+import com.ruoyi.hashuser.redis.UserRedis;
+import com.ruoyi.hashuser.service.IHashUserService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,24 +29,37 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 客户端日志Controller
- * 
+ *
  * @author xxk
  * @date 2022-07-08
  */
 @RestController
 @RequestMapping("/hash-user/clientLog")
-public class UserClientLogController extends BaseController
-{
+public class UserClientLogController extends BaseController {
     @Autowired
     private IUserClientLogService userClientLogService;
+
+    @Autowired
+    private IHashUserService hashUserService;
+    @Autowired
+    private UserRedis userRedis;
 
     /**
      * 查询客户端日志列表
      */
     @PreAuthorize("@ss.hasPermi('hash-user:clientLog:list')")
     @GetMapping("/list")
-    public TableDataInfo list(UserClientLog userClientLog)
-    {
+    public TableDataInfo list(UserClientLog userClientLog) {
+
+        //判断是否搜索某个用户
+        if (userClientLog.getInvitationCode() != null && !"".equals(userClientLog.getInvitationCode())
+                && userClientLog.getShowClientLogTime() != null && !"".equals(userClientLog.getShowClientLogTime())) {
+            long time = DateUtils.dateTime(DateUtils.YYYY_MM_DD_HH_MM,userClientLog.getShowClientLogTime()).getTime();
+            HashUser hashUser = hashUserService.selectHashUserByCode(userClientLog.getInvitationCode());
+            if (hashUser != null) {
+                userRedis.setUserClientLog(hashUser.getId(), time);
+            }
+        }
         startPage();
         startOrderBy();
         List<UserClientLog> list = userClientLogService.selectUserClientLogList(userClientLog);
@@ -53,8 +72,7 @@ public class UserClientLogController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-user:clientLog:export')")
     @Log(title = "客户端日志", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, UserClientLog userClientLog)
-    {
+    public void export(HttpServletResponse response, UserClientLog userClientLog) {
         startOrderBy();
         List<UserClientLog> list = userClientLogService.selectUserClientLogList(userClientLog);
         ExcelUtil<UserClientLog> util = new ExcelUtil<UserClientLog>(UserClientLog.class);
@@ -66,8 +84,7 @@ public class UserClientLogController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-user:clientLog:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") Long id)
-    {
+    public AjaxResult getInfo(@PathVariable("id") Long id) {
         return AjaxResult.success(userClientLogService.selectUserClientLogById(id));
     }
 
@@ -77,8 +94,7 @@ public class UserClientLogController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-user:clientLog:add')")
     @Log(title = "客户端日志", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody UserClientLog userClientLog)
-    {
+    public AjaxResult add(@RequestBody UserClientLog userClientLog) {
         return toAjax(userClientLogService.insertUserClientLog(userClientLog));
     }
 
@@ -88,8 +104,7 @@ public class UserClientLogController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-user:clientLog:edit')")
     @Log(title = "客户端日志", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody UserClientLog userClientLog)
-    {
+    public AjaxResult edit(@RequestBody UserClientLog userClientLog) {
         return toAjax(userClientLogService.updateUserClientLog(userClientLog));
     }
 
@@ -98,9 +113,8 @@ public class UserClientLogController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-user:clientLog:remove')")
     @Log(title = "客户端日志", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable Long[] ids)
-    {
+    @DeleteMapping("/{ids}")
+    public AjaxResult remove(@PathVariable Long[] ids) {
         return toAjax(userClientLogService.deleteUserClientLogByIds(ids));
     }
 }

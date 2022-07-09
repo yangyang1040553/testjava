@@ -20,6 +20,8 @@ public interface HashUserMapper
     public HashUser selectHashUserById(String id);
 
 
+    public  HashUser selectHashUserByCode(String invitationCode);
+
     /**
      * 查询用户
      *

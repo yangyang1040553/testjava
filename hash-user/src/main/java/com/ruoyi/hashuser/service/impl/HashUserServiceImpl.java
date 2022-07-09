@@ -75,6 +75,11 @@ public class HashUserServiceImpl implements IHashUserService {
         return hashUserMapper.selectHashUserDetail(id);
     }
 
+    @Override
+    public HashUser selectHashUserByCode(String invitationCode) {
+        return hashUserMapper.selectHashUserByCode(invitationCode);
+    }
+
     /**
      * 查询用户列表
      *

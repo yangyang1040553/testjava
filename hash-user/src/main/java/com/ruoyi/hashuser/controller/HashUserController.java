@@ -101,10 +101,6 @@ public class HashUserController extends BaseController {
     @Log(title = "用户", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody HashUser hashUser) {
-        if (StringUtils.isNotBlank(hashUser.showClientLogTime)) {
-            long time = DateUtils.dateTime(DateUtils.YYYY_MM_DD_HH_MM, hashUser.getShowClientLogTime()).getTime();
-            userRedis.setUserClientLog(hashUser.getId(), time);
-        }
 
         final int i = hashUserService.updateHashUser(hashUser);
         if (i > 0) {

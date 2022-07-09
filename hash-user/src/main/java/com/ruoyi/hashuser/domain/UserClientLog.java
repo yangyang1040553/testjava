@@ -31,7 +31,28 @@ public class UserClientLog extends BaseEntity
     @Excel(name = "日志")
     private String logs;
 
-    public void setId(Long id) 
+    private String invitationCode;
+
+    //查询客户端日志时间
+    public transient String showClientLogTime;
+
+    public String getShowClientLogTime() {
+        return showClientLogTime;
+    }
+
+    public void setShowClientLogTime(String showClientLogTime) {
+        this.showClientLogTime = showClientLogTime;
+    }
+
+    public String getInvitationCode() {
+        return invitationCode;
+    }
+
+    public void setInvitationCode(String invitationCode) {
+        this.invitationCode = invitationCode;
+    }
+
+    public void setId(Long id)
     {
         this.id = id;
     }
