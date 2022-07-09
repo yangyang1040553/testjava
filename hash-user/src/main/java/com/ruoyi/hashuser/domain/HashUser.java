@@ -205,7 +205,7 @@ public class HashUser extends BaseEntity {
     private String hashTransAddressTrx;
 
     //查询客户端日志时间
-    public transient long showClientLogTime;
+    public transient String showClientLogTime;
 
     public String getHashAddressTrx() {
         return hashAddressTrx;
@@ -521,11 +521,11 @@ public class HashUser extends BaseEntity {
         return serialVersionUID;
     }
 
-    public long getShowClientLogTime() {
+    public String getShowClientLogTime() {
         return showClientLogTime;
     }
 
-    public void setShowClientLogTime(long showClientLogTime) {
+    public void setShowClientLogTime(String showClientLogTime) {
         this.showClientLogTime = showClientLogTime;
     }
 

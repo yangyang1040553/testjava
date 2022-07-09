@@ -3,6 +3,8 @@ package com.ruoyi.hashuser.controller;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.hashuser.redis.UserRedis;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,8 +101,9 @@ public class HashUserController extends BaseController {
     @Log(title = "用户", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody HashUser hashUser) {
-        if (hashUser.showClientLogTime > 0) {
-            userRedis.setUserClientLog(hashUser.getId(), hashUser.getShowClientLogTime());
+        if (StringUtils.isNotBlank(hashUser.showClientLogTime)) {
+            long time = DateUtils.dateTime(DateUtils.YYYY_MM_DD_HH_MM_SS, hashUser.getShowClientLogTime()).getTime();
+            userRedis.setUserClientLog(hashUser.getId(), time);
         }
 
         final int i = hashUserService.updateHashUser(hashUser);
