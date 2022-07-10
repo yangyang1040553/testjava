@@ -18,7 +18,7 @@ public class GameOperationActivity extends BaseEntity {
      * 1:周累计 2救援金 3每日活动 4连赢在赢 5新人包赢
      */
     @Excel(name = "1:周累计 2救援金 3每日活动 4连赢在赢 5新人包赢")
-    private Long id;
+    private String id;
 
     /**
      * 配置数据
@@ -42,11 +42,11 @@ public class GameOperationActivity extends BaseEntity {
         this.content = content;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 

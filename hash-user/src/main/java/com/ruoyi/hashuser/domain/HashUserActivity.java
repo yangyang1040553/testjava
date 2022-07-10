@@ -20,7 +20,7 @@ public class HashUserActivity extends BaseEntity {
     /**
      * 唯一id
      */
-    private Long id;
+    private String id;
 
     /**
      * 活动名称
@@ -83,11 +83,11 @@ public class HashUserActivity extends BaseEntity {
         this.sort = sort;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 

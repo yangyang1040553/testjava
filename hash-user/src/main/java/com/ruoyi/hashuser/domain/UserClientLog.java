@@ -17,7 +17,7 @@ public class UserClientLog extends BaseEntity
 
     /** 唯一id */
     @Excel(name = "唯一id")
-    private Long id;
+    private String id;
 
     /** 玩家id */
     @Excel(name = "玩家id")
@@ -63,12 +63,12 @@ public class UserClientLog extends BaseEntity
         this.invitationCode = invitationCode;
     }
 
-    public void setId(Long id)
+    public void setId(String id)
     {
         this.id = id;
     }
 
-    public Long getId() 
+    public String getId()
     {
         return id;
     }

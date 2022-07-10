@@ -69,6 +69,17 @@ public class WalletPlayerData extends BaseEntity {
     @Excel(name = "trc转换")
     private String hashTransAddressTrx;
 
+    @Excel(name = "备注")
+    private String note;
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
     public String getHashTransAddressTrx() {
         return hashTransAddressTrx;
     }

@@ -18,7 +18,7 @@ public class GameMenu extends BaseEntity {
      * 唯一id
      */
     @Excel(name = "唯一id")
-    private Long id;
+    private String id;
 
     /**
      * 菜单名称
@@ -61,11 +61,11 @@ public class GameMenu extends BaseEntity {
         this.unSelectedAddr = unSelectedAddr;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 

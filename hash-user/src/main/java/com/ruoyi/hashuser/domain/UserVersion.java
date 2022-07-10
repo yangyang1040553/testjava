@@ -16,7 +16,7 @@ public class UserVersion extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** id */
-    private Long id;
+    private String id;
 
     /** 下载地址 */
     @Excel(name = "下载地址")
@@ -50,12 +50,12 @@ public class UserVersion extends BaseEntity
         this.versionType = versionType;
     }
 
-    public void setId(Long id)
+    public void setId(String id)
     {
         this.id = id;
     }
 
-    public Long getId() 
+    public String getId()
     {
         return id;
     }

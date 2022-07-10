@@ -17,7 +17,7 @@ public class UserH5Feedback extends BaseEntity
 
     /** 唯一id */
     @Excel(name = "唯一id")
-    private Long id;
+    private String id;
 
     /** 反馈问题类型 */
     @Excel(name = "反馈问题类型")
@@ -35,12 +35,12 @@ public class UserH5Feedback extends BaseEntity
     @Excel(name = "邮箱")
     private String email;
 
-    public void setId(Long id) 
+    public void setId(String id)
     {
         this.id = id;
     }
 
-    public Long getId() 
+    public String getId()
     {
         return id;
     }

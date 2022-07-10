@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.wallet.mapper.WalletArtificialOptMapper">
+
+    <resultMap type="WalletArtificialOpt" id="WalletArtificialOptResult">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="walletType" column="wallet_type"/>
+        <result property="amount" column="amount"/>
+        <result property="isCallback" column="is_callback"/>
+        <result property="optPerson" column="opt_person"/>
+        <result property="note" column="note"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <sql id="selectWalletArtificialOptVo">
+        select id,
+               user_id,
+               nick_name,
+               wallet_type,
+               amount,
+               is_callback,
+               opt_person,
+               note,
+               create_time
+        from t_wallet_artificial_opt
+    </sql>
+
+    <select id="selectWalletArtificialOptList" parameterType="WalletArtificialOpt"
+            resultMap="WalletArtificialOptResult">
+        <include refid="selectWalletArtificialOptVo"/>
+        <where>
+            <if test="id != null  and id != ''">and id = #{id}</if>
+            <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
+            <if test="nickName != null  and nickName != ''">and nick_name like concat('%', #{nickName}, '%')</if>
+            <if test="walletType != null  and walletType != ''">and wallet_type = #{walletType}</if>
+            <if test="amount != null ">and amount = #{amount}</if>
+            <if test="isCallback != null ">and is_callback = #{isCallback}</if>
+            <if test="optPerson != null  and optPerson != ''">and opt_person = #{optPerson}</if>
+            <if test="note != null  and note != ''">and note = #{note}</if>
+            <if test="createTime != null ">and create_time = #{createTime}</if>
+        </where>
+    </select>
+
+    <select id="selectWalletArtificialOptById" parameterType="String" resultMap="WalletArtificialOptResult">
+        <include refid="selectWalletArtificialOptVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertWalletArtificialOpt" parameterType="WalletArtificialOpt">
+        insert into t_wallet_artificial_opt
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="nickName != null">nick_name,</if>
+            <if test="walletType != null">wallet_type,</if>
+            <if test="amount != null">amount,</if>
+            <if test="isCallback != null">is_callback,</if>
+            <if test="optPerson != null">opt_person,</if>
+            <if test="note != null">note,</if>
+            <if test="createTime != null">create_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="nickName != null">#{nickName},</if>
+            <if test="walletType != null">#{walletType},</if>
+            <if test="amount != null">#{amount},</if>
+            <if test="isCallback != null">#{isCallback},</if>
+            <if test="optPerson != null">#{optPerson},</if>
+            <if test="note != null">#{note},</if>
+            <if test="createTime != null">#{createTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateWalletArtificialOpt" parameterType="WalletArtificialOpt">
+        update t_wallet_artificial_opt
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="nickName != null">nick_name = #{nickName},</if>
+            <if test="walletType != null">wallet_type = #{walletType},</if>
+            <if test="amount != null">amount = #{amount},</if>
+            <if test="isCallback != null">is_callback = #{isCallback},</if>
+            <if test="optPerson != null">opt_person = #{optPerson},</if>
+            <if test="note != null">note = #{note},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteWalletArtificialOptById" parameterType="String">
+        delete
+        from t_wallet_artificial_opt
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteWalletArtificialOptByIds" parameterType="String">
+        delete from t_wallet_artificial_opt where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
