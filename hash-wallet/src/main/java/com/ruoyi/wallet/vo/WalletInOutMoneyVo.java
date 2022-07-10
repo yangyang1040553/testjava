@@ -25,6 +25,11 @@ public class WalletInOutMoneyVo {
      */
     public long amount;
 
+    /***
+     * 备注说明
+     */
+    public String note;
+
     public String getId() {
         return id;
     }
@@ -47,5 +52,13 @@ public class WalletInOutMoneyVo {
 
     public void setAmount(long amount) {
         this.amount = amount;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 }
