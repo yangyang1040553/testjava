@@ -57,6 +57,18 @@ public class UserTelegram extends BaseEntity
     @Excel(name = "tg_random_no")
     private String tg_random_no;
 
+    @Excel(name = "rob_token")
+    private String rob_token;
+
+
+    public String getRob_token() {
+        return rob_token;
+    }
+
+    public void setRob_token(String rob_token) {
+        this.rob_token = rob_token;
+    }
+
     public String getTg_app_key() {
         return tg_app_key;
     }

@@ -18,6 +18,7 @@
         <result property="updateTime" column="update_time"/>
         <result property="tg_app_key" column="tg_app_key"/>
         <result property="tg_random_no" column="tg_random_no"/>
+        <result property="rob_token" column="rob_token"/>
     </resultMap>
 
     <sql id="selectUserTelegramVo">
@@ -33,7 +34,8 @@
                create_time,
                update_time,
                tg_app_key,
-               tg_random_no
+               tg_random_no,
+               rob_token
         from t_user_telegram
     </sql>
 
@@ -75,6 +77,7 @@
             <if test="updateTime != null">update_time,</if>
             <if test="tg_app_key != null">tg_app_key,</if>
             <if test="tg_random_no != null">tg_random_no,</if>
+            <if test="rob_token != null">rob_token,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="tgAccount != null and tgAccount != ''">#{tgAccount},</if>
@@ -89,6 +92,7 @@
             <if test="updateTime != null">#{updateTime},</if>
             <if test="tg_app_key != null">#{tg_app_key},</if>
             <if test="tg_random_no != null">#{tg_random_no},</if>
+            <if test="rob_token != null">#{rob_token},</if>
         </trim>
     </insert>
 
@@ -105,8 +109,9 @@
             <if test="status != null">status = #{status},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
-            <if test="tg_app_key != null">#{tg_app_key},</if>
-            <if test="tg_random_no != null">#{tg_random_no},</if>
+            <if test="tg_app_key != null">tg_app_key=#{tg_app_key},</if>
+            <if test="tg_random_no != null">tg_random_no=#{tg_random_no},</if>
+            <if test="rob_token != null">rob_token=#{rob_token},</if>
         </trim>
         where id = #{id}
     </update>
