@@ -86,11 +86,11 @@ public class IRedisImpl implements IRedisService {
             if (maxCount > onlineList.size()) {
                 endIndex = maxCount - (maxCount - size);
                 for (int i = startIndex; i < endIndex; i++) {
-                    ids = onlineList.get(i) + ",";
+                    ids = ids + onlineList.get(i) + ",";
                 }
             } else {
                 for (int i = startIndex; i < endIndex; i++) {
-                    ids = onlineList.get(i) + ",";
+                    ids =ids+ onlineList.get(i) + ",";
                 }
             }
             return getHashUsers(ids, sql, rspData);
