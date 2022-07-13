@@ -68,7 +68,8 @@ public class IRedisImpl implements IRedisService {
                 "               bind_time,\n" +
                 "               register_ip,\n" +
                 "               login_time,\n" +
-                "               login_ip\n" +
+                "               login_ip,\n" +
+                "               note_name\n" +
                 "        from t_user";
 
         // TODO: 2022/5/30 redis 中数量小于上限值 只查询 redis中的数据 拼接id    in 查询
