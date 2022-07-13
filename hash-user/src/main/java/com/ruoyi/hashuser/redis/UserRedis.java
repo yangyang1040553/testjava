@@ -30,6 +30,7 @@ public class UserRedis {
 //        redisCache.delCacheMapValue(RedisKey.user_token, userId);
     }
 
+
     public void delUserTokenAll() {
         redisCache.deleteObject(RedisKey.user_token + "*");
     }
@@ -46,6 +47,12 @@ public class UserRedis {
 
         redisCache.deleteObject(dels);
 //        redisCache.delCacheMapValue(RedisKey.user_token, userIdList);
+    }
+
+    public void setUserObject(String userID, String item, String value) {
+        if (redisCache.hasKey(RedisKey.user_object + userID)){
+            redisCache.setCacheMapValue(RedisKey.user_object + userID, item, value);
+        }
     }
 
     /***

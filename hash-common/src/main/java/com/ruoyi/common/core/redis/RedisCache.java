@@ -245,4 +245,9 @@ public class RedisCache {
     public Collection<String> keys(final String pattern) {
         return redisTemplate.keys(pattern);
     }
+
+
+    public boolean hasKey(String key){
+        return redisTemplate.hasKey(key);
+    }
 }
