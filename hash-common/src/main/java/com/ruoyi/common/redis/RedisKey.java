@@ -15,7 +15,7 @@ public class RedisKey {
     //用户活动表
     public final static String user_activity = "user_activity";
     //用户对象缓存
-    public final static String user_object = "user_object";
+    public final static String user_object = "ser_object:";
     //用户注册临时对象
     public final static String user_reg_temp = "user_reg_temp";
     //用户发送的短信
