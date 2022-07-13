@@ -41,6 +41,7 @@ public class HashUserServiceImpl implements IHashUserService {
         UserPromote userPromote = userPromoteMapper.selectUserlPromoteById(id);
         HashUser hashUser = hashUserMapper.selectHashUserById(id);
         HashUser detail = hashUserMapper.selectHashUserDetail(id);
+        HashUser hashWallet = hashUserMapper.selectHashUserWallet(id);
         if (userPromote != null) {
             hashUser.setLevel1Person(userPromote.getLevel1Person());
             hashUser.setLevel2Person(userPromote.getLevel2Person());
@@ -60,6 +61,10 @@ public class HashUserServiceImpl implements IHashUserService {
             }
         }
 
+        if (hashWallet != null) {
+            hashUser.setTrx_remote_amount(hashWallet.getTrx_remote_amount() * 10000);
+            hashUser.setUsdt_remote_amount(hashWallet.getUsdt_remote_amount() * 10000);
+        }
 
         //1 在线 0 不在线
         if (hashUser != null) {
