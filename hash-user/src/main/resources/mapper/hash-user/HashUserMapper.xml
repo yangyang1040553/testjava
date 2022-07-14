@@ -41,6 +41,9 @@
         <result property="hashAddressTrx" column="hash_address_trx"/>
         <result property="hashTransAddressTrx" column="hash_trans_address_trx"/>
 
+        <result property="usdt_remote_amount" column="usdt_remote_amount"/>
+        <result property="trx_remote_amount" column="trx_remote_amount"/>
+
     </resultMap>
 
     <sql id="selectHashUserVo">
@@ -93,6 +96,13 @@
 
     <select id="selectHashUserDetail" parameterType="HashUser" resultMap="HashUserResult">
         <include refid="selectHashUserEveryDay"/>
+        <where>
+            <if test="id != null ">and id = #{id}</if>
+        </where>
+    </select>
+
+    <select id="selectHashUserWallet" parameterType="HashUser" resultMap="HashUserResult">
+        SELECT   id , usdt_remote_amount,trx_remote_amount  from  t_wallet_player_data
         <where>
             <if test="id != null ">and id = #{id}</if>
         </where>

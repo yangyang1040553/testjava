@@ -53,6 +53,7 @@
             <if test="status != null ">and status = #{status}</if>
             <if test="createTime != null ">and create_time >= #{createTime}</if>
             <if test="invitationCode != null and invitationCode!='' ">and invitation_code = #{invitationCode}</if>
+            <if test="id != null and id !='' ">and id = #{id}</if>
         </where>
     </select>
 

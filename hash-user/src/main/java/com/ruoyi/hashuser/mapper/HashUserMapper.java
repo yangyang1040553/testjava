@@ -30,6 +30,8 @@ public interface HashUserMapper
      */
     public HashUser selectHashUserDetail(String id);
 
+    public HashUser selectHashUserWallet(String id);
+
 
     /**
      * 查询用户列表

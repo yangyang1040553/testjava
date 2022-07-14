@@ -207,6 +207,28 @@ public class HashUser extends BaseEntity {
     //查询客户端日志时间
     public transient String showClientLogTime;
 
+    @Excel(name = "USDT远程余额")
+    private  Double usdt_remote_amount;
+
+    @Excel(name = "TRX远程余额")
+    private  Double trx_remote_amount;
+
+    public Double getUsdt_remote_amount() {
+        return Global.getWalletAmountToReal(usdt_remote_amount);
+    }
+
+    public void setUsdt_remote_amount(Double usdt_remote_amount) {
+        this.usdt_remote_amount = usdt_remote_amount;
+    }
+
+    public Double getTrx_remote_amount() {
+        return Global.getWalletAmountToReal(trx_remote_amount);
+    }
+
+    public void setTrx_remote_amount(Double trx_remote_amount) {
+        this.trx_remote_amount = trx_remote_amount;
+    }
+
     public String getHashAddressTrx() {
         return hashAddressTrx;
     }
