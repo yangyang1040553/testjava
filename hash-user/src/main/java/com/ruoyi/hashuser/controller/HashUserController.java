@@ -110,9 +110,10 @@ public class HashUserController extends BaseController {
                 userRedis.delUserToken(hashUser.getId());
             }
 
-            if (StringUtils.isNotBlank(hashUser.getNoteName())) {
-                userRedis.setUserObject(hashUser.getId(), "nickName", hashUser.getNickName());
-            }
+//            if (StringUtils.isNotBlank(hashUser.getNoteName())) {
+//                userRedis.setUserObject(hashUser.getId(), "nickName", hashUser.getNickName());
+//            }
+            userRedis.delUserObject(hashUser.getId());
 
         }
 
