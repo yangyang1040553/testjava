@@ -50,9 +50,16 @@ public class UserRedis {
     }
 
     public void setUserObject(String userID, String item, String value) {
-        if (redisCache.hasKey(RedisKey.user_object + userID)){
+        String key = RedisKey.user_object + userID;
+        if (redisCache.hasKey(RedisKey.user_object + userID)) {
             redisCache.setCacheMapValue(RedisKey.user_object + userID, item, value);
         }
+    }
+
+
+    public void delUserObject(String userID) {
+        String key = RedisKey.user_object + userID;
+        redisCache.deleteObject(key);
     }
 
     /***
