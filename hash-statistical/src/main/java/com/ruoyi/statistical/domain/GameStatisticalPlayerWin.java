@@ -63,6 +63,26 @@ public class GameStatisticalPlayerWin extends BaseEntity {
     @Excel(name = "今日trx输赢金额")
     private Double trxWinAmount;
 
+    private String note_name;
+
+    @Excel(name = "昵称")
+    private String nick_name;
+
+    public String getNote_name() {
+        return note_name;
+    }
+
+    public void setNote_name(String note_name) {
+        this.note_name = note_name;
+    }
+
+    public String getNick_name() {
+        return nick_name;
+    }
+
+    public void setNick_name(String nick_name) {
+        this.nick_name = nick_name;
+    }
 
     public void setId(String id) {
         this.id = id;
