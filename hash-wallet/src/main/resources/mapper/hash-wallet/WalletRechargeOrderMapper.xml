@@ -20,6 +20,7 @@
         <result property="invitationCode" column="invitation_code"/>
         <result property="note" column="note"/>
         <result property="nickName" column="nick_name"/>
+        <result property="frist_recharge" column="frist_recharge"/>
 
     </resultMap>
 
@@ -38,7 +39,8 @@
                update_time,
                invitation_code,
                nick_name,
-               note
+               note,
+               frist_recharge
         FROM t_wallet_recharge_order
 
     </sql>

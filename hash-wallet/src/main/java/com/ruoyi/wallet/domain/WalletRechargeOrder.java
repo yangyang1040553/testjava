@@ -84,6 +84,17 @@ public class WalletRechargeOrder extends BaseEntity {
     @Excel(name = "说明")
     private String note;
 
+    @Excel(name = "是否首冲")
+    private  Integer frist_recharge;
+
+    public Integer getFrist_recharge() {
+        return frist_recharge;
+    }
+
+    public void setFrist_recharge(Integer frist_recharge) {
+        this.frist_recharge = frist_recharge;
+    }
+
     public String getNote() {
         return note;
     }
