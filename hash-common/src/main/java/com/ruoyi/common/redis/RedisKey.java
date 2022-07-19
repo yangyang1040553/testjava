@@ -47,6 +47,9 @@ public class RedisKey {
 
     //=====================2游戏相关key=====================
 
+    //钱包全局配置
+    public final static String wallet_global_config = "wallet_global_config";
+
 
     public final static String common_config_update = "common_config_update";
     //用户客户端日志查询

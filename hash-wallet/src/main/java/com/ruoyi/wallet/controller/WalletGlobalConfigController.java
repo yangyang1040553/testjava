@@ -3,6 +3,8 @@ package com.ruoyi.wallet.controller;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ruoyi.common.core.redis.RedisCache;
+import com.ruoyi.common.redis.RedisKey;
 import com.ruoyi.common.utils.DateUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,9 @@ import com.ruoyi.common.core.page.TableDataInfo;
 public class WalletGlobalConfigController extends BaseController {
     @Autowired
     private IWalletGlobalConfigService walletGlobalConfigService;
+
+    @Autowired
+    RedisCache redisCache;
 
     /**
      * 查询钱包全局配置列表
@@ -90,6 +95,7 @@ public class WalletGlobalConfigController extends BaseController {
     public AjaxResult edit(@RequestBody WalletGlobalConfig walletGlobalConfig) {
         walletGlobalConfig.setUpdateBy(getUsername());
         walletGlobalConfig.setUpdateTime(DateUtils.getNowDate());
+        redisCache.deleteObject(RedisKey.wallet_global_config);
         return toAjax(walletGlobalConfigService.updateWalletGlobalConfig(walletGlobalConfig));
     }
 
