@@ -98,6 +98,21 @@ public class WalletTransactionOrder extends BaseEntity {
     @Excel(name = "说明")
     private String note;
 
+    @Excel(name = "转换比例")
+    private Double scala;
+
+    public Double getScala() {
+        return scala;
+    }
+
+    public void setScala(Double scala) {
+        this.scala = scala;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
     public String getNote() {
         return note;
     }

@@ -62,6 +62,27 @@ public class WalletGlobalConfig extends BaseEntity {
     private Double minerScala;
 
 
+    @Excel(name = "usdt免审核金额")
+    private  Double usdt_free_check;
+    @Excel(name = "trx免审核金额")
+    private  Double trx_free_check;
+
+    public Double getUsdt_free_check() {
+        return usdt_free_check;
+    }
+
+    public void setUsdt_free_check(Double usdt_free_check) {
+        this.usdt_free_check = usdt_free_check;
+    }
+
+    public Double getTrx_free_check() {
+        return trx_free_check;
+    }
+
+    public void setTrx_free_check(Double trx_free_check) {
+        this.trx_free_check = trx_free_check;
+    }
+
     public JSONObject getTrxToUsdt() {
         return JSONObject.parseObject(trxTransUsdtScale);
     }

@@ -21,6 +21,7 @@
         <result property="nickName" column="nick_name"/>
         <result property="invitationCode" column="invitation_code"/>
         <result property="note" column="note"/>
+        <result property="scala" column="scala"/>
     </resultMap>
 
     <sql id="selectWalletTransactionOrderVo">
@@ -39,7 +40,8 @@
                update_time,
                nick_name,
                invitation_code,
-               note
+               note,
+               scala
 
         from t_wallet_transaction_order
     </sql>
