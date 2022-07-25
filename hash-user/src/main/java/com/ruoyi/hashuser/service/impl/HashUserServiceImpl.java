@@ -71,6 +71,8 @@ public class HashUserServiceImpl implements IHashUserService {
             hashUser.setOnline(gameRedis.userIsOnline(hashUser.getId()) ? 1L : 0L);
         }
 
+        hashUser.setPassword(null);
+
         return hashUser;
     }
 
@@ -93,7 +95,12 @@ public class HashUserServiceImpl implements IHashUserService {
      */
     @Override
     public List<HashUser> selectHashUserList(HashUser hashUser) {
-        return hashUserMapper.selectHashUserList(hashUser);
+        final List<HashUser> hashUsers = hashUserMapper.selectHashUserList(hashUser);
+        for (HashUser user : hashUsers) {
+            user.setPassword(null);
+        }
+
+        return hashUsers;
     }
 
     /**
