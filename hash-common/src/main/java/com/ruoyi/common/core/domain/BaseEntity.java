@@ -29,6 +29,7 @@ public class BaseEntity implements Serializable {
     /**
      * 创建时间
      */
+    @Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd HH:MM:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
@@ -40,6 +41,7 @@ public class BaseEntity implements Serializable {
     /**
      * 更新时间
      */
+    @Excel(name = "更新时间", width = 30, dateFormat = "yyyy-MM-dd HH:MM:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
