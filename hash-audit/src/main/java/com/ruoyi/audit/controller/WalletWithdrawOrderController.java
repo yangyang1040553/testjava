@@ -57,6 +57,8 @@ public class WalletWithdrawOrderController extends BaseController {
         startPage();
         startOrderBy();
         List<WalletWithdrawOrder> list = walletWithdrawOrderService.selectWalletWithdrawOrderList(walletWithdrawOrder);
+
+        System.out.println(list);
         return getDataTable(list);
     }
 
@@ -83,7 +85,10 @@ public class WalletWithdrawOrderController extends BaseController {
             withdrawOrder.setAmount(Global.getWalletAmountToReal(withdrawOrder.getAmount()));
             withdrawOrder.setPayAmount(Global.getWalletAmountToReal(withdrawOrder.getPayAmount()));
             withdrawOrder.setMinerAmount(Global.getWalletAmountToReal(withdrawOrder.getMinerAmount()));
+            withdrawOrder.setcTime(withdrawOrder.getcTime());
+            withdrawOrder.setuTime(withdrawOrder.getuTime());
         }
+
         ExcelUtil<WalletWithdrawOrder> util = new ExcelUtil<WalletWithdrawOrder>(WalletWithdrawOrder.class);
         util.exportExcel(response, list, "提现审核数据");
     }

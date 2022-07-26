@@ -6,6 +6,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
+import java.text.SimpleDateFormat;
+
 /**
  * 提现审核对象 t_wallet_withdraw_order
  *
@@ -85,7 +87,36 @@ public class WalletWithdrawOrder extends BaseEntity {
     @Excel(name = "说明")
     private String note;
 
+    @Excel(name = "更新时间")
+    private String cTime;
 
+    @Excel(name = "更新时间")
+    private String uTime;
+
+    public String getcTime() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        if (getCreateTime() != null) {
+            return simpleDateFormat.format(getCreateTime());
+        } else {
+            return "";
+        }
+    }
+
+    public void setcTime(String cTime) {
+        this.cTime = cTime;
+    }
+
+    public String getuTime() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        if (getUpdateTime() != null) {
+            return simpleDateFormat.format(getUpdateTime());
+        }
+        return "";
+    }
+
+    public void setuTime(String uTime) {
+        this.uTime = uTime;
+    }
 
     public Double getPayAmount() {
         return payAmount;
