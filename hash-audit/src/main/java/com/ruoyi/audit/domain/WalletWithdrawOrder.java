@@ -87,7 +87,7 @@ public class WalletWithdrawOrder extends BaseEntity {
     @Excel(name = "说明")
     private String note;
 
-    @Excel(name = "更新时间")
+    @Excel(name = "创建时间")
     private String cTime;
 
     @Excel(name = "更新时间")
