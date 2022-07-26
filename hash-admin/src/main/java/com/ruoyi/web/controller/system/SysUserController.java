@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ruoyi.common.utils.GoogleAuthenticator;
+import com.ruoyi.framework.web.domain.server.Sys;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -128,7 +129,7 @@ public class SysUserController extends BaseController {
         user.setPassword(SecurityUtils.encryptPassword(user.getPassword()));
         String secret = GoogleAuthenticator.genSecret(user.getUserName());
         user.setSecret(secret);
-        String qrCode = GoogleAuthenticator.getQRBarcodeURL(user.getUserName(),"Hash", secret);
+        String qrCode = GoogleAuthenticator.getQRBarcodeURL(user.getUserName(), "Hash", secret);
         user.setQr_code(qrCode);
         return toAjax(userService.insertUser(user));
     }
@@ -217,5 +218,13 @@ public class SysUserController extends BaseController {
         userService.checkUserDataScope(userId);
         userService.insertUserAuth(userId, roleIds);
         return success();
+    }
+
+
+    @Log(title = "用户管理  用户令牌", businessType = BusinessType.GRANT)
+    @PostMapping("/editGoogle")
+    public AjaxResult updateGoogle(@Validated @RequestBody SysUser sysUser) {
+//        System.out.println("sysUser===" + sysUser);
+        return toAjax(userService.updateGoogle(sysUser));
     }
 }

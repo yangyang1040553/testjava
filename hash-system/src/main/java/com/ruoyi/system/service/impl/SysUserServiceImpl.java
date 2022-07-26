@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Validator;
 
+import com.ruoyi.common.utils.GoogleAuthenticator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -500,5 +501,20 @@ public class SysUserServiceImpl implements ISysUserService {
             successMsg.insert(0, "恭喜您，数据已全部导入成功！共 " + successNum + " 条，数据如下：");
         }
         return successMsg.toString();
+    }
+
+    @Override
+    public int updateGoogle(SysUser sysUser) {
+
+        String secret = GoogleAuthenticator.genSecret(sysUser.getUserName());
+        System.out.println(secret);
+        String qrCode = GoogleAuthenticator.getQRBarcodeURL(sysUser.getUserName(),"Hash", secret);
+        System.out.println(qrCode);
+
+        sysUser.setSecret(secret);
+        sysUser.setQr_code(qrCode);
+
+
+        return userMapper.updateGoogle(sysUser);
     }
 }
