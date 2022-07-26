@@ -57,6 +57,9 @@ public class GameOperationActivityRecordController extends BaseController
     {
         startOrderBy();
         List<GameOperationActivityRecord> list = gameOperationActivityRecordService.selectGameOperationActivityRecordList(gameOperationActivityRecord);
+        for (GameOperationActivityRecord operationActivityRecord : list) {
+            operationActivityRecord.setAmount(operationActivityRecord.getAmount());
+        }
         ExcelUtil<GameOperationActivityRecord> util = new ExcelUtil<GameOperationActivityRecord>(GameOperationActivityRecord.class);
         util.exportExcel(response, list, "运营活动奖励记录数据");
     }

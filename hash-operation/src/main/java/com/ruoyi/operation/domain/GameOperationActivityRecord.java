@@ -33,7 +33,7 @@ public class GameOperationActivityRecord extends BaseEntity
 
     /** 奖励金额 */
     @Excel(name = "奖励金额")
-    private Long amount;
+    private Double amount;
 
     /** 活动类型 */
     @Excel(name = "活动类型")
@@ -90,7 +90,7 @@ public class GameOperationActivityRecord extends BaseEntity
     {
         return walletType;
     }
-    public void setAmount(Long amount) 
+    public void setAmount(Double amount)
     {
         this.amount = amount;
     }
