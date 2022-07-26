@@ -58,7 +58,7 @@ spring:
   redis:
     # 地址
     #    host: 18.136.193.171
-#    host: 18.142.223.68
+    #    host: 18.142.223.68
     host: 54.254.191.195
     # 端口，默认为6379
     port: 6379
@@ -66,7 +66,7 @@ spring:
     database: 0
     # 密码
     password: I^zf9x52fyyP
-#    password:
+    #    password:
     #    password:
     # 连接超时时间
     timeout: 10s
@@ -84,3 +84,4 @@ spring:
 #请求
 service:
   wallet-addr: https://hash-api.starops.work/hash
+  open-google: false

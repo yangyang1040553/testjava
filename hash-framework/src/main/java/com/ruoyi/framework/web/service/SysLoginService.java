@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import com.ruoyi.common.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,7 +16,6 @@ import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.core.redis.RedisCache;
 import com.ruoyi.common.exception.ServiceException;
 import com.ruoyi.common.exception.user.CaptchaException;
-import com.ruoyi.common.exception.user.CaptchaExpireException;
 import com.ruoyi.common.exception.user.UserPasswordNotMatchException;
 import com.ruoyi.common.utils.ip.IpUtils;
 import com.ruoyi.framework.manager.AsyncManager;
@@ -44,6 +44,10 @@ public class SysLoginService {
 
     @Autowired
     private ISysConfigService configService;
+
+
+    @Value("${service.open-google}")
+    private boolean openGoogle;
 
     /**
      * 登录验证
@@ -101,9 +105,9 @@ public class SysLoginService {
 //        }
 
         SysUser sysUser = userService.selectUserByUserName(username);
-        boolean authcode = GoogleAuthenticator.authcode(code, sysUser.getSecret());
+        boolean authCode = GoogleAuthenticator.authcode(code, sysUser.getSecret());
 //        if (!code.equalsIgnoreCase(captcha)) {
-        if (!authcode) {
+        if (openGoogle && !authCode) {
             AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.error")));
             throw new CaptchaException();
         }
