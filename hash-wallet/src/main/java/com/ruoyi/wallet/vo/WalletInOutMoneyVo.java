@@ -30,6 +30,11 @@ public class WalletInOutMoneyVo {
      */
     public String note;
 
+    /***
+     * 1：出款 2入款
+     */
+    public int type;
+
     public String getId() {
         return id;
     }
