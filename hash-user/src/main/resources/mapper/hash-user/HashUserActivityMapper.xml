@@ -16,13 +16,14 @@
         <result property="updateTime" column="update_time"/>
         <result property="updateBy" column="update_by"/>
         <result property="operationId" column="operation_id"/>
+        <result property="weight" column="weight"/>
     </resultMap>
 
     <sql id="selectHashUserActivityVo">
         select id,
                name,
                banner_url,
-               landing_page_url, open, finish_time, create_time, create_by, update_time, update_by
+               landing_page_url, open, finish_time, create_time, create_by, update_time, update_by,weight
                 , operation_id
         from t_user_activity
     </sql>
@@ -36,6 +37,7 @@
             <if test="open != null ">and open = #{open}</if>
             <if test="finishTime != null ">and finish_time >= #{finishTime}</if>
             <if test="operationId != null ">and operation_id >= #{operationId}</if>
+            <if test="weight != null ">and weight = #{weight}</if>
         </where>
     </select>
 
@@ -57,6 +59,7 @@
             <if test="updateTime != null">update_time,</if>
             <if test="updateBy != null">update_by,</if>
             <if test="operationId != null">operation_id,</if>
+            <if test="weight != null">weight,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="name != null">#{name},</if>
@@ -69,6 +72,7 @@
             <if test="updateTime != null">#{updateTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
             <if test="operationId != null">#{operationId},</if>
+            <if test="weight != null">#{weight},</if>
         </trim>
     </insert>
 
@@ -85,6 +89,7 @@
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="updateBy != null">update_by = #{updateBy},</if>
             <if test="operationId != null">operation_id = #{operationId},</if>
+            <if test="weight != null">weight = #{weight},</if>
         </trim>
         where id = #{id}
     </update>

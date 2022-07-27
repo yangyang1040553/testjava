@@ -59,6 +59,18 @@ public class HashUserActivity extends BaseEntity {
 
     private String operationId;
 
+
+    @Excel(name = "权重")
+    private String weight;
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
     public String getOperationId() {
         return operationId;
     }

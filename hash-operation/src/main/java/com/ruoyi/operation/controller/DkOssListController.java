@@ -2,6 +2,8 @@ package com.ruoyi.operation.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.utils.DateUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -89,6 +91,8 @@ public class DkOssListController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody DkOssList dkOssList)
     {
+        dkOssList.setUpdateBy(getUsername());
+        dkOssList.setUpdateTime(DateUtils.getNowDate());
         return toAjax(dkOssListService.updateDkOssList(dkOssList));
     }
 
