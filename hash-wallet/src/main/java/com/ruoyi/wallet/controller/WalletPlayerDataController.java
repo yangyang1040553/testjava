@@ -136,7 +136,7 @@ public class WalletPlayerDataController extends BaseController {
         final JSONObject jsonObject = JSON.parseObject(s);
 
         if (!jsonObject.getString("code").equals("200")) {
-            return AjaxResult.error();
+            return AjaxResult.error(jsonObject.getString("msg"));
         }
         return AjaxResult.success();
     }
