@@ -53,7 +53,7 @@
             <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
             <if test="walletType != null  and walletType != ''">and wallet_type = #{walletType}</if>
             <if test="status != null ">and status = #{status}</if>
-            <if test="createTime != null ">and create_time >= #{createTime}</if>
+            <if test="createTime != null ">and DATE_FORMAT(create_time, '%Y-%m-%d') =  DATE_FORMAT(#{createTime}, '%Y-%m-%d')</if>
             <if test="invitationCode != null and invitationCode!='' ">and invitation_code = #{invitationCode}</if>
             <if test="id != null and id !='' ">and id = #{id}</if>
         </where>

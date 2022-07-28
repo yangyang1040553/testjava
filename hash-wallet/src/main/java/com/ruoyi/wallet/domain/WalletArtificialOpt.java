@@ -48,7 +48,18 @@ public class WalletArtificialOpt extends BaseEntity
     @Excel(name = "备注说明")
     private String note;
 
-    public void setId(String id) 
+    @Excel(name = "出入款类型 1入款 2出款")
+    private String opt_type;
+
+    public String getOpt_type() {
+        return opt_type;
+    }
+
+    public void setOpt_type(String opt_type) {
+        this.opt_type = opt_type;
+    }
+
+    public void setId(String id)
     {
         this.id = id;
     }
