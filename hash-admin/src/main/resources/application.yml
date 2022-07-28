@@ -101,3 +101,8 @@ xss:
   excludes: /system/notice
   # 匹配链接
   urlPatterns: /system/*,/monitor/*,/tool/*
+
+shiro:
+  session:
+    # Session超时时间，-1代表永不过期（默认30分钟）
+    expireTime: 30

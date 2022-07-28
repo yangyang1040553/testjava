@@ -58,4 +58,8 @@ public interface DkOssListMapper
      * @return 结果
      */
     public int deleteDkOssListByIds(Long[] ids);
+
+
+
+    public List<DkOssList> selectDKOSSbyName(String name);
 }

@@ -33,6 +33,14 @@
         from dk_oss_list
     </sql>
 
+
+    <select id="selectDKOSSbyName" parameterType="String" resultMap="DkOssListResult">
+        <include refid="selectDkOssListVo"/>
+        <where>
+            <if test="bucket_name != null and bucket_name!=''">bucket_name in( ${ossType})</if>
+        </where>
+    </select>
+
     <select id="selectDkOssListList" parameterType="DkOssList" resultMap="DkOssListResult">
         <include refid="selectDkOssListVo"/>
         <where>
