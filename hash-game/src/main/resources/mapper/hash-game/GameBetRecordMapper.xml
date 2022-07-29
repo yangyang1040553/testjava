@@ -72,7 +72,7 @@
             <if test="betResult != null ">and bet_result = #{betResult}</if>
             <if test="rewardStatus != null ">and reward_status = #{rewardStatus}</if>
             <if test="winner != null ">and winner = #{winner}</if>
-            <if test="createTime != null ">and create_time >= #{createTime}</if>
+            <if test="createTime != null ">and DATE_FORMAT(create_time, '%Y-%m-%d') =  DATE_FORMAT(#{createTime}, '%Y-%m-%d')</if>
             <if test="finishTime != null ">and finish_time >= #{finish_time}</if>
             <if test="awardCallback != null ">and award_callback = #{awardCallback}</if>
         </where>
