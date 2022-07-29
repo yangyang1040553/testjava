@@ -10,10 +10,18 @@
         <result property="trxAmountRecharge" column="trx_amount_recharge"/>
         <result property="usdtAmountWithdraw" column="usdt_amount_withdraw"/>
         <result property="trxAmountWithdraw" column="trx_amount_withdraw"/>
+        <result property="usdt_amount_trans" column="usdt_amount_trans"/>
+        <result property="trx_amount_trans" column="trx_amount_trans"/>
     </resultMap>
 
     <sql id="selectWalletStatisticalPayVo">
-        select id, usdt_amount_recharge, trx_amount_recharge, usdt_amount_withdraw, trx_amount_withdraw
+        select id,
+               usdt_amount_recharge,
+               trx_amount_recharge,
+               usdt_amount_withdraw,
+               trx_amount_withdraw,
+               trx_amount_trans,
+               usdt_amount_trans
         from t_wallet_statistical_pay
     </sql>
 

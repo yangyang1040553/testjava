@@ -45,6 +45,30 @@ public class WalletStatisticalPay extends BaseEntity {
     @Excel(name = "今日trx提现金额")
     private Double trxAmountWithdraw;
 
+
+    @Excel(name = "今日trx转换金额")
+    private Double usdt_amount_trans;
+
+
+    @Excel(name = "今日trx转换金额")
+    private Double trx_amount_trans;
+
+    public Double getUsdt_amount_trans() {
+        return Global.getWalletAmountToReal(usdt_amount_trans);
+    }
+
+    public void setUsdt_amount_trans(Double usdt_amount_trans) {
+        this.usdt_amount_trans = usdt_amount_trans;
+    }
+
+    public Double getTrx_amount_trans() {
+        return Global.getWalletAmountToReal(trx_amount_trans);
+    }
+
+    public void setTrx_amount_trans(Double trx_amount_trans) {
+        this.trx_amount_trans = trx_amount_trans;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
