@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class Test2 {
 
-    static String url = "https://www.xhsxsw.com/html/94938/108500207.html";
+    static String url = "https://www.xhsxsw.com/html/94938/108500213.html";
 
     public static void main(String[] args) throws IOException, InterruptedException {
         String s = HttpUtils.sendGet(url);
@@ -27,7 +27,7 @@ public class Test2 {
         Element content = parse.getElementById("content");
         String html = content.html();
         html = html.replace("<br>", "");
-        html = html.replace("<p>", "");
+        html = html.replace("<p>", "   ");
         html = html.replace("</p>", "");
 
         System.out.print(html);

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.wallet.mapper.PayMerchantMapper">
+    
+    <resultMap type="PayMerchant" id="PayMerchantResult">
+        <result property="id"    column="id"    />
+        <result property="merchantName"    column="merchant_name"    />
+        <result property="merchantCode"    column="merchant_code"    />
+        <result property="appKey"    column="app_key"    />
+        <result property="notifyUrl"    column="notify_url"    />
+        <result property="apiUrl"    column="api_url"    />
+        <result property="ipWhiteList"    column="ip_white_list"    />
+        <result property="timeout"    column="timeout"    />
+        <result property="isEnable"    column="is_enable"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="query_url"    column="query_url"    />
+    </resultMap>
+
+    <sql id="selectPayMerchantVo">
+        select id, merchant_name, merchant_code, app_key, notify_url, api_url, ip_white_list, timeout, is_enable, create_time, update_time,query_url  from t_pay_merchant
+    </sql>
+
+    <select id="selectPayMerchantList" parameterType="PayMerchant" resultMap="PayMerchantResult">
+        <include refid="selectPayMerchantVo"/>
+        <where>  
+            <if test="merchantName != null  and merchantName != ''"> and merchant_name like concat('%', #{merchantName}, '%')</if>
+            <if test="merchantCode != null  and merchantCode != ''"> and merchant_code = #{merchantCode}</if>
+            <if test="appKey != null  and appKey != ''"> and app_key = #{appKey}</if>
+            <if test="notifyUrl != null  and notifyUrl != ''"> and notify_url = #{notifyUrl}</if>
+            <if test="apiUrl != null  and apiUrl != ''"> and api_url = #{apiUrl}</if>
+            <if test="ipWhiteList != null  and ipWhiteList != ''"> and ip_white_list = #{ipWhiteList}</if>
+            <if test="timeout != null "> and timeout = #{timeout}</if>
+            <if test="isEnable != null "> and is_enable = #{isEnable}</if>
+            <if test="createTime != null "> and create_time = #{createTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectPayMerchantById" parameterType="String" resultMap="PayMerchantResult">
+        <include refid="selectPayMerchantVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertPayMerchant" parameterType="PayMerchant" useGeneratedKeys="true" keyProperty="id">
+        insert into t_pay_merchant
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="merchantName != null and merchantName != ''">merchant_name,</if>
+            <if test="merchantCode != null and merchantCode != ''">merchant_code,</if>
+            <if test="appKey != null">app_key,</if>
+            <if test="notifyUrl != null and notifyUrl != ''">notify_url,</if>
+            <if test="apiUrl != null and apiUrl != ''">api_url,</if>
+            <if test="ipWhiteList != null and ipWhiteList != ''">ip_white_list,</if>
+            <if test="timeout != null">timeout,</if>
+            <if test="isEnable != null">is_enable,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="merchantName != null and merchantName != ''">#{merchantName},</if>
+            <if test="merchantCode != null and merchantCode != ''">#{merchantCode},</if>
+            <if test="appKey != null">#{appKey},</if>
+            <if test="notifyUrl != null and notifyUrl != ''">#{notifyUrl},</if>
+            <if test="apiUrl != null and apiUrl != ''">#{apiUrl},</if>
+            <if test="ipWhiteList != null and ipWhiteList != ''">#{ipWhiteList},</if>
+            <if test="timeout != null">#{timeout},</if>
+            <if test="isEnable != null">#{isEnable},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePayMerchant" parameterType="PayMerchant">
+        update t_pay_merchant
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="merchantName != null and merchantName != ''">merchant_name = #{merchantName},</if>
+            <if test="merchantCode != null and merchantCode != ''">merchant_code = #{merchantCode},</if>
+            <if test="appKey != null">app_key = #{appKey},</if>
+            <if test="notifyUrl != null and notifyUrl != ''">notify_url = #{notifyUrl},</if>
+            <if test="apiUrl != null and apiUrl != ''">api_url = #{apiUrl},</if>
+            <if test="ipWhiteList != null and ipWhiteList != ''">ip_white_list = #{ipWhiteList},</if>
+            <if test="timeout != null">timeout = #{timeout},</if>
+            <if test="isEnable != null">is_enable = #{isEnable},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePayMerchantById" parameterType="String">
+        delete from t_pay_merchant where id = #{id}
+    </delete>
+
+    <delete id="deletePayMerchantByIds" parameterType="String">
+        delete from t_pay_merchant where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
