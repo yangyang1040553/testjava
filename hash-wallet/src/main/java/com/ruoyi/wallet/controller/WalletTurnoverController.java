@@ -55,6 +55,7 @@ public class WalletTurnoverController extends BaseController {
     @Log(title = "钱包流水记录", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, WalletTurnover walletTurnover) {
+        startPage();
         startOrderBy();
         List<WalletTurnover> list = walletTurnoverService.selectWalletTurnoverList(walletTurnover);
         for (WalletTurnover statisticalPlayerDay : list) {

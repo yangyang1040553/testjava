@@ -25,17 +25,15 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 游戏投注记录Controller
- * 
+ *
  * @author xxk
  * @date 2022-05-12
  */
 @RestController
 @RequestMapping("/hash-game/record")
-public class GameBetRecordController extends BaseController
-{
+public class GameBetRecordController extends BaseController {
     @Autowired
     private IGameBetRecordService gameBetRecordService;
-
 
 
     /**
@@ -43,8 +41,7 @@ public class GameBetRecordController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-game:record:list')")
     @GetMapping("/list")
-    public TableDataInfo list(GameBetRecord gameBetRecord)
-    {
+    public TableDataInfo list(GameBetRecord gameBetRecord) {
         startPage();
         startOrderBy();
         List<GameBetRecord> list = gameBetRecordService.selectGameBetRecordList(gameBetRecord);
@@ -58,8 +55,8 @@ public class GameBetRecordController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-game:record:export')")
     @Log(title = "游戏投注记录", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, GameBetRecord gameBetRecord)
-    {
+    public void export(HttpServletResponse response, GameBetRecord gameBetRecord) {
+        startPage();
         startOrderBy();
         List<GameBetRecord> list = gameBetRecordService.selectGameBetRecordList(gameBetRecord);
         ExcelUtil<GameBetRecord> util = new ExcelUtil<GameBetRecord>(GameBetRecord.class);
@@ -71,8 +68,7 @@ public class GameBetRecordController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-game:record:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") String id)
-    {
+    public AjaxResult getInfo(@PathVariable("id") String id) {
         return AjaxResult.success(gameBetRecordService.selectGameBetRecordById(id));
     }
 
@@ -82,8 +78,7 @@ public class GameBetRecordController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-game:record:add')")
     @Log(title = "游戏投注记录", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody GameBetRecord gameBetRecord)
-    {
+    public AjaxResult add(@RequestBody GameBetRecord gameBetRecord) {
         return toAjax(gameBetRecordService.insertGameBetRecord(gameBetRecord));
     }
 
@@ -93,8 +88,7 @@ public class GameBetRecordController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-game:record:edit')")
     @Log(title = "游戏投注记录", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody GameBetRecord gameBetRecord)
-    {
+    public AjaxResult edit(@RequestBody GameBetRecord gameBetRecord) {
         return toAjax(gameBetRecordService.updateGameBetRecord(gameBetRecord));
     }
 
@@ -103,9 +97,8 @@ public class GameBetRecordController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-game:record:remove')")
     @Log(title = "游戏投注记录", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable String[] ids)
-    {
+    @DeleteMapping("/{ids}")
+    public AjaxResult remove(@PathVariable String[] ids) {
         return toAjax(gameBetRecordService.deleteGameBetRecordByIds(ids));
     }
 }

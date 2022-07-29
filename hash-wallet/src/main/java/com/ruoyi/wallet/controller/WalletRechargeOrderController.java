@@ -25,14 +25,13 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 充值Controller
- * 
+ *
  * @author xxk
  * @date 2022-06-17
  */
 @RestController
 @RequestMapping("/hash-wallet/rechargeOrder")
-public class WalletRechargeOrderController extends BaseController
-{
+public class WalletRechargeOrderController extends BaseController {
     @Autowired
     private IWalletRechargeOrderService walletRechargeOrderService;
 
@@ -41,8 +40,7 @@ public class WalletRechargeOrderController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-wallet:rechargeOrder:list')")
     @GetMapping("/list")
-    public TableDataInfo list(WalletRechargeOrder walletRechargeOrder)
-    {
+    public TableDataInfo list(WalletRechargeOrder walletRechargeOrder) {
         startPage();
         startOrderBy();
         List<WalletRechargeOrder> list = walletRechargeOrderService.selectWalletRechargeOrderList(walletRechargeOrder);
@@ -66,8 +64,8 @@ public class WalletRechargeOrderController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-wallet:rechargeOrder:export')")
     @Log(title = "充值", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, WalletRechargeOrder walletRechargeOrder)
-    {
+    public void export(HttpServletResponse response, WalletRechargeOrder walletRechargeOrder) {
+        startPage();
         startOrderBy();
         List<WalletRechargeOrder> list = walletRechargeOrderService.selectWalletRechargeOrderList(walletRechargeOrder);
         for (WalletRechargeOrder statisticalPlayerDay : list) {
@@ -84,8 +82,7 @@ public class WalletRechargeOrderController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-wallet:rechargeOrder:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") String id)
-    {
+    public AjaxResult getInfo(@PathVariable("id") String id) {
         return AjaxResult.success(walletRechargeOrderService.selectWalletRechargeOrderById(id));
     }
 
@@ -95,8 +92,7 @@ public class WalletRechargeOrderController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-wallet:rechargeOrder:add')")
     @Log(title = "充值", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody WalletRechargeOrder walletRechargeOrder)
-    {
+    public AjaxResult add(@RequestBody WalletRechargeOrder walletRechargeOrder) {
         return toAjax(walletRechargeOrderService.insertWalletRechargeOrder(walletRechargeOrder));
     }
 
@@ -106,8 +102,7 @@ public class WalletRechargeOrderController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-wallet:rechargeOrder:edit')")
     @Log(title = "充值", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody WalletRechargeOrder walletRechargeOrder)
-    {
+    public AjaxResult edit(@RequestBody WalletRechargeOrder walletRechargeOrder) {
         return toAjax(walletRechargeOrderService.updateWalletRechargeOrder(walletRechargeOrder));
     }
 
@@ -116,9 +111,8 @@ public class WalletRechargeOrderController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-wallet:rechargeOrder:remove')")
     @Log(title = "充值", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable String[] ids)
-    {
+    @DeleteMapping("/{ids}")
+    public AjaxResult remove(@PathVariable String[] ids) {
         return toAjax(walletRechargeOrderService.deleteWalletRechargeOrderByIds(ids));
     }
 }

@@ -55,6 +55,7 @@ public class WalletArtificialOptController extends BaseController
     @PostMapping("/export")
     public void export(HttpServletResponse response, WalletArtificialOpt walletArtificialOpt)
     {
+        startPage();
         startOrderBy();
         List<WalletArtificialOpt> list = walletArtificialOptService.selectWalletArtificialOptList(walletArtificialOpt);
         for (WalletArtificialOpt artificialOpt : list) {

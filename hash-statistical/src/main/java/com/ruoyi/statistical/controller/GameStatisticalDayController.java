@@ -64,6 +64,7 @@ public class GameStatisticalDayController extends BaseController {
     @Log(title = "游戏日统计", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, GameStatisticalDay gameStatisticalDay) {
+        startPage();
         startOrderBy();
         List<GameStatisticalDay> list = gameStatisticalDayService.selectGameStatisticalDayList(gameStatisticalDay);
         for (GameStatisticalDay statisticalDay : list) {

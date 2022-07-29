@@ -79,6 +79,7 @@ public class WalletWithdrawOrderController extends BaseController {
     @Log(title = "提现审核", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, WalletWithdrawOrder walletWithdrawOrder) {
+        startPage();
         startOrderBy();
         List<WalletWithdrawOrder> list = walletWithdrawOrderService.selectWalletWithdrawOrderList(walletWithdrawOrder);
         for (WalletWithdrawOrder withdrawOrder : list) {

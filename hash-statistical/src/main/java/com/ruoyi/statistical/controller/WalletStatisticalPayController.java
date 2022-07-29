@@ -25,14 +25,13 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 钱包日支付统计Controller
- * 
+ *
  * @author xxk
  * @date 2022-06-24
  */
 @RestController
 @RequestMapping("/hash-statistical/everyDay")
-public class WalletStatisticalPayController extends BaseController
-{
+public class WalletStatisticalPayController extends BaseController {
     @Autowired
     private IWalletStatisticalPayService walletStatisticalPayService;
 
@@ -41,8 +40,7 @@ public class WalletStatisticalPayController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-statistical:everyDay:list')")
     @GetMapping("/list")
-    public TableDataInfo list(WalletStatisticalPay walletStatisticalPay)
-    {
+    public TableDataInfo list(WalletStatisticalPay walletStatisticalPay) {
         startPage();
         startOrderBy();
         List<WalletStatisticalPay> list = walletStatisticalPayService.selectWalletStatisticalPayList(walletStatisticalPay);
@@ -55,8 +53,7 @@ public class WalletStatisticalPayController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-statistical:everyDay:export')")
     @Log(title = "钱包日支付统计", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, WalletStatisticalPay walletStatisticalPay)
-    {
+    public void export(HttpServletResponse response, WalletStatisticalPay walletStatisticalPay) {
         startOrderBy();
         List<WalletStatisticalPay> list = walletStatisticalPayService.selectWalletStatisticalPayList(walletStatisticalPay);
         for (WalletStatisticalPay walletStatistical : list) {
@@ -64,6 +61,9 @@ public class WalletStatisticalPayController extends BaseController
             walletStatistical.setUsdtAmountWithdraw(walletStatistical.getUsdtAmountWithdraw());
             walletStatistical.setTrxAmountRecharge(walletStatistical.getTrxAmountRecharge());
             walletStatistical.setUsdtAmountRecharge(walletStatistical.getUsdtAmountRecharge());
+            walletStatistical.setUsdt_amount_trans(walletStatistical.getUsdt_amount_trans());
+            walletStatistical.setTrx_amount_trans(walletStatistical.getTrx_amount_trans());
+
         }
         ExcelUtil<WalletStatisticalPay> util = new ExcelUtil<WalletStatisticalPay>(WalletStatisticalPay.class);
         util.exportExcel(response, list, "钱包日支付统计数据");
@@ -74,8 +74,7 @@ public class WalletStatisticalPayController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-statistical:everyDay:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") String id)
-    {
+    public AjaxResult getInfo(@PathVariable("id") String id) {
         return AjaxResult.success(walletStatisticalPayService.selectWalletStatisticalPayById(id));
     }
 
@@ -85,8 +84,7 @@ public class WalletStatisticalPayController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-statistical:everyDay:add')")
     @Log(title = "钱包日支付统计", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody WalletStatisticalPay walletStatisticalPay)
-    {
+    public AjaxResult add(@RequestBody WalletStatisticalPay walletStatisticalPay) {
         return toAjax(walletStatisticalPayService.insertWalletStatisticalPay(walletStatisticalPay));
     }
 
@@ -96,8 +94,7 @@ public class WalletStatisticalPayController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-statistical:everyDay:edit')")
     @Log(title = "钱包日支付统计", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody WalletStatisticalPay walletStatisticalPay)
-    {
+    public AjaxResult edit(@RequestBody WalletStatisticalPay walletStatisticalPay) {
         return toAjax(walletStatisticalPayService.updateWalletStatisticalPay(walletStatisticalPay));
     }
 
@@ -106,9 +103,8 @@ public class WalletStatisticalPayController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-statistical:everyDay:remove')")
     @Log(title = "钱包日支付统计", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable String[] ids)
-    {
+    @DeleteMapping("/{ids}")
+    public AjaxResult remove(@PathVariable String[] ids) {
         return toAjax(walletStatisticalPayService.deleteWalletStatisticalPayByIds(ids));
     }
 }
