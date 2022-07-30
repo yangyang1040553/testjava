@@ -59,6 +59,9 @@ public class GameBetRecordController extends BaseController {
         startPage();
         startOrderBy();
         List<GameBetRecord> list = gameBetRecordService.selectGameBetRecordList(gameBetRecord);
+        for (GameBetRecord betRecord : list) {
+            betRecord.setWinAmount(betRecord.getWinAmount());
+        }
         ExcelUtil<GameBetRecord> util = new ExcelUtil<GameBetRecord>(GameBetRecord.class);
         util.exportExcel(response, list, "游戏投注记录数据");
     }

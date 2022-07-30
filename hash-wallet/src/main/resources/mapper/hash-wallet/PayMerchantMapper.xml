@@ -17,6 +17,7 @@
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
         <result property="query_url" column="query_url"/>
+        <result property="merchant_no" column="merchant_no"/>
     </resultMap>
 
     <sql id="selectPayMerchantVo">
@@ -31,7 +32,8 @@
                is_enable,
                create_time,
                update_time,
-               query_url
+               query_url,
+               merchant_no
         from t_pay_merchant
     </sql>
 
@@ -71,6 +73,7 @@
             <if test="createTime != null">create_time,</if>
             <if test="updateTime != null">update_time,</if>
             <if test="query_url != null">query_url,</if>
+            <if test="merchant_no != null">merchant_no,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="merchantName != null and merchantName != ''">#{merchantName},</if>
@@ -84,6 +87,7 @@
             <if test="createTime != null">#{createTime},</if>
             <if test="updateTime != null">#{updateTime},</if>
             <if test="query_url != null">#{query_url},</if>
+            <if test="merchant_no != null">#{merchant_no},</if>
         </trim>
     </insert>
 
@@ -101,6 +105,7 @@
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="query_url != null">query_url = #{query_url},</if>
+            <if test="merchant_no != null">merchant_no = #{merchant_no},</if>
         </trim>
         where id = #{id}
     </update>

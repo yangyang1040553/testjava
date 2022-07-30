@@ -53,6 +53,17 @@ public class PayMerchant extends BaseEntity
     @Excel(name = "接口查询地址")
     String query_url;
 
+    @Excel(name = "商户ID")
+    String merchant_no;
+
+    public String getMerchant_no() {
+        return merchant_no;
+    }
+
+    public void setMerchant_no(String merchant_no) {
+        this.merchant_no = merchant_no;
+    }
+
     public String getQuery_url() {
         return query_url;
     }

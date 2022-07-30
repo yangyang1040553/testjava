@@ -86,7 +86,7 @@ public class GameBetRecord extends BaseEntity {
     @Excel(name = "到账金额")
     private Double incomeAmount;
 
-    @Excel(name = "投注金额")
+    @Excel(name = "输赢金额")
     private Double winAmount;
 
     /**
