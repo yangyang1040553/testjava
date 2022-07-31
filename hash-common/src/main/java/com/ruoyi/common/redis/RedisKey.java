@@ -54,4 +54,8 @@ public class RedisKey {
     public final static String common_config_update = "common_config_update";
     //用户客户端日志查询
     public final static String common_client_log = "common_client_log:";
+
+
+    //钱包充值通道
+    public final static String wallet_pay_channels = "wallet_pay_channels";
 }

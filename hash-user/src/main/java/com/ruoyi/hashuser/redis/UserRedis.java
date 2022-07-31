@@ -84,6 +84,13 @@ public class UserRedis {
         redisCache.deleteObject(RedisKey.user_activity);
     }
 
+    /***
+     * 删除支付通道
+     */
+    public void delPayChannels() {
+        redisCache.deleteObject(RedisKey.wallet_pay_channels);
+    }
+
     /**
      * 删除Banner缓存
      */
