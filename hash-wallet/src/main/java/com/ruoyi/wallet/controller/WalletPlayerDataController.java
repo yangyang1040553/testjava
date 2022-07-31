@@ -8,8 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.common.constant.Global;
+import com.ruoyi.common.core.domain.entity.SysUser;
+import com.ruoyi.common.utils.GoogleAuthenticator;
 import com.ruoyi.common.utils.http.HttpUtils;
 import com.ruoyi.common.utils.sign.Md5Utils;
+import com.ruoyi.system.service.ISysUserService;
 import com.ruoyi.wallet.domain.WalletRechargeOrder;
 import com.ruoyi.wallet.vo.WalletInOutMoneyVo;
 import org.apache.commons.lang3.StringUtils;
@@ -50,6 +53,9 @@ public class WalletPlayerDataController extends BaseController {
 
     @Autowired
     private IWalletPlayerDataService walletPlayerDataService;
+
+    @Autowired
+    private ISysUserService userService;
 
     /**
      * 查询用户钱包列表
@@ -111,6 +117,15 @@ public class WalletPlayerDataController extends BaseController {
     @Log(title = "用户钱包", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody WalletInOutMoneyVo walletInOutMoneyVo) {
+
+        // 谷歌验证授权
+        SysUser sysUser = userService.selectUserByUserName(getUsername());
+        String secret = sysUser.getSecret();
+        boolean authcode = GoogleAuthenticator.authcode(walletInOutMoneyVo.getGoogleCode(), secret);
+        if (!authcode) {
+            return AjaxResult.error("验证码错误或已过期");
+        }
+
         if (StringUtils.isBlank(walletInOutMoneyVo.getId())) {
             return AjaxResult.error("id为空");
         }

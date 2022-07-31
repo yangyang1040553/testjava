@@ -35,6 +35,16 @@ public class WalletInOutMoneyVo {
      */
     public int type;
 
+    private String googleCode;
+
+    public String getGoogleCode() {
+        return googleCode;
+    }
+
+    public void setGoogleCode(String googleCode) {
+        this.googleCode = googleCode;
+    }
+
     public String getId() {
         return id;
     }
