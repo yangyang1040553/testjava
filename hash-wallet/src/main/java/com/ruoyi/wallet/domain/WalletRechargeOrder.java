@@ -85,7 +85,38 @@ public class WalletRechargeOrder extends BaseEntity {
     private String note;
 
     @Excel(name = "是否首冲")
-    private  Integer frist_recharge;
+    private Integer frist_recharge;
+
+    @Excel(name = "充值方式")
+    private String pay_type;
+    @Excel(name = "转换比例")
+    private String scale;
+    @Excel(name = "原始金额")
+    private Double source_amount;
+
+    public String getPay_type() {
+        return pay_type;
+    }
+
+    public void setPay_type(String pay_type) {
+        this.pay_type = pay_type;
+    }
+
+    public String getScale() {
+        return scale;
+    }
+
+    public void setScale(String scale) {
+        this.scale = scale;
+    }
+
+    public Double getSource_amount() {
+        return Global.getWalletAmountToReal(source_amount);
+    }
+
+    public void setSource_amount(Double source_amount) {
+        this.source_amount = source_amount;
+    }
 
     public Integer getFrist_recharge() {
         return frist_recharge;

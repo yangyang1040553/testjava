@@ -72,6 +72,7 @@ public class WalletRechargeOrderController extends BaseController {
             statisticalPlayerDay.setAmount(statisticalPlayerDay.getAmount());
             statisticalPlayerDay.setPayAmount(statisticalPlayerDay.getPayAmount());
             statisticalPlayerDay.setMinerAmount(statisticalPlayerDay.getMinerAmount());
+            statisticalPlayerDay.setSource_amount(statisticalPlayerDay.getSource_amount());
         }
         ExcelUtil<WalletRechargeOrder> util = new ExcelUtil<WalletRechargeOrder>(WalletRechargeOrder.class);
         util.exportExcel(response, list, "充值数据");

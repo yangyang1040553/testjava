@@ -22,6 +22,10 @@
         <result property="nickName" column="nick_name"/>
         <result property="frist_recharge" column="frist_recharge"/>
 
+        <result property="pay_type" column="pay_type"/>
+        <result property="scale" column="scale"/>
+        <result property="source_amount" column="source_amount"/>
+
     </resultMap>
 
     <sql id="selectWalletRechargeOrderVo">
@@ -40,7 +44,10 @@
                invitation_code,
                nick_name,
                note,
-               frist_recharge
+               frist_recharge,
+               pay_type,
+               scale,
+               source_amount
         FROM t_wallet_recharge_order
 
     </sql>

@@ -63,7 +63,7 @@ public class PayOrder extends BaseEntity {
      * 转换比例
      */
     @Excel(name = "转换比例")
-    private Long scale;
+    private String scale;
 
     /**
      * 充值金额
@@ -223,11 +223,11 @@ public class PayOrder extends BaseEntity {
         return transStatus;
     }
 
-    public void setScale(Long scale) {
+    public void setScale(String scale) {
         this.scale = scale;
     }
 
-    public Long getScale() {
+    public String getScale() {
         return scale;
     }
 
