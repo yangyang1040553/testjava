@@ -2,6 +2,7 @@ package com.ruoyi.wallet.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,14 +24,13 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 充值订单记录Controller
- * 
+ *
  * @author xxk
  * @date 2022-07-31
  */
 @RestController
 @RequestMapping("/hash-wallet/smallOrder")
-public class PayOrderController extends BaseController
-{
+public class PayOrderController extends BaseController {
     @Autowired
     private IPayOrderService payOrderService;
 
@@ -39,9 +39,9 @@ public class PayOrderController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-wallet:smallOrder:list')")
     @GetMapping("/list")
-    public TableDataInfo list(PayOrder payOrder)
-    {
+    public TableDataInfo list(PayOrder payOrder) {
         startPage();
+        startOrderBy();
         List<PayOrder> list = payOrderService.selectPayOrderList(payOrder);
         return getDataTable(list);
     }
@@ -52,10 +52,14 @@ public class PayOrderController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-wallet:smallOrder:export')")
     @Log(title = "充值订单记录", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, PayOrder payOrder)
-    {
+    public void export(HttpServletResponse response, PayOrder payOrder) {
+        startPage();
         startOrderBy();
         List<PayOrder> list = payOrderService.selectPayOrderList(payOrder);
+        for (PayOrder order : list) {
+            order.setPayMoney(order.getPayMoney());
+            order.setRechargeMoney(order.getRechargeMoney());
+        }
         ExcelUtil<PayOrder> util = new ExcelUtil<PayOrder>(PayOrder.class);
         util.exportExcel(response, list, "充值订单记录数据");
     }
@@ -65,8 +69,7 @@ public class PayOrderController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-wallet:smallOrder:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") String id)
-    {
+    public AjaxResult getInfo(@PathVariable("id") String id) {
         return AjaxResult.success(payOrderService.selectPayOrderById(id));
     }
 
@@ -76,8 +79,7 @@ public class PayOrderController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-wallet:smallOrder:add')")
     @Log(title = "充值订单记录", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody PayOrder payOrder)
-    {
+    public AjaxResult add(@RequestBody PayOrder payOrder) {
         return toAjax(payOrderService.insertPayOrder(payOrder));
     }
 
@@ -87,8 +89,7 @@ public class PayOrderController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-wallet:smallOrder:edit')")
     @Log(title = "充值订单记录", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody PayOrder payOrder)
-    {
+    public AjaxResult edit(@RequestBody PayOrder payOrder) {
         return toAjax(payOrderService.updatePayOrder(payOrder));
     }
 
@@ -97,9 +98,8 @@ public class PayOrderController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-wallet:smallOrder:remove')")
     @Log(title = "充值订单记录", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable String[] ids)
-    {
+    @DeleteMapping("/{ids}")
+    public AjaxResult remove(@PathVariable String[] ids) {
         return toAjax(payOrderService.deletePayOrderByIds(ids));
     }
 }
