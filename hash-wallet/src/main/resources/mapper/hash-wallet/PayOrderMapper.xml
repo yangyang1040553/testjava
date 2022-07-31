@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.wallet.mapper.PayOrderMapper">
+    
+    <resultMap type="PayOrder" id="PayOrderResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="nickName"    column="nick_name"    />
+        <result property="channelId"    column="channel_id"    />
+        <result property="rechargeMerchantCode"    column="recharge_merchant_code"    />
+        <result property="toWallet"    column="to_wallet"    />
+        <result property="transStatus"    column="trans_status"    />
+        <result property="scale"    column="scale"    />
+        <result property="rechargeMoney"    column="recharge_money"    />
+        <result property="payMoney"    column="pay_money"    />
+        <result property="isFirstRecharge"    column="is_first_recharge"    />
+        <result property="payStatus"    column="pay_status"    />
+        <result property="orderStatus"    column="order_status"    />
+        <result property="payTypeNo"    column="pay_type_no"    />
+        <result property="channelCode"    column="channel_code"    />
+        <result property="channelNo"    column="channel_no"    />
+        <result property="payTime"    column="pay_time"    />
+        <result property="invalidTime"    column="invalid_time"    />
+        <result property="thirdOrderNo"    column="third_order_no"    />
+        <result property="remark"    column="remark"    />
+        <result property="payUrl"    column="pay_url"    />
+        <result property="reqMessage"    column="req_message"    />
+        <result property="callbackMessage"    column="callback_message"    />
+        <result property="regChannel"    column="reg_channel"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="updateUser"    column="update_user"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectPayOrderVo">
+        select id, user_id, nick_name, channel_id, recharge_merchant_code, to_wallet, trans_status, scale, recharge_money, pay_money, is_first_recharge, pay_status, order_status, pay_type_no, channel_code, channel_no, pay_time, invalid_time, third_order_no, remark, pay_url, req_message, callback_message, reg_channel, del_flag, update_user, create_time, update_time from t_pay_order
+    </sql>
+
+    <select id="selectPayOrderList" parameterType="PayOrder" resultMap="PayOrderResult">
+        <include refid="selectPayOrderVo"/>
+        <where>  
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="toWallet != null  and toWallet != ''"> and to_wallet = #{toWallet}</if>
+            <if test="transStatus != null "> and trans_status = #{transStatus}</if>
+            <if test="rechargeMoney != null "> and recharge_money = #{rechargeMoney}</if>
+            <if test="payStatus != null  and payStatus != ''"> and pay_status = #{payStatus}</if>
+            <if test="orderStatus != null  and orderStatus != ''"> and order_status = #{orderStatus}</if>
+            <if test="createTime != null "> and create_time = #{createTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectPayOrderById" parameterType="String" resultMap="PayOrderResult">
+        <include refid="selectPayOrderVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertPayOrder" parameterType="PayOrder">
+        insert into t_pay_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="nickName != null">nick_name,</if>
+            <if test="channelId != null">channel_id,</if>
+            <if test="rechargeMerchantCode != null">recharge_merchant_code,</if>
+            <if test="toWallet != null">to_wallet,</if>
+            <if test="transStatus != null">trans_status,</if>
+            <if test="scale != null">scale,</if>
+            <if test="rechargeMoney != null">recharge_money,</if>
+            <if test="payMoney != null">pay_money,</if>
+            <if test="isFirstRecharge != null">is_first_recharge,</if>
+            <if test="payStatus != null">pay_status,</if>
+            <if test="orderStatus != null">order_status,</if>
+            <if test="payTypeNo != null">pay_type_no,</if>
+            <if test="channelCode != null">channel_code,</if>
+            <if test="channelNo != null">channel_no,</if>
+            <if test="payTime != null">pay_time,</if>
+            <if test="invalidTime != null">invalid_time,</if>
+            <if test="thirdOrderNo != null">third_order_no,</if>
+            <if test="remark != null">remark,</if>
+            <if test="payUrl != null">pay_url,</if>
+            <if test="reqMessage != null">req_message,</if>
+            <if test="callbackMessage != null">callback_message,</if>
+            <if test="regChannel != null">reg_channel,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="updateUser != null">update_user,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="nickName != null">#{nickName},</if>
+            <if test="channelId != null">#{channelId},</if>
+            <if test="rechargeMerchantCode != null">#{rechargeMerchantCode},</if>
+            <if test="toWallet != null">#{toWallet},</if>
+            <if test="transStatus != null">#{transStatus},</if>
+            <if test="scale != null">#{scale},</if>
+            <if test="rechargeMoney != null">#{rechargeMoney},</if>
+            <if test="payMoney != null">#{payMoney},</if>
+            <if test="isFirstRecharge != null">#{isFirstRecharge},</if>
+            <if test="payStatus != null">#{payStatus},</if>
+            <if test="orderStatus != null">#{orderStatus},</if>
+            <if test="payTypeNo != null">#{payTypeNo},</if>
+            <if test="channelCode != null">#{channelCode},</if>
+            <if test="channelNo != null">#{channelNo},</if>
+            <if test="payTime != null">#{payTime},</if>
+            <if test="invalidTime != null">#{invalidTime},</if>
+            <if test="thirdOrderNo != null">#{thirdOrderNo},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="payUrl != null">#{payUrl},</if>
+            <if test="reqMessage != null">#{reqMessage},</if>
+            <if test="callbackMessage != null">#{callbackMessage},</if>
+            <if test="regChannel != null">#{regChannel},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="updateUser != null">#{updateUser},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePayOrder" parameterType="PayOrder">
+        update t_pay_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="nickName != null">nick_name = #{nickName},</if>
+            <if test="channelId != null">channel_id = #{channelId},</if>
+            <if test="rechargeMerchantCode != null">recharge_merchant_code = #{rechargeMerchantCode},</if>
+            <if test="toWallet != null">to_wallet = #{toWallet},</if>
+            <if test="transStatus != null">trans_status = #{transStatus},</if>
+            <if test="scale != null">scale = #{scale},</if>
+            <if test="rechargeMoney != null">recharge_money = #{rechargeMoney},</if>
+            <if test="payMoney != null">pay_money = #{payMoney},</if>
+            <if test="isFirstRecharge != null">is_first_recharge = #{isFirstRecharge},</if>
+            <if test="payStatus != null">pay_status = #{payStatus},</if>
+            <if test="orderStatus != null">order_status = #{orderStatus},</if>
+            <if test="payTypeNo != null">pay_type_no = #{payTypeNo},</if>
+            <if test="channelCode != null">channel_code = #{channelCode},</if>
+            <if test="channelNo != null">channel_no = #{channelNo},</if>
+            <if test="payTime != null">pay_time = #{payTime},</if>
+            <if test="invalidTime != null">invalid_time = #{invalidTime},</if>
+            <if test="thirdOrderNo != null">third_order_no = #{thirdOrderNo},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="payUrl != null">pay_url = #{payUrl},</if>
+            <if test="reqMessage != null">req_message = #{reqMessage},</if>
+            <if test="callbackMessage != null">callback_message = #{callbackMessage},</if>
+            <if test="regChannel != null">reg_channel = #{regChannel},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="updateUser != null">update_user = #{updateUser},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePayOrderById" parameterType="String">
+        delete from t_pay_order where id = #{id}
+    </delete>
+
+    <delete id="deletePayOrderByIds" parameterType="String">
+        delete from t_pay_order where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
