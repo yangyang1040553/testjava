@@ -121,8 +121,8 @@ public class WalletPlayerDataController extends BaseController {
         // 谷歌验证授权
         SysUser sysUser = userService.selectUserByUserName(getUsername());
         String secret = sysUser.getSecret();
-        boolean authcode = GoogleAuthenticator.authcode(walletInOutMoneyVo.getGoogleCode(), secret);
-        if (!authcode) {
+        boolean authCode = GoogleAuthenticator.authcode(walletInOutMoneyVo.getGoogleCode(), secret);
+        if (!authCode) {
             return AjaxResult.error("验证码错误或已过期");
         }
 
