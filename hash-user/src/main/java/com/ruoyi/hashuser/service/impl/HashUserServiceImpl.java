@@ -71,7 +71,7 @@ public class HashUserServiceImpl implements IHashUserService {
             hashUser.setOnline(gameRedis.userIsOnline(hashUser.getId()) ? 1L : 0L);
         }
 
-        hashUser.setPassword(null);
+        hashUser.setPassword("");
 
         return hashUser;
     }
