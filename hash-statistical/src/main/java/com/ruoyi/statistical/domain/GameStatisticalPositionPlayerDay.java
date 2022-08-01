@@ -74,6 +74,8 @@ public class GameStatisticalPositionPlayerDay extends BaseEntity {
 
     private String week;
 
+
+
     /**
      * 统计
      */
@@ -85,6 +87,17 @@ public class GameStatisticalPositionPlayerDay extends BaseEntity {
 
     @Excel(name = "TRX输赢金额")
     private Double trxWin;
+
+    @Excel(name = "邀请码")
+    private String invitation_code;
+
+    public String getInvitation_code() {
+        return invitation_code;
+    }
+
+    public void setInvitation_code(String invitation_code) {
+        this.invitation_code = invitation_code;
+    }
 
     public Double getUsdtWin() {
         return Global.getWalletAmountToReal(usdtWin);

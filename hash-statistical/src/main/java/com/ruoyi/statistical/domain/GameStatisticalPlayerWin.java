@@ -68,6 +68,19 @@ public class GameStatisticalPlayerWin extends BaseEntity {
     @Excel(name = "昵称")
     private String nick_name;
 
+
+
+    @Excel(name = "邀请码")
+    private String invitation_code;
+
+    public String getInvitation_code() {
+        return invitation_code;
+    }
+
+    public void setInvitation_code(String invitation_code) {
+        this.invitation_code = invitation_code;
+    }
+
     public String getNote_name() {
         return note_name;
     }

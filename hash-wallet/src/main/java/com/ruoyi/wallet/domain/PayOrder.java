@@ -115,15 +115,15 @@ public class PayOrder extends BaseEntity {
     /**
      * 支付时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "支付时间", width = 30, dateFormat = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "支付时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date payTime;
 
     /**
      * 失效时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "失效时间", width = 30, dateFormat = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "失效时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date invalidTime;
 
     /**
@@ -166,6 +166,18 @@ public class PayOrder extends BaseEntity {
      */
     @Excel(name = "操作人")
     private String updateUser;
+
+
+    @Excel(name = "邀请码")
+    private String invitation_code;
+
+    public String getInvitation_code() {
+        return invitation_code;
+    }
+
+    public void setInvitation_code(String invitation_code) {
+        this.invitation_code = invitation_code;
+    }
 
     public void setId(String id) {
         this.id = id;

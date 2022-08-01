@@ -71,6 +71,19 @@ public class GameStatisticalPlayerDay extends BaseEntity {
 
     private String week;
 
+
+
+    @Excel(name = "邀请码")
+    private String invitation_code;
+
+    public String getInvitation_code() {
+        return invitation_code;
+    }
+
+    public void setInvitation_code(String invitation_code) {
+        this.invitation_code = invitation_code;
+    }
+
     public String getWeek() {
         return week;
     }

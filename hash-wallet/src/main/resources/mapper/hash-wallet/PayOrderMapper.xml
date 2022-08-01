@@ -1,62 +1,93 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.wallet.mapper.PayOrderMapper">
-    
+
     <resultMap type="PayOrder" id="PayOrderResult">
-        <result property="id"    column="id"    />
-        <result property="userId"    column="user_id"    />
-        <result property="nickName"    column="nick_name"    />
-        <result property="channelId"    column="channel_id"    />
-        <result property="rechargeMerchantCode"    column="recharge_merchant_code"    />
-        <result property="toWallet"    column="to_wallet"    />
-        <result property="transStatus"    column="trans_status"    />
-        <result property="scale"    column="scale"    />
-        <result property="rechargeMoney"    column="recharge_money"    />
-        <result property="payMoney"    column="pay_money"    />
-        <result property="isFirstRecharge"    column="is_first_recharge"    />
-        <result property="payStatus"    column="pay_status"    />
-        <result property="orderStatus"    column="order_status"    />
-        <result property="payTypeNo"    column="pay_type_no"    />
-        <result property="channelCode"    column="channel_code"    />
-        <result property="channelNo"    column="channel_no"    />
-        <result property="payTime"    column="pay_time"    />
-        <result property="invalidTime"    column="invalid_time"    />
-        <result property="thirdOrderNo"    column="third_order_no"    />
-        <result property="remark"    column="remark"    />
-        <result property="payUrl"    column="pay_url"    />
-        <result property="reqMessage"    column="req_message"    />
-        <result property="callbackMessage"    column="callback_message"    />
-        <result property="regChannel"    column="reg_channel"    />
-        <result property="delFlag"    column="del_flag"    />
-        <result property="updateUser"    column="update_user"    />
-        <result property="createTime"    column="create_time"    />
-        <result property="updateTime"    column="update_time"    />
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="channelId" column="channel_id"/>
+        <result property="rechargeMerchantCode" column="recharge_merchant_code"/>
+        <result property="toWallet" column="to_wallet"/>
+        <result property="transStatus" column="trans_status"/>
+        <result property="scale" column="scale"/>
+        <result property="rechargeMoney" column="recharge_money"/>
+        <result property="payMoney" column="pay_money"/>
+        <result property="isFirstRecharge" column="is_first_recharge"/>
+        <result property="payStatus" column="pay_status"/>
+        <result property="orderStatus" column="order_status"/>
+        <result property="payTypeNo" column="pay_type_no"/>
+        <result property="channelCode" column="channel_code"/>
+        <result property="channelNo" column="channel_no"/>
+        <result property="payTime" column="pay_time"/>
+        <result property="invalidTime" column="invalid_time"/>
+        <result property="thirdOrderNo" column="third_order_no"/>
+        <result property="remark" column="remark"/>
+        <result property="payUrl" column="pay_url"/>
+        <result property="reqMessage" column="req_message"/>
+        <result property="callbackMessage" column="callback_message"/>
+        <result property="regChannel" column="reg_channel"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="updateUser" column="update_user"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="invitation_code" column="invitation_code"/>
     </resultMap>
 
     <sql id="selectPayOrderVo">
-        select id, user_id, nick_name, channel_id, recharge_merchant_code, to_wallet, trans_status, scale, recharge_money, pay_money, is_first_recharge, pay_status, order_status, pay_type_no, channel_code, channel_no, pay_time, invalid_time, third_order_no, remark, pay_url, req_message, callback_message, reg_channel, del_flag, update_user, create_time, update_time from t_pay_order
+        select id,
+               user_id,
+               nick_name,
+               channel_id,
+               recharge_merchant_code,
+               to_wallet,
+               trans_status,
+               scale,
+               recharge_money,
+               pay_money,
+               is_first_recharge,
+               pay_status,
+               order_status,
+               pay_type_no,
+               channel_code,
+               channel_no,
+               pay_time,
+               invalid_time,
+               third_order_no,
+               remark,
+               pay_url,
+               req_message,
+               callback_message,
+               reg_channel,
+               del_flag,
+               update_user,
+               create_time,
+               update_time,
+               invitation_code
+        from t_pay_order
     </sql>
 
     <select id="selectPayOrderList" parameterType="PayOrder" resultMap="PayOrderResult">
         <include refid="selectPayOrderVo"/>
-        <where>  
-            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
-            <if test="toWallet != null  and toWallet != ''"> and to_wallet = #{toWallet}</if>
-            <if test="transStatus != null "> and trans_status = #{transStatus}</if>
-            <if test="rechargeMoney != null "> and recharge_money = #{rechargeMoney}</if>
-            <if test="payStatus != null  and payStatus != ''"> and pay_status = #{payStatus}</if>
-            <if test="orderStatus != null  and orderStatus != ''"> and order_status = #{orderStatus}</if>
-            <if test="createTime != null "> and create_time = #{createTime}</if>
+        <where>
+            <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
+            <if test="invitation_code != null  and invitation_code != ''">and invitation_code = #{invitation_code}</if>
+            <if test="toWallet != null  and toWallet != ''">and to_wallet = #{toWallet}</if>
+            <if test="transStatus != null ">and trans_status = #{transStatus}</if>
+            <if test="rechargeMoney != null ">and recharge_money = #{rechargeMoney}</if>
+            <if test="payStatus != null  and payStatus != ''">and pay_status = #{payStatus}</if>
+            <if test="orderStatus != null  and orderStatus != ''">and order_status = #{orderStatus}</if>
+            <if test="createTime != null ">and create_time = #{createTime}</if>
         </where>
     </select>
-    
+
     <select id="selectPayOrderById" parameterType="String" resultMap="PayOrderResult">
         <include refid="selectPayOrderVo"/>
         where id = #{id}
     </select>
-        
+
     <insert id="insertPayOrder" parameterType="PayOrder">
         insert into t_pay_order
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -88,7 +119,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateUser != null">update_user,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateTime != null">update_time,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
             <if test="userId != null">#{userId},</if>
@@ -118,7 +149,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateUser != null">#{updateUser},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateTime != null">#{updateTime},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updatePayOrder" parameterType="PayOrder">
@@ -156,11 +187,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deletePayOrderById" parameterType="String">
-        delete from t_pay_order where id = #{id}
+        delete
+        from t_pay_order
+        where id = #{id}
     </delete>
 
     <delete id="deletePayOrderByIds" parameterType="String">
-        delete from t_pay_order where id in 
+        delete from t_pay_order where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

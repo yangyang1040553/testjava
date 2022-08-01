@@ -57,6 +57,7 @@ public class GameStatisticalPlayerDayServiceImpl implements IGameStatisticalPlay
                 "SELECT DATE_FORMAT(id, '" + regex + "') AS time, \n" +
                         "game_id,\n" +
                         "user_id,\n" +
+                        "invitation_code,\n" +
                         "sum(trx_bet_amount) AS trx_bet_amount, \n" +
                         "sum(trx_award_amount) AS trx_award_amount, \n" +
                         "sum(usdt_bet_amount) AS usdt_bet_amount, \n" +
@@ -77,8 +78,16 @@ public class GameStatisticalPlayerDayServiceImpl implements IGameStatisticalPlay
             }
         }
 
+        if (gameStatisticalPlayerDay.getInvitation_code() != null) {
+            if (sql.contains("where")){
+                sql+=" and invitation_code="+gameStatisticalPlayerDay.getInvitation_code();
+            } else {
+                sql+=" where invitation_code="+gameStatisticalPlayerDay.getInvitation_code();
+            }
+        }
 
-        sql += " GROUP BY time, game_id ,user_id";
+
+        sql += " GROUP BY time, game_id ,user_id,invitation_code";
 
         gameStatisticalPlayerDay.setSql(sql);
 

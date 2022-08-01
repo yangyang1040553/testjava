@@ -17,6 +17,7 @@
         <result property="usdtWin" column="usdt_win"/>
         <result property="nick_name" column="nick_name"/>
         <result property="note_name" column="note_name"/>
+        <result property="invitation_code" column="invitation_code"/>
     </resultMap>
 
     <sql id="selectGameStatisticalPlayerWinVo">
@@ -27,12 +28,13 @@
                usdt_win_amount,
                trx_bet_amount,
                trx_award_amount,
-               trx_win_amount
+               trx_win_amount,
+               invitation_code
         from t_game_statistical_player_win
     </sql>
 
     <sql id="selectWinListToday">
-        SELECT  a.user_id, a.id,b.nick_name,b.note_name,
+        SELECT  a.user_id, a.id,b.nick_name,b.note_name,b.invitation_code,
                 SUM(usdt_bet_amount)                          AS usdt_bet_amount,
                 SUM(usdt_award_amount)                        AS usdt_award_amount,
                 SUM(usdt_award_amount) - SUM(usdt_bet_amount) AS usdt_win_amount,
@@ -50,6 +52,9 @@
             <when test="userId != null  and userId != '' ">
                 <include refid="selectGameStatisticalPlayerWinVo"/>
             </when>
+            <when test="invitation_code != null  and invitation_code != '' ">
+                <include refid="selectGameStatisticalPlayerWinVo"/>
+            </when>
             <when test="params.beginId != null  and params.beginId != '' ">
                 <include refid="selectGameStatisticalPlayerWinVo"/>
             </when>
@@ -62,6 +67,7 @@
                 and id between #{params.beginId} and #{params.endId}
             </if>
             <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
+            <if test="invitation_code != null  and invitation_code != ''">and invitation_code = #{invitation_code}</if>
             <if test="usdtBetAmount != null ">and usdt_bet_amount = #{usdtBetAmount}</if>
             <if test="usdtAwardAmount != null ">and usdt_award_amount = #{usdtAwardAmount}</if>
             <if test="usdtWinAmount != null ">and usdt_win_amount = #{usdtWinAmount}</if>

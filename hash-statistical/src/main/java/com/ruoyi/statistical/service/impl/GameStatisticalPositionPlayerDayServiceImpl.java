@@ -58,6 +58,7 @@ public class GameStatisticalPositionPlayerDayServiceImpl implements IGameStatist
                         "game_id,\n" +
                         "bet_position,\n" +
                         "user_id,\n" +
+                        "invitation_code,\n" +
                         "sum(trx_bet_amount) AS trx_bet_amount, \n" +
                         "sum(trx_award_amount) AS trx_award_amount, \n" +
                         "sum(usdt_bet_amount) AS usdt_bet_amount, \n" +
@@ -78,7 +79,15 @@ public class GameStatisticalPositionPlayerDayServiceImpl implements IGameStatist
             }
         }
 
-        sql += " GROUP BY time, game_id ,bet_position,user_id";
+        if (gameStatisticalPositionPlayerDay.getInvitation_code() != null) {
+            if (sql.contains("where")){
+                sql+=" and invitation_code="+gameStatisticalPositionPlayerDay.getInvitation_code();
+            } else {
+                sql+=" where invitation_code="+gameStatisticalPositionPlayerDay.getInvitation_code();
+            }
+        }
+
+        sql += " GROUP BY time, game_id ,bet_position,user_id,invitation_code";
 
         gameStatisticalPositionPlayerDay.setSql(sql);
 

@@ -16,6 +16,7 @@
         <result property="betPosition" column="bet_position"/>
         <result property="trxWin" column="trx_win"/>
         <result property="usdtWin" column="usdt_win"/>
+        <result property="invitation_code" column="invitation_code"/>
     </resultMap>
 
     <sql id="selectGameStatisticalPlayerDayVo">
