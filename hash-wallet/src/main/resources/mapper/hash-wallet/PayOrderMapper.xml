@@ -72,6 +72,7 @@
     <select id="selectPayOrderList" parameterType="PayOrder" resultMap="PayOrderResult">
         <include refid="selectPayOrderVo"/>
         <where>
+            <if test="id != null  and id != ''">and id = #{id}</if>
             <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
             <if test="invitation_code != null  and invitation_code != ''">and invitation_code = #{invitation_code}</if>
             <if test="toWallet != null  and toWallet != ''">and to_wallet = #{toWallet}</if>
