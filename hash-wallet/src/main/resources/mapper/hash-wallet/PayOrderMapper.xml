@@ -80,7 +80,7 @@
             <if test="rechargeMoney != null ">and recharge_money = #{rechargeMoney}</if>
             <if test="payStatus != null  and payStatus != ''">and pay_status = #{payStatus}</if>
             <if test="orderStatus != null  and orderStatus != ''">and order_status = #{orderStatus}</if>
-            <if test="createTime != null ">and create_time = #{createTime}</if>
+            <if test="createTime != null ">and DATE_FORMAT(create_time, '%Y-%m-%d') =  DATE_FORMAT(#{createTime}, '%Y-%m-%d') </if>
         </where>
     </select>
 
