@@ -8,48 +8,74 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 人工出入款对象 t_wallet_artificial_opt
- * 
+ *
  * @author xxk
  * @date 2022-07-10
  */
-public class WalletArtificialOpt extends BaseEntity
-{
+public class WalletArtificialOpt extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
-    /** id */
+    /**
+     * id
+     */
     @Excel(name = "id")
     private String id;
 
-    /** 玩家id */
+    /**
+     * 玩家id
+     */
     @Excel(name = "玩家id")
     private String userId;
 
-    /** 玩家昵称 */
+    /**
+     * 玩家昵称
+     */
     @Excel(name = "玩家昵称")
     private String nickName;
 
-    /** 钱包类型 */
+    /**
+     * 钱包类型
+     */
     @Excel(name = "钱包类型")
     private String walletType;
 
-    /** 金额 */
+    /**
+     * 金额
+     */
     @Excel(name = "金额")
     private Double amount;
 
-    /** 是否成功 0否 1是 */
+    /**
+     * 是否成功 0否 1是
+     */
     @Excel(name = "是否成功 0否 1是")
     private Long isCallback;
 
-    /** 操作人 */
+    /**
+     * 操作人
+     */
     @Excel(name = "操作人")
     private String optPerson;
 
-    /** 备注说明 */
+    /**
+     * 备注说明
+     */
     @Excel(name = "备注说明")
     private String note;
 
     @Excel(name = "出入款类型 1入款 2出款")
     private String opt_type;
+
+    @Excel(name = "邀请码")
+    private String invitation_code;
+
+    public String getInvitation_code() {
+        return invitation_code;
+    }
+
+    public void setInvitation_code(String invitation_code) {
+        this.invitation_code = invitation_code;
+    }
 
     public String getOpt_type() {
         return opt_type;
@@ -59,91 +85,82 @@ public class WalletArtificialOpt extends BaseEntity
         this.opt_type = opt_type;
     }
 
-    public void setId(String id)
-    {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getId() 
-    {
+    public String getId() {
         return id;
     }
-    public void setUserId(String userId) 
-    {
+
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    public String getUserId() 
-    {
+    public String getUserId() {
         return userId;
     }
-    public void setNickName(String nickName) 
-    {
+
+    public void setNickName(String nickName) {
         this.nickName = nickName;
     }
 
-    public String getNickName() 
-    {
+    public String getNickName() {
         return nickName;
     }
-    public void setWalletType(String walletType) 
-    {
+
+    public void setWalletType(String walletType) {
         this.walletType = walletType;
     }
 
-    public String getWalletType() 
-    {
+    public String getWalletType() {
         return walletType;
     }
-    public void setAmount(Double amount)
-    {
+
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
-    public Double getAmount()
-    {
+    public Double getAmount() {
         return Global.getWalletAmountToReal(amount);
     }
-    public void setIsCallback(Long isCallback) 
-    {
+
+    public void setIsCallback(Long isCallback) {
         this.isCallback = isCallback;
     }
 
-    public Long getIsCallback() 
-    {
+    public Long getIsCallback() {
         return isCallback;
     }
-    public void setOptPerson(String optPerson) 
-    {
+
+    public void setOptPerson(String optPerson) {
         this.optPerson = optPerson;
     }
 
-    public String getOptPerson() 
-    {
+    public String getOptPerson() {
         return optPerson;
     }
-    public void setNote(String note) 
-    {
+
+    public void setNote(String note) {
         this.note = note;
     }
 
-    public String getNote() 
-    {
+    public String getNote() {
         return note;
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("userId", getUserId())
-            .append("nickName", getNickName())
-            .append("walletType", getWalletType())
-            .append("amount", getAmount())
-            .append("isCallback", getIsCallback())
-            .append("optPerson", getOptPerson())
-            .append("note", getNote())
-            .append("createTime", getCreateTime())
-            .toString();
+        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+                .append("id", getId())
+                .append("userId", getUserId())
+                .append("nickName", getNickName())
+                .append("walletType", getWalletType())
+                .append("amount", getAmount())
+                .append("isCallback", getIsCallback())
+                .append("optPerson", getOptPerson())
+                .append("note", getNote())
+                .append("createTime", getCreateTime())
+                .toString();
     }
 }

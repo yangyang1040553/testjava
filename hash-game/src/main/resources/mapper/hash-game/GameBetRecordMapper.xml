@@ -28,6 +28,8 @@
         <result property="awardCallback" column="award_callback"/>
         <result property="note" column="note"/>
         <result property="winAmount" column="win_amount"/>
+        <result property="invitation_code" column="invitation_code"/>
+
     </resultMap>
 
     <sql id="selectGameBetRecordVo">
@@ -53,7 +55,8 @@
                income_amount,
                award_callback,
                note,
-               win_amount
+               win_amount,
+               invitation_code
         from t_game_bet_record
     </sql>
 
@@ -62,6 +65,7 @@
         <where>
             <if test="id != null and id !='' ">and id = #{id}</if>
             <if test="gameId != null and gameId !='' ">and game_id = #{gameId}</if>
+            <if test="invitation_code != null and invitation_code !='' ">and invitation_code = #{invitation_code}</if>
             <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
             <if test="nickName != null  and nickName != ''">and nick_name like concat('%', #{nickName}, '%')</if>
             <if test="odds != null ">and odds = #{odds}</if>

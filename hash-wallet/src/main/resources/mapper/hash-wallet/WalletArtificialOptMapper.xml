@@ -15,6 +15,7 @@
         <result property="note" column="note"/>
         <result property="createTime" column="create_time"/>
         <result property="opt_type" column="opt_type"/>
+        <result property="invitation_code" column="invitation_code"/>
     </resultMap>
 
     <sql id="selectWalletArtificialOptVo">
@@ -27,7 +28,8 @@
                opt_person,
                note,
                create_time,
-               opt_type
+               opt_type,
+               invitation_code
         from t_wallet_artificial_opt
     </sql>
 
@@ -45,6 +47,7 @@
             <if test="note != null  and note != ''">and note = #{note}</if>
             <if test="createTime != null ">and DATE_FORMAT(create_time, '%Y-%m-%d') =  DATE_FORMAT(#{createTime}, '%Y-%m-%d')</if>
             <if test="opt_type != null ">and opt_type = #{opt_type}</if>
+            <if test="invitation_code != null and invitation_code !='' ">and invitation_code = #{invitation_code}</if>
         </where>
     </select>
 

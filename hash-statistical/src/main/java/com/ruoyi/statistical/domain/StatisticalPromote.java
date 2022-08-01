@@ -75,6 +75,18 @@ public class StatisticalPromote extends BaseEntity
     private Double team_trx_win_amount;
 
 
+    @Excel(name = "邀请码")
+    private String invitation_code;
+
+    public String getInvitation_code() {
+        return invitation_code;
+    }
+
+    public void setInvitation_code(String invitation_code) {
+        this.invitation_code = invitation_code;
+    }
+
+
     public String getInvite_award_person() {
         return invite_award_person;
     }

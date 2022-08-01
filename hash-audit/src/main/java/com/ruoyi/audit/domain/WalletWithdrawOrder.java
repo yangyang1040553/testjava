@@ -87,7 +87,16 @@ public class WalletWithdrawOrder extends BaseEntity {
     @Excel(name = "说明")
     private String note;
 
+    @Excel(name = "邀请码")
+    private String invitation_code;
 
+    public String getInvitation_code() {
+        return invitation_code;
+    }
+
+    public void setInvitation_code(String invitation_code) {
+        this.invitation_code = invitation_code;
+    }
 
     public Double getPayAmount() {
         return payAmount;

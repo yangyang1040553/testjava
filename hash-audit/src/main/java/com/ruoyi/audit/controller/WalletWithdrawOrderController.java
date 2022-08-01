@@ -57,8 +57,6 @@ public class WalletWithdrawOrderController extends BaseController {
         startPage();
         startOrderBy();
         List<WalletWithdrawOrder> list = walletWithdrawOrderService.selectWalletWithdrawOrderList(walletWithdrawOrder);
-
-        System.out.println(list);
         return getDataTable(list);
     }
 

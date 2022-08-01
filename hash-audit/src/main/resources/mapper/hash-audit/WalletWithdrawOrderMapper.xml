@@ -22,6 +22,7 @@
         <result property="updateBy" column="update_by"/>
         <result property="note" column="note"/>
         <result property="payAmount" column="pay_amount"/>
+        <result property="invitation_code" column="invitation_code"/>
     </resultMap>
 
     <sql id="selectWalletWithdrawOrderVo">
@@ -41,7 +42,8 @@
                update_time,
                update_by,
                pay_amount,
-               note
+               note,
+               invitation_code
         from t_wallet_withdraw_order
     </sql>
 
@@ -50,6 +52,7 @@
         <include refid="selectWalletWithdrawOrderVo"/>
         <where>
             <if test="id != null  and id != ''">and id = #{id}</if>
+            <if test="invitation_code != null  and invitation_code != ''">and invitation_code = #{invitation_code}</if>
             <if test="transactionNo != null  and transactionNo != ''">and transaction_no = #{transactionNo}</if>
             <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
             <if test="walletType != null  and walletType != ''">and wallet_type = #{walletType}</if>

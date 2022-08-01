@@ -20,6 +20,7 @@
         <result property="invite_award_person" column="invite_award_person"/>
         <result property="team_usdt_win_amount" column="team_usdt_win_amount"/>
         <result property="team_trx_win_amount" column="team_trx_win_amount"/>
+        <result property="invitation_code" column="invitation_code"/>
     </resultMap>
 
     <sql id="selectStatisticalPromoteVo">
@@ -37,7 +38,8 @@
                sumNumber,
                invite_award_person,
                team_usdt_win_amount,
-               team_trx_win_amount
+               team_trx_win_amount,
+               invitation_code
         from statistical_promote
     </sql>
 
@@ -45,6 +47,7 @@
         <include refid="selectStatisticalPromoteVo"/>
         <where>
             <if test="phone != null  and phone != ''">and phone = #{phone}</if>
+            <if test="invitation_code != null  and invitation_code != ''">and invitation_code = #{invitation_code}</if>
             <if test="account != null  and account != ''">and account = #{account}</if>
             <if test="registerTime != null ">and  DATE_FORMAT(register_time, '%Y-%m-%d') = DATE_FORMAT( #{registerTime}, '%Y-%m-%d') </if>
             <if test="promoteOdds != null ">and promote_odds = #{promoteOdds}</if>
