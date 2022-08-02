@@ -24,8 +24,7 @@
         <result property="registerIp" column="register_ip"/>
         <result property="loginTime" column="login_time"/>
         <result property="loginIp" column="login_ip"/>
-        <result property="inAmount" column="in_amount"/>
-        <result property="outAmount" column="out_amount"/>
+
         <result property="betMount" column="bet_amount"/>
 
         <result property="usdtAmount" column="usdt_amount"/>
@@ -43,6 +42,14 @@
 
         <result property="usdt_remote_amount" column="usdt_remote_amount"/>
         <result property="trx_remote_amount" column="trx_remote_amount"/>
+
+
+        <result property="trx_in_amount" column="trx_in_amount"/>
+        <result property="usdt_in_amount" column="usdt_in_amount"/>
+        <result property="trx_out_mount" column="trx_out_mount"/>
+        <result property="usdt_out_mount" column="usdt_out_mount"/>
+        <result property="trx_bet_amount" column="trx_bet_amount"/>
+        <result property="usdt_bet_amount" column="usdt_bet_amount"/>
 
     </resultMap>
 
@@ -75,23 +82,41 @@
     </sql>
 
     <sql id="selectHashUserEveryDay">
-        select u.*, t.betAmount, t.user_id, a.in_amount, b.out_mount
+        select u.*, t1.trx_bet_amount,t2.usdt_bet_amount, t1.user_id, a.trx_in_amount,b.usdt_in_amount,c.trx_out_mount,d.usdt_out_mount
         from t_user u
                  left join
-             (select user_id, sum(bet_amount) as betAmount
+             (select user_id, sum(bet_amount) as trx_bet_amount
               from t_game_bet_record
-              where create_time BETWEEN CONCAT(CURDATE(), ' 00:00:00') and CONCAT(CURDATE(), ' 23:59:59')
-              group by user_id) t on t.user_id = u.id
+              where create_time BETWEEN CONCAT(CURDATE(), ' 00:00:00') and CONCAT(CURDATE(), ' 23:59:59') and bet_wallet_type='TRX'
+              group by user_id) t1 on t1.user_id = u.id
                  left join
-             (select user_id, sum(amount) as in_amount
+             (select user_id, sum(bet_amount) as  usdt_bet_amount
+              from t_game_bet_record
+              where create_time BETWEEN CONCAT(CURDATE(), ' 00:00:00') and CONCAT(CURDATE(), ' 23:59:59')  and  bet_wallet_type='USDT'
+              group by user_id) t2 on t2.user_id = u.id
+                 left join
+             (select user_id, sum(amount) as trx_in_amount
               from t_wallet_recharge_order
-              where create_time BETWEEN CONCAT(CURDATE(), ' 00:00:00') and CONCAT(CURDATE(), ' 23:59:59')
+              where create_time BETWEEN CONCAT(CURDATE(), ' 00:00:00') and CONCAT(CURDATE(), ' 23:59:59') and wallet_type='TRX'
               group by user_id) a on a.user_id = u.id
                  left join
-             (select user_id, sum(amount) as out_mount
-              from t_wallet_withdraw_order
-              where create_time BETWEEN CONCAT(CURDATE(), ' 00:00:00') and CONCAT(CURDATE(), ' 23:59:59')
+             (select user_id, sum(amount) as usdt_in_amount
+              from t_wallet_recharge_order
+              where create_time BETWEEN CONCAT(CURDATE(), ' 00:00:00') and CONCAT(CURDATE(), ' 23:59:59') and wallet_type='USDT'
               group by user_id) b on b.user_id = u.id
+                 left join
+             (select user_id, sum(amount) as trx_out_mount
+              from t_wallet_withdraw_order
+              where create_time BETWEEN CONCAT(CURDATE(), ' 00:00:00') and CONCAT(CURDATE(), ' 23:59:59') and wallet_type='TRX'
+              group by user_id) c on c.user_id = u.id
+                 left join
+             (select user_id, sum(amount) as usdt_out_mount
+              from t_wallet_withdraw_order
+              where create_time BETWEEN CONCAT(CURDATE(), ' 00:00:00') and CONCAT(CURDATE(), ' 23:59:59') and wallet_type='USDT'
+              group by user_id) d on d.user_id = u.id
+
+
+
     </sql>
 
     <select id="selectHashUserDetail" parameterType="HashUser" resultMap="HashUserResult">

@@ -71,7 +71,7 @@
             <if test="fatherInvitationCode != null  and fatherInvitationCode != ''">and father_invitation_code =
                 #{fatherInvitationCode}
             </if>
-            <if test="createTime != null ">and create_time >= #{createTime}</if>
+            <if test="createTime != null ">and DATE_FORMAT(create_time, '%Y-%m-%d') =  DATE_FORMAT(#{createTime}, '%Y-%m-%d')</if>
             <if test="id != null and id !=''">and id = #{id}</if>
         </where>
     </select>

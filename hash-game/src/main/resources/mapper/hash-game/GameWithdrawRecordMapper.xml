@@ -38,7 +38,7 @@
             <if test="withdrawAmount != null ">and withdraw_amount = #{withdrawAmount}</if>
             <if test="walletType != null  and walletType != ''">and wallet_type = #{walletType}</if>
             <if test="status != null ">and status = #{status}</if>
-            <if test="createTime != null ">and create_time >= #{createTime}</if>
+            <if test="createTime != null ">and DATE_FORMAT(create_time, '%Y-%m-%d') =  DATE_FORMAT(#{createTime}, '%Y-%m-%d')</if>
         </where>
     </select>
 

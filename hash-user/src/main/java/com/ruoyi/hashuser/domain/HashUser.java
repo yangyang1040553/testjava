@@ -208,10 +208,67 @@ public class HashUser extends BaseEntity {
     public transient String showClientLogTime;
 
     @Excel(name = "USDT远程余额")
-    private  Double usdt_remote_amount;
+    private Double usdt_remote_amount;
 
     @Excel(name = "TRX远程余额")
-    private  Double trx_remote_amount;
+    private Double trx_remote_amount;
+
+
+    private Double trx_in_amount;
+    private Double usdt_in_amount;
+    private Double trx_out_mount;
+    private Double usdt_out_mount;
+    private Double usdt_bet_amount;
+    private Double trx_bet_amount;
+
+
+    public Double getUsdt_bet_amount() {
+        return Global.getWalletAmountToReal(usdt_bet_amount);
+    }
+
+    public void setUsdt_bet_amount(Double usdt_bet_amount) {
+        this.usdt_bet_amount = usdt_bet_amount;
+    }
+
+    public Double getTrx_bet_amount() {
+        return Global.getWalletAmountToReal(trx_bet_amount);
+    }
+
+    public void setTrx_bet_amount(Double trx_bet_amount) {
+        this.trx_bet_amount = trx_bet_amount;
+    }
+
+    public Double getTrx_in_amount() {
+        return Global.getWalletAmountToReal(trx_in_amount);
+    }
+
+    public void setTrx_in_amount(Double trx_in_amount) {
+        this.trx_in_amount = trx_in_amount;
+    }
+
+    public Double getUsdt_in_amount() {
+        return Global.getWalletAmountToReal(usdt_in_amount);
+    }
+
+    public void setUsdt_in_amount(Double usdt_in_amount) {
+        this.usdt_in_amount = usdt_in_amount;
+    }
+
+    public Double getTrx_out_mount() {
+        return Global.getWalletAmountToReal(trx_out_mount);
+    }
+
+    public void setTrx_out_mount(Double trx_out_mount) {
+        this.trx_out_mount = trx_out_mount;
+    }
+
+    public Double getUsdt_out_mount() {
+        return Global.getWalletAmountToReal(usdt_out_mount);
+    }
+
+    public void setUsdt_out_mount(Double usdt_out_mount) {
+        this.usdt_out_mount = usdt_out_mount;
+    }
 
     public Double getUsdt_remote_amount() {
         return Global.getWalletAmountToReal(usdt_remote_amount);
