@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.ruoyi.common.config.RuoYiConfig;
 import com.ruoyi.common.utils.LogUtils;
 import com.ruoyi.common.utils.OSSUplodFile;
+import com.ruoyi.common.utils.TCloudUplodFile;
 import com.ruoyi.operation.domain.DkOssList;
 import com.ruoyi.operation.mapper.DkOssListMapper;
 import com.ruoyi.operation.service.IDkOssListService;
@@ -112,12 +113,12 @@ public class DkConfigFileController extends BaseController {
             String upOssList = dkConfigFile.getUpOssList();
             String[] split = upOssList.split(",");
 
-            String str="";
+            String str = "";
             for (String s : split) {
-                str=str+"'"+s+"',";
+                str = str + "'" + s + "',";
             }
-            if (str.length()>0) {
-                str=str.substring(0,str.length()-1);
+            if (str.length() > 0) {
+                str = str.substring(0, str.length() - 1);
             }
             List<DkOssList> dkOssLists = dkOssListMapper.selectDKOSSbyName(str);
             LogUtils.getBlock(dkOssLists);
@@ -128,11 +129,23 @@ public class DkConfigFileController extends BaseController {
                     fileOutputStream.write(dkConfigFile.getJson().getBytes(StandardCharsets.UTF_8));
                     fileOutputStream.flush();
                     fileOutputStream.close();
-                    OSSUplodFile.uploadFile(file,
-                            dkOssList.getAccessId(),
-                            dkOssList.getAccessKey(),
-                            dkOssList.getUploadAddr(),
-                            dkOssList.getBucketName());
+                    Long ossType = dkOssList.getOssType();
+                    if (ossType == 1) {
+                        // 阿里上传
+                        OSSUplodFile.uploadFile(file,
+                                dkOssList.getAccessId(),
+                                dkOssList.getAccessKey(),
+                                dkOssList.getUploadAddr(),
+                                dkOssList.getBucketName());
+                    } else if (ossType==2){
+                        //腾讯上传
+                        TCloudUplodFile.uploadFile(file,
+                                dkOssList.getAccessId(),
+                                dkOssList.getAccessKey(),
+                                dkOssList.getUploadAddr(),
+                                dkOssList.getBucketName());
+                    }
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
