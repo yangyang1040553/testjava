@@ -26,7 +26,19 @@ public class DkConfigFile extends BaseEntity
     @Excel(name = "存储桶列表")
     private String upOssList;
 
-    public void setId(Long id) 
+
+    @Excel(name = "名字")
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setId(Long id)
     {
         this.id = id;
     }

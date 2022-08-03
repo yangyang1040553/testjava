@@ -9,10 +9,11 @@
         <result property="json" column="json"/>
         <result property="upOssList" column="up_oss_list"/>
         <result property="createTime" column="create_time"/>
+        <result property="name" column="name"/>
     </resultMap>
 
     <sql id="selectDkConfigFileVo">
-        select id, json, up_oss_list, create_time
+        select id, json, up_oss_list, create_time, name
         from dk_config_file
     </sql>
 
@@ -35,11 +36,13 @@
             <if test="json != null and json != ''">json,</if>
             <if test="upOssList != null and upOssList != ''">up_oss_list,</if>
             <if test="createTime != null">create_time,</if>
+            <if test="name != null and  name !='' ">name,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="json != null and json != ''">#{json},</if>
             <if test="upOssList != null and upOssList != ''">#{upOssList},</if>
             <if test="createTime != null">#{createTime},</if>
+            <if test="name != null and  name !='' ">#{name},</if>
         </trim>
     </insert>
 
@@ -49,6 +52,7 @@
             <if test="json != null and json != ''">json = #{json},</if>
             <if test="upOssList != null and upOssList != ''">up_oss_list = #{upOssList},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="name != null and  name !='' ">name = #{name},</if>
         </trim>
         where id = #{id}
     </update>
