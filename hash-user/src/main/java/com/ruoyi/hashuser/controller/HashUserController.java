@@ -109,11 +109,14 @@ public class HashUserController extends BaseController {
                 return error("邀请码已绑定，不能修改");
             } else if (StringUtils.isBlank(load.getFatherInvitationCode())) {
                 HashUser fatherUser = hashUserService.selectHashUserByCode(hashUser.getFatherInvitationCode());
+                if (fatherUser == null) {
+                    return error(hashUser.getFatherInvitationCode() + "邀请码不存在");
+                }
                 if (hashUser.getRegisterTime().getTime() < fatherUser.getRegisterTime().getTime()) {
                     return error("邀请码必须小于自己注册时间");
                 }
             }
-            
+
         }
 
 
