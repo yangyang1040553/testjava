@@ -103,6 +103,20 @@ public class HashUserController extends BaseController {
     @PutMapping
     public AjaxResult edit(@RequestBody HashUser hashUser) {
 
+        if (StringUtils.isNotBlank(hashUser.getFatherInvitationCode())) {
+            HashUser load = hashUserService.selectHashUserById(hashUser.getId());
+            if (StringUtils.isNotBlank(load.getFatherInvitationCode()) && !load.getFatherInvitationCode().equals(hashUser.getFatherInvitationCode())) {
+                return error("邀请码已绑定，不能修改");
+            } else if (StringUtils.isBlank(load.getFatherInvitationCode())) {
+                HashUser fatherUser = hashUserService.selectHashUserByCode(hashUser.getFatherInvitationCode());
+                if (hashUser.getRegisterTime().getTime() < fatherUser.getRegisterTime().getTime()) {
+                    return error("邀请码必须小于自己注册时间");
+                }
+            }
+            
+        }
+
+
         final int i = hashUserService.updateHashUser(hashUser);
         if (i > 0) {
             if (hashUser.getStatus() == 1) {
