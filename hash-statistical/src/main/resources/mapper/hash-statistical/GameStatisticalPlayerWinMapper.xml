@@ -55,7 +55,7 @@
             <when test="invitation_code != null  and invitation_code != '' ">
                 <include refid="selectGameStatisticalPlayerWinVo"/>
             </when>
-            <when test="params.beginId != null  and params.beginId != '' ">
+            <when test="id != null  and id != '' ">
                 <include refid="selectGameStatisticalPlayerWinVo"/>
             </when>
             <otherwise>
@@ -63,9 +63,10 @@
             </otherwise>
         </choose>
         <where>
-            <if test="params.beginId != null and params.beginId != '' and params.endId != null and params.endId != ''">
-                and id between #{params.beginId} and #{params.endId}
-            </if>
+<!--            <if test="params.beginId != null and params.beginId != '' and params.endId != null and params.endId != ''">-->
+<!--                and id between #{params.beginId} and #{params.endId}-->
+<!--            </if>-->
+            <if test="id != null  and id != ''">and DATE_FORMAT(id, '%Y-%m-%d') = DATE_FORMAT(#{id}, '%Y-%m-%d')</if>
             <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
             <if test="invitation_code != null  and invitation_code != ''">and invitation_code = #{invitation_code}</if>
             <if test="usdtBetAmount != null ">and usdt_bet_amount = #{usdtBetAmount}</if>
