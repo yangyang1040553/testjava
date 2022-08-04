@@ -41,7 +41,7 @@ public class GamePoolChangeController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(GamePoolChange gamePoolChange)
     {
-        startPage();
+//        startPage();
         List<GamePoolChange> list = gamePoolChangeService.selectGamePoolChangeList(gamePoolChange);
         return getDataTable(list);
     }
