@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSON;
 import com.ruoyi.common.config.RuoYiConfig;
 import com.ruoyi.common.utils.LogUtils;
 import com.ruoyi.common.utils.OSSUplodFile;
@@ -109,6 +110,7 @@ public class DkConfigFileController extends BaseController {
     }
 
     private AjaxResult getAjaxResult(@RequestBody DkConfigFile dkConfigFile, int i) {
+        logger.info("对抗文件上传成功 开始上传远程存储 save = {}", i > 0);
         if (i > 0) {
             String upOssList = dkConfigFile.getUpOssList();
             String[] split = upOssList.split(",");
@@ -120,25 +122,31 @@ public class DkConfigFileController extends BaseController {
             if (str.length() > 0) {
                 str = str.substring(0, str.length() - 1);
             }
+
+            logger.info("获取文件列表 str = {}", str);
+
             List<DkOssList> dkOssLists = dkOssListMapper.selectDKOSSbyName(str);
             LogUtils.getBlock(dkOssLists);
             for (DkOssList dkOssList : dkOssLists) {
+                logger.info("上传远程文件的配置 = {}", JSON.toJSONString(dkConfigFile));
                 try {
                     File file = new File(RuoYiConfig.getUploadPath(), System.currentTimeMillis() + ".json");
                     FileOutputStream fileOutputStream = new FileOutputStream(file);
                     fileOutputStream.write(dkConfigFile.getJson().getBytes(StandardCharsets.UTF_8));
                     fileOutputStream.flush();
                     fileOutputStream.close();
-                    System.out.println("dkOssList==-"+dkOssList);
+
                     Long ossType = dkOssList.getOssType();
                     if (ossType == 1) {
+                        logger.info("阿里云上传...");
                         // 阿里上传
                         OSSUplodFile.uploadFile(file,
                                 dkOssList.getAccessId(),
                                 dkOssList.getAccessKey(),
                                 dkOssList.getUploadAddr(),
                                 dkOssList.getBucketName());
-                    } else if (ossType==2){
+                    } else if (ossType == 2) {
+                        logger.info("腾讯云上传...");
                         //腾讯上传
                         TCloudUplodFile.uploadFile(file,
                                 dkOssList.getAccessId(),

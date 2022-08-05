@@ -1,5 +1,6 @@
 package com.ruoyi.common.utils;
 
+import com.alibaba.fastjson.JSON;
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.ClientConfig;
 import com.qcloud.cos.auth.BasicCOSCredentials;
@@ -8,11 +9,14 @@ import com.qcloud.cos.http.HttpProtocol;
 import com.qcloud.cos.model.PutObjectRequest;
 import com.qcloud.cos.model.PutObjectResult;
 import com.qcloud.cos.region.Region;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 
 public class TCloudUplodFile {
 
+    protected static final Logger logger = LoggerFactory.getLogger(TCloudUplodFile.class);
 
     public static void uploadFile(File file, String accessId, String accessKey, String endpoint, String bucket) {
 
@@ -33,6 +37,6 @@ public class TCloudUplodFile {
         String ext = "erytrty.json";
         PutObjectRequest putObjectRequest = new PutObjectRequest(bucket, ext, file);
         PutObjectResult putObjectResult = cosClient.putObject(putObjectRequest);
-        System.out.println(putObjectResult);
+        logger.info("tx oss response = {}", JSON.toJSONString(putObjectResult));
     }
 }
