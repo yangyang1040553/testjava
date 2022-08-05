@@ -129,6 +129,7 @@ public class DkConfigFileController extends BaseController {
                     fileOutputStream.write(dkConfigFile.getJson().getBytes(StandardCharsets.UTF_8));
                     fileOutputStream.flush();
                     fileOutputStream.close();
+                    System.out.println("dkOssList==-"+dkOssList);
                     Long ossType = dkOssList.getOssType();
                     if (ossType == 1) {
                         // 阿里上传
