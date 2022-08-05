@@ -136,8 +136,8 @@ public class DkConfigFileController extends BaseController {
                     fileOutputStream.flush();
                     fileOutputStream.close();
 
-                    long ossType = dkOssList.getOssType();
-                    if (ossType == 1L) {
+                    Integer ossType = dkOssList.getOssType().intValue();
+                    if (ossType == 1) {
                         logger.info("阿里云上传...");
                         // 阿里上传
                         OSSUplodFile.uploadFile(file,
@@ -145,7 +145,7 @@ public class DkConfigFileController extends BaseController {
                                 dkOssList.getAccessKey(),
                                 dkOssList.getUploadAddr(),
                                 dkOssList.getBucketName());
-                    } else if (ossType == 2L) {
+                    } else if (ossType == 2) {
                         logger.info("腾讯云上传...");
                         //腾讯上传
                         TCloudUplodFile.uploadFile(file,
