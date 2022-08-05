@@ -128,7 +128,7 @@ public class DkConfigFileController extends BaseController {
             List<DkOssList> dkOssLists = dkOssListMapper.selectDKOSSbyName(str);
             LogUtils.getBlock(dkOssLists);
             for (DkOssList dkOssList : dkOssLists) {
-                logger.info("上传远程文件的配置 = {}", JSON.toJSONString(dkConfigFile));
+                logger.info("上传远程文件的配置 = {}", JSON.toJSONString(dkOssList));
                 try {
                     File file = new File(RuoYiConfig.getUploadPath(), System.currentTimeMillis() + ".json");
                     FileOutputStream fileOutputStream = new FileOutputStream(file);
@@ -156,7 +156,7 @@ public class DkConfigFileController extends BaseController {
                     }
 
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    logger.error("oss上传异常", e);
                 }
             }
 
