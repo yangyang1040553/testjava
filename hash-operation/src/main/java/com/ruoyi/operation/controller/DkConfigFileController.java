@@ -136,8 +136,8 @@ public class DkConfigFileController extends BaseController {
                     fileOutputStream.flush();
                     fileOutputStream.close();
 
-                    Long ossType = dkOssList.getOssType();
-                    if (ossType == 1) {
+                    long ossType = dkOssList.getOssType();
+                    if (ossType == 1L) {
                         logger.info("阿里云上传...");
                         // 阿里上传
                         OSSUplodFile.uploadFile(file,
@@ -145,7 +145,7 @@ public class DkConfigFileController extends BaseController {
                                 dkOssList.getAccessKey(),
                                 dkOssList.getUploadAddr(),
                                 dkOssList.getBucketName());
-                    } else if (ossType == 2) {
+                    } else if (ossType == 2L) {
                         logger.info("腾讯云上传...");
                         //腾讯上传
                         TCloudUplodFile.uploadFile(file,
@@ -157,11 +157,12 @@ public class DkConfigFileController extends BaseController {
 
                 } catch (IOException e) {
                     logger.error("oss上传异常", e);
+                    return AjaxResult.error("OSS上传异常 桶名称：" + dkOssList.getBucketName());
                 }
             }
 
         }
-        return toAjax(i);
+        return success("修改文件成功，上传OSS文件成功");
     }
 
     /**
