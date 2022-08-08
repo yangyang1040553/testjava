@@ -1,11 +1,17 @@
 package com.ruoyi.hashuser.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.common.utils.http.HttpUtils;
 import com.ruoyi.hashuser.redis.UserRedis;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,6 +45,9 @@ public class HashUserController extends BaseController {
     private IHashUserService hashUserService;
     @Autowired
     private UserRedis userRedis;
+
+    @Value("${service.user-addr}")
+    public String serviceUserAddr;
 
     /**
      * 查询用户列表
@@ -108,12 +117,22 @@ public class HashUserController extends BaseController {
             if (StringUtils.isNotBlank(load.getFatherInvitationCode()) && !load.getFatherInvitationCode().equals(hashUser.getFatherInvitationCode())) {
                 return AjaxResult.error("邀请码已绑定，不能修改");
             } else if (StringUtils.isBlank(load.getFatherInvitationCode())) {
-                HashUser fatherUser = hashUserService.selectHashUserByCode(hashUser.getFatherInvitationCode());
-                if (fatherUser == null) {
-                    return AjaxResult.error(hashUser.getFatherInvitationCode() + "邀请码不存在");
+                //判断逻辑
+
+                Map<String, Object> param = new HashMap<>();
+                param.put("userId", hashUser.getId());
+                param.put("code", hashUser.getFatherInvitationCode());
+
+                final String s = HttpUtils.sendPost(serviceUserAddr + "/user/bindInvitationCode2", param);
+                if (org.apache.commons.lang3.StringUtils.isBlank(s)) {
+                    return AjaxResult.error();
                 }
-                if (hashUser.getRegisterTime().getTime() < fatherUser.getRegisterTime().getTime()) {
-                    return AjaxResult.error("邀请码必须小于自己注册时间");
+                final JSONObject jsonObject = JSON.parseObject(s);
+
+                if (!jsonObject.getString("code").equals("200")) {
+                    return AjaxResult.error(jsonObject.getString("msg"));
+                } else {
+                    return AjaxResult.success("绑定成功");
                 }
             }
 

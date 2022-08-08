@@ -131,9 +131,6 @@ public class DkConfigFileController extends BaseController {
                 logger.info("上传远程文件的配置 = {}", JSON.toJSONString(dkOssList));
                 try {
                     File file = new File(RuoYiConfig.getUploadPath(), System.currentTimeMillis() + ".json");
-                    if (!file.exists()) {
-                        file.createNewFile();
-                    }
                     FileOutputStream fileOutputStream = new FileOutputStream(file);
                     fileOutputStream.write(dkConfigFile.getJson().getBytes(StandardCharsets.UTF_8));
                     fileOutputStream.flush();

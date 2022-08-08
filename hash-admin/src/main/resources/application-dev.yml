@@ -84,4 +84,5 @@ spring:
 #请求
 service:
   wallet-addr: https://hash-api.starops.work/hash
+  user-addr: https://hash-api.starops.work/hash
   open-google: false
