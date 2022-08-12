@@ -8,10 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.common.constant.Global;
+import com.ruoyi.common.core.domain.entity.SysRole;
 import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.utils.GoogleAuthenticator;
 import com.ruoyi.common.utils.http.HttpUtils;
 import com.ruoyi.common.utils.sign.Md5Utils;
+import com.ruoyi.system.mapper.SysRoleMapper;
+import com.ruoyi.system.mapper.SysUserRoleMapper;
 import com.ruoyi.system.service.ISysUserService;
 import com.ruoyi.wallet.domain.WalletRechargeOrder;
 import com.ruoyi.wallet.vo.WalletInOutMoneyVo;
@@ -110,6 +113,10 @@ public class WalletPlayerDataController extends BaseController {
         return toAjax(walletPlayerDataService.insertWalletPlayerData(walletPlayerData));
     }
 
+
+    @Autowired
+    private SysRoleMapper roleMapper;
+
     /**
      * 修改用户钱包
      */
@@ -122,6 +129,19 @@ public class WalletPlayerDataController extends BaseController {
         SysUser sysUser = userService.selectUserByUserName(getUsername());
         String secret = sysUser.getSecret();
         boolean authCode = GoogleAuthenticator.authcode(walletInOutMoneyVo.getGoogleCode(), secret);
+
+        List<SysRole> sysRoles = roleMapper.selectRolesByUserName(getUsername());
+        if (sysRoles.size() > 0) {
+            if (sysRoles.get(0).getMax_money()==null) {
+                return AjaxResult.error("请联系超级管理员为当前角色设置最大人工出入款金额！！");
+            }
+            Integer max_money = sysRoles.get(0).getMax_money();
+            if (Math.abs(walletInOutMoneyVo.getAmount()) > max_money) {
+                return AjaxResult.error("超过当前角色最大人工出入款金额！");
+            }
+        }
+
+
         if (!authCode) {
             return AjaxResult.error("验证码错误或已过期");
         }
@@ -133,6 +153,7 @@ public class WalletPlayerDataController extends BaseController {
         if (StringUtils.isBlank(walletInOutMoneyVo.getWalletType())) {
             return AjaxResult.error("钱包类型为空");
         }
+
 
         Map<String, Object> param = new HashMap<>();
         param.put("userId", walletInOutMoneyVo.getId());
