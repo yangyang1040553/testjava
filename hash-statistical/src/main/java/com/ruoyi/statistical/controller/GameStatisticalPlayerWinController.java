@@ -25,14 +25,13 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 玩家输赢Controller
- * 
+ *
  * @author xxk
  * @date 2022-06-01
  */
 @RestController
 @RequestMapping("/hash-statistical/win")
-public class GameStatisticalPlayerWinController extends BaseController
-{
+public class GameStatisticalPlayerWinController extends BaseController {
     @Autowired
     private IGameStatisticalPlayerWinService gameStatisticalPlayerWinService;
 
@@ -41,8 +40,7 @@ public class GameStatisticalPlayerWinController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-statistical:win:list')")
     @GetMapping("/list")
-    public TableDataInfo list(GameStatisticalPlayerWin gameStatisticalPlayerWin)
-    {
+    public TableDataInfo list(GameStatisticalPlayerWin gameStatisticalPlayerWin) {
         startPage();
         startOrderBy();
         List<GameStatisticalPlayerWin> list = gameStatisticalPlayerWinService.selectGameStatisticalPlayerWinList(gameStatisticalPlayerWin);
@@ -55,8 +53,7 @@ public class GameStatisticalPlayerWinController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-statistical:win:export')")
     @Log(title = "玩家输赢", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, GameStatisticalPlayerWin gameStatisticalPlayerWin)
-    {
+    public void export(HttpServletResponse response, GameStatisticalPlayerWin gameStatisticalPlayerWin) {
         startOrderBy();
         List<GameStatisticalPlayerWin> list = gameStatisticalPlayerWinService.selectGameStatisticalPlayerWinList(gameStatisticalPlayerWin);
         for (GameStatisticalPlayerWin statisticalPlayerWin : list) {
@@ -67,8 +64,7 @@ public class GameStatisticalPlayerWinController extends BaseController
             statisticalPlayerWin.setUsdtBetAmount(statisticalPlayerWin.getUsdtBetAmount());
             statisticalPlayerWin.setUsdtAwardAmount(statisticalPlayerWin.getUsdtAwardAmount());
             statisticalPlayerWin.setUsdtWinAmount(statisticalPlayerWin.getUsdtWinAmount());
-
-
+            statisticalPlayerWin.setId(statisticalPlayerWin.getId());
 
         }
         ExcelUtil<GameStatisticalPlayerWin> util = new ExcelUtil<GameStatisticalPlayerWin>(GameStatisticalPlayerWin.class);
@@ -80,8 +76,7 @@ public class GameStatisticalPlayerWinController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-statistical:win:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") String id)
-    {
+    public AjaxResult getInfo(@PathVariable("id") String id) {
         return AjaxResult.success(gameStatisticalPlayerWinService.selectGameStatisticalPlayerWinById(id));
     }
 
@@ -91,8 +86,7 @@ public class GameStatisticalPlayerWinController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-statistical:win:add')")
     @Log(title = "玩家输赢", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody GameStatisticalPlayerWin gameStatisticalPlayerWin)
-    {
+    public AjaxResult add(@RequestBody GameStatisticalPlayerWin gameStatisticalPlayerWin) {
         return toAjax(gameStatisticalPlayerWinService.insertGameStatisticalPlayerWin(gameStatisticalPlayerWin));
     }
 
@@ -102,8 +96,7 @@ public class GameStatisticalPlayerWinController extends BaseController
     @PreAuthorize("@ss.hasPermi('hash-statistical:win:edit')")
     @Log(title = "玩家输赢", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody GameStatisticalPlayerWin gameStatisticalPlayerWin)
-    {
+    public AjaxResult edit(@RequestBody GameStatisticalPlayerWin gameStatisticalPlayerWin) {
         return toAjax(gameStatisticalPlayerWinService.updateGameStatisticalPlayerWin(gameStatisticalPlayerWin));
     }
 
@@ -112,9 +105,8 @@ public class GameStatisticalPlayerWinController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hash-statistical:win:remove')")
     @Log(title = "玩家输赢", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable String[] ids)
-    {
+    @DeleteMapping("/{ids}")
+    public AjaxResult remove(@PathVariable String[] ids) {
         return toAjax(gameStatisticalPlayerWinService.deleteGameStatisticalPlayerWinByIds(ids));
     }
 }

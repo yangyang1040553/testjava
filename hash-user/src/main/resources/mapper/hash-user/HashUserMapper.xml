@@ -157,6 +157,8 @@
             <if test="fatherInvitationCode != null and fatherInvitationCode != ''">and father_invitation_code = #{fatherInvitationCode}</if>
             <if test="tgId != null and tgId != ''">and tg_id = #{tgId}</if>
             <if test="tgAccount != null and tgAccount != ''">and tg_account = #{tgAccount}</if>
+            <if test="registerTime != null ">and DATE_FORMAT(register_time, '%Y-%m-%d') =  DATE_FORMAT(#{registerTime}, '%Y-%m-%d')</if>
+            <if test="loginTime != null ">and DATE_FORMAT(login_time, '%Y-%m-%d') =  DATE_FORMAT(#{loginTime}, '%Y-%m-%d')</if>
         </where>
     </select>
 
