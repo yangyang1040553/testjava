@@ -214,6 +214,9 @@ public class HashUser extends BaseEntity {
     private Double trx_remote_amount;
 
 
+    @Excel(name = "登录地址")
+    private String login_addr;
+
     private Double trx_in_amount;
     private Double usdt_in_amount;
     private Double trx_out_mount;
@@ -221,6 +224,13 @@ public class HashUser extends BaseEntity {
     private Double usdt_bet_amount;
     private Double trx_bet_amount;
 
+    public String getLogin_addr() {
+        return login_addr;
+    }
+
+    public void setLogin_addr(String login_addr) {
+        this.login_addr = login_addr;
+    }
 
     public Double getUsdt_bet_amount() {
         return Global.getWalletAmountToReal(usdt_bet_amount);
