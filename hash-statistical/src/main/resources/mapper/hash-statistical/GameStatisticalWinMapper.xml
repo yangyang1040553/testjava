@@ -35,12 +35,7 @@
             <when test="id !=null ">
                 <include refid="selectGameStatisticalWinVo"/>
                 <where>
-                    <if test="usdtBetAmount != null ">and usdt_bet_amount = #{usdtBetAmount}</if>
-                    <if test="usdtAwardAmount != null ">and usdt_award_amount = #{usdtAwardAmount}</if>
-                    <if test="usdtWinAmount != null ">and usdt_win_amount = #{usdtWinAmount}</if>
-                    <if test="trxBetAmount != null ">and trx_bet_amount = #{trxBetAmount}</if>
-                    <if test="trxAwardAmount != null ">and trx_award_amount = #{trxAwardAmount}</if>
-                    <if test="trxWinAmount != null ">and trx_win_amount = #{trxWinAmount}</if>
+                    <if test="id != null ">and DATE_FORMAT(id, '%Y-%m-%d') =  DATE_FORMAT(#{id}, '%Y-%m-%d')</if>
                 </where>
             </when>
             <otherwise>
