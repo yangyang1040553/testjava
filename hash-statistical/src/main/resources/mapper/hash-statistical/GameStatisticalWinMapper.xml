@@ -25,7 +25,7 @@
                SUM(trx_bet_amount - trx_award_amount)   AS trx_win_amount,
                SUM(usdt_bet_amount)                     AS usdt_bet_amount,
                SUM(usdt_award_amount)                   AS usdt_award_amount,
-               SUM(usdt_bet_amount - usdt_award_amount) AS usdt_wind_amount,
+               SUM(usdt_bet_amount - usdt_award_amount) AS usdt_win_amount,
                id
         FROM t_game_statistical_day  where DATE_FORMAT(id, '%Y-%m-%d') =  DATE_FORMAT(current_date, '%Y-%m-%d')    GROUP BY id
     </sql>

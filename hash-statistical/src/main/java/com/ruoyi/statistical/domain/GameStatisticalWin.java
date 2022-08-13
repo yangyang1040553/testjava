@@ -16,6 +16,7 @@ public class GameStatisticalWin extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** id-天为单位 */
+    @Excel(name = "时间")
     private String id;
 
     /** 今日usdt押注金额 */
