@@ -56,6 +56,15 @@ public class GameStatisticalWinController extends BaseController
     {
         startOrderBy();
         List<GameStatisticalWin> list = gameStatisticalWinService.selectGameStatisticalWinList(gameStatisticalWin);
+        for (GameStatisticalWin statisticalWin : list) {
+            statisticalWin.setTrxWinAmount(statisticalWin.getTrxWinAmount());
+            statisticalWin.setTrxBetAmount(statisticalWin.getTrxBetAmount());
+            statisticalWin.setTrxAwardAmount(statisticalWin.getTrxAwardAmount());
+
+            statisticalWin.setUsdtWinAmount(statisticalWin.getUsdtWinAmount());
+            statisticalWin.setUsdtBetAmount(statisticalWin.getTrxBetAmount());
+            statisticalWin.setUsdtAwardAmount(statisticalWin.getTrxAwardAmount());
+        }
         ExcelUtil<GameStatisticalWin> util = new ExcelUtil<GameStatisticalWin>(GameStatisticalWin.class);
         util.exportExcel(response, list, "游戏输赢数据");
     }

@@ -1,5 +1,6 @@
 package com.ruoyi.statistical.domain;
 
+import com.ruoyi.common.constant.Global;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
@@ -21,27 +22,27 @@ public class GameStatisticalWin extends BaseEntity
 
     /** 今日usdt押注金额 */
     @Excel(name = "今日usdt押注金额")
-    private Long usdtBetAmount;
+    private Double usdtBetAmount;
 
     /** 今日usdt中奖金额 */
     @Excel(name = "今日usdt中奖金额")
-    private Long usdtAwardAmount;
+    private Double usdtAwardAmount;
 
     /** 今日usdt输赢金额 */
     @Excel(name = "今日usdt输赢金额")
-    private Long usdtWinAmount;
+    private Double usdtWinAmount;
 
     /** 今日trx押注金额 */
     @Excel(name = "今日trx押注金额")
-    private Long trxBetAmount;
+    private Double trxBetAmount;
 
     /** 今日trx中奖金额 */
     @Excel(name = "今日trx中奖金额")
-    private Long trxAwardAmount;
+    private Double trxAwardAmount;
 
     /** 今日trx输赢金额 */
     @Excel(name = "今日trx输赢金额")
-    private Long trxWinAmount;
+    private Double trxWinAmount;
 
     public void setId(String id) 
     {
@@ -52,59 +53,53 @@ public class GameStatisticalWin extends BaseEntity
     {
         return id;
     }
-    public void setUsdtBetAmount(Long usdtBetAmount) 
-    {
+
+    public Double getUsdtBetAmount() {
+        return Global.getWalletAmountToReal(usdtBetAmount);
+    }
+
+    public void setUsdtBetAmount(Double usdtBetAmount) {
         this.usdtBetAmount = usdtBetAmount;
     }
 
-    public Long getUsdtBetAmount() 
-    {
-        return usdtBetAmount;
+    public Double getUsdtAwardAmount() {
+        return Global.getWalletAmountToReal(usdtAwardAmount);
     }
-    public void setUsdtAwardAmount(Long usdtAwardAmount) 
-    {
+
+    public void setUsdtAwardAmount(Double usdtAwardAmount) {
         this.usdtAwardAmount = usdtAwardAmount;
     }
 
-    public Long getUsdtAwardAmount() 
-    {
-        return usdtAwardAmount;
+    public Double getUsdtWinAmount() {
+        return Global.getWalletAmountToReal(usdtWinAmount);
     }
-    public void setUsdtWinAmount(Long usdtWinAmount) 
-    {
+
+    public void setUsdtWinAmount(Double usdtWinAmount) {
         this.usdtWinAmount = usdtWinAmount;
     }
 
-    public Long getUsdtWinAmount() 
-    {
-        return usdtWinAmount;
+    public Double getTrxBetAmount() {
+        return Global.getWalletAmountToReal(trxBetAmount);
     }
-    public void setTrxBetAmount(Long trxBetAmount) 
-    {
+
+    public void setTrxBetAmount(Double trxBetAmount) {
         this.trxBetAmount = trxBetAmount;
     }
 
-    public Long getTrxBetAmount() 
-    {
-        return trxBetAmount;
+    public Double getTrxAwardAmount() {
+        return Global.getWalletAmountToReal(trxAwardAmount);
     }
-    public void setTrxAwardAmount(Long trxAwardAmount) 
-    {
+
+    public void setTrxAwardAmount(Double trxAwardAmount) {
         this.trxAwardAmount = trxAwardAmount;
     }
 
-    public Long getTrxAwardAmount() 
-    {
-        return trxAwardAmount;
-    }
-    public void setTrxWinAmount(Long trxWinAmount) 
-    {
-        this.trxWinAmount = trxWinAmount;
+    public Double getTrxWinAmount() {
+        return Global.getWalletAmountToReal(trxWinAmount);
     }
 
-    public Long getTrxWinAmount() 
-    {
-        return trxWinAmount;
+    public void setTrxWinAmount(Double trxWinAmount) {
+        this.trxWinAmount = trxWinAmount;
     }
 
     @Override
