@@ -132,12 +132,16 @@ public class WalletPlayerDataController extends BaseController {
 
         List<SysRole> sysRoles = roleMapper.selectRolesByUserName(getUsername());
         if (sysRoles.size() > 0) {
-            if (sysRoles.get(0).getMax_money()==null) {
+            if (sysRoles.get(0).getTrx_max_money() == null || sysRoles.get(0).getUsdt_max_money() == null) {
                 return AjaxResult.error("请联系超级管理员为当前角色设置最大人工出入款金额！！");
             }
-            Integer max_money = sysRoles.get(0).getMax_money();
-            if (Math.abs(walletInOutMoneyVo.getAmount()) > max_money) {
-                return AjaxResult.error("超过当前角色最大人工出入款金额！");
+            Integer trx_max_money = sysRoles.get(0).getTrx_max_money();
+            Integer usdt_max_money = sysRoles.get(0).getUsdt_max_money();
+            if (Math.abs(walletInOutMoneyVo.getAmount()) > trx_max_money && walletInOutMoneyVo.getWalletType().equals("TRX")) {
+                return AjaxResult.error("超过当前角色最大TRX人工出入款金额！");
+            }
+            if (Math.abs(walletInOutMoneyVo.getAmount()) > usdt_max_money && walletInOutMoneyVo.getWalletType().equals("USDT")) {
+                return AjaxResult.error("超过当前角色最大USDT人工出入款金额！");
             }
         }
 

@@ -33,8 +33,11 @@ public class SysRole extends BaseEntity
     @Excel(name = "角色排序")
     private String roleSort;
 
-    @Excel(name = "最大人工出入款")
-    private Integer  max_money;
+    @Excel(name = "最大人工USDT出入款")
+    private Integer  usdt_max_money;
+
+    @Excel(name = "最大人工TRX出入款")
+    private Integer  trx_max_money;
 
     /** 数据范围（1：所有数据权限；2：自定义数据权限；3：本部门数据权限；4：本部门及以下数据权限；5：仅本人数据权限） */
     @Excel(name = "数据范围", readConverterExp = "1=所有数据权限,2=自定义数据权限,3=本部门数据权限,4=本部门及以下数据权限,5=仅本人数据权限")
@@ -67,12 +70,20 @@ public class SysRole extends BaseEntity
 
     }
 
-    public Integer getMax_money() {
-        return max_money;
+    public Integer getUsdt_max_money() {
+        return usdt_max_money;
     }
 
-    public void setMax_money(Integer max_money) {
-        this.max_money = max_money;
+    public void setUsdt_max_money(Integer usdt_max_money) {
+        this.usdt_max_money = usdt_max_money;
+    }
+
+    public Integer getTrx_max_money() {
+        return trx_max_money;
+    }
+
+    public void setTrx_max_money(Integer trx_max_money) {
+        this.trx_max_money = trx_max_money;
     }
 
     public SysRole(Long roleId)
