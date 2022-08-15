@@ -57,6 +57,10 @@ public class GameStatisticalPromoteIncomeController extends BaseController
     {
         startOrderBy();
         List<GameStatisticalPromoteIncome> list = gameStatisticalPromoteIncomeService.selectGameStatisticalPromoteIncomeList(gameStatisticalPromoteIncome);
+        for (GameStatisticalPromoteIncome statisticalPromoteIncome : list) {
+            statisticalPromoteIncome.setTrxIncomeAmount(statisticalPromoteIncome.getTrxIncomeAmount());
+            statisticalPromoteIncome.setUsdtIncomeAmount(statisticalPromoteIncome.getUsdtIncomeAmount());
+        }
         ExcelUtil<GameStatisticalPromoteIncome> util = new ExcelUtil<GameStatisticalPromoteIncome>(GameStatisticalPromoteIncome.class);
         util.exportExcel(response, list, "代理每日收益金额数据");
     }
