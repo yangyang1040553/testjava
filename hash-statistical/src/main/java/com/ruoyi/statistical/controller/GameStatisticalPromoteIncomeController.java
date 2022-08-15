@@ -60,6 +60,14 @@ public class GameStatisticalPromoteIncomeController extends BaseController
         for (GameStatisticalPromoteIncome statisticalPromoteIncome : list) {
             statisticalPromoteIncome.setTrxIncomeAmount(statisticalPromoteIncome.getTrxIncomeAmount());
             statisticalPromoteIncome.setUsdtIncomeAmount(statisticalPromoteIncome.getUsdtIncomeAmount());
+
+            statisticalPromoteIncome.setUsdt_income1_amount(statisticalPromoteIncome.getUsdt_income1_amount());
+            statisticalPromoteIncome.setUsdt_income2_amount(statisticalPromoteIncome.getUsdt_income2_amount());
+            statisticalPromoteIncome.setUsdt_income3_amount(statisticalPromoteIncome.getUsdt_income3_amount());
+            statisticalPromoteIncome.setTrx_income1_amount(statisticalPromoteIncome.getTrx_income1_amount());
+            statisticalPromoteIncome.setTrx_income2_amount(statisticalPromoteIncome.getTrx_income2_amount());
+            statisticalPromoteIncome.setTrx_income3_amount(statisticalPromoteIncome.getTrx_income3_amount());
+
         }
         ExcelUtil<GameStatisticalPromoteIncome> util = new ExcelUtil<GameStatisticalPromoteIncome>(GameStatisticalPromoteIncome.class);
         util.exportExcel(response, list, "代理每日收益金额数据");
