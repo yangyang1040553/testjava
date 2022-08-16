@@ -40,7 +40,7 @@ public class UserOperationDataController extends BaseController {
 //    @PreAuthorize("@ss.hasPermi('hash-statistical:statisticalOperation:list')")
     @GetMapping("/list")
     public TableDataInfo list(UserOperationData userOperationData) {
-        startPage();
+//        startPage();
         List<UserOperationData> list = userOperationDataService.selectUserOperationDataList(userOperationData);
         return getDataTable(list);
     }
