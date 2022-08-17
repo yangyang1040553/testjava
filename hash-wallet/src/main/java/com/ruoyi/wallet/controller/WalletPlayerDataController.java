@@ -127,6 +127,12 @@ public class WalletPlayerDataController extends BaseController {
 
         // 谷歌验证授权
         SysUser sysUser = userService.selectUserByUserName(getUsername());
+
+        // 检测当前用户状态和登录错误次数
+        if (!"0".equals(sysUser.getStatus()) || (sysUser.getError_count() != null && sysUser.getError_count() > 3)) {
+            return AjaxResult.error("账号已被冻结，请联系超级管理员");
+        }
+
         String secret = sysUser.getSecret();
         boolean authCode = GoogleAuthenticator.authcode(walletInOutMoneyVo.getGoogleCode(), secret);
 
