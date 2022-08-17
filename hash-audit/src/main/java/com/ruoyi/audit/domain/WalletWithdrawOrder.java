@@ -90,6 +90,16 @@ public class WalletWithdrawOrder extends BaseEntity {
     @Excel(name = "邀请码")
     private String invitation_code;
 
+    private String googleCode;
+
+    public String getGoogleCode() {
+        return googleCode;
+    }
+
+    public void setGoogleCode(String googleCode) {
+        this.googleCode = googleCode;
+    }
+
     public String getInvitation_code() {
         return invitation_code;
     }

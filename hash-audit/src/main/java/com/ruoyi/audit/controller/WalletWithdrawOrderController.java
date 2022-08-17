@@ -9,8 +9,11 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.common.constant.Global;
 import com.ruoyi.common.constant.HttpStatus;
+import com.ruoyi.common.core.domain.entity.SysUser;
+import com.ruoyi.common.utils.GoogleAuthenticator;
 import com.ruoyi.common.utils.http.HttpUtils;
 import com.ruoyi.common.utils.sign.Md5Utils;
+import com.ruoyi.system.service.ISysUserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -44,6 +47,9 @@ public class WalletWithdrawOrderController extends BaseController {
 
     @Value("${service.wallet-addr}")
     public String serviceWalletAddr;
+
+    @Autowired
+    private ISysUserService userService;
 
     @Autowired
     private IWalletWithdrawOrderService walletWithdrawOrderService;
@@ -117,6 +123,16 @@ public class WalletWithdrawOrderController extends BaseController {
     @PutMapping
     public AjaxResult edit(@RequestBody WalletWithdrawOrder walletWithdrawOrder) {
         walletWithdrawOrder.setUpdateBy(getUsername());
+
+        // 谷歌验证授权
+        SysUser sysUser = userService.selectUserByUserName(getUsername());
+        String secret = sysUser.getSecret();
+        boolean authCode = GoogleAuthenticator.authcode(walletWithdrawOrder.getGoogleCode(), secret);
+
+        if (!authCode) {
+            return new AjaxResult(HttpStatus.ERROR, "验证码错误或已过期！");
+        }
+
 
         final WalletWithdrawOrder order = walletWithdrawOrderService.selectWalletWithdrawOrderById(walletWithdrawOrder.getId());
         if (order.getCheckPerson() != null) {
