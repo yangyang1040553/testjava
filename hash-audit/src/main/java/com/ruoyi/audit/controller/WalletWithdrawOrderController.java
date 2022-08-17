@@ -133,6 +133,11 @@ public class WalletWithdrawOrderController extends BaseController {
             return new AjaxResult(HttpStatus.ERROR, "验证码错误或已过期！");
         }
 
+        // 检测当前用户状态和登录错误次数
+        if (!"0".equals(sysUser.getStatus()) || (sysUser.getError_count() != null && sysUser.getError_count() > 3)) {
+            return AjaxResult.error("账号已被冻结，请联系超级管理员");
+        }
+
 
         final WalletWithdrawOrder order = walletWithdrawOrderService.selectWalletWithdrawOrderById(walletWithdrawOrder.getId());
         if (order.getCheckPerson() != null) {
