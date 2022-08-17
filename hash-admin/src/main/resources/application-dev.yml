@@ -85,4 +85,4 @@ spring:
 service:
   wallet-addr: https://hash-api.starops.work/hash
   user-addr: https://hash-api.starops.work/hash
-  open-google: false
+  open-google: true

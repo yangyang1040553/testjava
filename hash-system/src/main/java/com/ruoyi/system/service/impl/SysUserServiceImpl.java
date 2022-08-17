@@ -297,6 +297,9 @@ public class SysUserServiceImpl implements ISysUserService {
      */
     @Override
     public int updateUserStatus(SysUser user) {
+        if ("0".equals(user.getStatus())) {
+            user.setError_count(0);
+        }
         return userMapper.updateUser(user);
     }
 
@@ -508,7 +511,7 @@ public class SysUserServiceImpl implements ISysUserService {
 
         String secret = GoogleAuthenticator.genSecret(sysUser.getUserName());
         System.out.println(secret);
-        String qrCode = GoogleAuthenticator.getQRBarcodeURL(sysUser.getUserName(),"Hash", secret);
+        String qrCode = GoogleAuthenticator.getQRBarcodeURL(sysUser.getUserName(), "Hash", secret);
         System.out.println(qrCode);
 
         sysUser.setSecret(secret);

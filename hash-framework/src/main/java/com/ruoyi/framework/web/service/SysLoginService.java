@@ -108,6 +108,21 @@ public class SysLoginService {
         boolean authCode = GoogleAuthenticator.authcode(code, sysUser.getSecret());
 //        if (!code.equalsIgnoreCase(captcha)) {
         if (openGoogle && !authCode) {
+            String userName = sysUser.getUserName();
+            Integer error_count = sysUser.getError_count();
+            if (error_count == null) {
+                error_count = 0;
+            }
+            sysUser.setError_count(error_count + 1);
+            //大于三次直接锁定
+            if (sysUser.getError_count() > 3) {
+                sysUser.setStatus("1");
+                userService.updateUser(sysUser);
+                AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, "超过最大登录次数,账号已锁定,请联系超级管理员！"));
+                throw new CaptchaException("user.jcaptcha.errortimes");
+            } else {
+                userService.updateUser(sysUser);
+            }
             AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.error")));
             throw new CaptchaException();
         }

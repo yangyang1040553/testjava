@@ -132,12 +132,23 @@ public class SysUser extends BaseEntity {
      */
     private Long roleId;
 
-    private  String qr_code;
-    private  String secret;
+    private String qr_code;
+    private String secret;
+
+
+    private Integer error_count;
 
 
     public SysUser() {
 
+    }
+
+    public Integer getError_count() {
+        return error_count;
+    }
+
+    public void setError_count(Integer error_count) {
+        this.error_count = error_count;
     }
 
     public String getQr_code() {
