@@ -105,6 +105,9 @@ public class SysLoginService {
 //        }
 
         SysUser sysUser = userService.selectUserByUserName(username);
+        if (sysUser==null) {
+            throw new CaptchaException("user.jcaptcha.error");
+        }
         boolean authCode = GoogleAuthenticator.authcode(code, sysUser.getSecret());
 //        if (!code.equalsIgnoreCase(captcha)) {
         if (openGoogle && !authCode) {
