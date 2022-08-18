@@ -126,11 +126,12 @@ public class WalletWithdrawOrderController extends BaseController {
 
         // 谷歌验证授权
         SysUser sysUser = userService.selectUserByUserName(getUsername());
-        String secret = sysUser.getSecret();
-        boolean authCode = GoogleAuthenticator.authcode(walletWithdrawOrder.getGoogleCode(), secret);
-
-        if (!authCode) {
-            return new AjaxResult(HttpStatus.ERROR, "验证码错误或已过期！");
+        if (!"1".equals(walletWithdrawOrder.getCheckStatus())) {
+            String secret = sysUser.getSecret();
+            boolean authCode = GoogleAuthenticator.authcode(walletWithdrawOrder.getGoogleCode(), secret);
+            if (!authCode) {
+                return new AjaxResult(HttpStatus.ERROR, "验证码错误或已过期！");
+            }
         }
 
         // 检测当前用户状态和登录错误次数
