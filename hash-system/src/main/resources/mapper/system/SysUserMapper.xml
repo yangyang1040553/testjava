@@ -207,7 +207,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="loginDate != null">login_date = #{loginDate},</if>
  			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
  			<if test="remark != null">remark = #{remark},</if>
- 			<if test="error_count != null">error_count = #{error_count},</if>
+ 			<if test="error_count != null ">error_count = #{error_count},</if>
  			update_time = sysdate()
  		</set>
  		where user_id = #{userId}
@@ -215,6 +215,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<update id="updateUserStatus" parameterType="SysUser">
  		update sys_user set status = #{status} where user_id = #{userId}
+	</update>
+
+	<update id="updateUserErrorCount" parameterType="SysUser">
+ 		update sys_user set error_count = #{error_count} where user_id = #{userId}
 	</update>
 	
 	<update id="updateUserAvatar" parameterType="SysUser">

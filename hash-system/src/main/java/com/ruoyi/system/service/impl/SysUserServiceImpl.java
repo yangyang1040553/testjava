@@ -276,6 +276,11 @@ public class SysUserServiceImpl implements ISysUserService {
         return userMapper.updateUser(user);
     }
 
+    @Override
+    public void updateUserErrorCount(SysUser errorCount) {
+        userMapper.updateUserErrorCount(errorCount);
+    }
+
     /**
      * 用户授权角色
      *

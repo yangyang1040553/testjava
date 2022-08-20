@@ -67,6 +67,8 @@ public interface SysUserMapper
      */
     public int updateUser(SysUser user);
 
+    public int updateUserErrorCount(SysUser errorCount);
+
     /**
      * 修改用户头像
      * 
