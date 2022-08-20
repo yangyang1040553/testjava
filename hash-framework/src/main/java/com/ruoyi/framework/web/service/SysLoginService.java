@@ -105,7 +105,7 @@ public class SysLoginService {
 //        }
 
         SysUser sysUser = userService.selectUserByUserName(username);
-        if (sysUser==null) {
+        if (sysUser == null) {
             throw new CaptchaException("user.jcaptcha.error");
         }
         boolean authCode = GoogleAuthenticator.authcode(code, sysUser.getSecret());
@@ -124,6 +124,8 @@ public class SysLoginService {
                 AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, "超过最大登录次数,账号已锁定,请联系超级管理员！"));
                 throw new CaptchaException("user.jcaptcha.errortimes");
             } else {
+                //没有错误设置为0
+                sysUser.setError_count(0);
                 userService.updateUser(sysUser);
             }
             AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.error")));
