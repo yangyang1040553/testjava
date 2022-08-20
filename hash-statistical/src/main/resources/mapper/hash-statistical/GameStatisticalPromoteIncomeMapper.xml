@@ -39,7 +39,7 @@
             resultMap="GameStatisticalPromoteIncomeResult">
         <include refid="selectGameStatisticalPromoteIncomeVo"/>
         <where>
-            <if test="id != null  and id != ''">and id >= #{id}</if>
+            <if test="id != null  and id != ''">and DATE_FORMAT(id, '%Y-%m-%d') =  DATE_FORMAT(#{id}, '%Y-%m-%d') </if>
             <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
             <if test="invitationCode != null  and invitationCode != ''">and invitation_code = #{invitationCode}</if>
         </where>
