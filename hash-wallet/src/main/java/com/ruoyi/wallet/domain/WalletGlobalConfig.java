@@ -67,6 +67,17 @@ public class WalletGlobalConfig extends BaseEntity {
     @Excel(name = "trx免审核金额")
     private  Double trx_free_check;
 
+    @Excel(name = "提现手续费比例")
+    private  String tax_scala;
+
+    public String getTax_scala() {
+        return tax_scala;
+    }
+
+    public void setTax_scala(String tax_scala) {
+        this.tax_scala = tax_scala;
+    }
+
     public Double getUsdt_free_check() {
         return usdt_free_check;
     }

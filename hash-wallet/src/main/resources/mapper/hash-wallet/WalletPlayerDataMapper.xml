@@ -20,6 +20,9 @@
         <result property="trxRemoteAmount" column="trx_remote_amount"/>
         <result property="hashTransAddressTrx" column="hash_trans_address_trx"/>
         <result property="note_name" column="note_name"/>
+        <result property="last_withdraw_time" column="last_withdraw_time"/>
+        <result property="free_usdt_amount" column="free_usdt_amount"/>
+        <result property="free_trx_amount" column="free_trx_amount"/>
     </resultMap>
 
     <sql id="selectWalletPlayerDataVo">
@@ -37,7 +40,10 @@
                a.usdt_remote_amount,
                a.trx_remote_amount,
                a.hash_trans_address_trx,
-               b.note_name
+               b.note_name,
+               a.last_withdraw_time,
+               a.free_usdt_amount,
+               a.free_trx_amount
         FROM t_wallet_player_data a
                  LEFT JOIN t_user b on a.id = b.id
     </sql>

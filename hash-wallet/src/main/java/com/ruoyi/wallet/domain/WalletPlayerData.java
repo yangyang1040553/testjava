@@ -75,6 +75,38 @@ public class WalletPlayerData extends BaseEntity {
 
     private String note_name;
 
+    @Excel(name = "上次提现时间", dateFormat = "yyyy-MM-dd HH:mm:ss")
+    private String last_withdraw_time;
+
+    @Excel(name = "usdt免费提现金额")
+    private Double free_usdt_amount;
+    @Excel(name = "trx免费提现金额")
+    private Double free_trx_amount;
+
+    public String getLast_withdraw_time() {
+        return last_withdraw_time;
+    }
+
+    public void setLast_withdraw_time(String last_withdraw_time) {
+        this.last_withdraw_time = last_withdraw_time;
+    }
+
+    public Double getFree_usdt_amount() {
+        return Global.getWalletAmountToReal(free_usdt_amount);
+    }
+
+    public void setFree_usdt_amount(Double free_usdt_amount) {
+        this.free_usdt_amount = free_usdt_amount;
+    }
+
+    public Double getFree_trx_amount() {
+        return Global.getWalletAmountToReal(free_trx_amount);
+    }
+
+    public void setFree_trx_amount(Double free_trx_amount) {
+        this.free_trx_amount = free_trx_amount;
+    }
+
     public String getNote_name() {
         return note_name;
     }
