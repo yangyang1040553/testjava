@@ -92,6 +92,17 @@ public class WalletWithdrawOrder extends BaseEntity {
 
     private String googleCode;
 
+    @Excel(name = "提现手续费")
+    private Double tax_amount;
+
+    public Double getTax_amount() {
+        return Global.getWalletAmountToReal(tax_amount);
+    }
+
+    public void setTax_amount(Double tax_amount) {
+        this.tax_amount = tax_amount;
+    }
+
     public String getGoogleCode() {
         return googleCode;
     }

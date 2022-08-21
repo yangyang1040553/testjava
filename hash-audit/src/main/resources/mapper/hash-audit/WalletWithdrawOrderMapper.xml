@@ -23,6 +23,7 @@
         <result property="note" column="note"/>
         <result property="payAmount" column="pay_amount"/>
         <result property="invitation_code" column="invitation_code"/>
+        <result property="tax_amount" column="tax_amount"/>
     </resultMap>
 
     <sql id="selectWalletWithdrawOrderVo">
@@ -43,7 +44,8 @@
                update_by,
                pay_amount,
                note,
-               invitation_code
+               invitation_code,
+               tax_amount
         from t_wallet_withdraw_order
     </sql>
 
