@@ -90,6 +90,7 @@ public class WalletWithdrawOrderController extends BaseController {
             withdrawOrder.setAmount(Global.getWalletAmountToReal(withdrawOrder.getAmount()));
             withdrawOrder.setPayAmount(Global.getWalletAmountToReal(withdrawOrder.getPayAmount()));
             withdrawOrder.setMinerAmount(Global.getWalletAmountToReal(withdrawOrder.getMinerAmount()));
+            withdrawOrder.setTax_amount(Global.getWalletAmountToReal(withdrawOrder.getTax_amount()));
         }
 
         ExcelUtil<WalletWithdrawOrder> util = new ExcelUtil<WalletWithdrawOrder>(WalletWithdrawOrder.class);

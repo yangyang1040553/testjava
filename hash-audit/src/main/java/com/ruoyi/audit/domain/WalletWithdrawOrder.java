@@ -96,7 +96,7 @@ public class WalletWithdrawOrder extends BaseEntity {
     private Double tax_amount;
 
     public Double getTax_amount() {
-        return Global.getWalletAmountToReal(tax_amount);
+        return tax_amount;
     }
 
     public void setTax_amount(Double tax_amount) {
