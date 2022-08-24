@@ -35,6 +35,11 @@ public class WalletInOutMoneyVo {
      */
     public int type;
 
+    /***
+     * 流水倍数设置
+     */
+    public int betMultiple;
+
     private String googleCode;
 
     public String getGoogleCode() {
@@ -75,5 +80,13 @@ public class WalletInOutMoneyVo {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public int getBetMultiple() {
+        return betMultiple;
+    }
+
+    public void setBetMultiple(int betMultiple) {
+        this.betMultiple = betMultiple;
     }
 }

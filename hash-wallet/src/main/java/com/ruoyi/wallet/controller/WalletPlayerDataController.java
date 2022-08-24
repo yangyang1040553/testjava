@@ -171,6 +171,7 @@ public class WalletPlayerDataController extends BaseController {
         param.put("amount", walletInOutMoneyVo.getAmount());
         param.put("note", walletInOutMoneyVo.getNote());
         param.put("optPerson", getUsername());
+        param.put("betMultiple", walletInOutMoneyVo.getBetMultiple());
 
         final String hash = Md5Utils.hash(Global.USER_SECRET_KEY + walletInOutMoneyVo.getId() + walletInOutMoneyVo.getWalletType() + walletInOutMoneyVo.getAmount());
         param.put("sign", hash);
