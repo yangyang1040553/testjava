@@ -1,8 +1,11 @@
 package com.ruoyi.statistical.controller;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +45,7 @@ public class UserOperationDataController extends BaseController {
     public TableDataInfo list(UserOperationData userOperationData) {
 //        startPage();
         List<UserOperationData> list = userOperationDataService.selectUserOperationDataList(userOperationData);
+        Collections.reverse(list);
         return getDataTable(list);
     }
 

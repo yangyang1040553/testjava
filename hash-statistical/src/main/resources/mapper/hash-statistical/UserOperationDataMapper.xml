@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="registerCount != null "> and register_count = #{registerCount}</if>
             <if test="promoteCount != null "> and promote_count = #{promoteCount}</if>
         </where>
-        order by id asc limit 30
+        order by id desc limit 30
     </select>
     
     <select id="selectUserOperationDataById" parameterType="String" resultMap="UserOperationDataResult">
