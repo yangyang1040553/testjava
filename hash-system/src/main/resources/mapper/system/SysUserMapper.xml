@@ -258,7 +258,7 @@
     </update>
 
     <update id="updateUserErrorCount" parameterType="SysUser">
-        update sys_user set error_count = #{error_count}
+        update sys_user set
         <set>
             <if test="status != null">status = #{status},</if>
             <if test="error_count != null ">error_count = #{error_count},</if>
