@@ -224,6 +224,27 @@ public class HashUser extends BaseEntity {
     private Double usdt_bet_amount;
     private Double trx_bet_amount;
 
+    @Excel(name = "唯一ID")
+    private String unique_id;
+    @Excel(name = "注册地址")
+    private String reg_addr;
+
+    public String getUnique_id() {
+        return unique_id;
+    }
+
+    public void setUnique_id(String unique_id) {
+        this.unique_id = unique_id;
+    }
+
+    public String getReg_addr() {
+        return reg_addr;
+    }
+
+    public void setReg_addr(String reg_addr) {
+        this.reg_addr = reg_addr;
+    }
+
     public String getLogin_addr() {
         return login_addr;
     }

@@ -118,11 +118,11 @@ public class SysLoginService {
             }
             error_count = error_count + 1;
             sysUser.setError_count(error_count);
-            userService.updateUser(sysUser);
+            userService.updateUserErrorCount(sysUser);
             //大于三次直接锁定
             if (sysUser.getError_count() > 3) {
                 sysUser.setStatus("1");
-                userService.updateUser(sysUser);
+                userService.updateUserErrorCount(sysUser);
                 AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, "超过最大登录次数,账号已锁定,请联系超级管理员！"));
                 throw new CaptchaException("user.jcaptcha.errortimes");
             }

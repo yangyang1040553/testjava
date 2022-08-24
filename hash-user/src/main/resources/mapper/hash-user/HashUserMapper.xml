@@ -51,6 +51,8 @@
         <result property="trx_bet_amount" column="trx_bet_amount"/>
         <result property="usdt_bet_amount" column="usdt_bet_amount"/>
         <result property="login_addr" column="login_addr"/>
+        <result property="unique_id" column="unique_id"/>
+        <result property="reg_addr" column="reg_addr"/>
 
     </resultMap>
 
@@ -79,7 +81,9 @@
                note_name,
                tg_id,
                tg_account,
-               login_addr
+               login_addr,
+               unique_id,
+               reg_addr
         from t_user
     </sql>
 
@@ -151,7 +155,8 @@
             <if test="nickName != null  and nickName != ''">and nick_name like concat('%', #{nickName}, '%')</if>
             <if test="status != null ">and status = #{status}</if>
             <if test="online != null ">and online = #{online}</if>
-            <if test="registerIp != null and registerIp!=''">and register_ip = #{registerIp}</if>
+            <if test="registerIp != null and registerIp!=''">and register_ip  like  concat('%', #{registerIp},'%')</if>
+            <if test="loginIp != null and loginIp!=''">and login_ip  like  concat('%', #{loginIp},'%')</if>
             <if test="id != null and id !='' ">and id = #{id}</if>
             <if test="invitationCode != null and invitationCode !='' ">and invitation_code = #{invitationCode}</if>
             <if test="fatherInvitationCode != null and fatherInvitationCode != ''">and father_invitation_code = #{fatherInvitationCode}</if>

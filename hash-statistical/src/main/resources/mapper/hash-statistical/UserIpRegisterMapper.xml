@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectUserIpRegisterList" parameterType="UserIpRegister" resultMap="UserIpRegisterResult">
         <include refid="selectUserIpRegisterVo"/>
         <where>  
-            <if test="ip != null  and ip != ''"> and ip = #{ip}</if>
+            <if test="ip != null  and ip != ''"> and ip like  concat('%', #{ip}, '%')</if>
             <if test="ipAddr != null  and ipAddr != ''"> and ip_addr like  concat('%', #{ipAddr}, '%') </if>
             <if test="regCount != null "> and reg_count >= #{regCount}  and reg_count >  0</if>
             <if test="isDisable != null "> and is_disable = #{isDisable} </if>
