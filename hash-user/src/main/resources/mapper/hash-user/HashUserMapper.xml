@@ -153,6 +153,7 @@
             <if test="phone != null  and phone != ''">and phone = #{phone}</if>
             <if test="account != null  and account != ''">and account = #{account}</if>
             <if test="nickName != null  and nickName != ''">and nick_name like concat('%', #{nickName}, '%')</if>
+            <if test="unique_id != null  and unique_id != ''">and unique_id like concat('%', #{unique_id}, '%')</if>
             <if test="status != null ">and status = #{status}</if>
             <if test="online != null ">and online = #{online}</if>
             <if test="registerIp != null and registerIp!=''">and register_ip  like  concat('%', #{registerIp},'%')</if>
