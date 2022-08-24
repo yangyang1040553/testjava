@@ -157,6 +157,7 @@ public class WalletWithdrawOrderController extends BaseController {
                 Map<String, Object> param = new HashMap<>();
                 param.put("orderId", walletWithdrawOrder.getId());
                 param.put("isPass", true);
+                param.put("remark", walletWithdrawOrder.getRemark());
 
                 final String hash = Md5Utils.hash(Global.USER_SECRET_KEY + walletWithdrawOrder.getId());
                 param.put("sign", hash);
@@ -181,6 +182,7 @@ public class WalletWithdrawOrderController extends BaseController {
             Map<String, Object> param = new HashMap<>();
             param.put("orderId", walletWithdrawOrder.getId());
             param.put("isPass", false);
+            param.put("remark", walletWithdrawOrder.getRemark());
 
             final String hash = Md5Utils.hash(Global.USER_SECRET_KEY + walletWithdrawOrder.getId());
             param.put("sign", hash);
