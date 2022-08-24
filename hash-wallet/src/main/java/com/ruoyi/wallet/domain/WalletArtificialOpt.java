@@ -69,6 +69,17 @@ public class WalletArtificialOpt extends BaseEntity {
     @Excel(name = "邀请码")
     private String invitation_code;
 
+    @Excel(name = "流水倍数")
+    private String bet_multiple;
+
+    public String getBet_multiple() {
+        return bet_multiple;
+    }
+
+    public void setBet_multiple(String bet_multiple) {
+        this.bet_multiple = bet_multiple;
+    }
+
     public String getInvitation_code() {
         return invitation_code;
     }

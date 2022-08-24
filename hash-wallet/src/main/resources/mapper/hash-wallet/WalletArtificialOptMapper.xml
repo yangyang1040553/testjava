@@ -16,6 +16,7 @@
         <result property="createTime" column="create_time"/>
         <result property="opt_type" column="opt_type"/>
         <result property="invitation_code" column="invitation_code"/>
+        <result property="bet_multiple" column="bet_multiple"/>
     </resultMap>
 
     <sql id="selectWalletArtificialOptVo">
@@ -29,7 +30,8 @@
                note,
                create_time,
                opt_type,
-               invitation_code
+               invitation_code,
+               bet_multiple
         from t_wallet_artificial_opt
     </sql>
 
