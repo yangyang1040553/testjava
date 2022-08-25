@@ -63,12 +63,23 @@ public class WalletGlobalConfig extends BaseEntity {
 
 
     @Excel(name = "usdt免审核金额")
-    private  Double usdt_free_check;
+    private Double usdt_free_check;
     @Excel(name = "trx免审核金额")
-    private  Double trx_free_check;
+    private Double trx_free_check;
 
     @Excel(name = "提现手续费比例")
-    private  String tax_scala;
+    private String tax_scala;
+
+    @Excel(name = "下注倍数")
+    private String activity_bet_multiple;
+
+    public String getActivity_bet_multiple() {
+        return activity_bet_multiple;
+    }
+
+    public void setActivity_bet_multiple(String activity_bet_multiple) {
+        this.activity_bet_multiple = activity_bet_multiple;
+    }
 
     public String getTax_scala() {
         return tax_scala;

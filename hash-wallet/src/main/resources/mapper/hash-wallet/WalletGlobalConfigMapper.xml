@@ -19,6 +19,7 @@
         <result property="usdt_free_check" column="usdt_free_check"/>
         <result property="trx_free_check" column="trx_free_check"/>
         <result property="tax_scala" column="tax_scala"/>
+        <result property="activity_bet_multiple" column="activity_bet_multiple"/>
     </resultMap>
 
     <sql id="selectWalletGlobalConfigVo">
@@ -35,7 +36,8 @@
                update_by,
                trx_free_check,
                usdt_free_check,
-               tax_scala
+               tax_scala,
+               activity_bet_multiple
         from t_wallet_global_config
     </sql>
 
@@ -77,6 +79,7 @@
             <if test="trx_free_check != null and trx_free_check != ''">trx_free_check,</if>
             <if test="usdt_free_check != null and usdt_free_check != ''">usdt_free_check,</if>
             <if test="tax_scala != null">tax_scala,</if>
+            <if test="activity_bet_multiple != null">activity_bet_multiple,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -93,6 +96,7 @@
             <if test="trx_free_check != null and trx_free_check != ''">#{trx_free_check},</if>
             <if test="usdt_free_check != null and usdt_free_check != ''">#{usdt_free_check},</if>
             <if test="tax_scala != null ">#{tax_scala},</if>
+            <if test="activity_bet_multiple != null ">#{activity_bet_multiple},</if>
         </trim>
     </insert>
 
@@ -116,6 +120,7 @@
             <if test="trx_free_check != null and trx_free_check != ''">trx_free_check = #{trx_free_check},</if>
             <if test="usdt_free_check != null and usdt_free_check != ''">usdt_free_check = #{usdt_free_check},</if>
             <if test="tax_scala != null and tax_scala != ''">tax_scala = #{tax_scala},</if>
+            <if test="activity_bet_multiple != null">activity_bet_multiple = #{activity_bet_multiple},</if>
         </trim>
         where id = #{id}
     </update>
