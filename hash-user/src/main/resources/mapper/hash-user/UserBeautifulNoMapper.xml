@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.hashuser.mapper.UserBeautifulNoMapper">
+    
+    <resultMap type="UserBeautifulNo" id="UserBeautifulNoResult">
+        <result property="id"    column="id"    />
+        <result property="code"    column="code"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectUserBeautifulNoVo">
+        select id, code, create_time from t_user_beautiful_no
+    </sql>
+
+    <select id="selectUserBeautifulNoList" parameterType="UserBeautifulNo" resultMap="UserBeautifulNoResult">
+        <include refid="selectUserBeautifulNoVo"/>
+        <where>  
+            <if test="id != null  and id != ''"> and id = #{id}</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="createTime != null">and DATE_FORMAT(create_time,'%Y-%m-%d') = DATE_FORMAT(#{createTime},'%Y-%m-%d')</if>
+        </where>
+    </select>
+    
+    <select id="selectUserBeautifulNoById" parameterType="String" resultMap="UserBeautifulNoResult">
+        <include refid="selectUserBeautifulNoVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectUserBeautifulNoByCode" parameterType="String" resultMap="UserBeautifulNoResult">
+        <include refid="selectUserBeautifulNoVo"/>
+        where code = #{code}
+    </select>
+
+    <insert id="insertUserBeautifulNo" parameterType="UserBeautifulNo">
+        insert into t_user_beautiful_no
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="code != null and code != ''">code,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="code != null and code != ''">#{code},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateUserBeautifulNo" parameterType="UserBeautifulNo">
+        update t_user_beautiful_no
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="code != null and code != ''">code = #{code},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUserBeautifulNoById" parameterType="String">
+        delete from t_user_beautiful_no where id = #{id}
+    </delete>
+
+    <delete id="deleteUserBeautifulNoByIds" parameterType="String">
+        delete from t_user_beautiful_no where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
