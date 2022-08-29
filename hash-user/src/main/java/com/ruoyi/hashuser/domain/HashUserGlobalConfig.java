@@ -92,11 +92,22 @@ public class HashUserGlobalConfig extends BaseEntity {
     private String welecome_txt;
 
 
+    @Excel(name = "是否限制设置注册")
+    private String reg_limit;
+
+
     /**
      * 是否强制更新
      */
     private transient int force;
 
+    public String getReg_limit() {
+        return reg_limit;
+    }
+
+    public void setReg_limit(String reg_limit) {
+        this.reg_limit = reg_limit;
+    }
 
     public String getH5_qr_addr() {
         return h5_qr_addr;
