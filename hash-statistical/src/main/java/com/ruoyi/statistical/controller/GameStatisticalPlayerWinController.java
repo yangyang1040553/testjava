@@ -66,6 +66,10 @@ public class GameStatisticalPlayerWinController extends BaseController {
             statisticalPlayerWin.setUsdtWinAmount(statisticalPlayerWin.getUsdtWinAmount());
             statisticalPlayerWin.setId(statisticalPlayerWin.getId());
 
+            statisticalPlayerWin.setUsdt_miner_fee(statisticalPlayerWin.getUsdt_miner_fee());
+            statisticalPlayerWin.setUsdt_tax_amount(statisticalPlayerWin.getUsdt_tax_amount());
+            statisticalPlayerWin.setTrx_tax_amount(statisticalPlayerWin.getTrx_tax_amount());
+
         }
         ExcelUtil<GameStatisticalPlayerWin> util = new ExcelUtil<GameStatisticalPlayerWin>(GameStatisticalPlayerWin.class);
         util.exportExcel(response, list, "玩家输赢数据");
