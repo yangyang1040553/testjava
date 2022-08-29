@@ -136,6 +136,21 @@ public class GameBetRecord extends BaseEntity {
     @Excel(name = "邀请码")
     private String invitation_code;
 
+    @Excel(name = "矿工费")
+    private Double usdt_miner_fee;
+
+    public void setTaxAmount(Double taxAmount) {
+        this.taxAmount = taxAmount;
+    }
+
+    public Double getUsdt_miner_fee() {
+        return Global.getWalletAmountToReal(usdt_miner_fee);
+    }
+
+    public void setUsdt_miner_fee(Double usdt_miner_fee) {
+        this.usdt_miner_fee = usdt_miner_fee;
+    }
+
     public String getInvitation_code() {
         return invitation_code;
     }

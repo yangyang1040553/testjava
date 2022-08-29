@@ -18,6 +18,9 @@
         <result property="nick_name" column="nick_name"/>
         <result property="note_name" column="note_name"/>
         <result property="invitation_code" column="invitation_code"/>
+        <result property="usdt_tax_amount" column="usdt_tax_amount"/>
+        <result property="usdt_miner_fee" column="usdt_miner_fee"/>
+        <result property="trx_tax_amount" column="trx_tax_amount"/>
     </resultMap>
 
     <sql id="selectGameStatisticalPlayerWinVo">
@@ -29,21 +32,38 @@
                trx_bet_amount,
                trx_award_amount,
                trx_win_amount,
-               invitation_code
+               invitation_code,
+               usdt_tax_amount,
+               usdt_miner_fee,
+               trx_tax_amount
+
         from t_game_statistical_player_win
     </sql>
 
     <sql id="selectWinListToday">
-        SELECT  a.user_id, a.id,b.nick_name,b.note_name,b.invitation_code,
-                SUM(usdt_bet_amount)                          AS usdt_bet_amount,
-                SUM(usdt_award_amount)                        AS usdt_award_amount,
-                SUM(usdt_award_amount) - SUM(usdt_bet_amount) AS usdt_win_amount,
-                SUM(trx_bet_amount)                           AS trx_bet_amount,
-                SUM(trx_award_amount)                         AS trx_award_amount,
-                SUM(trx_award_amount) - SUM(trx_bet_amount)   AS trx_win_amount
-        FROM t_game_statistical_player_day a left join  t_user b   on a.user_id = b.id
-        WHERE a.id = CURRENT_DATE
-        GROUP BY  a.user_id, a.id
+        SELECT
+            a.user_id,
+            a.id,
+            b.nick_name,
+            b.note_name,
+            b.invitation_code,
+            SUM( usdt_tax_amount ) AS usdt_tax_amount,
+            SUM( usdt_miner_fee ) AS usdt_miner_fee,
+            SUM( trx_tax_amount ) AS trx_tax_amount,
+            SUM( usdt_bet_amount ) AS usdt_bet_amount,
+            SUM( usdt_award_amount ) AS usdt_award_amount,
+            SUM( usdt_award_amount ) - SUM( usdt_bet_amount ) AS usdt_win_amount,
+            SUM( trx_bet_amount ) AS trx_bet_amount,
+            SUM( trx_award_amount ) AS trx_award_amount,
+            SUM( trx_award_amount ) - SUM( trx_bet_amount ) AS trx_win_amount
+        FROM
+            t_game_statistical_player_day a
+                LEFT JOIN t_user b ON a.user_id = b.id
+        WHERE
+            a.id = CURRENT_DATE
+        GROUP BY
+            a.user_id,
+            a.id
     </sql>
 
     <select id="selectGameStatisticalPlayerWinList" parameterType="GameStatisticalPlayerWin"

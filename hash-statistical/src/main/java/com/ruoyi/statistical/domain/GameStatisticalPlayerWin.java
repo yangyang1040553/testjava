@@ -69,9 +69,41 @@ public class GameStatisticalPlayerWin extends BaseEntity {
     private String nick_name;
 
 
-
     @Excel(name = "邀请码")
     private String invitation_code;
+
+    @Excel(name = "今日usdt手续费")
+    private Double usdt_tax_amount;
+
+    @Excel(name = "今日usdt矿工费")
+    private Double usdt_miner_fee;
+
+    @Excel(name = "今日trx手续费")
+    private Double trx_tax_amount;
+
+    public Double getUsdt_tax_amount() {
+        return Global.getWalletAmountToReal(usdt_tax_amount);
+    }
+
+    public void setUsdt_tax_amount(Double usdt_tax_amount) {
+        this.usdt_tax_amount = usdt_tax_amount;
+    }
+
+    public Double getUsdt_miner_fee() {
+        return Global.getWalletAmountToReal(usdt_miner_fee);
+    }
+
+    public void setUsdt_miner_fee(Double usdt_miner_fee) {
+        this.usdt_miner_fee = usdt_miner_fee;
+    }
+
+    public Double getTrx_tax_amount() {
+        return Global.getWalletAmountToReal(trx_tax_amount);
+    }
+
+    public void setTrx_tax_amount(Double trx_tax_amount) {
+        this.trx_tax_amount = trx_tax_amount;
+    }
 
     public String getInvitation_code() {
         return invitation_code;
