@@ -23,7 +23,7 @@ public class WalletInOutMoneyVo {
     /***
      * 金额
      */
-    public long amount;
+    public double amount;
 
     /***
      * 备注说明
@@ -66,11 +66,11 @@ public class WalletInOutMoneyVo {
         this.walletType = walletType;
     }
 
-    public long getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(long amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
