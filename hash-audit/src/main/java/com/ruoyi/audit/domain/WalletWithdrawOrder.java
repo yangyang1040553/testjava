@@ -1,5 +1,7 @@
 package com.ruoyi.audit.domain;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.common.constant.Global;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -7,6 +9,7 @@ import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 
 /**
  * 提现审核对象 t_wallet_withdraw_order
@@ -110,7 +113,17 @@ public class WalletWithdrawOrder extends BaseEntity {
     }
 
     public String getApply_info() {
-        return apply_info;
+        if (apply_info != null) {
+            String[] split = apply_info.split("#");
+            JSONArray jsonObject = new JSONArray();
+            jsonObject.addAll(Arrays.asList(split));
+            return jsonObject.toJSONString();
+        } else {
+            JSONArray jsonArray=new JSONArray();
+            jsonArray.add("---");
+            return jsonArray.toJSONString();
+        }
+
     }
 
     public void setApply_info(String apply_info) {
