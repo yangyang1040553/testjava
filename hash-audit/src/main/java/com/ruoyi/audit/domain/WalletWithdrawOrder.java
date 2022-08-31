@@ -95,6 +95,28 @@ public class WalletWithdrawOrder extends BaseEntity {
     @Excel(name = "提现手续费")
     private Double tax_amount;
 
+    @Excel(name = "昵称")
+    private String nick_name;
+
+    @Excel(name = "申请信息")
+    private String apply_info;
+
+    public String getNick_name() {
+        return nick_name;
+    }
+
+    public void setNick_name(String nick_name) {
+        this.nick_name = nick_name;
+    }
+
+    public String getApply_info() {
+        return apply_info;
+    }
+
+    public void setApply_info(String apply_info) {
+        this.apply_info = apply_info;
+    }
+
     public Double getTax_amount() {
         return tax_amount;
     }

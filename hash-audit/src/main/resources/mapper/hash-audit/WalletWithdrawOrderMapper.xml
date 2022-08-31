@@ -24,6 +24,8 @@
         <result property="payAmount" column="pay_amount"/>
         <result property="invitation_code" column="invitation_code"/>
         <result property="tax_amount" column="tax_amount"/>
+        <result property="nick_name" column="nick_name"/>
+        <result property="apply_info" column="apply_info"/>
     </resultMap>
 
     <sql id="selectWalletWithdrawOrderVo">
@@ -45,7 +47,9 @@
                pay_amount,
                note,
                invitation_code,
-               tax_amount
+               tax_amount,
+               apply_info,
+               nick_name
         from t_wallet_withdraw_order
     </sql>
 
