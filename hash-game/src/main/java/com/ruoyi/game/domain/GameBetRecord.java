@@ -92,7 +92,7 @@ public class GameBetRecord extends BaseEntity {
     /**
      * 手续费
      */
-    @Excel(name = "手续费")
+    @Excel(name = "中奖手续费")
     private Double taxAmount;
 
     /**
@@ -139,6 +139,17 @@ public class GameBetRecord extends BaseEntity {
     @Excel(name = "矿工费")
     private Double usdt_miner_fee;
 
+    @Excel(name = "下注手续费")
+    private Double bet_fee;
+
+
+    public Double getBet_fee() {
+        return Global.getWalletAmountToReal(bet_fee);
+    }
+
+    public void setBet_fee(Double bet_fee) {
+        this.bet_fee = bet_fee;
+    }
 
     public Double getUsdt_miner_fee() {
         return Global.getWalletAmountToReal(usdt_miner_fee);

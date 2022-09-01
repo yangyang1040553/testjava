@@ -30,6 +30,7 @@
         <result property="winAmount" column="win_amount"/>
         <result property="invitation_code" column="invitation_code"/>
         <result property="usdt_miner_fee" column="usdt_miner_fee"/>
+        <result property="bet_fee" column="bet_fee"/>
 
     </resultMap>
 
@@ -58,7 +59,8 @@
                note,
                win_amount,
                invitation_code,
-               usdt_miner_fee
+               usdt_miner_fee,
+               bet_fee
         from t_game_bet_record
     </sql>
 
