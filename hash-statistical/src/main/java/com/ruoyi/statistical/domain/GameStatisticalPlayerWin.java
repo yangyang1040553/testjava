@@ -81,6 +81,49 @@ public class GameStatisticalPlayerWin extends BaseEntity {
     @Excel(name = "今日trx手续费")
     private Double trx_tax_amount;
 
+
+    @Excel(name = "usdt今日活动奖励金")
+    private Double usdt_activity_amount;
+    @Excel(name = "usdt今日后台奖励金")
+    private Double usdt_back_amount;
+    @Excel(name = "trx今日活动奖励金")
+    private Double trx_activity_amount;
+    @Excel(name = "trx今日后台奖励金")
+    private Double trx_back_amount;
+
+
+    public Double getUsdt_activity_amount() {
+        return Global.getWalletAmountToReal(usdt_activity_amount);
+    }
+
+    public void setUsdt_activity_amount(Double usdt_activity_amount) {
+        this.usdt_activity_amount = usdt_activity_amount;
+    }
+
+    public Double getUsdt_back_amount() {
+        return Global.getWalletAmountToReal(usdt_back_amount);
+    }
+
+    public void setUsdt_back_amount(Double usdt_back_amount) {
+        this.usdt_back_amount = usdt_back_amount;
+    }
+
+    public Double getTrx_activity_amount() {
+        return Global.getWalletAmountToReal(trx_activity_amount);
+    }
+
+    public void setTrx_activity_amount(Double trx_activity_amount) {
+        this.trx_activity_amount = trx_activity_amount;
+    }
+
+    public Double getTrx_back_amount() {
+        return Global.getWalletAmountToReal(trx_back_amount);
+    }
+
+    public void setTrx_back_amount(Double trx_back_amount) {
+        this.trx_back_amount = trx_back_amount;
+    }
+
     public Double getUsdt_tax_amount() {
         return Global.getWalletAmountToReal(usdt_tax_amount);
     }

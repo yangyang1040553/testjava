@@ -20,6 +20,9 @@
         <result property="trx_free_check" column="trx_free_check"/>
         <result property="tax_scala" column="tax_scala"/>
         <result property="activity_bet_multiple" column="activity_bet_multiple"/>
+
+        <result property="usdt_bet_fee" column="usdt_bet_fee"/>
+        <result property="trx_bet_fee" column="trx_bet_fee"/>
     </resultMap>
 
     <sql id="selectWalletGlobalConfigVo">
@@ -37,7 +40,9 @@
                trx_free_check,
                usdt_free_check,
                tax_scala,
-               activity_bet_multiple
+               activity_bet_multiple,
+               usdt_bet_fee,
+               trx_bet_fee
         from t_wallet_global_config
     </sql>
 
@@ -80,6 +85,8 @@
             <if test="usdt_free_check != null and usdt_free_check != ''">usdt_free_check,</if>
             <if test="tax_scala != null">tax_scala,</if>
             <if test="activity_bet_multiple != null">activity_bet_multiple,</if>
+            <if test="usdt_bet_fee != null">usdt_bet_fee,</if>
+            <if test="trx_bet_fee != null">trx_bet_fee,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -97,6 +104,8 @@
             <if test="usdt_free_check != null and usdt_free_check != ''">#{usdt_free_check},</if>
             <if test="tax_scala != null ">#{tax_scala},</if>
             <if test="activity_bet_multiple != null ">#{activity_bet_multiple},</if>
+            <if test="usdt_bet_fee != null ">#{usdt_bet_fee},</if>
+            <if test="trx_bet_fee != null ">#{trx_bet_fee},</if>
         </trim>
     </insert>
 
@@ -121,6 +130,8 @@
             <if test="usdt_free_check != null and usdt_free_check != ''">usdt_free_check = #{usdt_free_check},</if>
             <if test="tax_scala != null and tax_scala != ''">tax_scala = #{tax_scala},</if>
             <if test="activity_bet_multiple != null">activity_bet_multiple = #{activity_bet_multiple},</if>
+            <if test="usdt_bet_fee != null">usdt_bet_fee = #{usdt_bet_fee},</if>
+            <if test="trx_bet_fee != null">trx_bet_fee = #{trx_bet_fee},</if>
         </trim>
         where id = #{id}
     </update>

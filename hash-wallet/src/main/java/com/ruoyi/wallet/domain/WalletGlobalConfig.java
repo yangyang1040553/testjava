@@ -73,6 +73,28 @@ public class WalletGlobalConfig extends BaseEntity {
     @Excel(name = "下注倍数")
     private String activity_bet_multiple;
 
+
+    @Excel(name = "USDT下注手续费")
+    private Double usdt_bet_fee;
+    @Excel(name = "TRX下注手续费")
+    private Double trx_bet_fee;
+
+    public Double getUsdt_bet_fee() {
+        return usdt_bet_fee;
+    }
+
+    public void setUsdt_bet_fee(Double usdt_bet_fee) {
+        this.usdt_bet_fee = usdt_bet_fee;
+    }
+
+    public Double getTrx_bet_fee() {
+        return trx_bet_fee;
+    }
+
+    public void setTrx_bet_fee(Double trx_bet_fee) {
+        this.trx_bet_fee = trx_bet_fee;
+    }
+
     public String getActivity_bet_multiple() {
         return activity_bet_multiple;
     }

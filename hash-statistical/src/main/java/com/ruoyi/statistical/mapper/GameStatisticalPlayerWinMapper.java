@@ -27,6 +27,9 @@ public interface GameStatisticalPlayerWinMapper
      */
     public List<GameStatisticalPlayerWin> selectGameStatisticalPlayerWinList(GameStatisticalPlayerWin gameStatisticalPlayerWin);
 
+
+    public List<GameStatisticalPlayerWin> selectGameRewardList(GameStatisticalPlayerWin gameStatisticalPlayerWin);
+
     /**
      * 新增玩家输赢
      * 
