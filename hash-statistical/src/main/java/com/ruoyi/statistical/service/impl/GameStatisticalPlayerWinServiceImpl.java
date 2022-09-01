@@ -52,10 +52,10 @@ public class GameStatisticalPlayerWinServiceImpl implements IGameStatisticalPlay
                             statisticalPlayerWin.getUserId().equals(gameStatisticalPlayerReward.getUserId())) {
 
                         // 多走了一次 get 函数 故此 乘以10000
-                        statisticalPlayerWin.setUsdt_activity_amount(gameStatisticalPlayerReward.getUsdt_activity_amount()*1000);
-                        statisticalPlayerWin.setUsdt_back_amount(gameStatisticalPlayerReward.getUsdt_back_amount()*1000);
-                        statisticalPlayerWin.setTrx_activity_amount(gameStatisticalPlayerReward.getTrx_activity_amount()*1000);
-                        statisticalPlayerWin.setTrx_back_amount(gameStatisticalPlayerReward.getTrx_back_amount()*1000);
+                        statisticalPlayerWin.setUsdt_activity_amount(gameStatisticalPlayerReward.getUsdt_activity_amount()*10000);
+                        statisticalPlayerWin.setUsdt_back_amount(gameStatisticalPlayerReward.getUsdt_back_amount()*10000);
+                        statisticalPlayerWin.setTrx_activity_amount(gameStatisticalPlayerReward.getTrx_activity_amount()*10000);
+                        statisticalPlayerWin.setTrx_back_amount(gameStatisticalPlayerReward.getTrx_back_amount()*10000);
                     }
                 }
             }

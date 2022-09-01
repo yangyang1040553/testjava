@@ -2,6 +2,7 @@ package com.ruoyi.operation.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.uuid.IdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.operation.mapper.GameOperationActivityRecordMapper;
@@ -54,6 +55,7 @@ public class GameOperationActivityRecordServiceImpl implements IGameOperationAct
     public int insertGameOperationActivityRecord(GameOperationActivityRecord gameOperationActivityRecord)
     {
         gameOperationActivityRecord.setCreateTime(DateUtils.getNowDate());
+        gameOperationActivityRecord.setId(IdUtils.getIDStr());
         return gameOperationActivityRecordMapper.insertGameOperationActivityRecord(gameOperationActivityRecord);
     }
 

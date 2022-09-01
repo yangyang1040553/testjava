@@ -59,6 +59,7 @@
             <if test="aType != null">a_type,</if>
             <if test="status != null">status,</if>
             <if test="createTime != null">create_time,</if>
+            <if test="note != null">note,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -69,6 +70,7 @@
             <if test="aType != null">#{aType},</if>
             <if test="status != null">#{status},</if>
             <if test="createTime != null">#{createTime},</if>
+            <if test="note != null">#{note},</if>
         </trim>
     </insert>
 
