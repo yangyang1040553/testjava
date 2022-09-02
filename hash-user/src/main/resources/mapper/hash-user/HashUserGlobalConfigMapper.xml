@@ -25,6 +25,8 @@
         <result property="h5_qr_addr" column="h5_qr_addr"/>
         <result property="welecome_txt" column="welecome_txt"/>
         <result property="reg_limit" column="reg_limit"/>
+        <result property="gg_addr" column="gg_addr"/>
+        <result property="open_gg" column="open_gg"/>
 
     </resultMap>
 
@@ -48,7 +50,9 @@
                web_addr,
                h5_qr_addr,
                welecome_txt,
-               reg_limit
+               reg_limit,
+               gg_addr,
+               open_gg
         from t_user_global_config
     </sql>
 
@@ -87,6 +91,8 @@
             <if test="h5_qr_addr != null">h5_qr_addr,</if>
             <if test="welecome_txt != null">welecome_txt,</if>
             <if test="reg_limit != null">reg_limit,</if>
+            <if test="gg_addr != null">gg_addr,</if>
+            <if test="open_gg != null">open_gg,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -109,6 +115,8 @@
             <if test="h5_qr_addr != null">#{h5_qr_addr},</if>
             <if test="welecome_txt != null">#{welecome_txt},</if>
             <if test="reg_limit != null">#{reg_limit},</if>
+            <if test="gg_addr != null">#{gg_addr},</if>
+            <if test="open_gg != null">#{open_gg},</if>
         </trim>
     </insert>
 
@@ -136,6 +144,8 @@
             <if test="h5_qr_addr != null">h5_qr_addr = #{h5_qr_addr},</if>
             <if test="welecome_txt != null">welecome_txt = #{welecome_txt},</if>
             <if test="reg_limit != null">reg_limit = #{reg_limit},</if>
+            <if test="gg_addr != null">gg_addr = #{gg_addr},</if>
+            <if test="open_gg != null">open_gg = #{open_gg},</if>
         </trim>
         where id = #{id}
     </update>

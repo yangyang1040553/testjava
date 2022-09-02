@@ -96,6 +96,25 @@ public class HashUserGlobalConfig extends BaseEntity {
     private String reg_limit;
 
 
+    private String gg_addr;
+    private Integer open_gg;
+
+    public String getGg_addr() {
+        return gg_addr;
+    }
+
+    public void setGg_addr(String gg_addr) {
+        this.gg_addr = gg_addr;
+    }
+
+    public Integer getOpen_gg() {
+        return open_gg;
+    }
+
+    public void setOpen_gg(Integer open_gg) {
+        this.open_gg = open_gg;
+    }
+
     /**
      * 是否强制更新
      */
