@@ -9,7 +9,7 @@ public class RedisKey {
     //用户登录频繁限制
     public final static String user_login_limit = "user_login_limit";
     //用户的token
-    public final static String user_token = "user_token";
+    public final static String user_token = "user_token:";
     //用户公告表
     public final static String user_notice = "user_notice";
     //用户活动表
