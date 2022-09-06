@@ -127,7 +127,7 @@ public class WalletWithdrawOrderController extends BaseController {
 
         // 谷歌验证授权
         SysUser sysUser = userService.selectUserByUserName(getUsername());
-        if (!"1".equals(walletWithdrawOrder.getCheckStatus())) {
+        if (!"1".equals(walletWithdrawOrder.getCheckStatus()) && !"2".equals(walletWithdrawOrder.getCheckStatus())) {
             String secret = sysUser.getSecret();
             boolean authCode = GoogleAuthenticator.authcode(walletWithdrawOrder.getGoogleCode(), secret);
             if (!authCode) {
