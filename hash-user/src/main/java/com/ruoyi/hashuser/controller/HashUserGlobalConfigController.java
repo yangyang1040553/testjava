@@ -44,6 +44,7 @@ public class HashUserGlobalConfigController extends BaseController {
     @PreAuthorize("@ss.hasPermi('hash-user:hashUserConfig:list')")
     @GetMapping("/list")
     public TableDataInfo list(HashUserGlobalConfig hashUserGlobalConfig) {
+        //测试
         startPage();
         List<HashUserGlobalConfig> list = hashUserGlobalConfigService.selectHashUserGlobalConfigList(hashUserGlobalConfig);
         return getDataTable(list);
