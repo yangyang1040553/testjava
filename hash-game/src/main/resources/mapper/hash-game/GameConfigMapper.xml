@@ -23,6 +23,7 @@
         <result property="isBrokerage" column="is_brokerage"/>
         <result property="activityDesc" column="activity_desc"/>
         <result property="weight" column="weight"/>
+        <result property="note" column="note"/>
     </resultMap>
 
     <sql id="selectGameConfigVo">
@@ -42,7 +43,8 @@
             menu_id,
             is_brokerage,
             activity_desc,
-            weight
+            weight,
+            note
         from t_game_config
     </sql>
 
@@ -87,6 +89,7 @@
             <if test="isBrokerage != null">is_brokerage,</if>
             <if test="weight != null">weight,</if>
             <if test="activityDesc != null">activity_desc,</if>
+            <if test="note != null">note,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -107,6 +110,7 @@
             <if test="isBrokerage != null">#{isBrokerage},</if>
             <if test="weight != null">#{weight},</if>
             <if test="activityDesc != null">#{activityDesc},</if>
+            <if test="note != null">#{note},</if>
         </trim>
     </insert>
 
@@ -130,6 +134,7 @@
             <if test="isBrokerage != null">is_brokerage = #{isBrokerage},</if>
             <if test="weight != null">weight = #{weight},</if>
             <if test="activityDesc != null">activity_desc = #{activityDesc},</if>
+            <if test="note != null">note = #{note},</if>
         </trim>
         where id = #{id}
     </update>

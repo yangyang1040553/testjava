@@ -103,6 +103,9 @@ public class GameConfig extends BaseEntity {
     @Excel(name = "权重")
     private  Integer weight;
 
+    @Excel(name = "备注")
+    private String note;
+
 
     private List<BetRule> betRuleList;
 
@@ -111,6 +114,14 @@ public class GameConfig extends BaseEntity {
     private int usdtMax;
     private int trxMax;
     private int trxMin;
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
 
     public String getActivityDesc() {
         return activityDesc;
