@@ -50,13 +50,6 @@
             <version>3.8.2</version>
         </dependency>
 
-        <!-- 定时任务-->
-        <dependency>
-            <groupId>com.hash</groupId>
-            <artifactId>hash-quartz</artifactId>
-            <version>3.8.2</version>
-        </dependency>
-
         <!-- 代码生成-->
         <dependency>
             <groupId>com.hash</groupId>
@@ -72,40 +65,9 @@
 
         <dependency>
             <groupId>com.hash</groupId>
-            <artifactId>hash-game</artifactId>
-            <version>3.8.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.hash</groupId>
-            <artifactId>hash-wallet</artifactId>
-            <version>3.8.2</version>
-        </dependency>
-
-
-        <dependency>
-            <groupId>com.hash</groupId>
-            <artifactId>hash-statistical</artifactId>
-            <version>3.8.2</version>
-        </dependency>
-        <dependency>
-            <groupId>com.hash</groupId>
-            <artifactId>hash-audit</artifactId>
-            <version>3.8.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.hash</groupId>
             <artifactId>hash-user</artifactId>
             <version>3.8.2</version>
         </dependency>
-
-        <dependency>
-            <groupId>com.hash</groupId>
-            <artifactId>hash-operation</artifactId>
-            <version>3.8.2</version>
-        </dependency>
-
 
     </dependencies>
 

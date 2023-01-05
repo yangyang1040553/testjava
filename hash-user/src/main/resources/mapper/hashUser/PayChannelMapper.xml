@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.hashUser.mapper.PayChannelMapper">
+    
+    <resultMap type="PayChannel" id="PayChannelResult">
+        <result property="id"    column="id"    />
+        <result property="channelName"    column="channel_name"    />
+        <result property="channelCode"    column="channel_code"    />
+        <result property="merchantCode"    column="merchant_code"    />
+        <result property="payTypeNo"    column="pay_type_no"    />
+        <result property="channelNo"    column="channel_no"    />
+        <result property="weight"    column="weight"    />
+        <result property="isEnable"    column="is_enable"    />
+        <result property="isFix"    column="is_fix"    />
+        <result property="minAmount"    column="min_amount"    />
+        <result property="maxAmount"    column="max_amount"    />
+        <result property="fixAmount"    column="fix_amount"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectPayChannelVo">
+        select id, channel_name, channel_code, merchant_code, pay_type_no, channel_no, weight, is_enable, is_fix, min_amount, max_amount, fix_amount, create_time, update_time from t_pay_channel
+    </sql>
+
+    <select id="selectPayChannelList" parameterType="PayChannel" resultMap="PayChannelResult">
+        <include refid="selectPayChannelVo"/>
+        <where>  
+            <if test="channelName != null  and channelName != ''"> and channel_name like concat('%', #{channelName}, '%')</if>
+            <if test="channelCode != null  and channelCode != ''"> and channel_code = #{channelCode}</if>
+            <if test="merchantCode != null  and merchantCode != ''"> and merchant_code = #{merchantCode}</if>
+            <if test="payTypeNo != null  and payTypeNo != ''"> and pay_type_no = #{payTypeNo}</if>
+            <if test="channelNo != null  and channelNo != ''"> and channel_no = #{channelNo}</if>
+            <if test="weight != null "> and weight = #{weight}</if>
+            <if test="isEnable != null "> and is_enable = #{isEnable}</if>
+            <if test="isFix != null "> and is_fix = #{isFix}</if>
+            <if test="minAmount != null "> and min_amount = #{minAmount}</if>
+            <if test="maxAmount != null "> and max_amount = #{maxAmount}</if>
+            <if test="fixAmount != null  and fixAmount != ''"> and fix_amount = #{fixAmount}</if>
+        </where>
+    </select>
+    
+    <select id="selectPayChannelById" parameterType="String" resultMap="PayChannelResult">
+        <include refid="selectPayChannelVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertPayChannel" parameterType="PayChannel" useGeneratedKeys="true" keyProperty="id">
+        insert into t_pay_channel
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="channelName != null and channelName != ''">channel_name,</if>
+            <if test="channelCode != null and channelCode != ''">channel_code,</if>
+            <if test="merchantCode != null and merchantCode != ''">merchant_code,</if>
+            <if test="payTypeNo != null and payTypeNo != ''">pay_type_no,</if>
+            <if test="channelNo != null and channelNo != ''">channel_no,</if>
+            <if test="weight != null">weight,</if>
+            <if test="isEnable != null">is_enable,</if>
+            <if test="isFix != null">is_fix,</if>
+            <if test="minAmount != null">min_amount,</if>
+            <if test="maxAmount != null">max_amount,</if>
+            <if test="fixAmount != null">fix_amount,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="channelName != null and channelName != ''">#{channelName},</if>
+            <if test="channelCode != null and channelCode != ''">#{channelCode},</if>
+            <if test="merchantCode != null and merchantCode != ''">#{merchantCode},</if>
+            <if test="payTypeNo != null and payTypeNo != ''">#{payTypeNo},</if>
+            <if test="channelNo != null and channelNo != ''">#{channelNo},</if>
+            <if test="weight != null">#{weight},</if>
+            <if test="isEnable != null">#{isEnable},</if>
+            <if test="isFix != null">#{isFix},</if>
+            <if test="minAmount != null">#{minAmount},</if>
+            <if test="maxAmount != null">#{maxAmount},</if>
+            <if test="fixAmount != null">#{fixAmount},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePayChannel" parameterType="PayChannel">
+        update t_pay_channel
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="channelName != null and channelName != ''">channel_name = #{channelName},</if>
+            <if test="channelCode != null and channelCode != ''">channel_code = #{channelCode},</if>
+            <if test="merchantCode != null and merchantCode != ''">merchant_code = #{merchantCode},</if>
+            <if test="payTypeNo != null and payTypeNo != ''">pay_type_no = #{payTypeNo},</if>
+            <if test="channelNo != null and channelNo != ''">channel_no = #{channelNo},</if>
+            <if test="weight != null">weight = #{weight},</if>
+            <if test="isEnable != null">is_enable = #{isEnable},</if>
+            <if test="isFix != null">is_fix = #{isFix},</if>
+            <if test="minAmount != null">min_amount = #{minAmount},</if>
+            <if test="maxAmount != null">max_amount = #{maxAmount},</if>
+            <if test="fixAmount != null">fix_amount = #{fixAmount},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePayChannelById" parameterType="String">
+        delete from t_pay_channel where id = #{id}
+    </delete>
+
+    <delete id="deletePayChannelByIds" parameterType="String">
+        delete from t_pay_channel where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

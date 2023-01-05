@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.hashUser.mapper.VideoCollectMapper">
+    
+    <resultMap type="VideoCollect" id="VideoCollectResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="vId"    column="v_id"    />
+        <result property="vTitle"    column="v_title"    />
+        <result property="vImg"    column="v_img"    />
+        <result property="duration"    column="duration"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectVideoCollectVo">
+        select id, user_id, v_id, v_title, v_img, duration, create_time from t_video_collect
+    </sql>
+
+    <select id="selectVideoCollectList" parameterType="VideoCollect" resultMap="VideoCollectResult">
+        <include refid="selectVideoCollectVo"/>
+        <where>  
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="vId != null  and vId != ''"> and v_id = #{vId}</if>
+            <if test="vTitle != null  and vTitle != ''"> and v_title = #{vTitle}</if>
+            <if test="vImg != null  and vImg != ''"> and v_img = #{vImg}</if>
+            <if test="duration != null  and duration != ''"> and duration = #{duration}</if>
+        </where>
+    </select>
+    
+    <select id="selectVideoCollectById" parameterType="Long" resultMap="VideoCollectResult">
+        <include refid="selectVideoCollectVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertVideoCollect" parameterType="VideoCollect">
+        insert into t_video_collect
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="vId != null">v_id,</if>
+            <if test="vTitle != null">v_title,</if>
+            <if test="vImg != null">v_img,</if>
+            <if test="duration != null">duration,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="vId != null">#{vId},</if>
+            <if test="vTitle != null">#{vTitle},</if>
+            <if test="vImg != null">#{vImg},</if>
+            <if test="duration != null">#{duration},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVideoCollect" parameterType="VideoCollect">
+        update t_video_collect
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="vId != null">v_id = #{vId},</if>
+            <if test="vTitle != null">v_title = #{vTitle},</if>
+            <if test="vImg != null">v_img = #{vImg},</if>
+            <if test="duration != null">duration = #{duration},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteVideoCollectById" parameterType="Long">
+        delete from t_video_collect where id = #{id}
+    </delete>
+
+    <delete id="deleteVideoCollectByIds" parameterType="String">
+        delete from t_video_collect where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

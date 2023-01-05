@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.hashUser.mapper.UserAdvertiseMapper">
+    
+    <resultMap type="UserAdvertise" id="UserAdvertiseResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="url"    column="url"    />
+        <result property="enable"    column="enable"    />
+        <result property="seconds"    column="seconds"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectUserAdvertiseVo">
+        select id, name, url, enable, seconds, create_time, update_time from t_user_advertise
+    </sql>
+
+    <select id="selectUserAdvertiseList" parameterType="UserAdvertise" resultMap="UserAdvertiseResult">
+        <include refid="selectUserAdvertiseVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="enable != null "> and enable = #{enable}</if>
+        </where>
+    </select>
+    
+    <select id="selectUserAdvertiseById" parameterType="Long" resultMap="UserAdvertiseResult">
+        <include refid="selectUserAdvertiseVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertUserAdvertise" parameterType="UserAdvertise" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user_advertise
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="url != null">url,</if>
+            <if test="enable != null">enable,</if>
+            <if test="seconds != null">seconds,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="url != null">#{url},</if>
+            <if test="enable != null">#{enable},</if>
+            <if test="seconds != null">#{seconds},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateUserAdvertise" parameterType="UserAdvertise">
+        update t_user_advertise
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="url != null">url = #{url},</if>
+            <if test="enable != null">enable = #{enable},</if>
+            <if test="seconds != null">seconds = #{seconds},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUserAdvertiseById" parameterType="Long">
+        delete from t_user_advertise where id = #{id}
+    </delete>
+
+    <delete id="deleteUserAdvertiseByIds" parameterType="String">
+        delete from t_user_advertise where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
