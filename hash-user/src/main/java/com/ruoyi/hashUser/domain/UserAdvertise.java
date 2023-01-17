@@ -6,16 +6,16 @@ import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
- * 用户意见对象 t_user_advertise
+ * 广告管理对象 t_user_advertise
  * 
  * @author xxk
- * @date 2023-01-05
+ * @date 2023-01-18
  */
 public class UserAdvertise extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** $column.columnComment */
+    /**  */
     private Long id;
 
     /** 广告名称 */
@@ -25,6 +25,14 @@ public class UserAdvertise extends BaseEntity
     /** 广告url */
     @Excel(name = "广告url")
     private String url;
+
+    /** $column.columnComment */
+    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    private String jumpUrl;
+
+    /**  1 启动页广告   2 播放页广告 */
+    @Excel(name = " 1 启动页广告   2 播放页广告")
+    private Long position;
 
     /** 是否开启 */
     @Excel(name = "是否开启")
@@ -61,6 +69,24 @@ public class UserAdvertise extends BaseEntity
     {
         return url;
     }
+    public void setJumpUrl(String jumpUrl) 
+    {
+        this.jumpUrl = jumpUrl;
+    }
+
+    public String getJumpUrl() 
+    {
+        return jumpUrl;
+    }
+    public void setPosition(Long position) 
+    {
+        this.position = position;
+    }
+
+    public Long getPosition() 
+    {
+        return position;
+    }
     public void setEnable(Long enable) 
     {
         this.enable = enable;
@@ -86,6 +112,8 @@ public class UserAdvertise extends BaseEntity
             .append("id", getId())
             .append("name", getName())
             .append("url", getUrl())
+            .append("jumpUrl", getJumpUrl())
+            .append("position", getPosition())
             .append("enable", getEnable())
             .append("seconds", getSeconds())
             .append("createTime", getCreateTime())

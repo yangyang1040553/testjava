@@ -2,6 +2,8 @@ package com.ruoyi.hashUser.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.hashUser.redis.UserRedis;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,24 +18,26 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 广告管理Controller
- * 
+ *
  * @author xxk
  * @date 2023-01-05
  */
 @RestController
 @RequestMapping("/hashUser/article")
-public class UserAdvertiseController extends BaseController
-{
+public class UserAdvertiseController extends BaseController {
+
+    @Autowired
+    UserRedis userRedis;
+
     @Autowired
     private IUserAdvertiseService userAdvertiseService;
 
     /**
      * 查询广告管理列表
      */
-//    @PreAuthorize("@ss.hasPermi('hashUser:advertise:list')")
+    @PreAuthorize("@ss.hasPermi('hashUser:advertise:list')")
     @GetMapping("/list")
-    public @ResponseBody TableDataInfo list(UserAdvertise userAdvertise)
-    {
+    public @ResponseBody TableDataInfo list(UserAdvertise userAdvertise) {
         startPage();
         List<UserAdvertise> list = userAdvertiseService.selectUserAdvertiseList(userAdvertise);
         return getDataTable(list);
@@ -42,11 +46,10 @@ public class UserAdvertiseController extends BaseController
     /**
      * 导出广告管理列表
      */
-//    @PreAuthorize("@ss.hasPermi('hashUser:advertise:export')")
+    @PreAuthorize("@ss.hasPermi('hashUser:advertise:export')")
     @Log(title = "广告管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, UserAdvertise userAdvertise)
-    {
+    public void export(HttpServletResponse response, UserAdvertise userAdvertise) {
         startOrderBy();
         List<UserAdvertise> list = userAdvertiseService.selectUserAdvertiseList(userAdvertise);
         ExcelUtil<UserAdvertise> util = new ExcelUtil<UserAdvertise>(UserAdvertise.class);
@@ -56,43 +59,42 @@ public class UserAdvertiseController extends BaseController
     /**
      * 获取广告管理详细信息
      */
-//    @PreAuthorize("@ss.hasPermi('hashUser:advertise:query')")
+    @PreAuthorize("@ss.hasPermi('hashUser:advertise:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") Long id)
-    {
+    public AjaxResult getInfo(@PathVariable("id") Long id) {
         return AjaxResult.success(userAdvertiseService.selectUserAdvertiseById(id));
     }
 
     /**
      * 新增广告管理
      */
-//    @PreAuthorize("@ss.hasPermi('hashUser:advertise:add')")
+    @PreAuthorize("@ss.hasPermi('hashUser:advertise:add')")
     @Log(title = "广告管理", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody UserAdvertise userAdvertise)
-    {
+    public AjaxResult add(@RequestBody UserAdvertise userAdvertise) {
+        userRedis.delUserAdvertise();
         return toAjax(userAdvertiseService.insertUserAdvertise(userAdvertise));
     }
 
     /**
      * 修改广告管理
      */
-//    @PreAuthorize("@ss.hasPermi('hashUser:advertise:edit')")
+    @PreAuthorize("@ss.hasPermi('hashUser:advertise:edit')")
     @Log(title = "广告管理", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody UserAdvertise userAdvertise)
-    {
+    public AjaxResult edit(@RequestBody UserAdvertise userAdvertise) {
+        userRedis.delUserAdvertise();
         return toAjax(userAdvertiseService.updateUserAdvertise(userAdvertise));
     }
 
     /**
      * 删除广告管理
      */
-//    @PreAuthorize("@ss.hasPermi('hashUser:advertise:remove')")
+    @PreAuthorize("@ss.hasPermi('hashUser:advertise:remove')")
     @Log(title = "广告管理", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable Long[] ids)
-    {
+    @DeleteMapping("/{ids}")
+    public AjaxResult remove(@PathVariable Long[] ids) {
+        userRedis.delUserAdvertise();
         return toAjax(userAdvertiseService.deleteUserAdvertiseByIds(ids));
     }
 }

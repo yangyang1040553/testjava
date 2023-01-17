@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.hashUser.mapper.UserGlobalConfigMapper">
+    
+    <resultMap type="UserGlobalConfig" id="UserGlobalConfigResult">
+        <result property="id"    column="id"    />
+        <result property="iosDownloadAddr"    column="ios_download_addr"    />
+        <result property="iosVersion"    column="ios_version"    />
+        <result property="androidDownloadAddr"    column="android_download_addr"    />
+        <result property="androidVersion"    column="android_version"    />
+    </resultMap>
+
+    <sql id="selectUserGlobalConfigVo">
+        select id, ios_download_addr, ios_version, android_download_addr, android_version from t_user_global_config
+    </sql>
+
+    <select id="selectUserGlobalConfigList" parameterType="UserGlobalConfig" resultMap="UserGlobalConfigResult">
+        <include refid="selectUserGlobalConfigVo"/>
+        <where>  
+            <if test="iosDownloadAddr != null  and iosDownloadAddr != ''"> and ios_download_addr = #{iosDownloadAddr}</if>
+            <if test="iosVersion != null  and iosVersion != ''"> and ios_version = #{iosVersion}</if>
+            <if test="androidDownloadAddr != null  and androidDownloadAddr != ''"> and android_download_addr = #{androidDownloadAddr}</if>
+            <if test="androidVersion != null  and androidVersion != ''"> and android_version = #{androidVersion}</if>
+        </where>
+    </select>
+    
+    <select id="selectUserGlobalConfigById" parameterType="String" resultMap="UserGlobalConfigResult">
+        <include refid="selectUserGlobalConfigVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertUserGlobalConfig" parameterType="UserGlobalConfig">
+        insert into t_user_global_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="iosDownloadAddr != null">ios_download_addr,</if>
+            <if test="iosVersion != null">ios_version,</if>
+            <if test="androidDownloadAddr != null">android_download_addr,</if>
+            <if test="androidVersion != null">android_version,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="iosDownloadAddr != null">#{iosDownloadAddr},</if>
+            <if test="iosVersion != null">#{iosVersion},</if>
+            <if test="androidDownloadAddr != null">#{androidDownloadAddr},</if>
+            <if test="androidVersion != null">#{androidVersion},</if>
+         </trim>
+    </insert>
+
+    <update id="updateUserGlobalConfig" parameterType="UserGlobalConfig">
+        update t_user_global_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="iosDownloadAddr != null">ios_download_addr = #{iosDownloadAddr},</if>
+            <if test="iosVersion != null">ios_version = #{iosVersion},</if>
+            <if test="androidDownloadAddr != null">android_download_addr = #{androidDownloadAddr},</if>
+            <if test="androidVersion != null">android_version = #{androidVersion},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUserGlobalConfigById" parameterType="String">
+        delete from t_user_global_config where id = #{id}
+    </delete>
+
+    <delete id="deleteUserGlobalConfigByIds" parameterType="String">
+        delete from t_user_global_config where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

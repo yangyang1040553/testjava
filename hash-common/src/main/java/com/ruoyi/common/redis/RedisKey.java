@@ -25,6 +25,8 @@ public class RedisKey {
     //用户banner配置
     public final static String user_banner_config = "user_banner_config";
 
+    public final static String user_advertise = "user_advertise";
+
     //=====================1用户相关key=====================
 
 

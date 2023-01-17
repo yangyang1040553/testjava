@@ -8,6 +8,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="id"    column="id"    />
         <result property="name"    column="name"    />
         <result property="url"    column="url"    />
+        <result property="jumpUrl"    column="jump_url"    />
+        <result property="position"    column="position"    />
         <result property="enable"    column="enable"    />
         <result property="seconds"    column="seconds"    />
         <result property="createTime"    column="create_time"    />
@@ -15,14 +17,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectUserAdvertiseVo">
-        select id, name, url, enable, seconds, create_time, update_time from t_user_advertise
+        select id, name, url, jump_url, position, enable, seconds, create_time, update_time from t_user_advertise
     </sql>
 
     <select id="selectUserAdvertiseList" parameterType="UserAdvertise" resultMap="UserAdvertiseResult">
         <include refid="selectUserAdvertiseVo"/>
         <where>  
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="url != null  and url != ''"> and url = #{url}</if>
+            <if test="jumpUrl != null  and jumpUrl != ''"> and jump_url = #{jumpUrl}</if>
+            <if test="position != null "> and position = #{position}</if>
             <if test="enable != null "> and enable = #{enable}</if>
+            <if test="seconds != null "> and seconds = #{seconds}</if>
         </where>
     </select>
     
@@ -36,6 +42,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="name != null">name,</if>
             <if test="url != null">url,</if>
+            <if test="jumpUrl != null">jump_url,</if>
+            <if test="position != null">position,</if>
             <if test="enable != null">enable,</if>
             <if test="seconds != null">seconds,</if>
             <if test="createTime != null">create_time,</if>
@@ -44,6 +52,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="name != null">#{name},</if>
             <if test="url != null">#{url},</if>
+            <if test="jumpUrl != null">#{jumpUrl},</if>
+            <if test="position != null">#{position},</if>
             <if test="enable != null">#{enable},</if>
             <if test="seconds != null">#{seconds},</if>
             <if test="createTime != null">#{createTime},</if>
@@ -56,6 +66,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="SET" suffixOverrides=",">
             <if test="name != null">name = #{name},</if>
             <if test="url != null">url = #{url},</if>
+            <if test="jumpUrl != null">jump_url = #{jumpUrl},</if>
+            <if test="position != null">position = #{position},</if>
             <if test="enable != null">enable = #{enable},</if>
             <if test="seconds != null">seconds = #{seconds},</if>
             <if test="createTime != null">create_time = #{createTime},</if>

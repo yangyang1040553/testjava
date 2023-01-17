@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.hashUser.mapper.UserBannerConfigMapper">
+    
+    <resultMap type="UserBannerConfig" id="UserBannerConfigResult">
+        <result property="id"    column="id"    />
+        <result property="bannerUrl"    column="banner_url"    />
+        <result property="isSkip"    column="is_skip"    />
+        <result property="skipUrl"    column="skip_url"    />
+        <result property="weight"    column="weight"    />
+    </resultMap>
+
+    <sql id="selectUserBannerConfigVo">
+        select id, banner_url, is_skip, skip_url, weight from t_user_banner_config
+    </sql>
+
+    <select id="selectUserBannerConfigList" parameterType="UserBannerConfig" resultMap="UserBannerConfigResult">
+        <include refid="selectUserBannerConfigVo"/>
+        <where>  
+            <if test="bannerUrl != null  and bannerUrl != ''"> and banner_url = #{bannerUrl}</if>
+            <if test="isSkip != null "> and is_skip = #{isSkip}</if>
+            <if test="skipUrl != null  and skipUrl != ''"> and skip_url = #{skipUrl}</if>
+            <if test="weight != null "> and weight = #{weight}</if>
+        </where>
+    </select>
+    
+    <select id="selectUserBannerConfigById" parameterType="Long" resultMap="UserBannerConfigResult">
+        <include refid="selectUserBannerConfigVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertUserBannerConfig" parameterType="UserBannerConfig" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user_banner_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bannerUrl != null">banner_url,</if>
+            <if test="isSkip != null">is_skip,</if>
+            <if test="skipUrl != null">skip_url,</if>
+            <if test="weight != null">weight,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bannerUrl != null">#{bannerUrl},</if>
+            <if test="isSkip != null">#{isSkip},</if>
+            <if test="skipUrl != null">#{skipUrl},</if>
+            <if test="weight != null">#{weight},</if>
+         </trim>
+    </insert>
+
+    <update id="updateUserBannerConfig" parameterType="UserBannerConfig">
+        update t_user_banner_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="bannerUrl != null">banner_url = #{bannerUrl},</if>
+            <if test="isSkip != null">is_skip = #{isSkip},</if>
+            <if test="skipUrl != null">skip_url = #{skipUrl},</if>
+            <if test="weight != null">weight = #{weight},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUserBannerConfigById" parameterType="Long">
+        delete from t_user_banner_config where id = #{id}
+    </delete>
+
+    <delete id="deleteUserBannerConfigByIds" parameterType="String">
+        delete from t_user_banner_config where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

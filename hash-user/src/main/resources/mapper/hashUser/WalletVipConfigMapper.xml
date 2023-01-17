@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.hashUser.mapper.WalletVipConfigMapper">
+    
+    <resultMap type="WalletVipConfig" id="WalletVipConfigResult">
+        <result property="id"    column="id"    />
+        <result property="vipType"    column="vip_type"    />
+        <result property="sourcePrice"    column="source_price"    />
+        <result property="price"    column="price"    />
+        <result property="name"    column="name"    />
+        <result property="vipDay"    column="vip_day"    />
+    </resultMap>
+
+    <sql id="selectWalletVipConfigVo">
+        select id, vip_type, source_price, price, name, vip_day from t_wallet_vip_config
+    </sql>
+
+    <select id="selectWalletVipConfigList" parameterType="WalletVipConfig" resultMap="WalletVipConfigResult">
+        <include refid="selectWalletVipConfigVo"/>
+        <where>  
+            <if test="vipType != null "> and vip_type = #{vipType}</if>
+            <if test="sourcePrice != null "> and source_price = #{sourcePrice}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="vipDay != null "> and vip_day = #{vipDay}</if>
+        </where>
+    </select>
+    
+    <select id="selectWalletVipConfigById" parameterType="Long" resultMap="WalletVipConfigResult">
+        <include refid="selectWalletVipConfigVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertWalletVipConfig" parameterType="WalletVipConfig" useGeneratedKeys="true" keyProperty="id">
+        insert into t_wallet_vip_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="vipType != null">vip_type,</if>
+            <if test="sourcePrice != null">source_price,</if>
+            <if test="price != null">price,</if>
+            <if test="name != null">name,</if>
+            <if test="vipDay != null">vip_day,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="vipType != null">#{vipType},</if>
+            <if test="sourcePrice != null">#{sourcePrice},</if>
+            <if test="price != null">#{price},</if>
+            <if test="name != null">#{name},</if>
+            <if test="vipDay != null">#{vipDay},</if>
+         </trim>
+    </insert>
+
+    <update id="updateWalletVipConfig" parameterType="WalletVipConfig">
+        update t_wallet_vip_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="vipType != null">vip_type = #{vipType},</if>
+            <if test="sourcePrice != null">source_price = #{sourcePrice},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="vipDay != null">vip_day = #{vipDay},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteWalletVipConfigById" parameterType="Long">
+        delete from t_wallet_vip_config where id = #{id}
+    </delete>
+
+    <delete id="deleteWalletVipConfigByIds" parameterType="String">
+        delete from t_wallet_vip_config where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
