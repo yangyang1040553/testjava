@@ -27,7 +27,7 @@ public class UserAdvertise extends BaseEntity
     private String url;
 
     /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    @Excel(name = "跳转地址")
     private String jumpUrl;
 
     /**  1 启动页广告   2 播放页广告 */

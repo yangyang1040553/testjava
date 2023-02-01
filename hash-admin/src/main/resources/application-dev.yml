@@ -6,9 +6,9 @@ spring:
     druid:
       # 主库数据源
       master:
-        url: jdbc:mysql://172.247.193.90:33060/vedio?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+        url: jdbc:mysql://172.247.193.90:3306/video?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
         username: root
-        password: tCd03w2BTv7Pm@Fo
+        password: f1mS2OvRMb
       # 从库数据源
       slave:
         # 从数据源开关/默认关闭
@@ -63,7 +63,7 @@ spring:
     # 数据库索引
     database: 0
     # 密码
-    password: WpvdHx4
+    password:
     # 连接超时时间
     timeout: 10s
     lettuce:
@@ -79,6 +79,4 @@ spring:
 
 #请求
 service:
-  wallet-addr: https://hash-api.starops.work/hash
-  user-addr: https://hash-api.starops.work/hash
   open-google: false

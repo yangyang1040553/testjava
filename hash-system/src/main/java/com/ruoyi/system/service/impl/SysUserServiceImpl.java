@@ -516,7 +516,7 @@ public class SysUserServiceImpl implements ISysUserService {
 
         String secret = GoogleAuthenticator.genSecret(sysUser.getUserName());
         System.out.println(secret);
-        String qrCode = GoogleAuthenticator.getQRBarcodeURL(sysUser.getUserName(), "Hash", secret);
+        String qrCode = GoogleAuthenticator.getQRBarcodeURL(sysUser.getUserName(), "fanhaoge", secret);
         System.out.println(qrCode);
 
         sysUser.setSecret(secret);

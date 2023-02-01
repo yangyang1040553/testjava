@@ -129,7 +129,7 @@ public class SysUserController extends BaseController {
         user.setPassword(SecurityUtils.encryptPassword(user.getPassword()));
         String secret = GoogleAuthenticator.genSecret(user.getUserName());
         user.setSecret(secret);
-        String qrCode = GoogleAuthenticator.getQRBarcodeURL(user.getUserName(), "Hash", secret);
+        String qrCode = GoogleAuthenticator.getQRBarcodeURL(user.getUserName(), "fanhaoge", secret);
         user.setQr_code(qrCode);
         return toAjax(userService.insertUser(user));
     }
